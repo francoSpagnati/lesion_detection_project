@@ -1,0 +1,9 @@
+{
+  "project": "lesion-detection-nnunet",
+  "entity": null,
+  "mode": "online",
+  "api_key_environment_variable": "WANDB_API_KEY",
+  "tags": ["medical-imaging", "lesion-segmentation", "nnunet"],
+  "log_code": true,
+  "notes": "The API key is stored only in ../.env and is intentionally not included here."
+}

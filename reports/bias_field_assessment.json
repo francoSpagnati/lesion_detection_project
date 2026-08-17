@@ -1,0 +1,1387 @@
+{
+  "parametri": {
+    "n_per_dataset": 10,
+    "seed": 0
+  },
+  "datasets": {
+    "WMH": {
+      "nota": "file gia' corretti dagli organizzatori (_BiasCorr)",
+      "immagini_disponibili": 79,
+      "casi": [
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Singapore_54_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1736.5,
+          "profilo": {
+            "0": {
+              "voxel": 578830,
+              "p1_rel": 0.6641119031133929,
+              "p99_rel": 1.1143932889568788,
+              "rapporto_p99_p1": 1.6780203512880014,
+              "cv": 0.10377569496631622
+            },
+            "3": {
+              "voxel": 305882,
+              "p1_rel": 0.7021284888407975,
+              "p99_rel": 1.0883002463742062,
+              "rapporto_p99_p1": 1.5500015505295504,
+              "cv": 0.05969734489917755
+            },
+            "6": {
+              "voxel": 165492,
+              "p1_rel": 0.9355203100261785,
+              "p99_rel": 1.0821369028343053,
+              "rapporto_p99_p1": 1.1567219773176534,
+              "cv": 0.03336983546614647
+            },
+            "12": {
+              "voxel": 17739,
+              "p1_rel": 0.9390252461748412,
+              "p99_rel": 1.092848674684037,
+              "rapporto_p99_p1": 1.1638118135117261,
+              "cv": 0.03237253427505493
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.6780203512880014,
+          "rapporto_interno": 1.1638118135117261
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Singapore_58_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1585.5,
+          "profilo": {
+            "0": {
+              "voxel": 528490,
+              "p1_rel": 0.6274494454690553,
+              "p99_rel": 1.1133571512836051,
+              "rapporto_p99_p1": 1.7744173005863526,
+              "cv": 0.1038481667637825
+            },
+            "3": {
+              "voxel": 269468,
+              "p1_rel": 0.6387767530248595,
+              "p99_rel": 1.098996567215585,
+              "rapporto_p99_p1": 1.7204705118202934,
+              "cv": 0.06755076348781586
+            },
+            "6": {
+              "voxel": 118922,
+              "p1_rel": 0.9205004810984638,
+              "p99_rel": 1.0883951535511687,
+              "rapporto_p99_p1": 1.1823949860975091,
+              "cv": 0.032021716237068176
+            },
+            "12": {
+              "voxel": 6778,
+              "p1_rel": 0.9633959860753335,
+              "p99_rel": 1.0610961613777612,
+              "rapporto_p99_p1": 1.1014122715005665,
+              "cv": 0.025359535589814186
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.7744173005863526,
+          "rapporto_interno": 1.1014122715005665
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Amsterdam_GE1T5_156_0000.nii.gz",
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1989.4,
+          "profilo": {
+            "0": {
+              "voxel": 421237,
+              "p1_rel": 0.5847569992841355,
+              "p99_rel": 1.1388395600850076,
+              "rapporto_p99_p1": 1.9475432726400619,
+              "cv": 0.13444089889526367
+            },
+            "3": {
+              "voxel": 233238,
+              "p1_rel": 0.6312693815822865,
+              "p99_rel": 1.1274840701790436,
+              "rapporto_p99_p1": 1.7860585402589735,
+              "cv": 0.10794949531555176
+            },
+            "6": {
+              "voxel": 82728,
+              "p1_rel": 0.6822825042100321,
+              "p99_rel": 1.1035916749331685,
+              "rapporto_p99_p1": 1.6174995960228251,
+              "cv": 0.0677466094493866
+            },
+            "12": {
+              "voxel": 3663,
+              "p1_rel": 0.8380707166649974,
+              "p99_rel": 1.079558460531342,
+              "rapporto_p99_p1": 1.2881472160575138,
+              "cv": 0.038084376603364944
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.9475432726400619,
+          "rapporto_interno": 1.2881472160575138
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Amsterdam_GE3T_129_0000.nii.gz",
+          "spacing_mm": [
+            1.2,
+            0.9766,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1362.6,
+          "profilo": {
+            "0": {
+              "voxel": 387562,
+              "p1_rel": 0.8849396494339091,
+              "p99_rel": 1.1075145118844583,
+              "rapporto_p99_p1": 1.251514171156111,
+              "cv": 0.04335647076368332
+            },
+            "3": {
+              "voxel": 244716,
+              "p1_rel": 0.8974530965552281,
+              "p99_rel": 1.087032199426107,
+              "rapporto_p99_p1": 1.21124123767421,
+              "cv": 0.03608439490199089
+            },
+            "6": {
+              "voxel": 111806,
+              "p1_rel": 0.9180961255064765,
+              "p99_rel": 1.0677677421831775,
+              "rapporto_p99_p1": 1.1630239062321859,
+              "cv": 0.030794784426689148
+            },
+            "12": {
+              "voxel": 3178,
+              "p1_rel": 0.9422368444118715,
+              "p99_rel": 1.0547459657059106,
+              "rapporto_p99_p1": 1.1194064124761172,
+              "cv": 0.025285830721259117
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.251514171156111,
+          "rapporto_interno": 1.1194064124761172
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Utrecht_19_0000.nii.gz",
+          "spacing_mm": [
+            0.9583,
+            0.9583,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1618.8,
+          "profilo": {
+            "0": {
+              "voxel": 587553,
+              "p1_rel": 0.9002173547005741,
+              "p99_rel": 1.3762890221629807,
+              "rapporto_p99_p1": 1.5288408015870292,
+              "cv": 0.10353494435548782
+            },
+            "3": {
+              "voxel": 203627,
+              "p1_rel": 0.9067962055895966,
+              "p99_rel": 1.3625752964327131,
+              "rapporto_p99_p1": 1.5026257146133182,
+              "cv": 0.08714454621076584
+            },
+            "6": {
+              "voxel": 40304,
+              "p1_rel": 0.9009875199321417,
+              "p99_rel": 1.2295959015184492,
+              "rapporto_p99_p1": 1.3647202367587254,
+              "cv": 0.05195784568786621
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.5288408015870292,
+          "rapporto_interno": 1.3647202367587254
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Utrecht_0_0000.nii.gz",
+          "spacing_mm": [
+            0.9583,
+            0.9583,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1762.1,
+          "profilo": {
+            "0": {
+              "voxel": 639569,
+              "p1_rel": 0.9130908877695081,
+              "p99_rel": 1.400738728755462,
+              "rapporto_p99_p1": 1.5340627614597893,
+              "cv": 0.12042680382728577
+            },
+            "3": {
+              "voxel": 226037,
+              "p1_rel": 0.9175517258876963,
+              "p99_rel": 1.3979822903826593,
+              "rapporto_p99_p1": 1.523600524025133,
+              "cv": 0.10750450193881989
+            },
+            "6": {
+              "voxel": 40831,
+              "p1_rel": 0.9255578090436261,
+              "p99_rel": 1.3308253298894501,
+              "rapporto_p99_p1": 1.4378630020577374,
+              "cv": 0.05508997291326523
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.5340627614597893,
+          "rapporto_interno": 1.4378630020577374
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Singapore_56_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1392.6,
+          "profilo": {
+            "0": {
+              "voxel": 464216,
+              "p1_rel": 0.588003969685327,
+              "p99_rel": 1.0748035850853332,
+              "rapporto_p99_p1": 1.8278849131928807,
+              "cv": 0.1109727993607521
+            },
+            "3": {
+              "voxel": 237611,
+              "p1_rel": 0.6618743078084464,
+              "p99_rel": 1.0578664447005424,
+              "rapporto_p99_p1": 1.5982890289294933,
+              "cv": 0.0628153532743454
+            },
+            "6": {
+              "voxel": 113235,
+              "p1_rel": 0.9130644746513974,
+              "p99_rel": 1.0516120881279758,
+              "rapporto_p99_p1": 1.1517391348836292,
+              "cv": 0.031352922320365906
+            },
+            "12": {
+              "voxel": 2712,
+              "p1_rel": 0.9532312181209482,
+              "p99_rel": 1.083990732012572,
+              "rapporto_p99_p1": 1.137175022602997,
+              "cv": 0.037280723452568054
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.8278849131928807,
+          "rapporto_interno": 1.137175022602997
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Amsterdam_GE3T_136_0000.nii.gz",
+          "spacing_mm": [
+            1.2,
+            0.9766,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1421.9,
+          "profilo": {
+            "0": {
+              "voxel": 404425,
+              "p1_rel": 0.8879296624250451,
+              "p99_rel": 1.0770398490439244,
+              "rapporto_p99_p1": 1.212978791701131,
+              "cv": 0.04008268192410469
+            },
+            "3": {
+              "voxel": 247276,
+              "p1_rel": 0.9345573319701402,
+              "p99_rel": 1.0631817176093856,
+              "rapporto_p99_p1": 1.1376313482749019,
+              "cv": 0.028487371280789375
+            },
+            "6": {
+              "voxel": 142612,
+              "p1_rel": 0.9428593097116739,
+              "p99_rel": 1.0580684202748634,
+              "rapporto_p99_p1": 1.1221912000830965,
+              "cv": 0.02658267877995968
+            },
+            "12": {
+              "voxel": 13516,
+              "p1_rel": 0.9436659833142655,
+              "p99_rel": 1.0491933033902952,
+              "rapporto_p99_p1": 1.1118269832143417,
+              "cv": 0.023930218070745468
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.212978791701131,
+          "rapporto_interno": 1.1118269832143417
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Singapore_69_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1561.4,
+          "profilo": {
+            "0": {
+              "voxel": 520478,
+              "p1_rel": 0.836531800329291,
+              "p99_rel": 1.1316030657352445,
+              "rapporto_p99_p1": 1.3527316777315603,
+              "cv": 0.05278392508625984
+            },
+            "3": {
+              "voxel": 225310,
+              "p1_rel": 0.8712015223550827,
+              "p99_rel": 1.088016327051707,
+              "rapporto_p99_p1": 1.2488687165175258,
+              "cv": 0.03830775246024132
+            },
+            "6": {
+              "voxel": 77052,
+              "p1_rel": 0.9160421360528777,
+              "p99_rel": 1.0786924441514822,
+              "rapporto_p99_p1": 1.1775576708724844,
+              "cv": 0.03163597360253334
+            },
+            "12": {
+              "voxel": 2169,
+              "p1_rel": 0.9719870669024288,
+              "p99_rel": 1.0651919810597514,
+              "rapporto_p99_p1": 1.095891105274016,
+              "cv": 0.02314419485628605
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.3527316777315603,
+          "rapporto_interno": 1.095891105274016
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset501_WMH/imagesTr/Amsterdam_GE3T_146_0000.nii.gz",
+          "spacing_mm": [
+            1.2,
+            0.9766,
+            3.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 1307.0,
+          "profilo": {
+            "0": {
+              "voxel": 371768,
+              "p1_rel": 0.8159269521608601,
+              "p99_rel": 1.2090609811241209,
+              "rapporto_p99_p1": 1.4818250309321248,
+              "cv": 0.07807447761297226
+            },
+            "3": {
+              "voxel": 207513,
+              "p1_rel": 0.8575577939340228,
+              "p99_rel": 1.174572747567063,
+              "rapporto_p99_p1": 1.3696718237248395,
+              "cv": 0.0634194165468216
+            },
+            "6": {
+              "voxel": 67574,
+              "p1_rel": 0.8897573830603043,
+              "p99_rel": 1.1386831258728405,
+              "rapporto_p99_p1": 1.279768111568078,
+              "cv": 0.05065123736858368
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.4818250309321248,
+          "rapporto_interno": 1.279768111568078
+        }
+      ],
+      "per_margine": {
+        "0": {
+          "casi": 10,
+          "mediano": 1.5314517815234092,
+          "max": 1.9475432726400619
+        },
+        "3": {
+          "casi": 10,
+          "mediano": 1.5131131193192255,
+          "max": 1.7860585402589735
+        },
+        "6": {
+          "casi": 10,
+          "mediano": 1.179976328484997,
+          "max": 1.6174995960228251
+        },
+        "12": {
+          "casi": 7,
+          "mediano": 1.1194064124761172,
+          "max": 1.2881472160575138
+        }
+      },
+      "appaiato": {
+        "margine_max_mm": 12,
+        "casi": 7,
+        "mediana_per_margine": {
+          "0": 1.6780203512880014,
+          "3": 1.5500015505295504,
+          "6": 1.1630239062321859,
+          "12": 1.1194064124761172
+        }
+      },
+      "interno_mediano": 1.1194064124761172,
+      "bordo_mediano": 1.6780203512880014,
+      "margine_riferimento_mm": 12,
+      "interno_max": 1.2881472160575138,
+      "giudizio": "moderato",
+      "azione": "N4 opzionale, solo come variante misurata contro la baseline",
+      "maschera": "testa (soglia di intensita)",
+      "volume_maschera_ml_mediano": 1573.45
+    },
+    "ATLAS": {
+      "nota": "T1w in spazio MNI, preprocessing degli autori non documentato come N4",
+      "immagini_disponibili": 556,
+      "casi": [
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r011s013_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2945.9,
+          "profilo": {
+            "0": {
+              "voxel": 2945949,
+              "p1_rel": 0.8728215816265718,
+              "p99_rel": 1.3424749295093759,
+              "rapporto_p99_p1": 1.5380863142815147,
+              "cv": 0.09576013684272766
+            },
+            "3": {
+              "voxel": 1101506,
+              "p1_rel": 0.8849755589432283,
+              "p99_rel": 1.3331015582290284,
+              "rapporto_p99_p1": 1.5063710457957942,
+              "cv": 0.09156458079814911
+            },
+            "6": {
+              "voxel": 330312,
+              "p1_rel": 0.8918381374897797,
+              "p99_rel": 1.279507259939406,
+              "rapporto_p99_p1": 1.4346855176442472,
+              "cv": 0.07059110701084137
+            },
+            "12": {
+              "voxel": 1277,
+              "p1_rel": 0.9748079755120395,
+              "p99_rel": 1.0241364911038526,
+              "rapporto_p99_p1": 1.0506033155564842,
+              "cv": 0.011097022332251072
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.5380863142815147,
+          "rapporto_interno": 1.0506033155564842
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r048s022_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2427.5,
+          "profilo": {
+            "0": {
+              "voxel": 2427510,
+              "p1_rel": 0.808635524135392,
+              "p99_rel": 1.2349870737952655,
+              "rapporto_p99_p1": 1.5272481073790771,
+              "cv": 0.07653592526912689
+            },
+            "3": {
+              "voxel": 778763,
+              "p1_rel": 0.8642386490765522,
+              "p99_rel": 1.2240963484423164,
+              "rapporto_p99_p1": 1.4163869548651589,
+              "cv": 0.06316018849611282
+            },
+            "6": {
+              "voxel": 180769,
+              "p1_rel": 0.8939272933236992,
+              "p99_rel": 1.1974017870282174,
+              "rapporto_p99_p1": 1.3394845374685604,
+              "cv": 0.05548732727766037
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.5272481073790771,
+          "rapporto_interno": 1.3394845374685604
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r009s053_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2900.1,
+          "profilo": {
+            "0": {
+              "voxel": 2900124,
+              "p1_rel": 0.8604174665542814,
+              "p99_rel": 1.297298256297128,
+              "rapporto_p99_p1": 1.5077544409836605,
+              "cv": 0.08631175756454468
+            },
+            "3": {
+              "voxel": 912648,
+              "p1_rel": 0.8661997395641869,
+              "p99_rel": 1.2749469809070706,
+              "rapporto_p99_p1": 1.4718856664036146,
+              "cv": 0.08052413910627365
+            },
+            "6": {
+              "voxel": 240385,
+              "p1_rel": 0.8689433816460261,
+              "p99_rel": 1.2408993626048548,
+              "rapporto_p99_p1": 1.4280554853346579,
+              "cv": 0.07315774261951447
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.5077544409836605,
+          "rapporto_interno": 1.4280554853346579
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r024s021_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2626.4,
+          "profilo": {
+            "0": {
+              "voxel": 2626435,
+              "p1_rel": 0.8935317062104421,
+              "p99_rel": 1.4964186860950917,
+              "rapporto_p99_p1": 1.6747236563563634,
+              "cv": 0.1412292867898941
+            },
+            "3": {
+              "voxel": 1174353,
+              "p1_rel": 0.921317113329401,
+              "p99_rel": 1.5022981353873075,
+              "rapporto_p99_p1": 1.6305983180518506,
+              "cv": 0.12102382630109787
+            },
+            "6": {
+              "voxel": 545918,
+              "p1_rel": 0.9252745640984108,
+              "p99_rel": 1.475412837740962,
+              "rapporto_p99_p1": 1.5945675964610646,
+              "cv": 0.09248654544353485
+            },
+            "12": {
+              "voxel": 68423,
+              "p1_rel": 0.9527057635378324,
+              "p99_rel": 1.0883283831607509,
+              "rapporto_p99_p1": 1.1423552001189639,
+              "cv": 0.030179068446159363
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.6747236563563634,
+          "rapporto_interno": 1.1423552001189639
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r009s055_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2795.1,
+          "profilo": {
+            "0": {
+              "voxel": 2795123,
+              "p1_rel": 0.8628178700491864,
+              "p99_rel": 1.3717587238723836,
+              "rapporto_p99_p1": 1.5898589626964776,
+              "cv": 0.11189261078834534
+            },
+            "3": {
+              "voxel": 815166,
+              "p1_rel": 0.8790342857078973,
+              "p99_rel": 1.348616617816294,
+              "rapporto_p99_p1": 1.5342025217255733,
+              "cv": 0.09444213658571243
+            },
+            "6": {
+              "voxel": 193914,
+              "p1_rel": 0.8867429233753796,
+              "p99_rel": 1.2602432499774898,
+              "rapporto_p99_p1": 1.4212047446405147,
+              "cv": 0.078091561794281
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.5898589626964776,
+          "rapporto_interno": 1.4212047446405147
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r005s070_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2752.6,
+          "profilo": {
+            "0": {
+              "voxel": 2752625,
+              "p1_rel": 0.886155326344361,
+              "p99_rel": 1.3647519808566924,
+              "rapporto_p99_p1": 1.5400821281373736,
+              "cv": 0.12023162096738815
+            },
+            "3": {
+              "voxel": 1032658,
+              "p1_rel": 0.9260549990510094,
+              "p99_rel": 1.3809620417031012,
+              "rapporto_p99_p1": 1.4912311289483515,
+              "cv": 0.11804244667291641
+            },
+            "6": {
+              "voxel": 294613,
+              "p1_rel": 0.94729347389005,
+              "p99_rel": 1.343616241987969,
+              "rapporto_p99_p1": 1.4183737975839987,
+              "cv": 0.06979741901159286
+            },
+            "12": {
+              "voxel": 7433,
+              "p1_rel": 0.9662743145918338,
+              "p99_rel": 1.0560874220283731,
+              "rapporto_p99_p1": 1.092947836944706,
+              "cv": 0.01923409476876259
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.5400821281373736,
+          "rapporto_interno": 1.092947836944706
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r015s027_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2777.6,
+          "profilo": {
+            "0": {
+              "voxel": 2777594,
+              "p1_rel": 0.8586396121878521,
+              "p99_rel": 1.382244336368988,
+              "rapporto_p99_p1": 1.6098073239912234,
+              "cv": 0.10851937532424927
+            },
+            "3": {
+              "voxel": 884365,
+              "p1_rel": 0.8679193769812545,
+              "p99_rel": 1.3590312047998088,
+              "rapporto_p99_p1": 1.565849594839915,
+              "cv": 0.10610255599021912
+            },
+            "6": {
+              "voxel": 145016,
+              "p1_rel": 0.8939502528781962,
+              "p99_rel": 1.2513299101779418,
+              "rapporto_p99_p1": 1.3997757773982529,
+              "cv": 0.07307497411966324
+            },
+            "12": {
+              "voxel": 1336,
+              "p1_rel": 0.9216287412504326,
+              "p99_rel": 1.0528477766523405,
+              "rapporto_p99_p1": 1.1423773256288368,
+              "cv": 0.030024366453289986
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.6098073239912234,
+          "rapporto_interno": 1.1423773256288368
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r052s010_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2762.2,
+          "profilo": {
+            "0": {
+              "voxel": 2762156,
+              "p1_rel": 0.8360833906612244,
+              "p99_rel": 1.3201426289584541,
+              "rapporto_p99_p1": 1.5789604765553436,
+              "cv": 0.11836735159158707
+            },
+            "3": {
+              "voxel": 828969,
+              "p1_rel": 0.899719285792998,
+              "p99_rel": 1.3767063765241232,
+              "rapporto_p99_p1": 1.5301510129470177,
+              "cv": 0.11228331178426743
+            },
+            "6": {
+              "voxel": 218252,
+              "p1_rel": 0.9302116525825738,
+              "p99_rel": 1.358894582333737,
+              "rapporto_p99_p1": 1.460844506259407,
+              "cv": 0.08474719524383545
+            },
+            "12": {
+              "voxel": 4044,
+              "p1_rel": 0.9767614793679467,
+              "p99_rel": 1.0724700426370404,
+              "rapporto_p99_p1": 1.097985603743327,
+              "cv": 0.02054627425968647
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.5789604765553436,
+          "rapporto_interno": 1.097985603743327
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r009s064_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2972.1,
+          "profilo": {
+            "0": {
+              "voxel": 2972086,
+              "p1_rel": 0.8646681797299022,
+              "p99_rel": 1.55069353227168,
+              "rapporto_p99_p1": 1.7933972460465384,
+              "cv": 0.14340296387672424
+            },
+            "3": {
+              "voxel": 1023995,
+              "p1_rel": 0.8971057370581962,
+              "p99_rel": 1.5927255692029363,
+              "rapporto_p99_p1": 1.7754045074171838,
+              "cv": 0.14717550575733185
+            },
+            "6": {
+              "voxel": 343306,
+              "p1_rel": 0.915017852172165,
+              "p99_rel": 1.5557659616089436,
+              "rapporto_p99_p1": 1.7002574954310494,
+              "cv": 0.14261069893836975
+            },
+            "12": {
+              "voxel": 5509,
+              "p1_rel": 0.9392604501037937,
+              "p99_rel": 1.4275406709239484,
+              "rapporto_p99_p1": 1.5198560428752186,
+              "cv": 0.08686443418264389
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.7933972460465384,
+          "rapporto_interno": 1.5198560428752186
+        },
+        {
+          "file": "data/processed/nnUNet_raw/Dataset502_ATLAS/imagesTr/sub-r031s003_0000.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "testa (soglia di intensita)",
+          "volume_maschera_ml": 2211.9,
+          "profilo": {
+            "0": {
+              "voxel": 2211856,
+              "p1_rel": 0.7021222452450187,
+              "p99_rel": 1.3333085441660426,
+              "rapporto_p99_p1": 1.8989692367612703,
+              "cv": 0.11139518022537231
+            },
+            "3": {
+              "voxel": 443710,
+              "p1_rel": 0.7472808437271831,
+              "p99_rel": 1.3055096869941145,
+              "rapporto_p99_p1": 1.747013452777239,
+              "cv": 0.09228463470935822
+            },
+            "6": {
+              "voxel": 38344,
+              "p1_rel": 0.7998336891073875,
+              "p99_rel": 1.1027190000988492,
+              "rapporto_p99_p1": 1.378685363115276,
+              "cv": 0.0693637877702713
+            }
+          },
+          "margine_piu_profondo_mm": 6,
+          "rapporto_bordo": 1.8989692367612703,
+          "rapporto_interno": 1.378685363115276
+        }
+      ],
+      "per_margine": {
+        "0": {
+          "casi": 10,
+          "mediano": 1.5844097196259106,
+          "max": 1.8989692367612703
+        },
+        "3": {
+          "casi": 10,
+          "mediano": 1.5321767673362956,
+          "max": 1.7754045074171838
+        },
+        "6": {
+          "casi": 10,
+          "mediano": 1.4246301149875862,
+          "max": 1.7002574954310494
+        },
+        "12": {
+          "casi": 6,
+          "mediano": 1.1201704019311456,
+          "max": 1.5198560428752186
+        }
+      },
+      "appaiato": {
+        "margine_max_mm": 12,
+        "casi": 6,
+        "mediana_per_margine": {
+          "0": 1.5943839002732836,
+          "3": 1.5480003038934664,
+          "6": 1.447765011951827,
+          "12": 1.1201704019311456
+        }
+      },
+      "interno_mediano": 1.1201704019311456,
+      "bordo_mediano": 1.5943839002732836,
+      "margine_riferimento_mm": 12,
+      "interno_max": 1.5198560428752186,
+      "giudizio": "moderato",
+      "azione": "N4 opzionale, solo come variante misurata contro la baseline",
+      "maschera": "testa (soglia di intensita)",
+      "volume_maschera_ml_mediano": 2769.8999999999996
+    },
+    "DBB": {
+      "nota": "T1 pediatrici in spazio MNI, maschera cerebrale fornita dal dataset",
+      "immagini_disponibili": 244,
+      "casi": [
+        {
+          "file": "data/raw/DBB/sub-0440/anat-t1w/61b28d857de472d3390df698/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1486.1,
+          "profilo": {
+            "0": {
+              "voxel": 1486116,
+              "p1_rel": 0.8848654133282767,
+              "p99_rel": 1.0622021261750028,
+              "rapporto_p99_p1": 1.2004109440549868,
+              "cv": 0.0406368114054203
+            },
+            "3": {
+              "voxel": 1183098,
+              "p1_rel": 0.901077378134446,
+              "p99_rel": 1.0540093669698474,
+              "rapporto_p99_p1": 1.1697212609554417,
+              "cv": 0.03416891768574715
+            },
+            "6": {
+              "voxel": 914894,
+              "p1_rel": 0.9166220100027314,
+              "p99_rel": 1.0481707669592746,
+              "rapporto_p99_p1": 1.1435147263768533,
+              "cv": 0.027958782389760017
+            },
+            "12": {
+              "voxel": 483976,
+              "p1_rel": 0.9411455090623361,
+              "p99_rel": 1.0441994010694708,
+              "rapporto_p99_p1": 1.1094983623837373,
+              "cv": 0.022993486374616623
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.2004109440549868,
+          "rapporto_interno": 1.1094983623837373
+        },
+        {
+          "file": "data/raw/DBB/sub-0901/anat-t1w/61b33930c7fba5bc5a641414/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1487.3,
+          "profilo": {
+            "0": {
+              "voxel": 1487344,
+              "p1_rel": 0.904163572301136,
+              "p99_rel": 1.0435436968502543,
+              "rapporto_p99_p1": 1.1541536607080838,
+              "cv": 0.029130149632692337
+            },
+            "3": {
+              "voxel": 1179093,
+              "p1_rel": 0.9189461365634644,
+              "p99_rel": 1.038393796702585,
+              "rapporto_p99_p1": 1.1299833095613339,
+              "cv": 0.024910932406783104
+            },
+            "6": {
+              "voxel": 899449,
+              "p1_rel": 0.9413009091775284,
+              "p99_rel": 1.0353522285374481,
+              "rapporto_p99_p1": 1.0999163162841286,
+              "cv": 0.020099904388189316
+            },
+            "12": {
+              "voxel": 437413,
+              "p1_rel": 0.9643597815614298,
+              "p99_rel": 1.0313759411698817,
+              "rapporto_p99_p1": 1.0694929018088497,
+              "cv": 0.014705021865665913
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.1541536607080838,
+          "rapporto_interno": 1.0694929018088497
+        },
+        {
+          "file": "data/raw/DBB/sub-0433/anat-t1w/61b28ab47de472d3390d7cf4/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1404.5,
+          "profilo": {
+            "0": {
+              "voxel": 1404467,
+              "p1_rel": 0.8719089428291319,
+              "p99_rel": 1.0696061230277123,
+              "rapporto_p99_p1": 1.2267406267873584,
+              "cv": 0.04737472906708717
+            },
+            "3": {
+              "voxel": 1111895,
+              "p1_rel": 0.8876721523202994,
+              "p99_rel": 1.056548291834015,
+              "rapporto_p99_p1": 1.1902460712238045,
+              "cv": 0.03835432603955269
+            },
+            "6": {
+              "voxel": 857708,
+              "p1_rel": 0.9128688297653477,
+              "p99_rel": 1.0490053880973567,
+              "rapporto_p99_p1": 1.149130470767638,
+              "cv": 0.028756991028785706
+            },
+            "12": {
+              "voxel": 444291,
+              "p1_rel": 0.951426257323351,
+              "p99_rel": 1.0400555002608418,
+              "rapporto_p99_p1": 1.0931540855166555,
+              "cv": 0.018008198589086533
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.2267406267873584,
+          "rapporto_interno": 1.0931540855166555
+        },
+        {
+          "file": "data/raw/DBB/sub-0945/anat-t1w/61b3465ac7fba5bc5a66306c/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1194.8,
+          "profilo": {
+            "0": {
+              "voxel": 1194796,
+              "p1_rel": 0.7280147059225659,
+              "p99_rel": 1.3756574691591912,
+              "rapporto_p99_p1": 1.8896012099314803,
+              "cv": 0.16833989322185516
+            },
+            "3": {
+              "voxel": 926110,
+              "p1_rel": 0.7403639722866374,
+              "p99_rel": 1.3193059015387731,
+              "rapporto_p99_p1": 1.7819693433542632,
+              "cv": 0.15152595937252045
+            },
+            "6": {
+              "voxel": 703758,
+              "p1_rel": 0.7630394086843287,
+              "p99_rel": 1.2667060828036074,
+              "rapporto_p99_p1": 1.6600795036100775,
+              "cv": 0.1318441927433014
+            },
+            "12": {
+              "voxel": 368027,
+              "p1_rel": 0.8195736879119688,
+              "p99_rel": 1.179756823411097,
+              "rapporto_p99_p1": 1.4394762067298286,
+              "cv": 0.09186418354511261
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.8896012099314803,
+          "rapporto_interno": 1.4394762067298286
+        },
+        {
+          "file": "data/raw/DBB/sub-0932/anat-t1w/6241ccda5e2efe54f59dd2a6/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 888.9,
+          "profilo": {
+            "0": {
+              "voxel": 888920,
+              "p1_rel": 0.7496745817183451,
+              "p99_rel": 1.328287174322483,
+              "rapporto_p99_p1": 1.7718183418702655,
+              "cv": 0.1472446471452713
+            },
+            "3": {
+              "voxel": 670613,
+              "p1_rel": 0.7707525655636908,
+              "p99_rel": 1.2666167503775398,
+              "rapporto_p99_p1": 1.6433506769467556,
+              "cv": 0.1259232759475708
+            },
+            "6": {
+              "voxel": 499229,
+              "p1_rel": 0.7997128950268289,
+              "p99_rel": 1.2168836123278088,
+              "rapporto_p99_p1": 1.521650607230717,
+              "cv": 0.10503704845905304
+            },
+            "12": {
+              "voxel": 246877,
+              "p1_rel": 0.8572848434450522,
+              "p99_rel": 1.149459499151994,
+              "rapporto_p99_p1": 1.34081397558928,
+              "cv": 0.0693238228559494
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.7718183418702655,
+          "rapporto_interno": 1.34081397558928
+        },
+        {
+          "file": "data/raw/DBB/sub-0890/anat-t1w/61b335d6c7fba5bc5a637c0f/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1538.4,
+          "profilo": {
+            "0": {
+              "voxel": 1538365,
+              "p1_rel": 0.9203508610085595,
+              "p99_rel": 1.0495422148955724,
+              "rapporto_p99_p1": 1.1403718509541456,
+              "cv": 0.026946023106575012
+            },
+            "3": {
+              "voxel": 1223499,
+              "p1_rel": 0.9307081755500317,
+              "p99_rel": 1.0470832039085345,
+              "rapporto_p99_p1": 1.125039224340892,
+              "cv": 0.02422258071601391
+            },
+            "6": {
+              "voxel": 930136,
+              "p1_rel": 0.9437666072329622,
+              "p99_rel": 1.0435519433414588,
+              "rapporto_p99_p1": 1.10573094591793,
+              "cv": 0.02076089009642601
+            },
+            "12": {
+              "voxel": 415228,
+              "p1_rel": 0.9626617556842243,
+              "p99_rel": 1.0364492633546678,
+              "rapporto_p99_p1": 1.0766494640872049,
+              "cv": 0.015953605994582176
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.1403718509541456,
+          "rapporto_interno": 1.0766494640872049
+        },
+        {
+          "file": "data/raw/DBB/sub-0499/anat-t1w/61b2babbc7fba5bc5a4f8b68/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1607.7,
+          "profilo": {
+            "0": {
+              "voxel": 1607686,
+              "p1_rel": 0.9112502430035753,
+              "p99_rel": 1.075263549354421,
+              "rapporto_p99_p1": 1.179987119465934,
+              "cv": 0.029777687042951584
+            },
+            "3": {
+              "voxel": 1278351,
+              "p1_rel": 0.9267587824278535,
+              "p99_rel": 1.0739004661026632,
+              "rapporto_p99_p1": 1.1587702069456942,
+              "cv": 0.02727428823709488
+            },
+            "6": {
+              "voxel": 961913,
+              "p1_rel": 0.9443643444431826,
+              "p99_rel": 1.0706423595340313,
+              "rapporto_p99_p1": 1.1337174744407625,
+              "cv": 0.02409498207271099
+            },
+            "12": {
+              "voxel": 392934,
+              "p1_rel": 0.9658341844475721,
+              "p99_rel": 1.0591659643466147,
+              "rapporto_p99_p1": 1.0966333366554277,
+              "cv": 0.01902313344180584
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.179987119465934,
+          "rapporto_interno": 1.0966333366554277
+        },
+        {
+          "file": "data/raw/DBB/sub-0835/anat-t1w/61b3233ac7fba5bc5a606c82/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            0.9583,
+            0.9583
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1744.6,
+          "profilo": {
+            "0": {
+              "voxel": 1899577,
+              "p1_rel": 0.9138910285927028,
+              "p99_rel": 1.0457105174831143,
+              "rapporto_p99_p1": 1.1442398325032253,
+              "cv": 0.024938518181443214
+            },
+            "3": {
+              "voxel": 1548234,
+              "p1_rel": 0.9259207792815154,
+              "p99_rel": 1.0442321669616357,
+              "rapporto_p99_p1": 1.127777008927185,
+              "cv": 0.02189302258193493
+            },
+            "6": {
+              "voxel": 1241281,
+              "p1_rel": 0.9412483500110741,
+              "p99_rel": 1.0422081671862555,
+              "rapporto_p99_p1": 1.1072616139767932,
+              "cv": 0.01838710904121399
+            },
+            "12": {
+              "voxel": 702026,
+              "p1_rel": 0.9759568962187632,
+              "p99_rel": 1.0394175731518067,
+              "rapporto_p99_p1": 1.0650240570858354,
+              "cv": 0.012381664477288723
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.1442398325032253,
+          "rapporto_interno": 1.0650240570858354
+        },
+        {
+          "file": "data/raw/DBB/sub-0858/anat-t1w/61b32b1fc7fba5bc5a61b3ee/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1397.0,
+          "profilo": {
+            "0": {
+              "voxel": 1396966,
+              "p1_rel": 0.9123800952256728,
+              "p99_rel": 1.0431893595825215,
+              "rapporto_p99_p1": 1.14337145784016,
+              "cv": 0.03013390302658081
+            },
+            "3": {
+              "voxel": 1107495,
+              "p1_rel": 0.922643399926485,
+              "p99_rel": 1.0375084417921592,
+              "rapporto_p99_p1": 1.1244955980553555,
+              "cv": 0.02589615061879158
+            },
+            "6": {
+              "voxel": 846819,
+              "p1_rel": 0.9361220848544951,
+              "p99_rel": 1.031755279687799,
+              "rapporto_p99_p1": 1.1021588918588203,
+              "cv": 0.020474117249250412
+            },
+            "12": {
+              "voxel": 422559,
+              "p1_rel": 0.9690368742972463,
+              "p99_rel": 1.0233495806131814,
+              "rapporto_p99_p1": 1.0560481316619899,
+              "cv": 0.012985278852283955
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.14337145784016,
+          "rapporto_interno": 1.0560481316619899
+        },
+        {
+          "file": "data/raw/DBB/sub-0505/anat-t1w/61b2bcd7c7fba5bc5a4fe009/t1.nii.gz",
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "maschera": "cervello (fornita dal dataset)",
+          "volume_maschera_ml": 1564.2,
+          "profilo": {
+            "0": {
+              "voxel": 1564191,
+              "p1_rel": 0.903683042754294,
+              "p99_rel": 1.0521925197811055,
+              "rapporto_p99_p1": 1.1643380145478621,
+              "cv": 0.029307562857866287
+            },
+            "3": {
+              "voxel": 1254609,
+              "p1_rel": 0.9218688978487137,
+              "p99_rel": 1.0491489582701894,
+              "rapporto_p99_p1": 1.1380674201271985,
+              "cv": 0.02514401450753212
+            },
+            "6": {
+              "voxel": 976114,
+              "p1_rel": 0.9400850828132938,
+              "p99_rel": 1.0470243659551426,
+              "rapporto_p99_p1": 1.1137548984628314,
+              "cv": 0.021543730050325394
+            },
+            "12": {
+              "voxel": 514644,
+              "p1_rel": 0.9543225852017595,
+              "p99_rel": 1.0462555566717913,
+              "rapporto_p99_p1": 1.0963332241063912,
+              "cv": 0.018551159650087357
+            }
+          },
+          "margine_piu_profondo_mm": 12,
+          "rapporto_bordo": 1.1643380145478621,
+          "rapporto_interno": 1.0963332241063912
+        }
+      ],
+      "per_margine": {
+        "0": {
+          "casi": 10,
+          "mediano": 1.172162567006898,
+          "max": 1.8896012099314803
+        },
+        "3": {
+          "casi": 10,
+          "mediano": 1.1484188135364464,
+          "max": 1.7819693433542632
+        },
+        "6": {
+          "casi": 10,
+          "mediano": 1.123736186451797,
+          "max": 1.6600795036100775
+        },
+        "12": {
+          "casi": 10,
+          "mediano": 1.0947436548115235,
+          "max": 1.4394762067298286
+        }
+      },
+      "appaiato": {
+        "margine_max_mm": 12,
+        "casi": 10,
+        "mediana_per_margine": {
+          "0": 1.172162567006898,
+          "3": 1.1484188135364464,
+          "6": 1.123736186451797,
+          "12": 1.0947436548115235
+        }
+      },
+      "interno_mediano": 1.0947436548115235,
+      "bordo_mediano": 1.172162567006898,
+      "margine_riferimento_mm": 12,
+      "interno_max": 1.4394762067298286,
+      "giudizio": "trascurabile",
+      "azione": "nessuna correzione N4: campo piatto all'interno",
+      "maschera": "cervello (fornita dal dataset)",
+      "volume_maschera_ml_mediano": 1486.6999999999998
+    }
+  }
+}

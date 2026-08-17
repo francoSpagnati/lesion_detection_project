@@ -1,0 +1,145 @@
+{
+  "generated": "2026-08-13",
+  "seed": 42,
+  "n_folds": 5,
+  "datasets": {
+    "WMH": {
+      "n_cases": 99,
+      "n_groups": 4,
+      "orientations": [
+        "LPS"
+      ],
+      "target_spacing": [
+        1.2,
+        0.9766,
+        3.0
+      ],
+      "target_spacing_diagnostics": {
+        "asse_peggiore": 2,
+        "spacing_mediano": [
+          1.2,
+          0.9766,
+          3.0
+        ],
+        "shape_mediana": [
+          132,
+          256,
+          83
+        ],
+        "cond_spacing": "3 > 3.0*1.2=3.6 -> False",
+        "cond_voxel": "83*3.0 < 132 -> False",
+        "override_applicato": false
+      },
+      "do_separate_z": true,
+      "lesion_ml": {
+        "min": 0.786,
+        "median": 10.930498177206426,
+        "max": 74.99138842215429
+      },
+      "n_under_100_voxels": 0,
+      "label_values": {
+        "0/1": 65,
+        "0/1/2": 34
+      },
+      "wmh_label2_policy": "exclude",
+      "split": {
+        "stratified_on": "group | terzile lesion_ml (bins=3)",
+        "development": 79,
+        "internal_test": 20,
+        "official_test_unlabeled": 0,
+        "folds": [
+          {
+            "train": 63,
+            "val": 16
+          },
+          {
+            "train": 63,
+            "val": 16
+          },
+          {
+            "train": 63,
+            "val": 16
+          },
+          {
+            "train": 63,
+            "val": 16
+          },
+          {
+            "train": 64,
+            "val": 15
+          }
+        ]
+      },
+      "dataset_dir": "data/processed/nnUNet_raw/Dataset501_WMH"
+    },
+    "ATLAS": {
+      "n_cases": 655,
+      "n_groups": 33,
+      "orientations": [
+        "RAS"
+      ],
+      "target_spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "target_spacing_diagnostics": {
+        "asse_peggiore": 0,
+        "spacing_mediano": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "shape_mediana": [
+          197,
+          233,
+          189
+        ],
+        "cond_spacing": "1 > 3.0*1=3 -> False",
+        "cond_voxel": "197*3.0 < 189 -> False",
+        "override_applicato": false
+      },
+      "do_separate_z": false,
+      "lesion_ml": {
+        "min": 0.013,
+        "median": 5.29,
+        "max": 496.656
+      },
+      "n_under_100_voxels": 19,
+      "label_values": {
+        "0/1": 654,
+        "0/0.01": 1
+      },
+      "wmh_label2_policy": null,
+      "split": {
+        "stratified_on": "group | terzile lesion_ml (bins=3)",
+        "development": 556,
+        "internal_test": 99,
+        "official_test_unlabeled": 300,
+        "folds": [
+          {
+            "train": 444,
+            "val": 112
+          },
+          {
+            "train": 445,
+            "val": 111
+          },
+          {
+            "train": 445,
+            "val": 111
+          },
+          {
+            "train": 445,
+            "val": 111
+          },
+          {
+            "train": 445,
+            "val": 111
+          }
+        ]
+      },
+      "dataset_dir": "data/processed/nnUNet_raw/Dataset502_ATLAS"
+    }
+  }
+}

@@ -1,0 +1,2184 @@
+{
+  "datasets": {
+    "WMH": {
+      "path": "/data01/miccai_mri_data/miccai_nifti",
+      "description": "WMH / MICCAI 2017 challenge, FLAIR + T1 co-registrato, 99 casi",
+      "exists": true,
+      "nifti_files": 594,
+      "roles": {
+        "FLAIR": 297,
+        "T1": 198,
+        "label_or_lesion": 99
+      },
+      "training_files": 0,
+      "testing_files": 0,
+      "sampled": 50,
+      "sample_shapes": {
+        "(128, 256, 103)": 28,
+        "(256, 256, 172)": 16,
+        "(124, 256, 103)": 6
+      },
+      "sample_spacings_mm": {
+        "(1.3, 1.2109, 3.0)": 10,
+        "(0.9766, 0.9766, 1.5)": 16,
+        "(1.2999, 1.2109, 3.0)": 4,
+        "(1.3001, 1.2109, 3.0)": 20
+      },
+      "samples": [
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_150/Amsterdam_GE1T5_150_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.2999,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.2999,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.2999,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_151/Amsterdam_GE1T5_151_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.2999,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_152/Amsterdam_GE1T5_152_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_153/Amsterdam_GE1T5_153_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_154/Amsterdam_GE1T5_154_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_155/Amsterdam_GE1T5_155_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_FLAIR_BiasField.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_156/Amsterdam_GE1T5_156_wmh.nii.gz",
+          "shape": [
+            128,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_FLAIR_BiasField.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_T1w_BiasCorr.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_T1w_BiasField.nii.gz",
+          "shape": [
+            256,
+            256,
+            172
+          ],
+          "spacing_mm": [
+            0.9766,
+            0.9766,
+            1.5
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Amsterdam_GE1T5_157/Amsterdam_GE1T5_157_wmh.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3001,
+            1.2109,
+            3.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "Amsterdam_GE1T5_158/Amsterdam_GE1T5_158_FLAIR_BiasCorr.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        },
+        {
+          "file": "Amsterdam_GE1T5_158/Amsterdam_GE1T5_158_FLAIR_BiasField.nii.gz",
+          "shape": [
+            124,
+            256,
+            103
+          ],
+          "spacing_mm": [
+            1.3,
+            1.2109,
+            3.0
+          ],
+          "role": "FLAIR"
+        }
+      ]
+    },
+    "ATLAS": {
+      "path": "/data01/atlas_mri_data/ATLAS_2",
+      "description": "ATLAS 2.0, T1 in spazio MNI, 655 casi annotati + 300 senza label",
+      "exists": true,
+      "nifti_files": 2266,
+      "roles": {
+        "other": 1,
+        "T1": 955,
+        "label_or_lesion": 1310
+      },
+      "training_files": 1965,
+      "testing_files": 300,
+      "sampled": 50,
+      "sample_shapes": {
+        "(197, 233, 189)": 50
+      },
+      "sample_spacings_mm": {
+        "(1.0, 1.0, 1.0)": 50
+      },
+      "samples": [
+        {
+          "file": "MNI152NLin2009aSym.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "Testing/R005/sub-r005s016/ses-1/anat/sub-r005s016_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s025/ses-1/anat/sub-r005s025_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s030/ses-1/anat/sub-r005s030_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s034/ses-1/anat/sub-r005s034_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s044/ses-1/anat/sub-r005s044_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s047/ses-1/anat/sub-r005s047_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s056/ses-1/anat/sub-r005s056_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s057/ses-1/anat/sub-r005s057_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s059/ses-1/anat/sub-r005s059_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s071/ses-1/anat/sub-r005s071_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s072/ses-1/anat/sub-r005s072_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s078/ses-1/anat/sub-r005s078_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s079/ses-1/anat/sub-r005s079_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s080/ses-1/anat/sub-r005s080_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s082/ses-1/anat/sub-r005s082_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R005/sub-r005s084/ses-1/anat/sub-r005s084_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R014/sub-r014s001/ses-1/anat/sub-r014s001_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R014/sub-r014s007/ses-1/anat/sub-r014s007_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R014/sub-r014s012/ses-1/anat/sub-r014s012_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R014/sub-r014s013/ses-1/anat/sub-r014s013_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s002/ses-1/anat/sub-r015s002_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s003/ses-1/anat/sub-r015s003_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s004/ses-1/anat/sub-r015s004_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s005/ses-1/anat/sub-r015s005_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s007/ses-1/anat/sub-r015s007_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s012/ses-1/anat/sub-r015s012_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s013/ses-1/anat/sub-r015s013_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s014/ses-1/anat/sub-r015s014_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s017/ses-1/anat/sub-r015s017_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s022/ses-1/anat/sub-r015s022_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R015/sub-r015s024/ses-1/anat/sub-r015s024_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s101/ses-1/anat/sub-r017s101_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s103/ses-1/anat/sub-r017s103_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s107/ses-1/anat/sub-r017s107_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s108/ses-1/anat/sub-r017s108_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s109/ses-1/anat/sub-r017s109_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s111/ses-1/anat/sub-r017s111_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s113/ses-1/anat/sub-r017s113_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R017/sub-r017s121/ses-1/anat/sub-r017s121_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R018/sub-r018s002/ses-1/anat/sub-r018s002_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R018/sub-r018s003/ses-1/anat/sub-r018s003_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R018/sub-r018s004/ses-1/anat/sub-r018s004_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R018/sub-r018s005/ses-1/anat/sub-r018s005_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R018/sub-r018s006/ses-1/anat/sub-r018s006_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R019/sub-r019s002/ses-1/anat/sub-r019s002_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R019/sub-r019s003/ses-1/anat/sub-r019s003_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R019/sub-r019s005/ses-1/anat/sub-r019s005_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R019/sub-r019s006/ses-1/anat/sub-r019s006_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        },
+        {
+          "file": "Testing/R019/sub-r019s011/ses-1/anat/sub-r019s011_ses-1_space-MNI152NLin2009aSym_T1w.nii.gz",
+          "shape": [
+            197,
+            233,
+            189
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "T1"
+        }
+      ]
+    },
+    "DBB": {
+      "path": "/home/ccantini/lesion_detection_project/data/raw/DBB",
+      "description": "Distorted Brain Benchmark, T1 pediatrici, 6 tessuti, 244 soggetti usabili su 955",
+      "exists": true,
+      "nifti_files": 2865,
+      "roles": {
+        "label_or_lesion": 1666,
+        "other": 955,
+        "T1": 244
+      },
+      "training_files": 0,
+      "testing_files": 0,
+      "sampled": 50,
+      "sample_shapes": {
+        "(182, 218, 182)": 33,
+        "(160, 256, 160)": 10,
+        "(160, 256, 190)": 1,
+        "(160, 256, 145)": 4,
+        "(160, 256, 170)": 2
+      },
+      "sample_spacings_mm": {
+        "(1.0, 1.0, 1.0)": 50
+      },
+      "samples": [
+        {
+          "file": "sub-0001/mask/61b1fcfc044dac225cf73cc5/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0001/mask_raw/61b1fd0f044dac225cf73eb7/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0001/parcellation-volume/61b1fcea044dac225cf73ad0/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0002/mask/61b1fd44044dac225cf74345/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0002/mask_raw/61b1fd57044dac225cf743a2/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            190
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0002/parcellation-volume/61b1fd32044dac225cf742e9/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0003/mask/61b1ffe7044dac225cf756e6/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0003/mask_raw/61b2000b044dac225cf75744/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0003/parcellation-volume/61b1ffd5044dac225cf7568a/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0004/mask/61b2003b044dac225cf75840/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0004/mask_raw/61b20053044dac225cf758a0/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0004/parcellation-volume/61b2002e044dac225cf757e6/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0005/mask/61b2009c044dac225cf759a7/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0005/mask_raw/61b200b9044dac225cf75a03/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            145
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0005/parcellation-volume/61b2008a044dac225cf7594a/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0006/mask/61b200f1044dac225cf75b01/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0006/mask_raw/61b20103044dac225cf75b5d/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0006/parcellation-volume/61b200d9044dac225cf75aa2/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0007/mask/61b2013e044dac225cf75c5f/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0007/mask_raw/61b20150044dac225cf75cbc/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0007/parcellation-volume/61b20126044dac225cf75bff/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0008/mask/61b20188044dac225cf75dba/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0008/mask_raw/61b2019a044dac225cf75e17/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0008/parcellation-volume/61b20175044dac225cf75d5e/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0009/mask/61b201cc044dac225cf75f14/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0009/mask_raw/61b201de044dac225cf75f72/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            145
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0009/parcellation-volume/61b201ba044dac225cf75eb8/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0010/mask/61b20216044dac225cf76071/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0010/mask_raw/61b20228044dac225cf760cd/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0010/parcellation-volume/61b20204044dac225cf76015/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0011/mask/61b20264044dac225cf761cb/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0011/mask_raw/61b20274044dac225cf76224/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0011/parcellation-volume/61b20251044dac225cf7616f/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0012/mask/61b202a6044dac225cf7631f/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0012/mask_raw/61b202c1044dac225cf76380/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            170
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0012/parcellation-volume/61b20299044dac225cf762c6/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0013/mask/61b202f3044dac225cf7647c/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0013/mask_raw/61b20306044dac225cf764d8/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0013/parcellation-volume/61b202e1044dac225cf7641f/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0014/mask/61b20343044dac225cf765d9/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0014/mask_raw/61b2035d044dac225cf76635/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            145
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0014/parcellation-volume/61b2032b044dac225cf7657a/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0015/mask/61b20395044dac225cf76730/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0015/mask_raw/61b203ab044dac225cf7678c/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            145
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0015/parcellation-volume/61b20385044dac225cf766d7/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0016/mask/61b203d8044dac225cf7691a/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0016/mask_raw/61b203ea044dac225cf769f4/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            160
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0016/parcellation-volume/61b203c5044dac225cf76828/parc.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "other"
+        },
+        {
+          "file": "sub-0017/mask/61b2041f044dac225cf76af0/mask.nii.gz",
+          "shape": [
+            182,
+            218,
+            182
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        },
+        {
+          "file": "sub-0017/mask_raw/61b20432044dac225cf76b4f/mask.nii.gz",
+          "shape": [
+            160,
+            256,
+            170
+          ],
+          "spacing_mm": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "role": "label_or_lesion"
+        }
+      ]
+    },
+    "AINCP": {
+      "path": null,
+      "description": "Dataset privato AInCP / Stella Maris, ~10 pazienti segmentati a mano. Non ancora consegnato: il bersaglio finale del progetto.",
+      "exists": false
+    }
+  }
+}

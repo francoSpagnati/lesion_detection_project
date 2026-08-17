@@ -1,0 +1,10 @@
+{
+  "project_root": "/home/ccantini/lesion_detection_project",
+  "nnunet_base": "/home/ccantini/lesion_detection_project/nnUNet",
+  "datasets": {
+    "WMH": {"path": "/data01/miccai_mri_data/miccai_nifti", "description": "WMH / MICCAI 2017 challenge, FLAIR + T1 co-registrato, 99 casi"},
+    "ATLAS": {"path": "/data01/atlas_mri_data/ATLAS_2", "description": "ATLAS 2.0, T1 in spazio MNI, 655 casi annotati + 300 senza label"},
+    "DBB": {"path": "/home/ccantini/lesion_detection_project/data/raw/DBB", "description": "Distorted Brain Benchmark, T1 pediatrici, 6 tessuti, 244 soggetti usabili su 955"},
+    "AINCP": {"path": null, "description": "Dataset privato AInCP / Stella Maris, ~10 pazienti segmentati a mano. Non ancora consegnato: il bersaglio finale del progetto."}
+  }
+}

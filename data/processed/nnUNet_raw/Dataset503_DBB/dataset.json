@@ -1,0 +1,26 @@
+{
+  "name": "Dataset503_DBB",
+  "description": "Distorted Brain Benchmark: segmentazione di 6 tessuti su T1 pediatrici. Training su cervelli sani, test su cervelli malformati. Preparato da scripts/convert_dbb_to_nnunet.py",
+  "channel_names": {
+    "0": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "csf": 1,
+    "gray_matter": 2,
+    "white_matter": 3,
+    "deep_gray_matter": 4,
+    "brain_stem": 5,
+    "cerebellum": 6
+  },
+  "numTraining": 207,
+  "file_ending": ".nii.gz",
+  "overwrite_image_reader_writer": "NibabelIOWithReorient",
+  "dataset_preparation": {
+    "seed": 42,
+    "n_folds": 5,
+    "fold_0": "split ufficiale del benchmark (184 train / 23 validation)",
+    "fold_1_4": "partizioni aggiuntive, stratificate su conformita' allo spazio MNI",
+    "test_set": "i 37 casi patologici del benchmark, esclusi dalla cross-validation"
+  }
+}

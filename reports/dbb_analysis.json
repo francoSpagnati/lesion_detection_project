@@ -1,0 +1,207 @@
+{
+  "sorgente": "/home/ccantini/lesion_detection_project/data/raw/DBB",
+  "copertura": {
+    "totale": 955,
+    "con_t1": 244,
+    "con_parc": 955,
+    "con_mask": 954,
+    "label_senza_immagine": 711
+  },
+  "coorti_senza_t1": {
+    "C-MIND": 413,
+    "NIH-PED": 298
+  },
+  "casi_analizzati": 244,
+  "orientamenti": {
+    "LAS": 232,
+    "RAS": 12
+  },
+  "shapes": {
+    "182x218x182": 213,
+    "170x256x256": 2,
+    "160x240x240": 6,
+    "155x240x240": 4,
+    "150x224x224": 3,
+    "155x224x224": 3,
+    "160x256x256": 2,
+    "150x240x240": 2,
+    "140x224x224": 4,
+    "151x240x240": 1,
+    "145x224x224": 1,
+    "149x240x240": 1,
+    "150x256x256": 1,
+    "155x256x256": 1
+  },
+  "spacings": {
+    "1 x 1 x 1": 221,
+    "1 x 0.9583 x 0.9583": 5,
+    "1 x 0.9821 x 0.9821": 3,
+    "1 x 0.9375 x 0.9375": 8,
+    "1 x 0.938 x 0.938": 5,
+    "1 x 0.9545 x 0.9545": 1,
+    "1 x 0.958 x 0.958": 1
+  },
+  "geometria_incoerente": [],
+  "etichette": {
+    "0/1/2/3/4/5/6": 244
+  },
+  "target_spacing_nnunet": {
+    "spacing_mediana": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "shape_mediana": [
+      182,
+      218,
+      182
+    ],
+    "asse_peggiore": "x",
+    "condizione_spacing": false,
+    "condizione_voxel": false,
+    "override_anisotropico": false,
+    "target_spacing": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "resampling_separato_z": false
+  },
+  "gruppi": [
+    {
+      "gruppo": "EMEDEA-PED_ACC",
+      "n": 10,
+      "split": "test",
+      "spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape": [
+        182,
+        218,
+        182
+      ],
+      "brain_ml_mediana": 1298.2
+    },
+    {
+      "gruppo": "EMEDEA-PED_HD",
+      "n": 6,
+      "split": "test",
+      "spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape": [
+        182,
+        218,
+        182
+      ],
+      "brain_ml_mediana": 1977.8
+    },
+    {
+      "gruppo": "EMEDEA-PED_Healthy",
+      "n": 207,
+      "split": "train",
+      "spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape": [
+        182,
+        218,
+        182
+      ],
+      "brain_ml_mediana": 1483.3
+    },
+    {
+      "gruppo": "EMEDEA-PED_MCDs",
+      "n": 10,
+      "split": "test",
+      "spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape": [
+        182,
+        218,
+        182
+      ],
+      "brain_ml_mediana": 1056.7
+    },
+    {
+      "gruppo": "EMEDEA-PED_PFM",
+      "n": 11,
+      "split": "test",
+      "spacing": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape": [
+        182,
+        218,
+        182
+      ],
+      "brain_ml_mediana": 1268.6
+    }
+  ],
+  "volumi_per_classe": {
+    "CSF": {
+      "valore_voxel": 1,
+      "mediana_ml": 232.4,
+      "min_ml": 59.9,
+      "max_ml": 1376.3,
+      "casi_con_classe_vuota": 0
+    },
+    "Gray Matter": {
+      "valore_voxel": 2,
+      "mediana_ml": 609.0,
+      "min_ml": 261.4,
+      "max_ml": 820.6,
+      "casi_con_classe_vuota": 0
+    },
+    "White Matter": {
+      "valore_voxel": 3,
+      "mediana_ml": 412.5,
+      "min_ml": 146.2,
+      "max_ml": 606.5,
+      "casi_con_classe_vuota": 0
+    },
+    "Deep Gray Matter": {
+      "valore_voxel": 4,
+      "mediana_ml": 43.5,
+      "min_ml": 14.2,
+      "max_ml": 58.7,
+      "casi_con_classe_vuota": 0
+    },
+    "Brain Stem": {
+      "valore_voxel": 5,
+      "mediana_ml": 20.7,
+      "min_ml": 6.3,
+      "max_ml": 30.9,
+      "casi_con_classe_vuota": 0
+    },
+    "Cerebellum": {
+      "valore_voxel": 6,
+      "mediana_ml": 159.9,
+      "min_ml": 31.9,
+      "max_ml": 232.4,
+      "casi_con_classe_vuota": 0
+    }
+  },
+  "split_ufficiale": {
+    "train": 184,
+    "validation": 23,
+    "test": 37
+  },
+  "frazione_nonzero_mediana": 0.6074,
+  "brain_ml": {
+    "mediana": 1478.6,
+    "min": 647.4,
+    "max": 2196.6
+  }
+}

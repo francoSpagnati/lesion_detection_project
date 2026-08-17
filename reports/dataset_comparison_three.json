@@ -1,0 +1,111 @@
+{
+  "WMH": {
+    "dataset": "WMH",
+    "compito": "lesioni della sostanza bianca (iperintensita)",
+    "canale_usato": "FLAIR (T1 co-registrato disponibile)",
+    "spazio": "nativo dello scanner",
+    "classi": "binaria (wmh); label 2 \"altra patologia\" esclusa",
+    "popolazione": "adulti, 4 siti / scanner diversi",
+    "nnunet": "Dataset501_WMH",
+    "n_casi": 99,
+    "n_senza_label": 0,
+    "n_gruppi": 4,
+    "orientamenti": {
+      "LPS": 99
+    },
+    "spacing_distinti": 7,
+    "spacing_mediana": [
+      1.2,
+      0.9766,
+      3.0
+    ],
+    "shape_mediana": [
+      132,
+      256,
+      83
+    ],
+    "anisotropia_mediana": 3.07,
+    "voxel_mm3_mediano": 3.516,
+    "fov_mediano_ml": 9861.0,
+    "foreground_ml": {
+      "p10": 1.61,
+      "mediana": 10.93,
+      "p90": 40.12
+    },
+    "frazione_foreground_mediana": 0.001,
+    "casi_geometria_ko": 0
+  },
+  "ATLAS": {
+    "dataset": "ATLAS",
+    "compito": "lesioni da ictus (post-stroke)",
+    "canale_usato": "T1",
+    "spazio": "MNI152NLin2009aSym",
+    "classi": "binaria (lesion)",
+    "popolazione": "adulti, 33 coorti",
+    "nnunet": "Dataset502_ATLAS",
+    "n_casi": 655,
+    "n_senza_label": 300,
+    "n_gruppi": 33,
+    "orientamenti": {
+      "RAS": 655
+    },
+    "spacing_distinti": 1,
+    "spacing_mediana": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "shape_mediana": [
+      197,
+      233,
+      189
+    ],
+    "anisotropia_mediana": 1.0,
+    "voxel_mm3_mediano": 1.0,
+    "fov_mediano_ml": 8675.0,
+    "foreground_ml": {
+      "p10": 0.38,
+      "mediana": 5.29,
+      "p90": 106.09
+    },
+    "frazione_foreground_mediana": 0.0006,
+    "casi_geometria_ko": 0
+  },
+  "DBB": {
+    "dataset": "DBB",
+    "compito": "segmentazione di 6 tessuti (non lesioni)",
+    "canale_usato": "T1",
+    "spazio": "MNI152 (213 casi) + nativo (31 casi)",
+    "classi": "6 tessuti: CSF, GM, WM, GM profonda, tronco, cervelletto",
+    "popolazione": "pediatrica; training su sani, test su malformazioni",
+    "nnunet": "Dataset503_DBB",
+    "n_casi": 244,
+    "n_senza_label": 0,
+    "n_gruppi": 5,
+    "orientamenti": {
+      "LAS": 232,
+      "RAS": 12
+    },
+    "spacing_distinti": 7,
+    "spacing_mediana": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "shape_mediana": [
+      182,
+      218,
+      182
+    ],
+    "anisotropia_mediana": 1.0,
+    "voxel_mm3_mediano": 1.0,
+    "fov_mediano_ml": 7221.0,
+    "foreground_ml": {
+      "p10": 1295.0,
+      "mediana": 1478.81,
+      "p90": 1689.0
+    },
+    "frazione_foreground_mediana": 0.2034,
+    "casi_geometria_ko": 0
+  }
+}

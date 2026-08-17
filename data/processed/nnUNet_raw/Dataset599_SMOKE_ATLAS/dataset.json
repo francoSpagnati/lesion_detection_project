@@ -1,0 +1,35 @@
+{
+  "name": "Dataset599_SMOKE_ATLAS",
+  "description": "Smoke test della pipeline. 16 casi presi da Dataset502_ATLAS con passo 34. Non usare per produrre metriche.",
+  "channel_names": {
+    "0": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "lesion": 1
+  },
+  "numTraining": 16,
+  "file_ending": ".nii.gz",
+  "smoke_test": {
+    "sorgente": "Dataset502_ATLAS",
+    "passo": 34,
+    "casi": [
+      "sub-r001s002",
+      "sub-r002s004",
+      "sub-r004s016",
+      "sub-r005s081",
+      "sub-r009s045",
+      "sub-r009s092",
+      "sub-r010s010",
+      "sub-r011s029",
+      "sub-r019s012",
+      "sub-r028s009",
+      "sub-r031s030",
+      "sub-r035s012",
+      "sub-r038s071",
+      "sub-r040s053",
+      "sub-r044s003",
+      "sub-r048s012"
+    ]
+  }
+}

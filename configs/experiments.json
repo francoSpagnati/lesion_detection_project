@@ -1,0 +1,13 @@
+{
+  "datasets": [
+    {"id": 501, "name": "WMH", "channel": "FLAIR", "enabled": true},
+    {"id": 502, "name": "ATLAS", "channel": "T1", "enabled": true},
+    {"id": 503, "name": "DBB", "channel": "T1", "enabled": true, "note": "6 tessuti, non lesioni"},
+    {"id": 511, "name": "WMH_T1", "channel": "T1", "enabled": true, "note": "ablazione della FLAIR, da confrontare con 501"},
+    {"id": 599, "name": "SMOKE_ATLAS", "channel": "T1", "enabled": false, "note": "smoke test, non produce metriche"}
+  ],
+  "configurations": ["2d", "3d_fullres"],
+  "optional_configurations": ["3d_lowres", "3d_cascade_fullres"],
+  "trainers": ["nnUNetTrainerWandb", "nnUNetTrainerWandb_250epochs"],
+  "folds": [0, 1, 2, 3, 4]
+}

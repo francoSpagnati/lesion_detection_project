@@ -1,0 +1,25 @@
+{
+  "name": "Dataset502_ATLAS",
+  "description": "ATLAS lesion segmentation, preparato da notebooks/dataset_preparation.ipynb",
+  "channel_names": {
+    "0": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "lesion": 1
+  },
+  "numTraining": 556,
+  "file_ending": ".nii.gz",
+  "dataset_preparation": {
+    "seed": 42,
+    "n_folds": 5,
+    "test_fraction": 0.15,
+    "stratified_on": "group | terzile lesion_ml (bins=3)",
+    "wmh_label2_policy": null,
+    "predicted_target_spacing": [
+      1.0,
+      1.0,
+      1.0
+    ]
+  }
+}

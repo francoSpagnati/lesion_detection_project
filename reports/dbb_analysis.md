@@ -1,0 +1,58 @@
+# DBB - analisi del terzo dataset
+
+Generato da `scripts/analyze_dbb.py`. Read-only: nessun dato modificato.
+Manifest per caso: `data/processed/manifests/DBB_cases.csv`.
+
+## Copertura
+
+| | soggetti |
+| --- | --- |
+| nel progetto brainlife | 955 |
+| con parcellazione (label) | 955 |
+| con maschera cerebrale | 954 |
+| **con T1 (usabili)** | **244** |
+| con label ma senza immagine | 711 |
+
+I soggetti senza T1 appartengono a coorti ad accesso ristretto: C-MIND (413), NIH-PED (298).
+Le loro label sono pubbliche ma le immagini no, quindi sono inutilizzabili.
+
+## Geometria
+
+- casi analizzati: **244**
+- orientamento: `{'LAS': 232, 'RAS': 12}`
+- shape distinte: `{'182x218x182': 213, '170x256x256': 2, '160x240x240': 6, '155x240x240': 4, '150x224x224': 3, '155x224x224': 3, '160x256x256': 2, '150x240x240': 2, '140x224x224': 4, '151x240x240': 1, '145x224x224': 1, '149x240x240': 1, '150x256x256': 1, '155x256x256': 1}`
+- spacing distinti: `{'1 x 1 x 1': 221, '1 x 0.9583 x 0.9583': 5, '1 x 0.9821 x 0.9821': 3, '1 x 0.9375 x 0.9375': 8, '1 x 0.938 x 0.938': 5, '1 x 0.9545 x 0.9545': 1, '1 x 0.958 x 0.958': 1}`
+- casi con immagine e label non allineate: **0**
+- frazione mediana di voxel non nulli: **0.6074**
+
+### Target spacing prevista (regola nnU-Net v2)
+
+- spacing mediano: `[1.0, 1.0, 1.0]` mm, shape mediana `[182, 218, 182]`
+- asse peggiore: `x`
+- override anisotropico applicato: **False**
+- **target spacing: `[1.0, 1.0, 1.0]` mm**
+
+## Split ufficiale del benchmark
+
+| Gruppo | n | split | spacing (mm) | shape | volume cervello mediano (ml) |
+| --- | --- | --- | --- | --- | --- |
+| EMEDEA-PED_ACC | 10 | test | 1 x 1 x 1 | 182x218x182 | 1298.2 |
+| EMEDEA-PED_HD | 6 | test | 1 x 1 x 1 | 182x218x182 | 1977.8 |
+| EMEDEA-PED_Healthy | 207 | train | 1 x 1 x 1 | 182x218x182 | 1483.3 |
+| EMEDEA-PED_MCDs | 10 | test | 1 x 1 x 1 | 182x218x182 | 1056.7 |
+| EMEDEA-PED_PFM | 11 | test | 1 x 1 x 1 | 182x218x182 | 1268.6 |
+
+## Classi di tessuto
+
+Valori di label osservati: `{'0/1/2/3/4/5/6': 244}`
+
+| Valore | Classe | mediana (ml) | min | max | casi con classe vuota |
+| --- | --- | --- | --- | --- | --- |
+| 1 | CSF | 232.4 | 59.9 | 1376.3 | 0 |
+| 2 | Gray Matter | 609.0 | 261.4 | 820.6 | 0 |
+| 3 | White Matter | 412.5 | 146.2 | 606.5 | 0 |
+| 4 | Deep Gray Matter | 43.5 | 14.2 | 58.7 | 0 |
+| 5 | Brain Stem | 20.7 | 6.3 | 30.9 | 0 |
+| 6 | Cerebellum | 159.9 | 31.9 | 232.4 | 0 |
+
+Volume cerebrale (maschera fornita): mediana **1478.6 ml**, da 647.4 a 2196.6 ml.

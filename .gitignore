@@ -1,0 +1,44 @@
+# --- Segreti ---------------------------------------------------------------
+.env
+*.key
+
+# --- Dati -------------------------------------------------------------------
+# I sorgenti stanno su /data01 in sola lettura e non vanno versionati.
+# data/raw/ contiene symlink a /data01, tranne data/raw/DBB/ che sono 4.4 GB
+# di file veri scaricati da brainlife (rigenerabili con scripts/download_dbb.py).
+data/raw/
+
+# Dataset nnU-Net convertiti: rigenerabili dal notebook e dagli script di
+# conversione. Le immagini sono symlink, le label sono derivate.
+# Si versiona solo il dataset.json, che documenta la conversione.
+data/processed/nnUNet_raw/*
+!data/processed/nnUNet_raw/*/
+data/processed/nnUNet_raw/*/*
+!data/processed/nnUNet_raw/*/dataset.json
+
+# Figure di QC: rigenerabili dal notebook, binarie.
+data/processed/qc/
+
+# --- nnU-Net ----------------------------------------------------------------
+# Fingerprint, piani, dati preprocessati, checkpoint: decine di GB, rigenerabili.
+# Eccezione: splits_final.json NON va perso. I fold non si rigenerano, perche'
+# se cambiano i confronti fra run precedenti e successive perdono validita'.
+nnUNet/*
+!nnUNet/nnUNet_preprocessed/
+nnUNet/nnUNet_preprocessed/*
+!nnUNet/nnUNet_preprocessed/*/
+nnUNet/nnUNet_preprocessed/*/*
+!nnUNet/nnUNet_preprocessed/*/splits_final.json
+
+# --- Output di esecuzione ---------------------------------------------------
+wandb/
+logs/
+models/
+*.log
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+*.egg-info/
