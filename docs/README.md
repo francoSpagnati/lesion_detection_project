@@ -20,6 +20,10 @@ Leggi in quest'ordine. Sono cinque documenti, nessuno ripete gli altri.
 
 [Componenti](components.md) è la mappa di cartelle e file, da consultare al bisogno.
 
+Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
+[prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
+riesplorare i dati da zero.
+
 ## Stato
 
 | Fase | Stato |
