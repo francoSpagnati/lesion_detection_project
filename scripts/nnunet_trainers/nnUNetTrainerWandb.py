@@ -55,6 +55,33 @@ def _tags_configurate():
     return list(json.loads(cfg_file.read_text()).get('tags', []))
 
 
+def _consenti_riscrittura_config():
+    """Rende ripartibile un training tracciato (`nnUNetv2_train ... --c`).
+
+    Bug di nnU-Net 2.8: `WandbLogger.update_config` chiama `run.config.update(config)`
+    senza `allow_val_change=True`. Alla ripresa il logger riaggancia il run W&B
+    esistente (stesso id, preso da `wandb/latest-run`) e `nnUNetTrainer.__init__`
+    riscrive la config con il piano; wandb rifiuta di cambiare una chiave gia'
+    presente e solleva `ConfigError` **prima** che il training inizi.
+
+    I due valori sono lo stesso piano: differiscono all'ultima cifra della
+    serializzazione dei float (`0.9765999913215636` contro `...37`). Qui la
+    riscrittura viene autorizzata.
+
+    Costato una volta: 189 epoche su 501 non ripartivano dal checkpoint.
+    """
+    from nnunetv2.training.logging import nnunet_logger
+
+    if getattr(nnunet_logger.WandbLogger.update_config, '_patch_ripresa', False):
+        return
+
+    def update_config(self, config: dict):
+        self.run.config.update(config, allow_val_change=True)
+
+    update_config._patch_ripresa = True
+    nnunet_logger.WandbLogger.update_config = update_config
+
+
 def _abilita_wandb():
     """Accende il logger integrato di nnU-Net. Va fatto prima di `nnUNetTrainer.__init__`,
     che e' dove il `MetaLogger` viene costruito.
@@ -81,6 +108,7 @@ def _abilita_wandb():
     os.environ.setdefault('nnUNet_wandb_mode', cfg.get('mode', 'online'))
     if cfg.get('entity'):
         os.environ.setdefault('WANDB_ENTITY', cfg['entity'])
+    _consenti_riscrittura_config()
     return True
 
 

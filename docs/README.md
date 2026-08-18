@@ -20,6 +20,10 @@ Leggi in quest'ordine. Sono cinque documenti, nessuno ripete gli altri.
 
 [Componenti](components.md) è la mappa di cartelle e file, da consultare al bisogno.
 
+[Recap per il relatore](recap-per-relatore.md) non è documentazione tecnica ma un documento di
+**comunicazione**: riassume per chi sta fuori dal progetto cosa è stato analizzato, cosa deciso e perché.
+Va riscritto quando serve, non mantenuto in parallelo agli altri.
+
 Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
@@ -37,9 +41,9 @@ riesplorare i dati da zero.
 | Conversione di DBB | completata: `Dataset503_DBB`, integrità verificata |
 | Variante T1-only di WMH | completata: `Dataset511_WMH_T1` |
 | Tracking W&B | **verificato** end-to-end sullo smoke test |
-| **Planning e preprocessing di 501/502/503** | **da fare — è il passo successivo** |
-| Baseline di training (fold 0 su 501, 502, 503) | da fare |
-| Ablazione FLAIR (511 contro 501) | da fare |
+| Planning e preprocessing di 501/502/503 | completato: 24 GB, spacing verificate (`notebooks/preprocessing_501_502_503.ipynb`) |
+| Baseline di training (fold 0) | 501 e 502 **fatte** (Dice 0.774 e 0.610, `reports/baseline_validation.md`); 503 in corso |
+| **Ablazione FLAIR (511 contro 501)** | **da fare — è il passo successivo** |
 | Transfer DBB → ATLAS | pianificato |
 | Dataset privato AInCP | non ancora consegnato |
 | Stadio 2 — inpainting e gemello sano | da fare, dopo la segmentazione |

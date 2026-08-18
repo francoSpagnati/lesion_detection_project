@@ -35,19 +35,26 @@ quella che permette di tenere i trainer del progetto in `scripts/nnunet_trainers
 
 ## Step 2 - Planning e preprocessing
 
+**Fatto** per 501, 502 e 503 — esito e numeri reali in
+[cosa-e-stato-fatto.md](cosa-e-stato-fatto.md#10-planning-e-preprocessing-di-501-502-e-503). Resta da
+fare per 511, al momento dell'ablazione FLAIR.
+
 ```bash
-nnUNetv2_plan_and_preprocess -d 501 --verify_dataset_integrity   # WMH (FLAIR)
-nnUNetv2_plan_and_preprocess -d 502 --verify_dataset_integrity   # ATLAS (T1)
-nnUNetv2_plan_and_preprocess -d 503 --verify_dataset_integrity   # DBB (T1, 6 tessuti)
+nnUNetv2_plan_and_preprocess -d 501 -npfp 16 -np 16 --verify_dataset_integrity   # WMH (FLAIR)
+nnUNetv2_plan_and_preprocess -d 502 -npfp 16 -np 16 --verify_dataset_integrity   # ATLAS (T1)
+nnUNetv2_plan_and_preprocess -d 503 -npfp 16 -np 16 --verify_dataset_integrity   # DBB (T1, 6 tessuti)
 ```
+
+`-np`/`-npfp` cambiano solo il tempo, non il risultato: con 16 processi i tre dataset richiedono circa
+3 minuti in tutto. La macchina ha 96 core ma è condivisa, quindi non vanno presi tutti.
 
 `--verify_dataset_integrity` va usato la prima volta: controlla appaiamento immagini/label, geometrie e
 coerenza con `dataset.json`. Se fallisce, il problema è nella preparazione, non nel training.
 
 Attenzione allo spazio disco: `/home` ha circa 250 GB liberi (verificare con `df -h /home`: la macchina è condivisa), e `/data01` non è scrivibile.
-Il preprocessing genera stime dell'ordine di ~25 GB per ATLAS per configurazione (i dati vengono
-scompattati in `.npy` durante il training), pochi GB per WMH e ~8 GB per DBB. `2d` + `3d_fullres` sui tre
-dataset stanno nel budget, ma vanno monitorati:
+**Misurato:** `2d` + `3d_fullres` sui tre dataset occupano **24 GB** (ATLAS 15.9, DBB 6.8, WMH 1.1), meno
+delle stime iniziali. Il costo vero arriva dopo: durante il training i casi vengono scompattati in `.npy`
+non compressi, quindi lo spazio va ricontrollato al primo training su ATLAS:
 
 ```bash
 du -sh "$nnUNet_preprocessed"; df -h /home
@@ -98,6 +105,17 @@ epoche sono settimane di GPU, quindi non si fa così. L'ordine consigliato:
    produrre i numeri finali.
 3. **Giro definitivo** sui 5 fold, solo sulle configurazioni sopravvissute.
 
+**Come lanciare, perché il modo conta.** Un training dura ore e **non deve morire con il terminale o
+con la sessione che lo ha avviato**. `nohup` da solo non basta: protegge dal segnale di riaggancio del
+terminale, non dalla terminazione dell'intero gruppo di processi quando il padre viene chiuso. Serve
+`setsid`, che mette il comando in una sessione propria. `scripts/run_baselines.sh` incapsula questo più
+le guardie su spazio disco e GPU occupata, riprende da `checkpoint_latest.pth` se lo trova e si ferma
+invece di proseguire quando un training fallisce:
+
+```bash
+setsid nohup bash scripts/run_baselines.sh 501 502 503 > reports/logs/baselines.log 2>&1 < /dev/null &
+```
+
 ```bash
 # baseline, un fold alla volta
 nnUNetv2_train 501 3d_fullres 0 --npz -tr nnUNetTrainerWandb
@@ -114,9 +132,14 @@ La priorità fra dataset ed esperimenti (baseline → ablazione FLAIR → transf
 `--npz` salva le probabilità di validation: senza, `nnUNetv2_find_best_configuration` non può valutare
 gli ensemble.
 
-Su WMH la configurazione `2d` merita attenzione reale e non è una formalità: con fette da 3 mm il
-contesto attraverso il piano è scarso, ed è il caso tipico in cui la 2d è competitiva con la 3d.
-`3d_lowres` e la cascade vanno usate solo se è il planner a proporle.
+Su WMH la configurazione `2d` va misurata, ma **l'argomento a priori a suo favore si è indebolito**: il
+piano assegna alla `3d_fullres` una patch di 64 fette su 79, cioè l'81% del volume, quindi il contesto
+attraverso il piano non è così scarso come si temeva con fette da 3 mm. Resta un confronto da fare, non
+più un candidato favorito.
+
+`3d_lowres` **non è disponibile**: il planner l'ha scartata su tutti e tre i dataset perché la riduzione
+di dimensione sarebbe trascurabile. Di conseguenza nemmeno la cascade è utilizzabile, e il confronto di
+configurazione è a due: `2d` contro `3d_fullres`.
 
 ## Step 6 - Scegliere configurazione ed ensemble
 
@@ -176,6 +199,15 @@ confrontabili. Varianti disponibili: `nnUNetTrainerWandb_250epochs` per il primo
 
 Se W&B non è raggiungibile il training **prosegue senza tracking**: un problema di logging non deve far
 perdere ore di GPU. Per un run deliberatamente non tracciato, usare il `nnUNetTrainer` di default.
+
+**Ripresa di un training interrotto** (`nnUNetv2_train ... --c`, riparte da `checkpoint_latest.pth`, che
+nnU-Net salva ogni 50 epoche). Funziona, ma solo grazie a una correzione nel nostro trainer: il
+`WandbLogger` di nnU-Net 2.8 riaggancia il run W&B esistente e ne riscrive la config chiamando
+`run.config.update()` **senza** `allow_val_change=True`; wandb rifiuta di sovrascrivere una chiave già
+presente e il training muore in inizializzazione. I due valori sono lo stesso piano, diverso solo
+all'ultima cifra della serializzazione dei float. Senza quella correzione nessun run tracciato è
+ripartibile. Alla ripresa W&B ignora le epoche già registrate («Tried to log to step N») e riprende
+dalla prima nuova: è atteso, non un errore.
 
 Per verificare la catena senza impegnare la GPU per ore:
 

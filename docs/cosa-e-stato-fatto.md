@@ -151,6 +151,77 @@ config (`target_spacing [1,1,1]`, `patch_size [128,128,128]`, `channel_names {'0
 iperparametri, GPU), le metriche per epoca e le metriche finali in summary (`final_val/foreground_dice`).
 Il Dice dello smoke **non va letto**: 16 casi, 5 epoche.
 
+## 10. Planning e preprocessing di 501, 502 e 503
+
+```bash
+source scripts/env.sh
+nnUNetv2_plan_and_preprocess -d 501 -npfp 16 -np 16 --verify_dataset_integrity   # e cosi' per 502 e 503
+```
+
+Eseguito da `notebooks/preprocessing_501_502_503.ipynb`, che aggiunge attorno al comando i controlli che
+lo rendono verificabile: spazio disco con guardia a 60 GB fra un dataset e l'altro, hash degli
+`splits_final.json` prima e dopo, e la verifica del piano. Log completi in `reports/logs/`.
+
+→ `nnUNetPlans.json`, `dataset_fingerprint.json` e i dati preprocessati nelle tre cartelle di
+`nnUNet_preprocessed/`. **24 GB in tutto** (WMH 1.1, ATLAS 15.9, DBB 6.8 — meno dei ~35 GB stimati),
+**3 minuti** di parete con 16 processi.
+
+| | Target spacing del piano | Coincide con l'attesa | Patch `3d_fullres` | Batch |
+| --- | --- | --- | --- | --- |
+| 501 WMH | `3.0 × 0.9766 × 1.2` | sì | `64 × 224 × 128` | 2 |
+| 502 ATLAS | `1.0 × 1.0 × 1.0` | sì | `128 × 128 × 128` | 2 |
+| 503 DBB | `1.0 × 1.0 × 1.0` | sì | `128 × 160 × 112` | 2 |
+
+I valori del piano sono nell'ordine assi di nnU-Net, che mette per prima la direzione a risoluzione
+peggiore: sono gli stessi numeri di `1.2 × 0.9766 × 3.0` permutati, non una spacing diversa.
+
+**Tre esiti che cambiano qualcosa:**
+
+- **`3d_lowres` scartata su tutti e tre** dal planner («image size difference too small»): resta il
+  confronto a due, `2d` contro `3d_fullres`, e la cascade non è disponibile.
+- **Su WMH la patch copre 64 delle 79 fette (81% del volume).** Era l'argomento principale a favore
+  della `2d` — «con fette da 3 mm il contesto attraverso il piano è scarso» — e il piano lo indebolisce:
+  la rete 3D vede quasi tutto il volume in una volta. La `2d` va comunque misurata, ma l'aspettativa a
+  priori non è più a suo favore.
+- **Batch size 2 ovunque in `3d_fullres`**, cioè il minimo: le patch sono grandi quanto il budget di
+  memoria consente. Gli split sono rimasti invariati (hash identici) e le dimensioni dei fold sono
+  quelle attese.
+
+## 11. Baseline: fold 0 di 3d_fullres su 501, 502, 503
+
+```bash
+setsid nohup bash scripts/run_baselines.sh 501 502 503 > reports/logs/baselines.log 2>&1 < /dev/null &
+python scripts/summarize_validation.py     # -> reports/baseline_validation.md
+```
+
+1000 epoche, ~22.9 s/epoca su A100, circa 6 ore per dataset in sequenza sulla stessa GPU. Il tracking W&B
+funziona; `scripts/summarize_validation.py` legge i `summary.json` della validation e ne riassume la
+distribuzione, che è il punto: il Dice medio da solo su questi compiti non descrive il comportamento.
+
+| | casi val | Dice medio | mediana | Q1–Q3 |
+| --- | --- | --- | --- | --- |
+| 501 WMH | 16 | 0.774 | 0.837 | 0.705 – 0.880 |
+| 502 ATLAS | 112 | 0.610 | 0.721 | 0.465 – 0.839 |
+| 503 DBB | in corso | | | |
+
+**Cosa dicono i numeri, oltre alla media:**
+
+- la **mediana è più alta della media** in entrambi (+6 e +11 punti): pochi casi difficili tirano giù la
+  media, il modello lavora bene sulla maggioranza;
+- il **volume del bersaglio domina**. Metà dei casi con lesioni più piccole contro metà con le più grandi:
+  0.667 / 0.881 su WMH, 0.509 / 0.712 su ATLAS. Su ATLAS i casi sotto 100 voxel stanno a 0.28;
+- su ATLAS la **coorte `r009`** (19 casi su 112) ha lesioni mediane da 1398 voxel contro 7053 delle altre e
+  Dice 0.337 contro 0.666. Buona parte del divario fra i due dataset è composizione del campione, non
+  qualità del modello;
+- **8 casi su 112 hanno Dice 0**, e non sono solo i minuscoli: uno ha 9586 voxel di riferimento e 217
+  predetti. Sono errori di **localizzazione**, categoria diversa dai bordi imprecisi, da guardare a parte;
+- **WMH per sito**: Singapore 0.818, Amsterdam_GE3T 0.790, Amsterdam_GE1T5 0.750 (1 caso), Utrecht 0.715.
+  Con 16 casi su un fold non è ancora interpretabile.
+
+**Due problemi risolti durante l'esecuzione, entrambi documentati in [training.md](training.md):** i
+training lanciati con `nohup` muoiono con la sessione che li ha avviati (serve `setsid`), e la ripresa con
+`--c` di un run tracciato su W&B falliva per un bug del logger di nnU-Net 2.8, corretto nel nostro trainer.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili
@@ -163,5 +234,6 @@ Il Dice dello smoke **non va letto**: 16 casi, 5 epoche.
 | `Dataset511_WMH_T1` | T1 | lesione | 79 | 20 | `scripts/make_wmh_t1_dataset.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
-Nessuno di questi è ancora stato preprocessato tranne il 599. Il passo successivo è
-`nnUNetv2_plan_and_preprocess` su 501, 502 e 503 — vedi [training.md](training.md).
+501, 502 e 503 sono preprocessati (passo 10) in `2d` e `3d_fullres`. Il 511 no: va fatto quando si
+lancia l'ablazione FLAIR. Il passo successivo è il training delle baseline — vedi
+[training.md](training.md#step-5---strategia-di-training).
