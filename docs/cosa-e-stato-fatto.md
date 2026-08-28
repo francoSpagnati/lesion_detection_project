@@ -378,11 +378,18 @@ che Python bufferizza a blocchi e puo' restare indietro di mezz'ora.
 | `Dataset502_ATLAS` | T1 | lesione | 556 | 99 | `notebooks/dataset_preparation.ipynb` |
 | `Dataset503_DBB` | T1 | 6 tessuti | 207 | 37 | `scripts/convert_dbb_to_nnunet.py` |
 | `Dataset511_WMH_T1` | T1 | lesione | 79 | 20 | `scripts/make_wmh_t1_dataset.py` |
+| `Dataset512_WMH_T1_FLAIR` | FLAIR + T1 | lesione | 79 | 20 | `scripts/make_wmh_two_channel_dataset.py` |
 | `Dataset521_ATLAS_3T` | T1 | lesione | 504 | — | `scripts/make_atlas_3t_dataset.py` |
 | `Dataset522_WMH_SS` | FLAIR skull-stripped | lesione | 79 | 20 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
-501, 502 e 503 sono preprocessati (passo 10) in `2d` e `3d_fullres`. Il 511 no: va fatto quando si
-lancia l'ablazione FLAIR. Il passo successivo è il training delle baseline — vedi
+501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522 e 523 in `3d_fullres`.
+
+Un dettaglio che cambia come vanno letti i confronti: **512 eredita da 501 lo stesso patch
+[64, 224, 128] e lo stesso batch 2**, quindi 512 contro 501 isola davvero la sola aggiunta del canale
+T1. Su 522 e 523 invece nnU-Net ha ricalcolato il piano, perche' dopo il ritaglio i volumi sono piu'
+piccoli (su WMH il patch passa a [48, 192, 128] con batch 3, e arriva a coprire il 100% delle fette
+invece dell'81%). Quei due confronti misurano quindi "la pipeline nnU-Net con e senza skull stripping",
+che e' la domanda pratica giusta, ma non una variabile sola. Il passo successivo è il training delle baseline — vedi
 [training.md](training.md#step-5---strategia-di-training).

@@ -1,0 +1,33 @@
+{
+  "name": "Dataset512_WMH_T1_FLAIR",
+  "description": "WMH con due canali di input, FLAIR e T1 co-registrato. Identico a Dataset501_WMH tranne il canale aggiunto. Preparato da scripts/make_wmh_two_channel_dataset.py",
+  "channel_names": {
+    "0": "FLAIR",
+    "1": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "wmh": 1
+  },
+  "numTraining": 79,
+  "file_ending": ".nii.gz",
+  "dataset_preparation": {
+    "seed": 42,
+    "n_folds": 5,
+    "test_fraction": 0.2,
+    "stratified_on": "group | terzile lesion_ml (bins=3)",
+    "wmh_label2_policy": "exclude",
+    "predicted_target_spacing": [
+      1.2,
+      0.9766,
+      3.0
+    ]
+  },
+  "ablazione": {
+    "riferimento": "Dataset501_WMH",
+    "variabile_cambiata": "aggiunto il canale T1 accanto alla FLAIR",
+    "immagine_usata": "*_T1w_BiasCorr_2FLAIR_Aligned.nii.gz",
+    "contesto": "da solo il T1 vale 0.626 contro 0.774 della FLAIR (511 contro 501)",
+    "domanda": "il T1 aggiunge informazione alla FLAIR o e' ridondante?"
+  }
+}
