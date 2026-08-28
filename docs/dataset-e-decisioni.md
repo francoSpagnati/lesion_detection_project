@@ -240,6 +240,156 @@ definitiva richiederebbe prima lo skull stripping.
 mantenere, nessun GB materializzato. La decisione si riapre solo se lo skull stripping renderà possibile
 una misura più pulita.
 
+## ATLAS: una parte dei casi non è risolvibile con il solo T1
+
+Scoperto esaminando i casi falliti del primo training invece di mediarli con gli altri
+(`scripts/inspect_failures.py` → [`reports/failure_analysis_502.md`](../reports/failure_analysis_502.md)).
+Nel fold 0, **10 casi su 112 hanno Dice ≤ 0.05**. Tre ipotesi sono state testate e due escluse.
+
+**Non è un errore di lateralità.** Il test dello specchio — confronto fra la distanza dei centroidi e la
+distanza dal riflesso rispetto al piano sagittale mediano — marca **un solo caso** su 10 come predizione
+controlaterale. Nessun problema sistematico di orientamento o di flip in augmentation.
+
+**Non è un problema di soglia.** Le probabilità che il modello assegna ai voxel della lesione vera hanno
+**mediana 0.0000** (massimo 0.03 nel caso peggiore). Il modello non è incerto: è convinto che non ci sia
+nulla. Abbassare la soglia a 0.1 non recupera niente, il Dice resta a zero. Anche il numero di voxel
+predetti è minimo: 217 contro 9586 di riferimento nel caso peggiore, cioè il modello **non segmenta**,
+non "segmenta nel posto sbagliato".
+
+**È il contrasto.** Rapporto fra intensità media dentro la lesione annotata e tessuto cerebrale attorno:
+
+| | volume delle lesioni | rapporto lesione / cervello |
+| --- | --- | --- |
+| 10 casi falliti | 0.04 – 9.6 ml | **1.07** (mediana) |
+| 6 casi migliori | 85 – 231 ml | **0.62** (mediana) |
+
+Le due popolazioni sono separate su entrambe le dimensioni. Dove il modello riesce, la lesione è una
+**cavità**: perdita di tessuto sostituita da liquido, quindi molto ipointensa su T1 e inequivocabile.
+Dove fallisce, la regione annotata ha la stessa intensità del tessuto sano che la circonda — su T1 non
+c'è niente da vedere. Sono lesioni senza cavitazione (gliosi, ischemia cronica lieve), il tipo che si
+riconosce su FLAIR o T2 e non su T1.
+
+**Conseguenze.** Nessuna correzione da fare alla pipeline: non è un bug. Ma tre implicazioni:
+
+- il Dice medio di ATLAS (0.610) include una frazione di casi **intrinsecamente non risolvibili** con il
+  canale disponibile: non è un margine recuperabile con più training o più epoche;
+- è un argomento indipendente **a favore della FLAIR**, che l'ablazione 511 contro 501 misura
+  direttamente;
+- riguarda il bersaglio finale più di quanto sembri. Nella paralisi cerebrale molte lesioni della
+  sostanza bianca non sono cavitate, quindi il limite osservato qui potrebbe presentarsi su AInCP —
+  **da verificare quando i dati arriveranno**, non dimostrato.
+
+**Limite della misura:** confronta intensità *medie*. Una lesione può essere riconoscibile per texture o
+asimmetria senza differire in media, quindi la conferma vera richiede un'ispezione visiva dei casi.
+
+## DBB non contiene maschere di lesione: verificato
+
+Dopo l'incontro del 27 agosto è stato chiesto di ricontrollare se DBB fornisse annotazioni di lesione o
+malformazione, dato che è pediatrico e patologico. **Verificato su tutti i 244 casi con immagine: non le
+contiene.**
+
+La verifica è esaustiva, non a campione: `mask` vale `1` e nient'altro in **244 casi su 244**, e
+`parcellation-volume` contiene esattamente `1,2,3,4,5,6` in **244 su 244** — con gli stessi identici sei
+valori nei 37 patologici e nei 207 sani. Lo conferma anche la descrizione ufficiale del progetto:
+«benchmark to segment the brain **tissues** of distorted brains», dove *distorted* qualifica l'anatomia
+dei pazienti, non l'esistenza di annotazioni di lesione.
+
+Su brainlife la pubblicazione espone cinque tipi di dato, e sono tutti presenti in `data/raw/DBB/`:
+
+| tipo | contenuto reale |
+| --- | --- |
+| `anat-t1w` | l'immagine T1 |
+| `mask` | maschera **cerebrale binaria** (unico valore `1`), stesso volume della parcellazione |
+| `parcellation-volume` | i 6 tessuti, valori `1..6` |
+| `mask_raw`, `transform-nifti_linear` | solo per i 711 soggetti **senza immagine**, quindi inutilizzabili |
+
+Il controllo decisivo: le parcellazioni dei casi **patologici** contengono esattamente gli stessi valori
+`1..6` di quelle dei sani. Non esiste una classe aggiuntiva per la malformazione, e la `mask` è una
+maschera di cervello, non di lesione. Nel benchmark **la patologia è implicita nell'anatomia**: si
+addestra sul sano e si verifica se la parcellazione tiene su anatomie alterate.
+
+**Una conseguenza che è facile non vedere:** DBB **non può essere usato come insieme di casi negativi**
+in un training sulle lesioni. Darlo alla rete come "cervelli senza lesione" le insegnerebbe che le
+anatomie malformate sono normali — cioè esattamente il contrario di ciò che serve sul bersaglio finale,
+dove le anatomie alterate sono la norma e vanno esaminate, non liquidate.
+
+**Conseguenza:** DBB resta utile per tre cose — pretraining dell'encoder sul contrasto tissutale del T1
+pediatrico, test di generalizzazione anatomica, e parcellazione per lo stadio 2 — ma **non può fornire
+esempi di lesione**, quindi non può entrare in un dataset unificato che abbia "lesione" come bersaglio.
+
+## Campo magnetico: dove sono i dati a 1.5 T
+
+Il campo non era stato censito. I metadati di ATLAS
+(`20211112_ATLAS_2.0_SupplementaryInfo.csv`, prima riga di ogni coorte) lo dichiarano per tutte e 33 le
+coorti; su WMH lo dice il nome del sito.
+
+| | casi a 1.5 T | su totale |
+| --- | --- | --- |
+| WMH | 10 (`Amsterdam_GE1T5`) | 99 |
+| ATLAS | 52 nei casi annotati (coorti `R029`, `R039`, `R040`) | 655 |
+| DBB | non dichiarato nei dati disponibili | — |
+
+**La misura preliminare non giustifica l'esclusione.** Nel fold 0 di ATLAS i 9 casi a 1.5 T presenti in
+validation hanno Dice medio **0.653**, contro **0.607** dei 103 casi a 3 T: vanno leggermente *meglio*,
+non peggio. E solo 1 dei 10 casi falliti è a 1.5 T.
+
+Due precisazioni che tengono la questione aperta:
+
+- con 9 casi in un solo fold il confronto è debole, e va rifatto sui 5 fold prima di concludere;
+- l'argomento per escluderli non è necessariamente che vadano male **su di sé**, ma che introducano
+  variabilità di dominio che danneggia il modello nel complesso. È una tesi diversa, e si verifica solo
+  addestrando **senza** quei casi e confrontando il risultato sugli stessi fold — cioè come dataset
+  separato con un nuovo ID, non cancellando dati.
+
+Da notare, perché è una coincidenza che vale la pena tenere d'occhio: le coorti a 1.5 T sono anche quelle
+dei due casi anomali già noti — `R039` è la coorte del caso codificato `0/0.01`, `R040` quella del caso
+con 9586 voxel di lesione che il modello non vede affatto.
+
+## SynthStrip: funziona, ma taglia il CSF nei ventricoli dilatati
+
+Validato su **tutti i 244 casi di DBB** contro le maschere cerebrali di riferimento
+(`scripts/run_synthstrip.py` → [`reports/synthstrip_dbb.md`](../reports/synthstrip_dbb.md)). Modello
+principale `synthstrip.1.pt`, quello con CSF, che è l'unico confrontabile con il riferimento di DBB.
+
+| gruppo | n | Dice medio | minimo |
+| --- | --- | --- | --- |
+| sani | 207 | 0.9673 | 0.9476 |
+| ACC | 10 | 0.9675 | 0.9621 |
+| MCD | 10 | 0.9605 | 0.9284 |
+| PFM | 11 | 0.9604 | 0.9365 |
+| **HD** (idrocefalo) | 6 | **0.9267** | **0.8791** |
+
+**La risposta alla domanda posta è sì:** sui malformati SynthStrip perde solo **0.010** rispetto ai sani
+(0.9569 contro 0.9673). Su ACC è indistinguibile dai sani. È il contrario di quanto ci si aspetta da BET,
+ed è il motivo per cui era stato indicato come alternativa.
+
+**Ma c'è un pattern sistematico che ci riguarda da vicino.** L'unico gruppo sotto 0.95 è l'idrocefalo, e
+l'errore ha una direzione precisa: SynthStrip **esclude** volume che il riferimento include, e quel volume
+è quasi tutto **liquido cerebrospinale**.
+
+| caso | escluso da SynthStrip | di cui CSF |
+| --- | --- | --- |
+| `sub-0955` (HD) | 423 ml | **400 ml** |
+| `sub-0924` (HD) | 353 ml | 209 ml |
+| `sub-0958` (HD) | 251 ml | 132 ml |
+| `sub-0922` (MCD) | 182 ml | 85 ml |
+
+Nei cervelli normali il comportamento si inverte: SynthStrip è leggermente più generoso e include
+100–160 ml di tessuto fuori dal cervello (dura madre e spazi subaracnoidei).
+
+**Perché è un rischio per il bersaglio finale.** Nella paralisi cerebrale la dilatazione ventricolare è
+frequente — esiti di emorragia intraventricolare, dilatazione *ex vacuo* nella leucomalacia
+periventricolare. Se la maschera venisse usata per **ritagliare** le immagini, si rischierebbe di
+rimuovere proprio le regioni periventricolari, dove stanno le lesioni tipiche di quella popolazione.
+
+Due conseguenze operative:
+
+- per l'uso come **`ignore` label** (variante C) il rischio è nullo: un voxel escluso per errore resta
+  `0`, cioè il comportamento che si avrebbe senza skull stripping;
+- per un **dataset skull-stripped** va invece dilatata la maschera di qualche millimetro, e soprattutto
+  va verificato **quanta parte delle lesioni annotate cadrebbe fuori dalla maschera** su WMH e ATLAS. Se
+  la frazione non è zero, quel dataset non va costruito così.
+
 ## Cosa deliberatamente non facciamo
 
 Decisioni prese, non dimenticanze. Vanno riaperte solo con una misura in mano.

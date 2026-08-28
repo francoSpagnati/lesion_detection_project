@@ -42,3 +42,17 @@ __pycache__/
 .ipynb_checkpoints/
 .venv/
 *.egg-info/
+
+# Figure di confronto predizione/ground truth: rigenerabili con
+# scripts/plot_predictions.py, binarie e pesanti.
+reports/figures/
+
+# --- SynthStrip -------------------------------------------------------------
+# Pesi del modello (30 MB, binari): si riscaricano da
+# https://surfer.nmr.mgh.harvard.edu/docs/synthstrip/ come synthstrip.1.pt.
+synthstrip.1.pt
+*.pt
+
+# Maschere di skull stripping: 244 NIfTI rigenerabili con
+# scripts/run_synthstrip.py. Si versionano solo il report e il CSV di metriche.
+data/processed/synthstrip/

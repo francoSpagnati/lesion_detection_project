@@ -18,11 +18,9 @@ Leggi in quest'ordine. Sono cinque documenti, nessuno ripete gli altri.
 5. **[Training](training.md)** — dai dataset preparati al modello addestrato e valutato, con il tracking
    su W&B.
 
-[Componenti](components.md) è la mappa di cartelle e file, da consultare al bisogno.
-
-[Recap per il relatore](recap-per-relatore.md) non è documentazione tecnica ma un documento di
-**comunicazione**: riassume per chi sta fuori dal progetto cosa è stato analizzato, cosa deciso e perché.
-Va riscritto quando serve, non mantenuto in parallelo agli altri.
+[Panoramica del progetto](panoramica-progetto.md) è il documento di **comunicazione**: una sintesi
+compatta di dati, scelte, training e risultati, da mostrare a chi sta fuori dal progetto. Non è
+documentazione tecnica e non va mantenuta in parallelo agli altri: si aggiorna quando serve mostrarla.
 
 Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
@@ -42,8 +40,17 @@ riesplorare i dati da zero.
 | Variante T1-only di WMH | completata: `Dataset511_WMH_T1` |
 | Tracking W&B | **verificato** end-to-end sullo smoke test |
 | Planning e preprocessing di 501/502/503 | completato: 24 GB, spacing verificate (`notebooks/preprocessing_501_502_503.ipynb`) |
-| Baseline di training (fold 0) | 501 e 502 **fatte** (Dice 0.774 e 0.610, `reports/baseline_validation.md`); 503 in corso |
-| **Ablazione FLAIR (511 contro 501)** | **da fare — è il passo successivo** |
+| Baseline di training (fold 0) | **completate**: 501 `0.774`, 502 `0.610`, 503 `0.971` (`reports/baseline_validation.md`) |
+| Ablazione FLAIR (511 contro 501) | **completata**: T1 `0.626` contro FLAIR `0.774`, −0.148, peggiore in **16 casi su 16** |
+| Esame dei casi falliti di ATLAS | completato: limite del T1, non un bug (`reports/failure_analysis_502.md`) |
+| Verifica maschere DBB e campo magnetico | completata il 27/08, vedi [dataset-e-decisioni](dataset-e-decisioni.md) |
+| **Ablazione a due canali (512: T1+FLAIR)** | **da fare — chiude il confronto sui canali** |
+| Immagini di confronto predizione/ground truth | da fare, richiesta dai relatori |
+| Studio delle maschere DBB per lesioni | **verificato: non esistono**, vedi decisioni |
+| Esclusione dei dati 1.5 T | da valutare: la misura preliminare **non** la supporta |
+| Dataset unificato a 1 mm sui tre dataset | pianificato |
+| Skull stripping con SynthStrip | **validato su DBB**: 0.957 sui patologici, ma taglia il CSF negli idrocefali (`reports/synthstrip_dbb.md`) |
+| Prova su 2 pazienti AInCP a 3 T | in attesa dei dati |
 | Transfer DBB → ATLAS | pianificato |
 | Dataset privato AInCP | non ancora consegnato |
 | Stadio 2 — inpainting e gemello sano | da fare, dopo la segmentazione |

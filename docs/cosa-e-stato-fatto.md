@@ -202,7 +202,7 @@ distribuzione, che è il punto: il Dice medio da solo su questi compiti non desc
 | --- | --- | --- | --- | --- |
 | 501 WMH | 16 | 0.774 | 0.837 | 0.705 – 0.880 |
 | 502 ATLAS | 112 | 0.610 | 0.721 | 0.465 – 0.839 |
-| 503 DBB | in corso | | | |
+| 503 DBB | 23 | 0.971 | — | per classe: 0.928 (CSF) – 0.989 (sostanza bianca) |
 
 **Cosa dicono i numeri, oltre alla media:**
 
@@ -216,11 +216,81 @@ distribuzione, che è il punto: il Dice medio da solo su questi compiti non desc
 - **8 casi su 112 hanno Dice 0**, e non sono solo i minuscoli: uno ha 9586 voxel di riferimento e 217
   predetti. Sono errori di **localizzazione**, categoria diversa dai bordi imprecisi, da guardare a parte;
 - **WMH per sito**: Singapore 0.818, Amsterdam_GE3T 0.790, Amsterdam_GE1T5 0.750 (1 caso), Utrecht 0.715.
-  Con 16 casi su un fold non è ancora interpretabile.
+  Con 16 casi su un fold non è ancora interpretabile;
+- **DBB sta a 0.971**, ma il numero non è confrontabile con gli altri due: il compito è la partizione in
+  tessuti, il foreground è un voxel su cinque e il Dice è alto per costruzione. La classe più difficile è
+  il **CSF** (0.928), che ha molta superficie per poco volume; le classi piccole tengono bene (grigia
+  profonda 0.972, tronco encefalico 0.973). Soprattutto: **questa validation è sui 23 casi sani**, mentre
+  il senso di DBB sono i 37 malformati che stanno nel test e non sono ancora stati toccati.
 
 **Due problemi risolti durante l'esecuzione, entrambi documentati in [training.md](training.md):** i
 training lanciati con `nohup` muoiono con la sessione che li ha avviati (serve `setsid`), e la ripresa con
 `--c` di un run tracciato su W&B falliva per un bug del logger di nnU-Net 2.8, corretto nel nostro trainer.
+
+## 12. Esame dei casi falliti di ATLAS
+
+```bash
+python scripts/inspect_failures.py 502 --soglia 0.05   # -> reports/failure_analysis_502.md
+```
+
+Per ogni caso sotto soglia: volumi, componenti connesse, centroidi in millimetri, distanza fra i
+centroidi, **test dello specchio** (predizione controlaterale?), probabilità assegnate ai voxel di
+lesione (le legge dai `.npz` salvati con `--npz`), e rapporto di intensità lesione/cervello confrontato
+con i casi riusciti.
+
+**Esito: i 10 fallimenti non sono un difetto della pipeline ma un limite del T1.** Il modello non vede
+quelle lesioni perché non hanno contrasto (rapporto 1.07 contro 0.62 nei casi riusciti), e le probabilità
+predette al loro interno sono nulle. Dettaglio e conseguenze in
+[dataset-e-decisioni.md](dataset-e-decisioni.md#atlas-una-parte-dei-casi-non-è-risolvibile-con-il-solo-t1).
+
+## 13. Ablazione FLAIR: 511 contro 501
+
+```bash
+nnUNetv2_plan_and_preprocess -d 511 -npfp 16 -np 16 --verify_dataset_integrity
+setsid nohup bash scripts/run_baselines.sh 511 > reports/logs/baselines.log 2>&1 < /dev/null &
+```
+
+Prima di lanciare è stato verificato che il **piano di 511 fosse identico a quello di 501** — stessa
+spacing, stessa patch `64×224×128`, stessi kernel e strides — e che gli `splits_final.json` fossero
+bit-identici. Solo così la differenza è attribuibile al canale e non all'architettura. L'unica voce
+diversa è `median_image_size_in_voxels` (`79×242×134` contro `74×237×134`), statistica del fingerprint
+che non entra nella rete: nasce dal ritaglio, perché il T1 allineato alla griglia FLAIR ha qualche fetta
+azzerata in più ai bordi.
+
+| | Dice medio | mediana |
+| --- | --- | --- |
+| 501, **FLAIR** | **0.7739** | 0.8369 |
+| 511, **T1** | **0.6257** | 0.7138 |
+
+**Esito: la FLAIR vale 14.8 punti di Dice, ed è migliore in 16 casi su 16** (Wilcoxon appaiato sugli
+stessi casi, p = 0.00003). Il confronto è appaiato perché i due dataset condividono casi e fold.
+
+Il dettaglio che conta più della media: **la perdita dipende dalla dimensione della lesione**.
+
+| | perdita passando da FLAIR a T1 |
+| --- | --- |
+| lesioni sotto la mediana (< 2266 voxel) | **−0.242** |
+| lesioni sopra la mediana | **−0.055** |
+
+Sulle lesioni grandi il T1 se la cava; su quelle piccole crolla. Converge con quanto trovato in modo
+indipendente sui fallimenti di ATLAS (passo 12): il T1 non porta l'informazione necessaria per le lesioni
+piccole e non cavitate.
+
+## 14. Verifiche richieste dall'incontro del 27 agosto
+
+Due domande poste dai relatori, entrambe risolte leggendo i dati invece di ragionarci sopra.
+
+**DBB ha maschere di lesione o malformazione?** No. I cinque tipi di dato pubblicati su brainlife sono
+tutti già scaricati: la `mask` è una maschera **cerebrale binaria**, e le parcellazioni dei casi
+patologici contengono **gli stessi valori `1..6`** di quelle dei sani, senza classi aggiuntive. La
+patologia in quel benchmark è implicita nell'anatomia, non annotata.
+
+**Dove sono i dati a 1.5 T?** Censiti per la prima volta, dai metadati di ATLAS
+(`20211112_ATLAS_2.0_SupplementaryInfo.csv`) e dal nome del sito su WMH: 10 casi su 99 in WMH, 52 sui 655
+annotati di ATLAS (coorti `R029`, `R039`, `R040`). Nel fold 0 di ATLAS i casi a 1.5 T hanno Dice **0.653**
+contro **0.607** dei 3 T, quindi la misura preliminare **non** supporta l'esclusione.
+
+Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le cautele.
 
 ---
 

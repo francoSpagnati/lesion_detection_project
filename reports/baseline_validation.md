@@ -114,3 +114,51 @@ Un Dice nullo su un bersaglio grande, con voxel predetti in quantita', non e'
 una rifinitura imprecisa dei bordi: e' un errore di **localizzazione**, il modello ha
 segmentato altrove. Vanno guardati come categoria a se'.
 
+
+## Dataset503_DBB — nnUNetTrainerWandb__nnUNetPlans__3d_fullres
+
+Fold: `fold_0`, 23 casi di validation.
+
+### Dice per classe, sui casi interi
+
+| | n | media | mediana | Q1 | Q3 | min | max |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| classe 1 (CSF) | 23 | 0.9278 | 0.9357 | 0.9224 | 0.9418 | 0.8657 | 0.9465 |
+| classe 2 (sostanza grigia) | 23 | 0.9845 | 0.9845 | 0.9840 | 0.9859 | 0.9793 | 0.9880 |
+| classe 3 (sostanza bianca) | 23 | 0.9892 | 0.9897 | 0.9886 | 0.9906 | 0.9824 | 0.9916 |
+| classe 4 (grigia profonda) | 23 | 0.9718 | 0.9738 | 0.9702 | 0.9766 | 0.9480 | 0.9802 |
+| classe 5 (tronco encefalico) | 23 | 0.9732 | 0.9775 | 0.9695 | 0.9806 | 0.9348 | 0.9874 |
+| classe 6 (cervelletto) | 23 | 0.9806 | 0.9829 | 0.9813 | 0.9845 | 0.9506 | 0.9863 |
+
+
+## Dataset511_WMH_T1 — nnUNetTrainerWandb__nnUNetPlans__3d_fullres
+
+Fold: `fold_0`, 16 casi di validation.
+
+### Dice per classe, sui casi interi
+
+| | n | media | mediana | Q1 | Q3 | min | max |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| classe 1 | 16 | 0.6257 | 0.7138 | 0.4149 | 0.8173 | 0.1928 | 0.8715 |
+
+### Dice per gruppo (sito per WMH, coorte per ATLAS)
+
+| | n | media | mediana | Q1 | Q3 | min | max |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Amsterdam_GE1T5 | 1 | 0.5109 | 0.5109 | 0.5109 | 0.5109 | 0.5109 | 0.5109 |
+| Amsterdam_GE3T | 8 | 0.6337 | 0.7138 | 0.4149 | 0.8091 | 0.3738 | 0.8218 |
+| Singapore | 3 | 0.7028 | 0.8381 | 0.6199 | 0.8534 | 0.4017 | 0.8687 |
+| Utrecht | 4 | 0.5806 | 0.6291 | 0.3972 | 0.8125 | 0.1928 | 0.8715 |
+
+### I cinque casi con il bersaglio piu' piccolo
+
+| caso | voxel di riferimento | Dice |
+| --- | --- | --- |
+| Amsterdam_GE1T5_156 | 496 | 0.5109 |
+| Singapore_58 | 543 | 0.4017 |
+| Amsterdam_GE3T_123 | 555 | 0.3738 |
+| Amsterdam_GE3T_116 | 613 | 0.4180 |
+| Utrecht_11 | 894 | 0.1928 |
+
+Dice medio sulla meta' di casi con bersaglio piu' piccolo: **0.4255**; sulla meta' con bersaglio piu' grande: **0.8259**.
+
