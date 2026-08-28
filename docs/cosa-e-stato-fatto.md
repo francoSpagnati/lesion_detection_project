@@ -294,6 +294,54 @@ Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le
 
 ---
 
+## 15. Skull stripping: validazione e costruzione dei dataset
+
+Tre passaggi, in ordine, il 28 agosto.
+
+**a. SynthStrip regge sulle anatomie alterate?** `scripts/run_synthstrip.py` lo applica a tutti i 244
+casi DBB e confronta con le maschere di riferimento. Dice medio **0.9657**. Per gruppo: sani 0.9673,
+ACC 0.9675, MCD 0.9605, PFM 0.9604, idrocefalo **0.9267** (minimo assoluto 0.8791). Sui cervelli
+malformati si perde **0.010** rispetto ai sani: e' la risposta che serviva, ed e' il contrario di cio'
+che farebbe BET. Nei casi con ventricoli dilatati il volume escluso e' pero' quasi tutto CSF (in
+`sub-0955`, 400 ml su 423). Report: `reports/synthstrip_dbb.md`, 244 figure di controllo in
+`reports/figures/synthstrip/` col Dice come prefisso del nome.
+
+**b. Quante lesioni si perderebbero ritagliando?** `scripts/lesioni_fuori_maschera.py`. Su WMH la
+perdita e' **zero esatto** in tutti e 79 i casi; su ATLAS la media e' **0.0007** con un massimo di
+0.0186. I casi sopra l'1% sono infarti massivi che arrivano alla superficie corticale, e i voxel persi
+stanno a 1-2 mm mediani dal bordo della maschera: rifilatura di superficie, non asportazione. Dilatare
+la maschera di 2 mm dimezzerebbe la perdita ma rimetterebbe dentro ~160 ml di guscio non cerebrale per
+caso, quindi **non si dilata**. Report: `reports/lesioni_fuori_maschera.md`.
+
+**c. Costruzione dei dataset.** `scripts/make_skullstripped_datasets.py` produce `Dataset522_WMH_SS` e
+`Dataset523_ATLAS_SS`: i voxel fuori dalla maschera sono azzerati, **geometria, affine e label restano
+identiche**, e `splits_final.json` e' copiato dal dataset di partenza. Verificato su otto casi a
+campione: geometria invariata e voxel di lesione conservati (sette casi al 100%, uno al 98.4%).
+Frazione di volume tenuta: **0.161** su WMH, **0.240** su ATLAS — la differenza e' il campo di vista,
+non il cervello: le immagini WMH includono collo e spalle.
+
+DBB **non** e' incluso di proposito: li' il compito e' segmentare i tessuti e l'unione delle sei classi
+coincide con la maschera cerebrale (Dice 0.9999), quindi azzerare fuori dalla maschera regalerebbe alla
+rete l'estensione del foreground.
+
+Nessun resampling: la spacing di destinazione si sceglie al planning con
+`nnUNetv2_plan_experiment -overwrite_target_spacing`, quindi "tutto a 1 mm" e' un'opzione di planning e
+non un secondo dataset da 3 GB.
+
+**Cosa ci si aspetta.** nnU-Net accende `use_mask_for_norm` da solo quando il ritaglio al non-zero
+scende sotto i 3/4 del volume. Oggi e' `False` su 501, 502 e 503 perche' sono teste intere; su 522 e 523
+si accendera', e lo z-score verra' calcolato **solo sui voxel cerebrali** invece che su una
+distribuzione che include grasso sottocutaneo, diploe e aria. E' l'ipotesi che il confronto 522/501 e
+523/502 mette alla prova.
+
+**Note operative costate tempo.** SynthStrip su CPU passa da 6 s a oltre 100 s per caso quando la
+macchina e' contesa; su GPU costa 10 s di cui 9 di solo avvio del processo, quindi conviene tenerne
+6 in parallelo (0.27 casi/s). E il progresso di un training va letto in
+`nnUNet_results/<dataset>/*/fold_0/training_log_*.txt`, non nello stdout rediretto in `reports/logs/`,
+che Python bufferizza a blocchi e puo' restare indietro di mezz'ora.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |
@@ -302,6 +350,9 @@ Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le
 | `Dataset502_ATLAS` | T1 | lesione | 556 | 99 | `notebooks/dataset_preparation.ipynb` |
 | `Dataset503_DBB` | T1 | 6 tessuti | 207 | 37 | `scripts/convert_dbb_to_nnunet.py` |
 | `Dataset511_WMH_T1` | T1 | lesione | 79 | 20 | `scripts/make_wmh_t1_dataset.py` |
+| `Dataset521_ATLAS_3T` | T1 | lesione | 504 | — | `scripts/make_atlas_3t_dataset.py` |
+| `Dataset522_WMH_SS` | FLAIR skull-stripped | lesione | 79 | 20 | `scripts/make_skullstripped_datasets.py` |
+| `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
 501, 502 e 503 sono preprocessati (passo 10) in `2d` e `3d_fullres`. Il 511 no: va fatto quando si

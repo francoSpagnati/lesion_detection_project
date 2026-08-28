@@ -1,0 +1,32 @@
+{
+  "name": "Dataset522_WMH_SS",
+  "description": "Dataset501_WMH con skull stripping SynthStrip. Geometria e label invariate: i voxel fuori dalla maschera cerebrale sono azzerati, nient'altro cambia.",
+  "channel_names": {
+    "0": "FLAIR"
+  },
+  "labels": {
+    "background": 0,
+    "wmh": 1
+  },
+  "numTraining": 79,
+  "file_ending": ".nii.gz",
+  "dataset_preparation": {
+    "seed": 42,
+    "n_folds": 5,
+    "test_fraction": 0.2,
+    "stratified_on": "group | terzile lesion_ml (bins=3)",
+    "wmh_label2_policy": "exclude",
+    "predicted_target_spacing": [
+      1.2,
+      0.9766,
+      3.0
+    ]
+  },
+  "skull_stripping": {
+    "strumento": "SynthStrip (FreeSurfer), modello principale synthstrip.1.pt",
+    "validazione": "reports/synthstrip_dbb.md \u2014 Dice 0.966 su 244 casi DBB, 0.957 sui cervelli malformati",
+    "lesione_persa": "reports/lesioni_fuori_maschera.md",
+    "dilatazione_mm": 0,
+    "resampling": "nessuno: la spacing di destinazione si sceglie al planning"
+  }
+}
