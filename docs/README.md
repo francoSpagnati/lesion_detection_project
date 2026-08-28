@@ -47,7 +47,7 @@ riesplorare i dati da zero.
 | **Ablazione a due canali (512: T1+FLAIR)** | **da fare — chiude il confronto sui canali** |
 | Immagini di confronto predizione/ground truth | da fare, richiesta dai relatori |
 | Studio delle maschere DBB per lesioni | **verificato: non esistono**, vedi decisioni |
-| Esclusione dei dati 1.5 T | da valutare: la misura preliminare **non** la supporta |
+| Esclusione dei dati 1.5 T | **misurata e scartata**: +0.0093 appaiato su 103 casi, p=0.67 (`reports/test_esclusione_1_5T.md`) |
 | Dataset skull-stripped | **costruiti**: `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, geometria e fold invariati |
 | Dataset unificato a 1 mm sui tre dataset | pianificato |
 | Skull stripping con SynthStrip | **validato**: 0.957 sui patologici DBB; taglia il CSF negli idrocefali, ma ritagliando WMH/ATLAS si perde lo **0.00%/0.12%** delle lesioni (`reports/synthstrip_dbb.md`, `reports/lesioni_fuori_maschera.md`) |

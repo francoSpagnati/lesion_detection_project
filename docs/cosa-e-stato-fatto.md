@@ -294,7 +294,33 @@ Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le
 
 ---
 
-## 15. Skull stripping: validazione e costruzione dei dataset
+## 15. Test 1 — escludere i dati a 1.5 T non serve
+
+`scripts/make_atlas_3t_dataset.py` costruisce `Dataset521_ATLAS_3T` togliendo le tre coorti a 1.5 T
+(`r029`, `r039`, `r040`), 504 casi invece di 556. I fold sono **filtrati da quelli di 502, mai
+rigenerati**, quindi la validation del fold 0 e' esattamente il sottoinsieme 3 T di quella di 502:
+103 casi su 112. Training identico, 1000 epoche, `3d_fullres`, fold 0.
+
+`scripts/confronto_appaiato.py` fa il confronto sui **casi in comune**, non fra le due medie: se i due
+dataset non hanno gli stessi casi di validation, una differenza fra le medie puo' venire dalla
+composizione invece che dal cambiamento.
+
+| | Dice sui 103 casi 3 T |
+| --- | --- |
+| `Dataset502_ATLAS` (allenato con i 1.5 T dentro) | 0.6066 |
+| `Dataset521_ATLAS_3T` (allenato senza) | 0.6160 |
+| differenza | **+0.0093** |
+
+Migliora in 48 casi, peggiora in 51, pari in 4. **Wilcoxon appaiato p = 0.67**: e' un lancio di moneta.
+E i 9 casi a 1.5 T esclusi avevano, sotto 502, Dice **0.6528** — cioe' meglio della media dei 3 T.
+
+**Conclusione: l'esclusione non e' supportata.** L'ipotesi dei relatori era che i dati a 1.5 T fossero
+troppo diversi per essere utili; la misura dice che togliere 52 casi annotati costa dati e non compra
+accuratezza. Restano dentro. Report: `reports/test_esclusione_1_5T.md`.
+
+---
+
+## 16. Skull stripping: validazione e costruzione dei dataset
 
 Tre passaggi, in ordine, il 28 agosto.
 

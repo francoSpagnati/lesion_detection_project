@@ -190,6 +190,14 @@ def costruisci(chiave, jobs: int):
             shutil.copy2(s, d)
         print(f'  splits_final.json copiato da {src_nome}', flush=True)
 
+    # nnU-Net cerca i dataset in $nnUNet_raw, che per convenzione del progetto
+    # contiene symlink a data/processed/nnUNet_raw/. Senza questo passaggio il
+    # dataset esiste ma `nnUNetv2_plan_and_preprocess` non lo trova.
+    collegamento = PROGETTO / 'nnUNet' / 'nnUNet_raw' / dst_nome
+    if not collegamento.exists():
+        collegamento.symlink_to(dst)
+        print(f'  collegato in nnUNet/nnUNet_raw/{dst_nome}', flush=True)
+
     if frazioni:
         f = np.array(frazioni)
         print(f'  frazione di volume tenuta: mediana {np.median(f):.3f} '
