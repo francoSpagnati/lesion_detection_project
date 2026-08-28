@@ -386,9 +386,29 @@ Due conseguenze operative:
 
 - per l'uso come **`ignore` label** (variante C) il rischio è nullo: un voxel escluso per errore resta
   `0`, cioè il comportamento che si avrebbe senza skull stripping;
-- per un **dataset skull-stripped** va invece dilatata la maschera di qualche millimetro, e soprattutto
-  va verificato **quanta parte delle lesioni annotate cadrebbe fuori dalla maschera** su WMH e ATLAS. Se
-  la frazione non è zero, quel dataset non va costruito così.
+- per un **dataset skull-stripped** andava verificato **quanta parte delle lesioni annotate cadrebbe
+  fuori dalla maschera**. Questa verifica è stata fatta, ed è il paragrafo seguente.
+
+### Quante lesioni si perderebbero ritagliando: praticamente nessuna
+
+`scripts/lesioni_fuori_maschera.py` applica SynthStrip a tutti i 79 casi WMH e a 100 casi ATLAS
+campionati, e misura la frazione di voxel di lesione annotata che cade fuori dalla maschera
+(`reports/lesioni_fuori_maschera.md`).
+
+| dataset | casi | frazione media | massima | casi oltre 1% | casi oltre 5% |
+| --- | --- | --- | --- | --- | --- |
+| WMH (FLAIR) | 79 | 0.0000 | 0.0000 | 0 | 0 |
+| ATLAS (T1) | 100 | 0.0007 | 0.0186 | 3 | 0 |
+
+Su WMH la perdita è **esattamente zero in tutti e 79 i casi**. Su ATLAS la media è lo 0.07% e il caso
+peggiore perde l'1.9% di una lesione da 80 ml. I tre casi sopra l'1% sono tutti infarti massivi
+(80–374 ml) che arrivano alla superficie corticale, dove il confine stesso di "cervello" è ambiguo: i
+voxel persi stanno a **1–2 mm mediani dal bordo della maschera**, cioè sono rifilatura di superficie,
+non asportazione di lesione.
+
+**Quindi il dataset skull-stripped si può costruire.** Con una cautela che resta aperta: questa misura
+è su adulti senza idrocefalo. Sui pazienti AInCP, dove la dilatazione ventricolare è attesa, va
+ripetuta prima di fidarsi — è lì che il taglio del CSF descritto sopra potrebbe mordere.
 
 ## Cosa deliberatamente non facciamo
 

@@ -49,7 +49,7 @@ riesplorare i dati da zero.
 | Studio delle maschere DBB per lesioni | **verificato: non esistono**, vedi decisioni |
 | Esclusione dei dati 1.5 T | da valutare: la misura preliminare **non** la supporta |
 | Dataset unificato a 1 mm sui tre dataset | pianificato |
-| Skull stripping con SynthStrip | **validato su DBB**: 0.957 sui patologici, ma taglia il CSF negli idrocefali (`reports/synthstrip_dbb.md`) |
+| Skull stripping con SynthStrip | **validato**: 0.957 sui patologici DBB; taglia il CSF negli idrocefali, ma ritagliando WMH/ATLAS si perde lo **0.00%/0.07%** delle lesioni (`reports/synthstrip_dbb.md`, `reports/lesioni_fuori_maschera.md`) |
 | Prova su 2 pazienti AInCP a 3 T | in attesa dei dati |
 | Transfer DBB → ATLAS | pianificato |
 | Dataset privato AInCP | non ancora consegnato |
