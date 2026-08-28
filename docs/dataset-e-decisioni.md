@@ -398,13 +398,18 @@ campionati, e misura la frazione di voxel di lesione annotata che cade fuori dal
 | dataset | casi | frazione media | massima | casi oltre 1% | casi oltre 5% |
 | --- | --- | --- | --- | --- | --- |
 | WMH (FLAIR) | 79 | 0.0000 | 0.0000 | 0 | 0 |
-| ATLAS (T1) | 100 | 0.0007 | 0.0186 | 3 | 0 |
+| ATLAS (T1) | 556 | 0.0012 | 0.0649 | 18 | 3 |
 
-Su WMH la perdita è **esattamente zero in tutti e 79 i casi**. Su ATLAS la media è lo 0.07% e il caso
-peggiore perde l'1.9% di una lesione da 80 ml. I tre casi sopra l'1% sono tutti infarti massivi
-(80–374 ml) che arrivano alla superficie corticale, dove il confine stesso di "cervello" è ambiguo: i
-voxel persi stanno a **1–2 mm mediani dal bordo della maschera**, cioè sono rifilatura di superficie,
-non asportazione di lesione.
+Su WMH la perdita è **esattamente zero in tutti e 79 i casi**. Su ATLAS la media è lo 0.12%, ma la coda
+non è vuota: 18 casi su 556 perdono oltre l'1% e **tre superano il 5%**, con un massimo del 6.5%.
+
+Sono quasi tutti infarti massivi (196–360 ml) che arrivano alla superficie corticale, dove il confine
+stesso di "cervello" è ambiguo: i voxel persi stanno a **1–2 mm mediani dal bordo della maschera**,
+cioè sono rifilatura di superficie, non asportazione. L'unica eccezione è `sub-r028s014`, una lesione
+da 8.6 ml che ne perde il 5.5% — cioè 0.47 ml.
+
+Una misura su 100 casi campionati dava media 0.0007 e nessun caso oltre il 5%: la coda esiste solo nel
+campione completo, ed è il motivo per cui la misura è stata rifatta su tutti e 556.
 
 **Quindi il dataset skull-stripped si può costruire.** Con una cautela che resta aperta: questa misura
 è su adulti senza idrocefalo. Sui pazienti AInCP, dove la dilatazione ventricolare è attesa, va

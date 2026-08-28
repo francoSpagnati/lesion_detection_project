@@ -50,7 +50,7 @@ riesplorare i dati da zero.
 | Esclusione dei dati 1.5 T | da valutare: la misura preliminare **non** la supporta |
 | Dataset skull-stripped | **costruiti**: `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, geometria e fold invariati |
 | Dataset unificato a 1 mm sui tre dataset | pianificato |
-| Skull stripping con SynthStrip | **validato**: 0.957 sui patologici DBB; taglia il CSF negli idrocefali, ma ritagliando WMH/ATLAS si perde lo **0.00%/0.07%** delle lesioni (`reports/synthstrip_dbb.md`, `reports/lesioni_fuori_maschera.md`) |
+| Skull stripping con SynthStrip | **validato**: 0.957 sui patologici DBB; taglia il CSF negli idrocefali, ma ritagliando WMH/ATLAS si perde lo **0.00%/0.12%** delle lesioni (`reports/synthstrip_dbb.md`, `reports/lesioni_fuori_maschera.md`) |
 | Prova su 2 pazienti AInCP a 3 T | in attesa dei dati |
 | Transfer DBB → ATLAS | pianificato |
 | Dataset privato AInCP | non ancora consegnato |

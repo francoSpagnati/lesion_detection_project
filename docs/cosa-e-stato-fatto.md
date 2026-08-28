@@ -307,8 +307,10 @@ che farebbe BET. Nei casi con ventricoli dilatati il volume escluso e' pero' qua
 `reports/figures/synthstrip/` col Dice come prefisso del nome.
 
 **b. Quante lesioni si perderebbero ritagliando?** `scripts/lesioni_fuori_maschera.py`. Su WMH la
-perdita e' **zero esatto** in tutti e 79 i casi; su ATLAS la media e' **0.0007** con un massimo di
-0.0186. I casi sopra l'1% sono infarti massivi che arrivano alla superficie corticale, e i voxel persi
+perdita e' **zero esatto** in tutti e 79 i casi; su ATLAS (tutti i 556) la media e' **0.0012** con un
+massimo di **0.0649**: 18 casi oltre l'1% e tre oltre il 5%. Una prima misura su 100 casi campionati
+dava 0.0007 e nessun caso oltre il 5% — la coda si vede solo sul dataset intero, quindi la misura va
+sempre fatta su tutto. I casi peggiori sono infarti massivi che arrivano alla superficie corticale, e i voxel persi
 stanno a 1-2 mm mediani dal bordo della maschera: rifilatura di superficie, non asportazione. Dilatare
 la maschera di 2 mm dimezzerebbe la perdita ma rimetterebbe dentro ~160 ml di guscio non cerebrale per
 caso, quindi **non si dilata**. Report: `reports/lesioni_fuori_maschera.md`.
