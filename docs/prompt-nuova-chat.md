@@ -52,13 +52,20 @@ COME VOGLIO IL CODICE
   o non è in un report, dillo invece di stimarlo.
 - Documentazione: consolida nei file esistenti, non aggiungerne di nuovi. Compatta.
 
-COSA FARE ADESSO
-Preprocessing e prime baseline:
-  nnUNetv2_plan_and_preprocess -d 501 --verify_dataset_integrity
-  nnUNetv2_plan_and_preprocess -d 502 --verify_dataset_integrity
-  nnUNetv2_plan_and_preprocess -d 503 --verify_dataset_integrity
-poi fold 0 di 3d_fullres su 501, 502 e 503 con -tr nnUNetTrainerWandb, e confronto
-della target spacing effettiva con quella prevista (docs/training.md, Step 3).
+COSA FARE ADESSO (aggiornato il 29 agosto 2026)
+Le baseline sono fatte: 501 = 0.774, 502 = 0.610, 503 = 0.971. Sono fatte anche
+l'ablazione FLAIR (511 = 0.626, la FLAIR vince in 16 casi su 16) e il test
+sull'esclusione dei dati a 1.5 T (521: +0.009 con p = 0.67, quindi NON si escludono).
+Tre dataset sono costruiti, verificati e preprocessati ma il training non e' mai
+partito, ed e' il primo passo:
+  setsid nohup bash scripts/run_baselines.sh 512 523 522 \
+      > reports/logs/coda_512_523_522.log 2>&1 < /dev/null &
+512 = WMH a due canali FLAIR+T1 (contro 501), 523 = ATLAS skull-stripped (contro
+502), 522 = WMH skull-stripped (contro 501). Circa 7 ore ciascuno.
+I confronti si fanno con scripts/confronto_appaiato.py, che interseca i casi invece
+di confrontare due medie complessive.
+Dopo, l'obiettivo prioritario e' la variante D: un modello unico sui tre dataset a
+1 mm con 7 classi (vedi obiettivo-e-piano.md).
 Prima di lanciare, controlla lo spazio su /home e la GPU libera.
 ```
 

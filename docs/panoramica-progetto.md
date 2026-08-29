@@ -46,9 +46,12 @@ proprio le lesioni piccole.
 
 **La correzione di bias N4** era l'unico passo che avrebbe aggiunto qualcosa. È stata **misurata prima di
 implementarla**: dentro il cervello il campo risulta piatto (rapporto 1.10–1.12 su tutti e tre i dataset),
-quindi è stata scartata. **Nessuno skull stripping** per ora: nnU-Net non lo richiede, e BET assume una
-testa di forma regolare ed è tarato sul T1 — i due presupposti che cadono con la FLAIR e con le anatomie
-alterate. Se servirà: HD-BET o SynthStrip, addestrati anche su cervelli patologici.
+quindi è stata scartata. Lo **skull stripping** non entra nelle baseline, perché nnU-Net non lo richiede,
+e FSL BET è stato escluso: assume una testa di forma regolare ed è tarato sul T1, i due presupposti che
+cadono con la FLAIR e con le anatomie alterate. È stato invece adottato **SynthStrip**, che quei
+presupposti non li ha, dopo averlo misurato sulle 244 maschere di riferimento di DBB. Le versioni
+skull-stripped di WMH e ATLAS esistono come dataset separati, così il confronto con le baseline resta
+possibile.
 
 ## Impostazione del training
 
@@ -106,6 +109,14 @@ Su entrambi i dataset lesionali **la mediana è più alta della media**: il mode
 maggioranza dei casi, ed è una minoranza difficile a spostare il valore medio. Il fattore che domina è la
 **dimensione della lesione**: su ATLAS i casi sotto i 100 voxel hanno Dice medio 0.28.
 
+### Una cosa che sembrava vera e non lo era
+
+Una parte dei dati ATLAS viene da risonanze a **1.5 tesla** invece che a 3, ed era ragionevole pensare che
+quella eterogeneità danneggiasse il modello. È stato riaddestrato tutto senza quei casi e confrontato
+sugli stessi 103 pazienti: il Dice passa da 0.607 a 0.616, migliora in 48 casi e peggiora in 51,
+**p = 0.67**. È un lancio di moneta. I 45 casi a 1.5 T restano nel training, perché toglierli costa dati
+e non compra accuratezza.
+
 ## Il risultato che orienta le scelte: quanto vale la FLAIR
 
 Stesso dataset, stessi casi, stesse label, stessi fold, **stessa identica architettura**: cambia solo il
@@ -144,16 +155,29 @@ rinuncia alla FLAIR per sfruttare il pretraining, o si rinuncia al pretraining p
 
 Restano aperte anche:
 
-- **skull stripping**: introdurlo con HD-BET o SynthStrip, sapendo che nnU-Net non lo richiede?
 - **risoluzione comune fra dataset**: per trasferire pesi serve la stessa griglia, ma portare WMH a 1 mm
   isotropo significa interpolare fette da 3 mm;
 - **quando arriva AInCP**, e se le annotazioni copriranno anche la FLAIR oltre al T1.
 
+Lo **skull stripping** non è più una domanda aperta: SynthStrip è stato misurato sulle 244 maschere di
+riferimento di DBB e tiene anche sui cervelli malformati (0.957 contro 0.967 dei sani), quindi si usa.
+Con una cautela: sugli idrocefali esclude il liquido nei ventricoli dilatati, e la dilatazione
+ventricolare è comune nella paralisi cerebrale.
+
 ## Prossimi passi
 
-1. confronto 2D contro 3D, deciso in cross-validation;
-2. **transfer DBB → ATLAS**: le label dense dei sei tessuti insegnano all'encoder il contrasto tissutale e
-   l'anatomia, che il compito lesionale riusa. È la prima verifica vera che il pretraining funzioni;
-3. all'arrivo di AInCP, fine-tuning dai pesi migliori con metriche riportate per singolo paziente;
-4. seconda fase: inpainting e "gemello sano virtuale", da affrontare dopo, perché senza una maschera di
+1. **tre training già pronti**, in attesa solo di GPU: WMH a due canali FLAIR+T1, e le versioni
+   skull-stripped di WMH e ATLAS. Rispondono a "il T1 aggiunge qualcosa alla FLAIR?" e "lo skull
+   stripping aiuta?";
+2. **modello unico sui tre dataset a 1 mm**, con la lesione e i sei tessuti come classi distinte. È
+   l'obiettivo prioritario: mettere tutti i dati sotto un solo modello;
+3. **transfer DBB → ATLAS**: le label dense dei sei tessuti insegnano all'encoder il contrasto tissutale e
+   l'anatomia, che il compito lesionale riusa;
+4. confronto 2D contro 3D, deciso in cross-validation;
+5. all'arrivo di AInCP, fine-tuning dai pesi migliori con metriche riportate per singolo paziente;
+6. seconda fase: inpainting e "gemello sano virtuale", da affrontare dopo, perché senza una maschera di
    lesione affidabile non c'è nulla da inpaintare.
+
+Due risultati recenti che orientano le scelte: **escludere i dati a 1.5 T non serve** (misurato: +0.009
+di Dice con p = 0.67, quindi si tengono), e **lo skull stripping si può applicare senza perdere
+annotazioni** (le lesioni che cadrebbero fuori dalla maschera sono lo 0.00% su WMH e lo 0.12% su ATLAS).

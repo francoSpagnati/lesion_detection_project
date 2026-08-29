@@ -26,35 +26,52 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato
+## Stato al 29 agosto 2026
 
-| Fase | Stato |
+**In una riga:** le baseline e le due ablazioni chiuse sono misurate; l'esclusione dei dati a 1.5 T è
+stata provata e scartata; SynthStrip è validato e i tre dataset successivi sono pronti ma **nessuno dei
+tre training è ancora partito**.
+
+### Risultati misurati
+
+| Esperimento | Dice fold 0 | Cosa dice |
+| --- | --- | --- |
+| `501` WMH, FLAIR | **0.774** | baseline |
+| `502` ATLAS, T1 | **0.610** | baseline; i casi falliti sono lesioni piccole non cavitate |
+| `503` DBB, 6 tessuti | **0.971** | baseline; validation su 23 casi *sani* |
+| `511` WMH, solo T1 | **0.626** | −0.148 contro la FLAIR, peggiore in **16 casi su 16** (p=0.00003) |
+| `521` ATLAS solo 3 T | **0.616** | +0.0093 appaiato su 103 casi, **p=0.67**: escludere i 1.5 T non serve |
+
+### Pronto, in attesa di GPU
+
+| Dataset | Domanda | Confronto |
+| --- | --- | --- |
+| `512` WMH FLAIR+T1 | il T1 aggiunge qualcosa alla FLAIR? | contro `501` |
+| `522` WMH skull-stripped | lo skull stripping aiuta? | contro `501` |
+| `523` ATLAS skull-stripped | lo skull stripping aiuta? | contro `502` |
+
+Tutti e tre costruiti, verificati e preprocessati in `3d_fullres`. Circa 7 ore di training ciascuno.
+
+### Da fare dopo
+
+| Voce | Stato |
 | --- | --- |
-| Esplorazione dei dati | completata (`reports/dataset_exploration.md`) |
-| Preparazione e split di WMH e ATLAS | completata (`reports/dataset_preparation.md`) |
-| Sblocco GPU | completato: `torch 2.6.0+cu124`, verificato su A100 |
-| Download di DBB | completato: 3576/3576 file, 4.4 GB |
-| Fase 0 — misura del bias di campo | completata: **N4 non giustificato**, la Fase 1 decade |
-| Analisi di DBB e confronto a tre | completata (`reports/dbb_analysis.md`, `reports/dataset_comparison_three.md`) |
-| Conversione di DBB | completata: `Dataset503_DBB`, integrità verificata |
-| Variante T1-only di WMH | completata: `Dataset511_WMH_T1` |
-| Tracking W&B | **verificato** end-to-end sullo smoke test |
-| Planning e preprocessing di 501/502/503 | completato: 24 GB, spacing verificate (`notebooks/preprocessing_501_502_503.ipynb`) |
-| Baseline di training (fold 0) | **completate**: 501 `0.774`, 502 `0.610`, 503 `0.971` (`reports/baseline_validation.md`) |
-| Ablazione FLAIR (511 contro 501) | **completata**: T1 `0.626` contro FLAIR `0.774`, −0.148, peggiore in **16 casi su 16** |
-| Esame dei casi falliti di ATLAS | completato: limite del T1, non un bug (`reports/failure_analysis_502.md`) |
-| Verifica maschere DBB e campo magnetico | completata il 27/08, vedi [dataset-e-decisioni](dataset-e-decisioni.md) |
-| **Ablazione a due canali (512: T1+FLAIR)** | **da fare — chiude il confronto sui canali** |
-| Immagini di confronto predizione/ground truth | da fare, richiesta dai relatori |
-| Studio delle maschere DBB per lesioni | **verificato: non esistono**, vedi decisioni |
-| Esclusione dei dati 1.5 T | **misurata e scartata**: +0.0093 appaiato su 103 casi, p=0.67 (`reports/test_esclusione_1_5T.md`) |
-| Dataset skull-stripped | **costruiti**: `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, geometria e fold invariati |
-| Dataset unificato a 1 mm sui tre dataset | pianificato |
-| Skull stripping con SynthStrip | **validato**: 0.957 sui patologici DBB; taglia il CSF negli idrocefali, ma ritagliando WMH/ATLAS si perde lo **0.00%/0.12%** delle lesioni (`reports/synthstrip_dbb.md`, `reports/lesioni_fuori_maschera.md`) |
-| Prova su 2 pazienti AInCP a 3 T | in attesa dei dati |
+| **Variante D** — modello unico sui tre dataset a 1 mm, 7 classi | **obiettivo prioritario**, da costruire |
+| Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
+| Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
+| Prova sui 2 pazienti AInCP a 3 T | in attesa dei dati |
 | Dataset privato AInCP | non ancora consegnato |
-| Stadio 2 — inpainting e gemello sano | da fare, dopo la segmentazione |
+| Stadio 2 — inpainting e gemello sano | dopo la segmentazione |
+
+### Fasi concluse
+
+Esplorazione dei dati, preparazione e split di WMH e ATLAS, sblocco GPU (`torch 2.6.0+cu124` su A100),
+download di DBB (3576 file), misura del bias di campo (**N4 non giustificato**), analisi di DBB e
+confronto a tre, conversione di DBB, tracking W&B verificato end-to-end, planning e preprocessing di
+501/502/503, esame dei casi falliti di ATLAS, verifica delle maschere DBB (**le maschere di lesione non
+esistono**), figure di confronto predizione/ground truth, validazione di SynthStrip su 244 casi DBB.
+Il dettaglio di ciascuna, con comandi e misure, è in [cosa-e-stato-fatto.md](cosa-e-stato-fatto.md).
 
 ## Vincoli operativi da ricordare
 

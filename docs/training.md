@@ -116,6 +116,14 @@ invece di proseguire quando un training fallisce:
 setsid nohup bash scripts/run_baselines.sh 501 502 503 > reports/logs/baselines.log 2>&1 < /dev/null &
 ```
 
+**Dove leggere il progresso.** Non in `reports/logs/train_<d>_*.log`: quello è lo stdout rediretto, che
+Python bufferizza a blocchi e puo' restare indietro di mezz'ora, facendo sembrare fermo un training che
+sta lavorando. Il log vero, scritto con flush esplicito da nnU-Net, è:
+
+```bash
+tail -f nnUNet/nnUNet_results/Dataset<NNN>_*/*/fold_0/training_log_*.txt
+```
+
 ```bash
 # baseline, un fold alla volta
 nnUNetv2_train 501 3d_fullres 0 --npz -tr nnUNetTrainerWandb
@@ -221,6 +229,13 @@ nnUNetv2_train 599 3d_fullres 0 -tr nnUNetTrainerWandb_5epochs
 
 - Non guardare il test set finché la configurazione non è decisa sulla cross-validation.
 - Non rigenerare `splits_final.json` fra un esperimento e l'altro.
+- **Confrontare i casi, non le medie.** Se due dataset non hanno la stessa validation, una differenza fra
+  le due medie complessive può venire dalla composizione invece che dal cambiamento.
+  `scripts/confronto_appaiato.py` interseca i casi e applica un Wilcoxon appaiato — senza assumere
+  normalità, che sul Dice di lesioni piccole non vale.
+- **Controllare se nnU-Net ha ricalcolato il piano.** Un dataset derivato può ricevere patch e batch
+  diversi (è successo su `522`, dove il ritaglio ha ridotto i volumi): in quel caso il confronto misura la
+  pipeline intera, non la singola variabile, e va detto.
 - Cambiare **una** variabile per volta: canali (FLAIR contro FLAIR+T1), politica della label 2,
   configurazione, target spacing. Cambiarne due insieme rende il risultato non attribuibile.
 - Per cambiare risoluzione usare un piano alternativo

@@ -297,7 +297,7 @@ Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le
 ## 15. Test 1 — escludere i dati a 1.5 T non serve
 
 `scripts/make_atlas_3t_dataset.py` costruisce `Dataset521_ATLAS_3T` togliendo le tre coorti a 1.5 T
-(`r029`, `r039`, `r040`), 504 casi invece di 556. I fold sono **filtrati da quelli di 502, mai
+(`r029`, `r039`, `r040`), **511 casi di sviluppo invece di 556** e 92 di test invece di 99. I fold sono **filtrati da quelli di 502, mai
 rigenerati**, quindi la validation del fold 0 e' esattamente il sottoinsieme 3 T di quella di 502:
 103 casi su 112. Training identico, 1000 epoche, `3d_fullres`, fold 0.
 
@@ -315,8 +315,8 @@ Migliora in 48 casi, peggiora in 51, pari in 4. **Wilcoxon appaiato p = 0.67**: 
 E i 9 casi a 1.5 T esclusi avevano, sotto 502, Dice **0.6528** — cioe' meglio della media dei 3 T.
 
 **Conclusione: l'esclusione non e' supportata.** L'ipotesi dei relatori era che i dati a 1.5 T fossero
-troppo diversi per essere utili; la misura dice che togliere 52 casi annotati costa dati e non compra
-accuratezza. Restano dentro. Report: `reports/test_esclusione_1_5T.md`.
+troppo diversi per essere utili; la misura dice che togliere **45 casi** dal training (52 contando
+anche il test) costa dati e non compra accuratezza. Restano dentro. Report: `reports/test_esclusione_1_5T.md`.
 
 ---
 
@@ -379,7 +379,7 @@ che Python bufferizza a blocchi e puo' restare indietro di mezz'ora.
 | `Dataset503_DBB` | T1 | 6 tessuti | 207 | 37 | `scripts/convert_dbb_to_nnunet.py` |
 | `Dataset511_WMH_T1` | T1 | lesione | 79 | 20 | `scripts/make_wmh_t1_dataset.py` |
 | `Dataset512_WMH_T1_FLAIR` | FLAIR + T1 | lesione | 79 | 20 | `scripts/make_wmh_two_channel_dataset.py` |
-| `Dataset521_ATLAS_3T` | T1 | lesione | 504 | — | `scripts/make_atlas_3t_dataset.py` |
+| `Dataset521_ATLAS_3T` | T1 | lesione | 511 | 92 | `scripts/make_atlas_3t_dataset.py` |
 | `Dataset522_WMH_SS` | FLAIR skull-stripped | lesione | 79 | 20 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
