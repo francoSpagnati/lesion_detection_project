@@ -41,6 +41,7 @@ tre training è ancora partito**.
 | `503` DBB, 6 tessuti | **0.971** | baseline; validation su 23 casi *sani* |
 | `511` WMH, solo T1 | **0.626** | −0.148 contro la FLAIR, peggiore in **16 casi su 16** (p=0.00003) |
 | `521` ATLAS solo 3 T | **0.616** | +0.0093 appaiato su 103 casi, **p=0.67**: escludere i 1.5 T non serve |
+| `521` applicato ai casi 1.5 T mai visti | **0.672** | nessun crollo fuori dominio; sui 9 casi puliti −0.072 con **p=0.25**, e due terzi vengono da un caso solo |
 
 ### Pronto, in attesa di GPU
 

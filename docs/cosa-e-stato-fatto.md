@@ -314,6 +314,26 @@ composizione invece che dal cambiamento.
 Migliora in 48 casi, peggiora in 51, pari in 4. **Wilcoxon appaiato p = 0.67**: e' un lancio di moneta.
 E i 9 casi a 1.5 T esclusi avevano, sotto 502, Dice **0.6528** — cioe' meglio della media dei 3 T.
 
+### Il rovescio della domanda: quanto costerebbe escluderli
+
+Il test sopra dice che escludere i 1.5 T non fa guadagnare nulla sui 3 T. Restava aperto il rovescio:
+un modello addestrato **solo** su 3 T sa ancora segmentare una risonanza a 1.5 T, o l'esclusione crea un
+buco? `scripts/inferenza_incrociata_15T.py` applica il modello 521 ai 45 casi a 1.5 T che non ha mai
+visto, senza toccare il test set. La verifica preliminare che nessuno dei 45 comparisse in 521 e' parte
+dello script: se ne fosse passato uno, l'intera misura sarebbe stata priva di senso.
+
+**Nessun crollo.** `521` sui 45 casi a 1.5 T mai visti vale **0.6721**, cioe' *meglio* dei 0.6160 che
+ottiene sui suoi stessi casi a 3 T — coerente col fatto, gia' noto, che le lesioni della coorte a 1.5 T
+sono piu' grandi e piu' facili.
+
+Sui 9 casi che **nessuno dei due modelli** aveva visto (erano in validation di 502 e assenti da 521) il
+confronto appaiato da' 0.6528 contro 0.5805, cioe' **-0.0723**, con p = 0.25. Tre limiti impediscono di
+leggerlo come un effetto reale: nove casi danno poco potere, vengono tutti dalla **stessa coorte**
+(`r040`, cioe' uno scanner e non "i 1.5 T"), e **due terzi del divario vengono da un caso solo** —
+togliendo `sub-r040s059` la differenza scende a -0.0270.
+
+Report: `reports/inferenza_incrociata_15T.md`.
+
 **Conclusione: l'esclusione non e' supportata.** L'ipotesi dei relatori era che i dati a 1.5 T fossero
 troppo diversi per essere utili; la misura dice che togliere **45 casi** dal training (52 contando
 anche il test) costa dati e non compra accuratezza. Restano dentro. Report: `reports/test_esclusione_1_5T.md`.
