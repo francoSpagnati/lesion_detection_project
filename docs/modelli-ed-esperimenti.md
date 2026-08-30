@@ -100,6 +100,7 @@ sono di validation.
 | **521** | ATLAS senza 1.5 T | T1 | lesione | 511 | 103 | **0.6160** | ablazione: escludere i 1.5 T? |
 | **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | *in corso* | ablazione: skull stripping |
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | *in coda* | ablazione: skull stripping |
+| **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | *da addestrare* | variante D: il modello unico |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -296,6 +297,62 @@ DBB è deliberatamente escluso da questo esperimento: l'unione delle sue 6 class
 cerebrale (Dice 0.9999), quindi strippare significherebbe regalare alla rete l'estensione esatta del
 foreground.
 
+### 531 — variante D: tutti e tre i dataset in un modello solo
+
+**Perché.** È la richiesta centrale del progetto: **mettere tutti i dati insieme** e addestrare un
+modello unico, su una griglia comune, così che i pesi valgano per tutti e possano poi essere trasferiti
+sui pazienti AInCP. È la strada verso il dataset privato da ~10 casi, dove addestrare da zero non è
+un'opzione.
+
+**Cosa vede.** 842 casi di sviluppo: 79 da WMH (**con il T1**, non la FLAIR), 556 da ATLAS, 207 da DBB.
+Un canale, sette classi: `1` la lesione da WMH e ATLAS, `2..7` i sei tessuti di DBB. Costruita da
+`scripts/make_union_dataset.py`.
+
+**Come è costruita, e perché così.**
+
+- Le immagini e le label di lesione **non sono copiate ma collegate** ai dataset di origine: sono
+  identiche, e un symlink rende impossibile che una copia divergga. Si riscrivono soltanto le 244 label
+  di DBB, rimappate da `1..6` a `2..7` perché il valore `1` è ora occupato dalla lesione.
+- I nomi dei casi sono prefissati `wmh_`, `atlas_`, `dbb_`. Serve a evitare collisioni silenziose
+  (ATLAS e DBB usano entrambi nomi che iniziano per `sub-`) e a **rendere leggibile la provenienza nel
+  `summary.json`**, che è l'unico modo di riportare poi il Dice separatamente per sorgente.
+- I fold sono l'**unione dei fold k dei tre sorgenti**, non rigenerati. Un caso che era in validation
+  nel fold 0 di ATLAS resta in validation nel fold 0 di D, quindi il confronto con le baseline è
+  appaiato caso per caso. Fold 0: 691 train, 151 validation (444+184+63 e 112+23+16).
+
+**Il piano.** Ed è una buona notizia: il planner di default sceglie da solo spacing `1 × 1 × 1` mm e
+patch `128 × 128 × 128` con batch 2, cioè **esattamente il piano di 502**. Non è servito forzare la
+risoluzione con `-overwrite_target_spacing`: con 763 casi su 842 già isotropi a 1 mm, la mediana ci
+arriva da sola, e WMH viene interpolato dalle sue fette da 3 mm come previsto. Il confronto fra D e la
+baseline ATLAS misura quindi l'unione dei dati e non un cambio di architettura. `3d_lowres` è stata
+scartata dal planner, come sugli altri dataset. 19 GB di preprocessing.
+
+**Il conflitto, ora misurato.** D contiene di proposito una contraddizione: il tessuto cerebrale sano
+vale `0` in WMH e ATLAS e `2..7` in DBB, quindi la rete riceve segnali opposti sullo stesso ingresso.
+Quanto pesi non era un numero ma un'intuizione; ora lo è (`scripts/bilancio_classi_union.py`):
+
+| sorgente | casi | foreground mediano per caso | quota del volume |
+| --- | --- | --- | --- |
+| WMH | 79 | 9 384 voxel | 0.21% |
+| ATLAS | 556 | 5 232 voxel | 0.38% |
+| **DBB** | 207 | **1 483 524 voxel** | **22.06%** |
+
+**Un caso DBB porta 266 volte il foreground di un caso lesionale**, e la lesione è solo il **5.87%** di
+tutto il foreground annotato (contro il 38.6% della sostanza grigia e il 26.3% della bianca). nnU-Net
+forza il 33% delle patch a contenere foreground ma **non bilancia fra le classi**: quelle patch
+finiranno quasi tutte su tessuto DBB.
+
+**Come andrà letto.** Non con un Dice medio unico, che qui sarebbe privo di significato: sette classi di
+cui sei facili e densissime e una difficile e rarissima produrrebbero un numero alto e vuoto. Il
+risultato va riportato **per classe** e **per sorgente**, e la domanda vera è una sola: *il Dice della
+classe 1 sui casi ATLAS regge il confronto con lo 0.6103 di 502, sugli stessi casi di validation?* Se
+perde, avremo quantificato il costo del conflitto invece di ipotizzarlo — che è un risultato
+riportabile, ed è esattamente ciò che motiva la variante C, dove quei voxel diventano `ignore`.
+
+**Stato: dataset costruito, verificato e preprocessato; training non ancora avviato** perché la GPU 0 è
+occupata da 522 e 523. Subito dopo verrà costruita la stessa D sui volumi skull-stripped, per
+confrontare le due direttamente.
+
 ---
 
 ## Terza parte: cosa abbiamo imparato, in cinque righe
@@ -317,8 +374,7 @@ foreground.
 
 | Modello | Domanda | Stato |
 | --- | --- | --- |
-| **D** — un solo modello sui tre dataset a 1 mm, 7 classi | tutti i dati insieme reggono? | **prossimo da costruire** |
-| **D skull-stripped** | e con lo skull stripping? | dopo D, per confronto diretto |
+| **D skull-stripped** | lo skull stripping aiuta anche sull'unione? | da costruire, per confronto diretto con `531` |
 | varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge | pianificate |
 | transfer DBB → ATLAS | i tessuti insegnano l'anatomia al task lesionale? | pianificato |
 | `2d` contro `3d_fullres` | quale configurazione, decisa in cross-validation | pianificato |

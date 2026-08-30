@@ -1,0 +1,18 @@
+{
+  "channel_names": {
+    "0": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "lesion": 1,
+    "csf": 2,
+    "gray_matter": 3,
+    "white_matter": 4,
+    "deep_gray_matter": 5,
+    "brain_stem": 6,
+    "cerebellum": 7
+  },
+  "numTraining": 842,
+  "file_ending": ".nii.gz",
+  "description": "Variante D: unione di WMH (T1), ATLAS e DBB. Classe 1 = lesione da WMH e ATLAS, classi 2-7 = i sei tessuti di DBB. Costruita da scripts/make_union_dataset.py."
+}

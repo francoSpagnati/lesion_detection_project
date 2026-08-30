@@ -63,8 +63,8 @@ quindi l'effetto della pipeline nel suo insieme, non della sola rimozione del cr
 
 | Voce | Stato |
 | --- | --- |
-| **Variante D** — modello unico sui tre dataset a 1 mm, 7 classi | **obiettivo prioritario**, prossima cosa da costruire |
-| **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire dopo D, per confrontarle direttamente |
+| **Variante D** (`531`) — modello unico sui tre dataset a 1 mm, 7 classi | **dataset costruito e preprocessato**, training in attesa di GPU |
+| **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire, per confrontarla direttamente con `531` |
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |

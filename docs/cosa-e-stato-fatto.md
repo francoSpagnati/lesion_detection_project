@@ -345,6 +345,35 @@ piu'. Lettura completa e conseguenze per il modello unificato in
 [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#512--wmh-con-flair-e-t1-insieme-no-non-aiuta).
 Report: `reports/confronto_512_due_canali.md`.
 
+## 18. Variante D: costruzione del dataset unificato
+
+```bash
+python scripts/make_union_dataset.py --verifica    # controlli, non scrive
+python scripts/make_union_dataset.py               # -> Dataset531_UNION_D
+nnUNetv2_extract_fingerprint -d 531 --verify_dataset_integrity -np 12
+nnUNetv2_plan_experiment -d 531
+nnUNetv2_preprocess -d 531 -c 3d_fullres -np 12
+python scripts/bilancio_classi_union.py            # -> reports/bilancio_classi_531.md
+```
+
+`Dataset531_UNION_D` unisce WMH (col T1), ATLAS e DBB: **842 casi di sviluppo e 156 di test**, un canale,
+sette classi. Immagini e label di lesione sono symlink ai sorgenti; solo le 244 label di DBB sono
+riscritte, rimappate da `1..6` a `2..7`. I nomi sono prefissati `wmh_`, `atlas_`, `dbb_`, e i fold sono
+l'unione dei fold k dei tre sorgenti: fold 0 = 691 train, 151 validation.
+
+Verifiche fatte prima di preprocessare: rimappatura DBB confrontata voxel per voxel con l'atteso su 4
+casi campionati, label di WMH e ATLAS ancora `0/1`, geometria immagine/label coerente, unicita' dei nomi,
+nessun caso presente sia in train sia in val, e `--verify_dataset_integrity` sull'intero dataset.
+
+**Il planner ha scelto da solo `1x1x1` mm e patch `128x128x128` batch 2, identici a 502**: non e' servito
+forzare la risoluzione, e il confronto fra D e la baseline ATLAS resta pulito. 19 GB di preprocessing.
+
+Lo sbilanciamento fra le classi e' stato misurato invece che stimato: un caso DBB porta **266 volte** il
+foreground di un caso lesionale, e la lesione e' il **5.87%** del foreground totale. Conseguenze sulla
+lettura del risultato in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
+
+Training non ancora avviato: la GPU 0 e' occupata da 522 e 523.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili
@@ -359,9 +388,10 @@ Report: `reports/confronto_512_due_canali.md`.
 | `Dataset521_ATLAS_3T` | T1 | lesione | 511 | 92 | `scripts/make_atlas_3t_dataset.py` |
 | `Dataset522_WMH_SS` | FLAIR skull-stripped | lesione | 79 | 20 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
+| `Dataset531_UNION_D` | T1 | lesione + 6 tessuti | 842 | 156 | `scripts/make_union_dataset.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
-501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522 e 523 in `3d_fullres`.
+501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522, 523 e 531 in `3d_fullres`.
 
 Un dettaglio che cambia come vanno letti i confronti: **512 eredita da 501 lo stesso patch
 [64, 224, 128] e lo stesso batch 2**, quindi 512 contro 501 isola davvero la sola aggiunta del canale

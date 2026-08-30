@@ -202,8 +202,10 @@ lesione da WMH e ATLAS, `2..7` i tessuti da DBB. Dove un dataset non annota una 
 `0`. È realizzabile **subito**, senza dipendere da altro, ed è la versione più diretta della richiesta.
 
 Il conflitto da tenere presente per interpretarne l'esito: il tessuto cerebrale sano vale `0` in WMH e
-ATLAS e `2..7` in DBB, quindi la rete riceve segnali opposti sullo stesso ingresso, e DBB ha duecento
-volte più foreground per caso. È il motivo per cui esiste anche la variante C. Ma l'esito **si misura**,
+ATLAS e `2..7` in DBB, quindi la rete riceve segnali opposti sullo stesso ingresso. Lo sbilanciamento
+è ora **misurato** (`scripts/bilancio_classi_union.py`, `reports/bilancio_classi_531.md`): un caso DBB
+porta **266 volte** il foreground di un caso lesionale, e la lesione è il **5.9%** del foreground
+totale. È il motivo per cui esiste anche la variante C. Ma l'esito **si misura**,
 non si assume: il confronto con le baseline sugli stessi fold dirà se il modello unico perde, tiene o
 guadagna, e su quali classi. Se perde, avremo quantificato il costo del conflitto invece di ipotizzarlo —
 ed è un risultato riportabile, non un esperimento sprecato.
