@@ -5,7 +5,7 @@ I dati originali non vengono duplicati: sono referenziati da `data/raw/` tramite
 
 ## Da dove iniziare
 
-Leggi in quest'ordine. Sono cinque documenti, nessuno ripete gli altri.
+Leggi in quest'ordine. Sono sei documenti, nessuno ripete gli altri.
 
 1. **[Obiettivo e piano](obiettivo-e-piano.md)** — a cosa serve il progetto, i quattro dataset e il ruolo
    di ciascuno, cosa va fatto adesso e in che ordine. **Se leggi un solo file, leggi questo.**
@@ -13,10 +13,13 @@ Leggi in quest'ordine. Sono cinque documenti, nessuno ripete gli altri.
    spacing, geometrie, metriche, come funziona nnU-Net. Non presuppone background in neuroimaging.
 3. **[Dataset e decisioni](dataset-e-decisioni.md)** — cosa contiene ciascun dataset, i problemi trovati
    misurandoli, e le decisioni prese con la loro motivazione. Include cosa **non** facciamo e perché.
-4. **[Cosa è stato fatto](cosa-e-stato-fatto.md)** — pratico: quale script, quale comando, cosa ha
-   prodotto, cosa ne è uscito.
-5. **[Training](training.md)** — dai dataset preparati al modello addestrato e valutato, con il tracking
-   su W&B.
+4. **[Modelli ed esperimenti](modelli-ed-esperimenti.md)** — il registro dei modelli: per ciascuno il
+   dataset visto, l'architettura, la ricetta di training, il risultato e cosa ci ha detto. **È il file da
+   aprire per "che modelli abbiamo e cosa hanno dimostrato".**
+5. **[Cosa è stato fatto](cosa-e-stato-fatto.md)** — cronologia pratica: quale script, quale comando,
+   cosa ha prodotto.
+6. **[Training](training.md)** — la procedura: come si lancia un training, dove si legge il progresso,
+   come si valuta, il tracking su W&B.
 
 [Panoramica del progetto](panoramica-progetto.md) è il documento di **comunicazione**: una sintesi
 compatta di dati, scelte, training e risultati, da mostrare a chi sta fuori dal progetto. Non è
@@ -61,6 +64,7 @@ quindi l'effetto della pipeline nel suo insieme, non della sola rimozione del cr
 | Voce | Stato |
 | --- | --- |
 | **Variante D** — modello unico sui tre dataset a 1 mm, 7 classi | **obiettivo prioritario**, prossima cosa da costruire |
+| **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire dopo D, per confrontarle direttamente |
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |

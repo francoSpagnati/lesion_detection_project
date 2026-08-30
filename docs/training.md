@@ -1,5 +1,9 @@
 # Training
 
+Questo documento e' la **procedura**: come si prepara, si lancia e si valuta un training. I modelli gia'
+addestrati, con architetture, numeri e interpretazione, stanno invece nel registro
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
+
 Prerequisito: i dataset devono essere già preparati. Stato atteso sotto `nnUNet/nnUNet_raw/`:
 
 | Dataset | Canale | Sviluppo | Test | Prodotto da |
@@ -35,9 +39,9 @@ quella che permette di tenere i trainer del progetto in `scripts/nnunet_trainers
 
 ## Step 2 - Planning e preprocessing
 
-**Fatto** per 501, 502 e 503 — esito e numeri reali in
-[cosa-e-stato-fatto.md](cosa-e-stato-fatto.md#10-planning-e-preprocessing-di-501-502-e-503). Resta da
-fare per 511, al momento dell'ablazione FLAIR.
+**Fatto** per 501, 502, 503, 511, 512, 521, 522 e 523 — esito e numeri reali in
+[cosa-e-stato-fatto.md](cosa-e-stato-fatto.md#10-planning-e-preprocessing-di-501-502-e-503), i piani
+risultanti nel registro [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
 
 ```bash
 nnUNetv2_plan_and_preprocess -d 501 -npfp 16 -np 16 --verify_dataset_integrity   # WMH (FLAIR)

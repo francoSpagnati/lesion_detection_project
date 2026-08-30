@@ -65,6 +65,8 @@ Controlla se sono finiti prima di rilanciarli: lo script salta da solo i dataset
 che hanno gia' un checkpoint_final.pth e riprende quelli interrotti.
 I confronti si fanno con scripts/confronto_appaiato.py, che interseca i casi invece
 di confrontare due medie complessive.
+Per sapere che modelli esistono e cosa hanno dimostrato, leggi
+docs/modelli-ed-esperimenti.md: e' il registro unico, con architetture e risultati.
 Il lavoro successivo, e obiettivo prioritario, e' la variante D: un modello unico
 sui tre dataset a 1 mm con 7 classi (vedi obiettivo-e-piano.md). E' lavoro di CPU e
 si puo' costruire mentre la GPU e' occupata.

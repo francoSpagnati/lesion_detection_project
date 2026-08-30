@@ -9,7 +9,7 @@ rileggere a distanza di settimane.
    si capisce a quale dataset, configurazione e fold appartenga.
 2. Il config del logger integrato non contiene la **target spacing effettiva del
    piano**. Senza quella due run non sono confrontabili
-   (vedi `docs/experiments-and-tracking.md`), perche' la stessa rete su spacing
+   (vedi `docs/modelli-ed-esperimenti.md`), perche' la stessa rete su spacing
    diverse e' un altro esperimento.
 3. Non registra canali di input ne' mappa delle label, cioe' esattamente le
    variabili che qui cambiano fra un esperimento e l'altro (T1 contro FLAIR,

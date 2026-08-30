@@ -194,34 +194,13 @@ setsid nohup bash scripts/run_baselines.sh 501 502 503 > reports/logs/baselines.
 python scripts/summarize_validation.py     # -> reports/baseline_validation.md
 ```
 
-1000 epoche, ~22.9 s/epoca su A100, circa 6 ore per dataset in sequenza sulla stessa GPU. Il tracking W&B
-funziona; `scripts/summarize_validation.py` legge i `summary.json` della validation e ne riassume la
-distribuzione, che è il punto: il Dice medio da solo su questi compiti non descrive il comportamento.
+1000 epoche, circa 23 s/epoca su A100: 5h42 per 501, 6h43 per 502, 8h03 per 503, in sequenza sulla stessa
+GPU fra il 17 e il 18 agosto. Il tracking W&B funziona.
 
-| | casi val | Dice medio | mediana | Q1–Q3 |
-| --- | --- | --- | --- | --- |
-| 501 WMH | 16 | 0.774 | 0.837 | 0.705 – 0.880 |
-| 502 ATLAS | 112 | 0.610 | 0.721 | 0.465 – 0.839 |
-| 503 DBB | 23 | 0.971 | — | per classe: 0.928 (CSF) – 0.989 (sostanza bianca) |
-
-**Cosa dicono i numeri, oltre alla media:**
-
-- la **mediana è più alta della media** in entrambi (+6 e +11 punti): pochi casi difficili tirano giù la
-  media, il modello lavora bene sulla maggioranza;
-- il **volume del bersaglio domina**. Metà dei casi con lesioni più piccole contro metà con le più grandi:
-  0.667 / 0.881 su WMH, 0.509 / 0.712 su ATLAS. Su ATLAS i casi sotto 100 voxel stanno a 0.28;
-- su ATLAS la **coorte `r009`** (19 casi su 112) ha lesioni mediane da 1398 voxel contro 7053 delle altre e
-  Dice 0.337 contro 0.666. Buona parte del divario fra i due dataset è composizione del campione, non
-  qualità del modello;
-- **8 casi su 112 hanno Dice 0**, e non sono solo i minuscoli: uno ha 9586 voxel di riferimento e 217
-  predetti. Sono errori di **localizzazione**, categoria diversa dai bordi imprecisi, da guardare a parte;
-- **WMH per sito**: Singapore 0.818, Amsterdam_GE3T 0.790, Amsterdam_GE1T5 0.750 (1 caso), Utrecht 0.715.
-  Con 16 casi su un fold non è ancora interpretabile;
-- **DBB sta a 0.971**, ma il numero non è confrontabile con gli altri due: il compito è la partizione in
-  tessuti, il foreground è un voxel su cinque e il Dice è alto per costruzione. La classe più difficile è
-  il **CSF** (0.928), che ha molta superficie per poco volume; le classi piccole tengono bene (grigia
-  profonda 0.972, tronco encefalico 0.973). Soprattutto: **questa validation è sui 23 casi sani**, mentre
-  il senso di DBB sono i 37 malformati che stanno nel test e non sono ancora stati toccati.
+Esito: **501 = 0.774, 502 = 0.610, 503 = 0.971**. Architetture, piani e lettura completa dei risultati
+sono in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md); la distribuzione caso per caso, che su
+questi compiti conta piu' della media, e' in `reports/baseline_validation.md`, prodotto da
+`scripts/summarize_validation.py`.
 
 **Due problemi risolti durante l'esecuzione, entrambi documentati in [training.md](training.md):** i
 training lanciati con `nohup` muoiono con la sessione che li ha avviati (serve `setsid`), e la ripresa con
@@ -250,31 +229,16 @@ nnUNetv2_plan_and_preprocess -d 511 -npfp 16 -np 16 --verify_dataset_integrity
 setsid nohup bash scripts/run_baselines.sh 511 > reports/logs/baselines.log 2>&1 < /dev/null &
 ```
 
-Prima di lanciare è stato verificato che il **piano di 511 fosse identico a quello di 501** — stessa
-spacing, stessa patch `64×224×128`, stessi kernel e strides — e che gli `splits_final.json` fossero
-bit-identici. Solo così la differenza è attribuibile al canale e non all'architettura. L'unica voce
-diversa è `median_image_size_in_voxels` (`79×242×134` contro `74×237×134`), statistica del fingerprint
-che non entra nella rete: nasce dal ritaglio, perché il T1 allineato alla griglia FLAIR ha qualche fetta
-azzerata in più ai bordi.
+Prima di lanciare e' stato verificato che il **piano di 511 fosse identico a quello di 501** — stessa
+spacing, stessa patch `64x224x128`, stessi kernel e strides — e che gli `splits_final.json` fossero
+bit-identici. Solo cosi' la differenza e' attribuibile al canale e non all'architettura. L'unica voce
+diversa e' `median_image_size_in_voxels` (`79x242x134` contro `74x237x134`), statistica del fingerprint
+che non entra nella rete: nasce dal ritaglio, perche' il T1 allineato alla griglia FLAIR ha qualche fetta
+azzerata in piu' ai bordi.
 
-| | Dice medio | mediana |
-| --- | --- | --- |
-| 501, **FLAIR** | **0.7739** | 0.8369 |
-| 511, **T1** | **0.6257** | 0.7138 |
-
-**Esito: la FLAIR vale 14.8 punti di Dice, ed è migliore in 16 casi su 16** (Wilcoxon appaiato sugli
-stessi casi, p = 0.00003). Il confronto è appaiato perché i due dataset condividono casi e fold.
-
-Il dettaglio che conta più della media: **la perdita dipende dalla dimensione della lesione**.
-
-| | perdita passando da FLAIR a T1 |
-| --- | --- |
-| lesioni sotto la mediana (< 2266 voxel) | **−0.242** |
-| lesioni sopra la mediana | **−0.055** |
-
-Sulle lesioni grandi il T1 se la cava; su quelle piccole crolla. Converge con quanto trovato in modo
-indipendente sui fallimenti di ATLAS (passo 12): il T1 non porta l'informazione necessaria per le lesioni
-piccole e non cavitate.
+Esito: **0.6257 contro 0.7739**, la FLAIR migliore in 16 casi su 16 (p = 0.00003), con la perdita
+concentrata sulle lesioni piccole. Numeri e interpretazione in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#511--wmh-sul-solo-t1-quanto-vale-la-flair).
 
 ## 14. Verifiche richieste dall'incontro del 27 agosto
 
@@ -297,46 +261,24 @@ Entrambe in [dataset-e-decisioni.md](dataset-e-decisioni.md) con i dettagli e le
 ## 15. Test 1 — escludere i dati a 1.5 T non serve
 
 `scripts/make_atlas_3t_dataset.py` costruisce `Dataset521_ATLAS_3T` togliendo le tre coorti a 1.5 T
-(`r029`, `r039`, `r040`), **511 casi di sviluppo invece di 556** e 92 di test invece di 99. I fold sono **filtrati da quelli di 502, mai
-rigenerati**, quindi la validation del fold 0 e' esattamente il sottoinsieme 3 T di quella di 502:
-103 casi su 112. Training identico, 1000 epoche, `3d_fullres`, fold 0.
+(`r029`, `r039`, `r040`): **511 casi di sviluppo invece di 556** e 92 di test invece di 99. I fold sono
+**filtrati da quelli di 502, mai rigenerati**, quindi la validation del fold 0 e' esattamente il
+sottoinsieme 3 T di quella di 502, 103 casi su 112. Training identico, 1000 epoche, `3d_fullres`, fold 0.
 
-`scripts/confronto_appaiato.py` fa il confronto sui **casi in comune**, non fra le due medie: se i due
-dataset non hanno gli stessi casi di validation, una differenza fra le medie puo' venire dalla
-composizione invece che dal cambiamento.
+Il confronto e' stato fatto con `scripts/confronto_appaiato.py`, sui **casi in comune** e non fra le due
+medie complessive. Poi, per rispondere al rovescio della domanda — un modello addestrato solo su 3 T sa
+ancora segmentare una 1.5 T? — `scripts/inferenza_incrociata_15T.py` ha applicato 521 ai 45 casi a 1.5 T
+mai visti, senza toccare il test set. La verifica che nessuno dei 45 comparisse nel training di 521 e'
+parte dello script: se ne fosse passato uno, l'intera misura sarebbe stata priva di senso.
 
-| | Dice sui 103 casi 3 T |
-| --- | --- |
-| `Dataset502_ATLAS` (allenato con i 1.5 T dentro) | 0.6066 |
-| `Dataset521_ATLAS_3T` (allenato senza) | 0.6160 |
-| differenza | **+0.0093** |
-
-Migliora in 48 casi, peggiora in 51, pari in 4. **Wilcoxon appaiato p = 0.67**: e' un lancio di moneta.
-E i 9 casi a 1.5 T esclusi avevano, sotto 502, Dice **0.6528** — cioe' meglio della media dei 3 T.
-
-### Il rovescio della domanda: quanto costerebbe escluderli
-
-Il test sopra dice che escludere i 1.5 T non fa guadagnare nulla sui 3 T. Restava aperto il rovescio:
-un modello addestrato **solo** su 3 T sa ancora segmentare una risonanza a 1.5 T, o l'esclusione crea un
-buco? `scripts/inferenza_incrociata_15T.py` applica il modello 521 ai 45 casi a 1.5 T che non ha mai
-visto, senza toccare il test set. La verifica preliminare che nessuno dei 45 comparisse in 521 e' parte
-dello script: se ne fosse passato uno, l'intera misura sarebbe stata priva di senso.
-
-**Nessun crollo.** `521` sui 45 casi a 1.5 T mai visti vale **0.6721**, cioe' *meglio* dei 0.6160 che
-ottiene sui suoi stessi casi a 3 T — coerente col fatto, gia' noto, che le lesioni della coorte a 1.5 T
-sono piu' grandi e piu' facili.
-
-Sui 9 casi che **nessuno dei due modelli** aveva visto (erano in validation di 502 e assenti da 521) il
-confronto appaiato da' 0.6528 contro 0.5805, cioe' **-0.0723**, con p = 0.25. Tre limiti impediscono di
-leggerlo come un effetto reale: nove casi danno poco potere, vengono tutti dalla **stessa coorte**
-(`r040`, cioe' uno scanner e non "i 1.5 T"), e **due terzi del divario vengono da un caso solo** —
-togliendo `sub-r040s059` la differenza scende a -0.0270.
-
-Report: `reports/inferenza_incrociata_15T.md`.
+Esito: **+0.0093 con p = 0.67** sui casi appaiati, e **0.6721** in inferenza incrociata, cioe' nessun
+crollo fuori dominio. Numeri completi, limiti della sottoanalisi sui 9 casi puliti e conclusione in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#521--atlas-senza-i-dati-a-15-t-escluderli-non-serve).
+Report: `reports/test_esclusione_1_5T.md` e `reports/inferenza_incrociata_15T.md`.
 
 **Conclusione: l'esclusione non e' supportata.** L'ipotesi dei relatori era che i dati a 1.5 T fossero
-troppo diversi per essere utili; la misura dice che togliere **45 casi** dal training (52 contando
-anche il test) costa dati e non compra accuratezza. Restano dentro. Report: `reports/test_esclusione_1_5T.md`.
+troppo diversi per essere utili; la misura dice che togliere **45 casi** dal training (52 contando anche
+il test) costa dati e non compra accuratezza. Restano dentro.
 
 ---
 
@@ -392,35 +334,16 @@ che Python bufferizza a blocchi e puo' restare indietro di mezz'ora.
 
 ## 17. Test 3 — aggiungere il T1 alla FLAIR peggiora
 
-**Cosa e' stato lanciato.** `Dataset512_WMH_T1_FLAIR`, costruito da `scripts/make_wmh_two_channel_dataset.py`
-mettendo la FLAIR di 501 come canale 0 e il T1 di 511 come canale 1. Lo script non si fida della
-co-registrazione dichiarata dal dataset: verifica caso per caso che forma e affine coincidano, e si ferma
-se non lo fanno. Training fold 0 `3d_fullres` avviato il 29 agosto alle 18:06, concluso il 30 alle 00:58.
+`scripts/make_wmh_two_channel_dataset.py` costruisce `Dataset512_WMH_T1_FLAIR` mettendo la FLAIR di 501
+come canale 0 e il T1 di 511 come canale 1. Lo script non si fida della co-registrazione dichiarata dal
+dataset: verifica caso per caso che forma e affine coincidano, e si ferma se non lo fanno. Training fold 0
+`3d_fullres` avviato il 29 agosto alle 18:06, concluso il 30 alle 00:58.
 
-**Il risultato.** Dice medio di validation **0.7535**, contro **0.7739** della sola FLAIR.
-
-| | Dice medio |
-| --- | --- |
-| `501`, FLAIR sola | 0.7739 |
-| `512`, FLAIR + T1 | 0.7535 |
-| **differenza appaiata sui 16 casi** | **-0.0205** |
-
-Migliora in 5 casi, peggiora in 11, Wilcoxon appaiato **p = 0.025**. Il caso che perde di piu' e'
-`Utrecht_33` (0.697 -> 0.555). Report completo in `reports/confronto_512_due_canali.md`, prodotto da
-`scripts/confronto_appaiato.py`.
-
-**Come va letto.** Il confronto e' pulito: 512 eredita da 501 lo stesso patch `[64, 224, 128]` e lo
-stesso batch 2, quindi l'unica cosa cambiata e' il canale in piu'. Il verso del risultato non e'
-sorprendente, la sua ampiezza si': ci si poteva aspettare che la rete imparasse a ignorare un canale
-poco informativo, e invece pagare per averlo costa due punti di Dice. Due spiegazioni plausibili, che
-questo esperimento non separa: con 79 casi di training la capacita' spesa sul secondo canale e'
-capacita' tolta al primo; e la normalizzazione e l'augmentation ora lavorano su due distribuzioni
-diverse invece che una.
-
-**Cosa decide.** Chiude l'ultima alternativa alla scelta di canale per la variante D. Non si puo'
-tenere la FLAIR "gratis" affiancandola al T1: sui dati dove entrambe esistono, affiancarle non aiuta
-nemmeno la' dove la FLAIR c'e'. In D, quindi, WMH entra **con il solo T1**, e il costo da mettere in
-conto resta quello gia' misurato da 511: 0.626 contro 0.774.
+Esito: **0.7535 contro 0.7739**, peggiore in 11 casi su 16, Wilcoxon **p = 0.025**. Il confronto e' pulito
+perche' 512 eredita da 501 la stessa patch e lo stesso batch, quindi l'unica variabile e' il canale in
+piu'. Lettura completa e conseguenze per il modello unificato in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#512--wmh-con-flair-e-t1-insieme-no-non-aiuta).
+Report: `reports/confronto_512_due_canali.md`.
 
 ---
 

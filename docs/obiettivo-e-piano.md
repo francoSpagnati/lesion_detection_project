@@ -104,6 +104,7 @@ indipendenti: ciascuno fissa un parametro con cui D verrà costruita.
 | 2 | skull stripping: funziona? | **se** applicarlo a D, e sblocca C | strumento validato, **training 522 e 523 in corso** |
 | 3 | modello a due canali T1+FLAIR | **quanto costa** la strada D | **chiuso: il T1 non aggiunge**, −0.0205 con p=0.025 |
 | 4 | **variante D** | — | obiettivo, **prossima cosa da costruire** |
+| 5 | **variante D skull-stripped** | se lo skull stripping aiuta anche sull'unione | dopo D, per confronto diretto |
 
 Restano sulla GPU `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, in sequenza, circa 7 ore ciascuno.
 
