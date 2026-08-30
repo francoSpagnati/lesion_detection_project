@@ -52,21 +52,23 @@ COME VOGLIO IL CODICE
   o non è in un report, dillo invece di stimarlo.
 - Documentazione: consolida nei file esistenti, non aggiungerne di nuovi. Compatta.
 
-COSA FARE ADESSO (aggiornato il 29 agosto 2026)
-Le baseline sono fatte: 501 = 0.774, 502 = 0.610, 503 = 0.971. Sono fatte anche
-l'ablazione FLAIR (511 = 0.626, la FLAIR vince in 16 casi su 16) e il test
-sull'esclusione dei dati a 1.5 T (521: +0.009 con p = 0.67, quindi NON si escludono).
-Tre dataset sono costruiti, verificati e preprocessati ma il training non e' mai
-partito, ed e' il primo passo:
-  setsid nohup bash scripts/run_baselines.sh 512 523 522 \
-      > reports/logs/coda_512_523_522.log 2>&1 < /dev/null &
-512 = WMH a due canali FLAIR+T1 (contro 501), 523 = ATLAS skull-stripped (contro
-502), 522 = WMH skull-stripped (contro 501). Circa 7 ore ciascuno.
+COSA FARE ADESSO (aggiornato il 30 agosto 2026)
+Le baseline sono fatte: 501 = 0.774, 502 = 0.610, 503 = 0.971. Sono chiusi anche
+tre test: l'ablazione FLAIR (511 = 0.626, la FLAIR vince in 16 casi su 16),
+l'esclusione dei dati a 1.5 T (521: +0.009 con p = 0.67, quindi NON si escludono)
+e i due canali (512 = 0.753 contro 0.774, p = 0.025: il T1 in piu' PEGGIORA).
+In corso sulla GPU 0 dal 30 agosto: 522 (WMH skull-stripped, contro 501) e dietro
+di lui 523 (ATLAS skull-stripped, contro 502), circa 7 ore ciascuno, lanciati con
+  setsid nohup bash scripts/run_baselines.sh 522 523 \
+      > reports/logs/coda_522_523.log 2>&1 < /dev/null &
+Controlla se sono finiti prima di rilanciarli: lo script salta da solo i dataset
+che hanno gia' un checkpoint_final.pth e riprende quelli interrotti.
 I confronti si fanno con scripts/confronto_appaiato.py, che interseca i casi invece
 di confrontare due medie complessive.
-Dopo, l'obiettivo prioritario e' la variante D: un modello unico sui tre dataset a
-1 mm con 7 classi (vedi obiettivo-e-piano.md).
-Prima di lanciare, controlla lo spazio su /home e la GPU libera.
+Il lavoro successivo, e obiettivo prioritario, e' la variante D: un modello unico
+sui tre dataset a 1 mm con 7 classi (vedi obiettivo-e-piano.md). E' lavoro di CPU e
+si puo' costruire mentre la GPU e' occupata.
+Prima di lanciare qualsiasi training, controlla lo spazio su /home e la GPU libera.
 ```
 
 ---

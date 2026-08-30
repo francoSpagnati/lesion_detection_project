@@ -125,9 +125,13 @@ canale in ingresso.
 | | Dice |
 | --- | --- |
 | WMH con **FLAIR** | **0.774** |
+| WMH con **FLAIR + T1** insieme | **0.753** |
 | WMH con **solo T1** | **0.626** |
 
 La FLAIR vale **quasi 15 punti di Dice**, ed è migliore in **16 casi su 16** (test appaiato, p = 0.00003).
+E non si può tenere il meglio dei due mondi affiancando i canali: dando alla rete FLAIR *e* T1 il Dice
+**scende** di due punti rispetto alla sola FLAIR, peggiorando in 11 casi su 16 (p = 0.025). Con 79 casi di
+addestramento, la capacità spesa sul secondo canale è capacità tolta al primo.
 Ma il dato che conta è come si distribuisce la perdita:
 
 | | perdita passando da FLAIR a T1 |
@@ -166,9 +170,10 @@ ventricolare è comune nella paralisi cerebrale.
 
 ## Prossimi passi
 
-1. **tre training già pronti**, in attesa solo di GPU: WMH a due canali FLAIR+T1, e le versioni
-   skull-stripped di WMH e ATLAS. Rispondono a "il T1 aggiunge qualcosa alla FLAIR?" e "lo skull
-   stripping aiuta?";
+1. **skull stripping**, i due training in corso: le versioni skull-stripped di WMH e ATLAS, che
+   rispondono a "lo skull stripping aiuta?". La domanda gemella — "il T1 aggiunge qualcosa alla
+   FLAIR?" — ha gia' risposta, ed è no: un modello a due canali FLAIR+T1 rende 0.753 contro lo 0.774
+   della sola FLAIR, peggiorando in 11 casi su 16 (p = 0.025);
 2. **modello unico sui tre dataset a 1 mm**, con la lesione e i sei tessuti come classi distinte. È
    l'obiettivo prioritario: mettere tutti i dati sotto un solo modello;
 3. **transfer DBB → ATLAS**: le label dense dei sei tessuti insegnano all'encoder il contrasto tissutale e

@@ -98,15 +98,25 @@ finali che producono la mappa di segmentazione. Da qui due vincoli e una libert�
 restano come alternative se questa strada non regge. I tre test che la precedono non sono esperimenti
 indipendenti: ciascuno fissa un parametro con cui D verrà costruita.
 
-| | test | cosa decide di D | stato al 29 agosto |
+| | test | cosa decide di D | stato al 30 agosto |
 | --- | --- | --- | --- |
 | 1 | solo 3 T contro tutto (su ATLAS) | **quali casi** mettere in D | **chiuso: non escludere**, +0.009 con p=0.67 |
-| 2 | skull stripping: funziona? | **se** applicarlo a D, e sblocca C | **strumento validato**, dataset 522 e 523 pronti, training da lanciare |
-| 3 | modello a due canali T1+FLAIR | **quanto costa** la strada D | dataset 512 pronto, training da lanciare |
-| 4 | **variante D** | — | obiettivo, da costruire |
+| 2 | skull stripping: funziona? | **se** applicarlo a D, e sblocca C | strumento validato, **training 522 e 523 in corso** |
+| 3 | modello a due canali T1+FLAIR | **quanto costa** la strada D | **chiuso: il T1 non aggiunge**, −0.0205 con p=0.025 |
+| 4 | **variante D** | — | obiettivo, **prossima cosa da costruire** |
 
-I tre dataset preprocessati e in attesa di GPU sono `Dataset512_WMH_T1_FLAIR`, `Dataset522_WMH_SS` e
-`Dataset523_ATLAS_SS`: circa 7 ore di training ciascuno.
+Restano sulla GPU `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, in sequenza, circa 7 ore ciascuno.
+
+**Cosa ha detto il test 3.** Dando alla rete FLAIR *e* T1 insieme il Dice scende da 0.774 a 0.753,
+peggiorando in 11 casi su 16 (Wilcoxon p=0.025). Il secondo canale non viene semplicemente ignorato:
+costa qualcosa, presumibilmente perche' la rete deve spendere capacita' su un'immagine in cui la
+lesione e' molto meno visibile, e perche' la normalizzazione e l'augmentation ora lavorano su due
+distribuzioni invece che una. Con soli 79 casi di training questo margine e' plausibile.
+
+Per D il numero da tenere resta pero' quello di 511 (**0.626**), non questo: D fa entrare WMH **con il
+solo T1**, non con due canali. Il test 3 serve a escludere l'alternativa — non si puo' salvare la FLAIR
+mettendola come canale in piu' e riempiendola di zeri altrove — e quella strada e' ora chiusa con un
+numero invece che con un'intuizione.
 
 ### D è necessariamente a un solo canale
 
@@ -152,10 +162,10 @@ entrano nel piano nell'ordine seguente.
 | # | Richiesta | Stato |
 | --- | --- | --- |
 | 1 | Immagini di confronto predizione / ground truth per ogni training | **fatto**: `scripts/plot_predictions.py`, figure per 501, 502, 503 e 511 |
-| 2 | Chiudere il confronto sui canali con un modello **T1+FLAIR** | dataset `512` costruito e preprocessato, **training da lanciare** |
+| 2 | Chiudere il confronto sui canali con un modello **T1+FLAIR** | **fatto e chiuso**: `0.753` contro `0.774`, il T1 in piu' peggiora (p=0.025) |
 | 3 | Studiare le maschere di lesione di DBB | **verificato: non esistono** (vedi decisioni) |
 | 4 | Escludere i dati a 1.5 T | **misurato e scartato**: +0.0093 appaiato, p=0.67. I 1.5 T restano dentro |
-| 5 | Skull stripping con SynthStrip, dataset separato, output a 1 mm | **strumento validato e dataset costruiti** (`522`, `523`); il "tutto a 1 mm" si fa al planning, non duplicando i dati |
+| 5 | Skull stripping con SynthStrip, dataset separato, output a 1 mm | strumento validato, dataset costruiti, **training `522` e `523` in corso**; il "tutto a 1 mm" si fa al planning, non duplicando i dati |
 | 6 | Dataset unificato a 1 mm e modello unico | pianificato in **quattro varianti**: A (WMH+ATLAS) e D (**tutti e tre**) subito, C (tutti e tre con `ignore`) dopo SynthStrip |
 | 7 | Prova su 2 pazienti AInCP a 3 T | in attesa dei dati |
 
@@ -248,10 +258,14 @@ Sono i numeri contro cui si misura ogni guadagno successivo.
 **2. Ablazione FLAIR: 511 contro 501 — FATTO.** T1 `0.626` contro FLAIR `0.774`, peggiore in 16 casi su
 16, Wilcoxon p=0.00003. La perdita si concentra sulle lesioni piccole.
 
-**2-bis. I tre training pronti in coda — DA LANCIARE.** `512` (due canali) contro 501, `522` (WMH
-skull-stripped) contro 501, `523` (ATLAS skull-stripped) contro 502. I dataset sono costruiti,
-verificati e preprocessati; servono circa 7 ore di GPU ciascuno. Il confronto si fa con
-`scripts/confronto_appaiato.py`, che interseca i casi invece di confrontare due medie.
+**2-bis. Due canali: 512 contro 501 — FATTO.** FLAIR+T1 `0.753` contro FLAIR sola `0.774`, peggiore in
+11 casi su 16, Wilcoxon p=0.025. Aggiungere il T1 alla FLAIR non aiuta.
+
+**2-ter. Skull stripping: 522 e 523 — IN CORSO.** `522` (WMH skull-stripped) contro 501 e `523` (ATLAS
+skull-stripped) contro 502, in sequenza sulla GPU 0 dal 30 agosto. Il confronto si fa con
+`scripts/confronto_appaiato.py`, che interseca i casi invece di confrontare due medie. Va letto
+ricordando che su questi due dataset nnU-Net ha cambiato anche patch e batch: il confronto misura la
+pipeline, non la sola rimozione del cranio.
 
 **3. Scelta della configurazione.** Su WMH la `2d` è una candidata seria e non una formalità: con fette
 da 3 mm il contesto attraverso il piano è scarso. Si decide con

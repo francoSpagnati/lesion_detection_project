@@ -26,11 +26,11 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 29 agosto 2026
+## Stato al 30 agosto 2026
 
-**In una riga:** le baseline e le due ablazioni chiuse sono misurate; l'esclusione dei dati a 1.5 T è
-stata provata e scartata; SynthStrip è validato e i tre dataset successivi sono pronti ma **nessuno dei
-tre training è ancora partito**.
+**In una riga:** le baseline e le tre ablazioni chiuse sono misurate; l'esclusione dei dati a 1.5 T è
+stata provata e scartata; **aggiungere il T1 alla FLAIR peggiora** il risultato; i due training di
+skull stripping sono in corso, e subito dopo si costruisce la variante D.
 
 ### Risultati misurati
 
@@ -41,23 +41,26 @@ tre training è ancora partito**.
 | `503` DBB, 6 tessuti | **0.971** | baseline; validation su 23 casi *sani* |
 | `511` WMH, solo T1 | **0.626** | −0.148 contro la FLAIR, peggiore in **16 casi su 16** (p=0.00003) |
 | `521` ATLAS solo 3 T | **0.616** | +0.0093 appaiato su 103 casi, **p=0.67**: escludere i 1.5 T non serve |
+| `512` WMH, FLAIR+T1 | **0.753** | −0.0205 appaiato su 16 casi, peggiore in 11 su 16 (p=0.025): il T1 **toglie** |
 | `521` applicato ai casi 1.5 T mai visti | **0.672** | nessun crollo fuori dominio; sui 9 casi puliti −0.072 con **p=0.25**, e due terzi vengono da un caso solo |
 
-### Pronto, in attesa di GPU
+### In corso
 
-| Dataset | Domanda | Confronto |
-| --- | --- | --- |
-| `512` WMH FLAIR+T1 | il T1 aggiunge qualcosa alla FLAIR? | contro `501` |
-| `522` WMH skull-stripped | lo skull stripping aiuta? | contro `501` |
-| `523` ATLAS skull-stripped | lo skull stripping aiuta? | contro `502` |
+| Dataset | Domanda | Confronto | Stato |
+| --- | --- | --- | --- |
+| `522` WMH skull-stripped | lo skull stripping aiuta? | contro `501` | avviato il 30/08 alle 12:34, GPU 0 |
+| `523` ATLAS skull-stripped | lo skull stripping aiuta? | contro `502` | in coda dietro a `522` |
 
-Tutti e tre costruiti, verificati e preprocessati in `3d_fullres`. Circa 7 ore di training ciascuno.
+Circa 7 ore ciascuno, quindi in sequenza sulla stessa GPU chiudono entro il 31 mattina. **Attenzione a
+come si leggeranno:** nnU-Net, sui volumi ridotti dallo skull stripping, ha ricalcolato anche patch e
+batch (522: `[48, 192, 128]` batch 3, contro `[64, 224, 128]` batch 2 di 501). Il confronto misura
+quindi l'effetto della pipeline nel suo insieme, non della sola rimozione del cranio.
 
 ### Da fare dopo
 
 | Voce | Stato |
 | --- | --- |
-| **Variante D** — modello unico sui tre dataset a 1 mm, 7 classi | **obiettivo prioritario**, da costruire |
+| **Variante D** — modello unico sui tre dataset a 1 mm, 7 classi | **obiettivo prioritario**, prossima cosa da costruire |
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |

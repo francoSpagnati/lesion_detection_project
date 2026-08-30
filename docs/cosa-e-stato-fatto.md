@@ -390,6 +390,40 @@ che Python bufferizza a blocchi e puo' restare indietro di mezz'ora.
 
 ---
 
+## 17. Test 3 — aggiungere il T1 alla FLAIR peggiora
+
+**Cosa e' stato lanciato.** `Dataset512_WMH_T1_FLAIR`, costruito da `scripts/make_wmh_two_channel_dataset.py`
+mettendo la FLAIR di 501 come canale 0 e il T1 di 511 come canale 1. Lo script non si fida della
+co-registrazione dichiarata dal dataset: verifica caso per caso che forma e affine coincidano, e si ferma
+se non lo fanno. Training fold 0 `3d_fullres` avviato il 29 agosto alle 18:06, concluso il 30 alle 00:58.
+
+**Il risultato.** Dice medio di validation **0.7535**, contro **0.7739** della sola FLAIR.
+
+| | Dice medio |
+| --- | --- |
+| `501`, FLAIR sola | 0.7739 |
+| `512`, FLAIR + T1 | 0.7535 |
+| **differenza appaiata sui 16 casi** | **-0.0205** |
+
+Migliora in 5 casi, peggiora in 11, Wilcoxon appaiato **p = 0.025**. Il caso che perde di piu' e'
+`Utrecht_33` (0.697 -> 0.555). Report completo in `reports/confronto_512_due_canali.md`, prodotto da
+`scripts/confronto_appaiato.py`.
+
+**Come va letto.** Il confronto e' pulito: 512 eredita da 501 lo stesso patch `[64, 224, 128]` e lo
+stesso batch 2, quindi l'unica cosa cambiata e' il canale in piu'. Il verso del risultato non e'
+sorprendente, la sua ampiezza si': ci si poteva aspettare che la rete imparasse a ignorare un canale
+poco informativo, e invece pagare per averlo costa due punti di Dice. Due spiegazioni plausibili, che
+questo esperimento non separa: con 79 casi di training la capacita' spesa sul secondo canale e'
+capacita' tolta al primo; e la normalizzazione e l'augmentation ora lavorano su due distribuzioni
+diverse invece che una.
+
+**Cosa decide.** Chiude l'ultima alternativa alla scelta di canale per la variante D. Non si puo'
+tenere la FLAIR "gratis" affiancandola al T1: sui dati dove entrambe esistono, affiancarle non aiuta
+nemmeno la' dove la FLAIR c'e'. In D, quindi, WMH entra **con il solo T1**, e il costo da mettere in
+conto resta quello gia' misurato da 511: 0.626 contro 0.774.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |
@@ -411,5 +445,8 @@ Un dettaglio che cambia come vanno letti i confronti: **512 eredita da 501 lo st
 T1. Su 522 e 523 invece nnU-Net ha ricalcolato il piano, perche' dopo il ritaglio i volumi sono piu'
 piccoli (su WMH il patch passa a [48, 192, 128] con batch 3, e arriva a coprire il 100% delle fette
 invece dell'81%). Quei due confronti misurano quindi "la pipeline nnU-Net con e senza skull stripping",
-che e' la domanda pratica giusta, ma non una variabile sola. Il passo successivo è il training delle baseline — vedi
-[training.md](training.md#step-5---strategia-di-training).
+che e' la domanda pratica giusta, ma non una variabile sola.
+
+Stato dei training al 30 agosto: 501, 502, 503, 511, 521 e 512 conclusi; **522 in corso** (avviato alle
+12:34 sulla GPU 0) e **523 in coda** dietro di lui. Come si lanciano e dove si legge il progresso e'
+in [training.md](training.md).
