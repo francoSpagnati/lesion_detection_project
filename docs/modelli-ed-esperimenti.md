@@ -266,7 +266,8 @@ motivi concreti per aspettarsi un guadagno, ed è il secondo quello interessante
    che su una distribuzione che comprende grasso sottocutaneo, diploe e aria.
 
 **Lo strumento.** SynthStrip di FreeSurfer, validato prima dell'uso sulle 244 maschere cerebrali di
-riferimento di DBB: Dice medio **0.9657**, e soprattutto **0.9605 sui cervelli malformati** contro 0.9673
+riferimento di DBB: Dice medio **0.9657**, e soprattutto **0.9569 sull'insieme dei cervelli
+patologici** contro 0.9673
 sui sani — un calo di un punto, che è il motivo per cui ci si può fidare anche sui pazienti con paralisi
 cerebrale. Il caso peggiore è l'idrocefalo (0.9267), dove il volume escluso è quasi tutto liquido nei
 ventricoli dilatati; è una cautela da ricordare, perché la dilatazione ventricolare è comune nella
