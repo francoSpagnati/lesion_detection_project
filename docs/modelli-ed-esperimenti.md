@@ -98,9 +98,9 @@ sono di validation.
 | **511** | WMH | T1 | lesione | 79 | 16 | **0.6257** | ablazione: quanto vale la FLAIR |
 | **512** | WMH | FLAIR + T1 | lesione | 79 | 16 | **0.7535** | ablazione: due canali aiutano? |
 | **521** | ATLAS senza 1.5 T | T1 | lesione | 511 | 103 | **0.6160** | ablazione: escludere i 1.5 T? |
-| **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | *in corso* | ablazione: skull stripping |
-| **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | *in coda* | ablazione: skull stripping |
-| **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | *da addestrare* | variante D: il modello unico |
+| **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | **0.7785** | ablazione: skull stripping, +0.0045 con p=0.86 |
+| **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
+| **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | *in corso* | variante D: il modello unico |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -254,7 +254,7 @@ annotati.
 
 ---
 
-### 522 e 523 — skull stripping: in corso
+### 522 e 523 — skull stripping: nessun effetto
 
 **Perché.** Rimuovere cranio, cuoio capelluto e collo prima di dare l'immagine alla rete. Ci sono due
 motivi concreti per aspettarsi un guadagno, ed è il secondo quello interessante:
@@ -292,7 +292,31 @@ Su 522 la patch ora copre il **100%** delle fette invece dell'81%. Questi due co
 "la pipeline nnU-Net con e senza skull stripping" — che è la domanda pratica giusta — ma **non una sola
 variabile**, e questo va detto ogni volta che si riporta il numero.
 
-**Stato.** 522 avviato il 30 agosto alle 12:34 sulla GPU 0, 523 in coda dietro; circa 7 ore ciascuno.
+**Risultato: nessun effetto, in nessuna delle due direzioni.**
+
+| | senza stripping | con stripping | differenza appaiata | migliora / peggiora | Wilcoxon |
+| --- | --- | --- | --- | --- | --- |
+| WMH (`501` → `522`) | 0.7739 | **0.7785** | +0.0045 | 7 / 9 | p = 0.86 |
+| ATLAS (`502` → `523`) | 0.6103 | **0.6067** | −0.0037 | 59 / 46 | p = 0.58 |
+
+**Cosa dice, e un dettaglio che vale la pena guardare.** Su ATLAS *più casi migliorano che peggiorano*
+(59 contro 46), eppure la media scende: il segno è deciso da una manciata di casi che **crollano**
+(`sub-r050s005` da 0.603 a **0.000**, `sub-r019s010` da 0.779 a 0.367). Verificato subito il sospetto
+ovvio — che la maschera avesse tagliato via la lesione — e **non è così**: quei casi perdono fra lo 0% e
+l'1.7% dei voxel di lesione, mentre i tre casi che ne perdono davvero (fino al 6.5%) non sono fra i
+peggiorati. Il crollo viene dal modello, non dai dati: lo stripping cambia anche la normalizzazione e la
+patch, e su qualche caso quel cambiamento sposta la predizione oltre la soglia di localizzazione.
+
+Il guadagno atteso dalla normalizzazione sui soli voxel di cervello, quindi, **non si è materializzato**;
+e va ricordato che questi due confronti non isolavano una sola variabile (patch e batch sono cambiati
+con essa), quindi il risultato è "questa pipeline non migliora con lo skull stripping", non "lo skull
+stripping è inutile in assoluto".
+
+**Conseguenza.** Nessun motivo di adottarlo per default: costa un passo di preprocessing e introduce una
+modalità di fallimento nuova, senza comprare accuratezza. Resta però lo strumento che rende possibile la
+variante C, dove la maschera cerebrale serve a marcare `ignore`, e verrà comunque provato sull'unione
+(D skull-stripped) perché lì la domanda è diversa: con sette classi la normalizzazione conta di più.
+
 DBB è deliberatamente escluso da questo esperimento: l'unione delle sue 6 classi **è** la maschera
 cerebrale (Dice 0.9999), quindi strippare significherebbe regalare alla rete l'estensione esatta del
 foreground.
@@ -349,13 +373,13 @@ classe 1 sui casi ATLAS regge il confronto con lo 0.6103 di 502, sugli stessi ca
 perde, avremo quantificato il costo del conflitto invece di ipotizzarlo — che è un risultato
 riportabile, ed è esattamente ciò che motiva la variante C, dove quei voxel diventano `ignore`.
 
-**Stato: dataset costruito, verificato e preprocessato; training non ancora avviato** perché la GPU 0 è
-occupata da 522 e 523. Subito dopo verrà costruita la stessa D sui volumi skull-stripped, per
-confrontare le due direttamente.
+**Stato: training avviato il 31 agosto alle 16:34** sulla GPU 0, con gli split corretti (691 train, 151
+validation letti dal nostro `splits_final.json`). Circa 7 ore. Subito dopo verrà costruita la stessa D
+sui volumi skull-stripped, per confrontare le due direttamente.
 
 ---
 
-## Terza parte: cosa abbiamo imparato, in cinque righe
+## Terza parte: cosa abbiamo imparato
 
 1. **Il T1 non basta per le lesioni piccole.** Trovato due volte per vie indipendenti: l'ablazione FLAIR
    (−0.242 sulle piccole contro −0.055 sulle grandi) e i casi falliti di ATLAS (contrasto 1.07 contro
@@ -364,10 +388,14 @@ confrontare le due direttamente.
 2. **Non si aggira affiancando i canali.** FLAIR+T1 rende meno della sola FLAIR.
 3. **Non si buttano via dati per pulizia.** Escludere i 1.5 T non ha dato nulla, e il modello che non li
    ha mai visti li segmenta comunque bene.
-4. **Il Dice medio, da solo, mente.** Su questi compiti dipende quasi solo dal volume del bersaglio: metà
+4. **Le scorciatoie di preprocessing non hanno pagato.** Escludere i dati a bassa qualita', affiancare
+   un secondo canale, togliere il cranio: tre interventi ragionevoli, tre risultati nulli o negativi. La
+   pipeline di default di nnU-Net e' gia' vicina al massimo che si ottiene senza cambiare i **dati** o il
+   **compito** — che e' precisamente il motivo per cui la variante D prova a cambiare i dati.
+5. **Il Dice medio, da solo, mente.** Su questi compiti dipende quasi solo dal volume del bersaglio: metà
    della differenza fra WMH e ATLAS è composizione del campione. Ogni numero va letto con la
    distribuzione accanto.
-5. **Confrontare medie di validation diverse è un errore facile.** Da qui la scelta di fare tutti i
+6. **Confrontare medie di validation diverse è un errore facile.** Da qui la scelta di fare tutti i
    confronti appaiati, caso per caso.
 
 ## Quarta parte: cosa non è ancora stato addestrato

@@ -374,6 +374,36 @@ lettura del risultato in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
 
 Training non ancora avviato: la GPU 0 e' occupata da 522 e 523.
 
+## 19. Test 2 — lo skull stripping non cambia il risultato
+
+```bash
+setsid nohup bash scripts/run_baselines.sh 522 523 > reports/logs/coda_522_523.log 2>&1 < /dev/null &
+python scripts/confronto_appaiato.py Dataset501_WMH  Dataset522_WMH_SS   --out reports/confronto_522_skullstrip.md
+python scripts/confronto_appaiato.py Dataset502_ATLAS Dataset523_ATLAS_SS --out reports/confronto_523_skullstrip.md
+```
+
+522 dal 30 agosto 12:34 alle 19:00, 523 dalle 19:00 alle 02:44 del 31, in sequenza sulla GPU 0.
+
+Esito: **+0.0045 con p = 0.86 su WMH** e **-0.0037 con p = 0.58 su ATLAS**. Nessun effetto in nessuna
+delle due direzioni. Su ATLAS piu' casi migliorano che peggiorano (59 contro 46) ma pochi casi crollano e
+decidono il segno; verificato che **non e' colpa della maschera**, perche' quei casi perdono fra lo 0% e
+l'1.7% dei voxel di lesione e i tre casi che ne perdono davvero non sono fra i peggiorati.
+
+Lettura completa e conseguenze in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#522-e-523--skull-stripping-nessun-effetto).
+
+---
+
+## 20. Variante D: training avviato
+
+```bash
+CUDA_VISIBLE_DEVICES=0 setsid nohup bash scripts/run_baselines.sh 531 > reports/logs/coda_531.log 2>&1 < /dev/null &
+```
+
+Avviato il 31 agosto alle 16:34. Verificato all'avvio che nnU-Net legga il **nostro**
+`splits_final.json` e non ne generi uno proprio: il log dice "This split has 691 training and 151
+validation cases", che sono i numeri attesi.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili

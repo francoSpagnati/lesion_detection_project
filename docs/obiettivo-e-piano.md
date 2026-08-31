@@ -101,9 +101,9 @@ indipendenti: ciascuno fissa un parametro con cui D verrà costruita.
 | | test | cosa decide di D | stato al 30 agosto |
 | --- | --- | --- | --- |
 | 1 | solo 3 T contro tutto (su ATLAS) | **quali casi** mettere in D | **chiuso: non escludere**, +0.009 con p=0.67 |
-| 2 | skull stripping: funziona? | **se** applicarlo a D, e sblocca C | strumento validato, **training 522 e 523 in corso** |
+| 2 | skull stripping: funziona? | **se** applicarlo a D, e sblocca C | **chiuso: nessun effetto**, +0.004 (p=0.86) su WMH e −0.004 (p=0.58) su ATLAS |
 | 3 | modello a due canali T1+FLAIR | **quanto costa** la strada D | **chiuso: il T1 non aggiunge**, −0.0205 con p=0.025 |
-| 4 | **variante D** | — | obiettivo, **prossima cosa da costruire** |
+| 4 | **variante D** | — | **training in corso** dal 31 agosto |
 | 5 | **variante D skull-stripped** | se lo skull stripping aiuta anche sull'unione | dopo D, per confronto diretto |
 
 Restano sulla GPU `Dataset522_WMH_SS` e `Dataset523_ATLAS_SS`, in sequenza, circa 7 ore ciascuno.
@@ -264,7 +264,9 @@ Sono i numeri contro cui si misura ogni guadagno successivo.
 **2-bis. Due canali: 512 contro 501 — FATTO.** FLAIR+T1 `0.753` contro FLAIR sola `0.774`, peggiore in
 11 casi su 16, Wilcoxon p=0.025. Aggiungere il T1 alla FLAIR non aiuta.
 
-**2-ter. Skull stripping: 522 e 523 — IN CORSO.** `522` (WMH skull-stripped) contro 501 e `523` (ATLAS
+**2-ter. Skull stripping: 522 e 523 — FATTO, nessun effetto.** +0.0045 con p=0.86 su WMH e −0.0037 con
+p=0.58 su ATLAS. Non si adotta per default; resta lo strumento che rende possibile la variante C.
+Dettaglio originale dell'esperimento: `522` (WMH skull-stripped) contro 501 e `523` (ATLAS
 skull-stripped) contro 502, in sequenza sulla GPU 0 dal 30 agosto. Il confronto si fa con
 `scripts/confronto_appaiato.py`, che interseca i casi invece di confrontare due medie. Va letto
 ricordando che su questi due dataset nnU-Net ha cambiato anche patch e batch: il confronto misura la

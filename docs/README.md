@@ -29,11 +29,11 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 30 agosto 2026
+## Stato al 31 agosto 2026
 
-**In una riga:** le baseline e le tre ablazioni chiuse sono misurate; l'esclusione dei dati a 1.5 T è
-stata provata e scartata; **aggiungere il T1 alla FLAIR peggiora** il risultato; i due training di
-skull stripping sono in corso, e subito dopo si costruisce la variante D.
+**In una riga:** tutte e cinque le ablazioni sono chiuse e **nessuna delle scorciatoie provate funziona**
+— né escludere i 1.5 T, né aggiungere il T1 alla FLAIR, né lo skull stripping; è in corso il training
+della **variante D**, il modello unico su tutti e tre i dataset, che è l'obiettivo prioritario.
 
 ### Risultati misurati
 
@@ -46,24 +46,23 @@ skull stripping sono in corso, e subito dopo si costruisce la variante D.
 | `521` ATLAS solo 3 T | **0.616** | +0.0093 appaiato su 103 casi, **p=0.67**: escludere i 1.5 T non serve |
 | `512` WMH, FLAIR+T1 | **0.753** | −0.0205 appaiato su 16 casi, peggiore in 11 su 16 (p=0.025): il T1 **toglie** |
 | `521` applicato ai casi 1.5 T mai visti | **0.672** | nessun crollo fuori dominio; sui 9 casi puliti −0.072 con **p=0.25**, e due terzi vengono da un caso solo |
+| `522` WMH skull-stripped | **0.779** | +0.0045 appaiato, **p=0.86**: nessun effetto |
+| `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
 
 ### In corso
 
 | Dataset | Domanda | Confronto | Stato |
 | --- | --- | --- | --- |
-| `522` WMH skull-stripped | lo skull stripping aiuta? | contro `501` | avviato il 30/08 alle 12:34, GPU 0 |
-| `523` ATLAS skull-stripped | lo skull stripping aiuta? | contro `502` | in coda dietro a `522` |
+| `531` **variante D** | un modello unico su tutti e tre i dataset regge? | contro `501`, `502`, `503` sugli stessi fold | avviato il 31/08 alle 16:34, GPU 0, ~7 ore |
 
-Circa 7 ore ciascuno, quindi in sequenza sulla stessa GPU chiudono entro il 31 mattina. **Attenzione a
-come si leggeranno:** nnU-Net, sui volumi ridotti dallo skull stripping, ha ricalcolato anche patch e
-batch (522: `[48, 192, 128]` batch 3, contro `[64, 224, 128]` batch 2 di 501). Il confronto misura
-quindi l'effetto della pipeline nel suo insieme, non della sola rimozione del cranio.
+Il risultato di D **non va letto come un Dice medio unico**: sette classi, di cui sei dense e facili e
+una rara e difficile. Va riportato per classe e per sorgente, e la domanda vera è se il Dice della
+lesione sui casi ATLAS regge il confronto con lo 0.610 di `502` sugli stessi casi di validation.
 
 ### Da fare dopo
 
 | Voce | Stato |
 | --- | --- |
-| **Variante D** (`531`) — modello unico sui tre dataset a 1 mm, 7 classi | **dataset costruito e preprocessato**, training in attesa di GPU |
 | **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire, per confrontarla direttamente con `531` |
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
