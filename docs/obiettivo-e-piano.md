@@ -119,6 +119,46 @@ solo T1**, non con due canali. Il test 3 serve a escludere l'alternativa — non
 mettendola come canale in piu' e riempiendola di zeri altrove — e quella strada e' ora chiusa con un
 numero invece che con un'intuizione.
 
+### Vincolo aggiornato: AInCP avrà la FLAIR, e sarà tutto a 3 T
+
+Confermato dall'utente il 31 agosto, e cambia il quadro a monte di tutto il resto.
+
+**AInCP avrà T1 *e* FLAIR.** Quindi il modello finale sarà a due canali. E siccome nnU-Net trasferisce
+i pesi solo fra architetture identiche — copia tutto tranne i `seg_layers` e verifica il resto con un
+assert — **anche il pretraining deve essere a due canali**. Un pretraining solo-T1 su ATLAS e DBB non è
+direttamente riusabile.
+
+Questo riabilita il `512`. Il suo risultato (`0.753` contro `0.774` della sola FLAIR) diceva che *se hai
+già la FLAIR* aggiungere il T1 non aiuta; non diceva che due canali siano una cattiva architettura. Per
+AInCP il confronto rilevante è un altro, ed è netto: **due canali `0.753` contro solo T1 `0.626`**. Il
+`512` non è più un vicolo cieco ma il modello di riferimento per il pretraining.
+
+Il problema che ne nasce è di dati: dei nostri tre dataset **solo WMH ha entrambe le sequenze**, cioè 79
+casi di sviluppo. Servono sorgenti pubbliche con T1 e FLAIR appaiati — vedi la sezione seguente.
+
+**AInCP sarà tutto a 3 T.** L'utente preferisce quindi escludere i casi a 1.5 T dai dataset pubblici per
+coerenza di dominio. La misura dice che l'esclusione **non cambia nulla in nessuna direzione**
+(+0.0093 con p=0.67 su ATLAS, e il modello solo-3 T segmenta comunque bene i 1.5 T mai visti), quindi è
+una scelta gratuita che si può fare per pulizia del disegno sperimentale — ma non va presentata come un
+miglioramento. Applicata con coerenza tocca due dataset: `Dataset521_ATLAS_3T` esiste già (511 casi
+invece di 556), e su WMH andrebbero tolti i **10 casi** `Amsterdam_GE1T5` (8 di sviluppo, 2 di test).
+
+### Dataset pubblici con T1 e FLAIR appaiati, da valutare
+
+Cercati il 31 agosto. Nessuno è ancora stato scaricato: la scelta va fatta prima, perché ogni download
+costa spazio su `/home` e tempo.
+
+| Dataset | Casi | Sequenze | Perché | Accesso |
+| --- | --- | --- | --- | --- |
+| **MSLesSeg** | ~75 pazienti, 115 serie | T1, T2, FLAIR | Le lesioni della sclerosi multipla sono iperintensità periventricolari della bianca: è il fenotipo pubblico **più simile alla leucomalacia periventricolare**, che è il reperto più frequente nella paralisi cerebrale | CC BY 4.0, richiesta via [iplab.dmi.unict.it](https://iplab.dmi.unict.it/mfs/ms-les-seg/). Già skull-strippato e registrato su MNI-152 |
+| **MSSEG-1 / Shifts** | decine | T1, FLAIR | Altre coorti di sclerosi multipla, multicentriche | registrazione alla challenge |
+| **ISLES 2015 SISS** | 28 training | T1, T2, DWI, FLAIR | Ictus sub-acuto: è l'altro fenotipo, quello cavitato, ma **con la FLAIR** | scaricabile da Zenodo |
+| **BraTS** | 1251 (2021) – 2877 (2025) | T1, T1ce, T2, FLAIR | L'unico grande abbastanza da fare da pretraining generico a due canali | registrazione, dimensioni notevoli |
+
+Nota che rende tutto più semplice: MSLesSeg arriva già skull-strippato mentre i nostri dati non lo sono.
+Prima dei test `522`/`523` sarebbe stato un problema di coerenza; ora **sappiamo per misura** che lo
+skull stripping non sposta il risultato, quindi si possono mescolare sorgenti strippate e non.
+
 ### D è necessariamente a un solo canale
 
 Vincolo da tenere presente fin d'ora, perché non è aggirabile: nnU-Net pretende **tutti i canali per tutti
