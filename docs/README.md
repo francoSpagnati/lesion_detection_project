@@ -71,6 +71,14 @@ lesione sui casi ATLAS regge il confronto con lo 0.610 di `502` sugli stessi cas
 | Dataset privato AInCP | non ancora consegnato |
 | Stadio 2 — inpainting e gemello sano | dopo la segmentazione |
 
+### Materiale per gli incontri
+
+Le figure stanno in `reports/figures/`: `risultati.png` riassume tutti i confronti in due pannelli,
+`skullstrip_prima_dopo.png` mostra cosa toglie SynthStrip su WMH e ATLAS, `predizioni_<NNN>_fold_0.png`
+confronta predizione e riferimento per ognuno dei sette modelli, e `synthstrip/` contiene le 244 figure
+di validazione su DBB (il nome del file inizia con il Dice). Si rigenerano con
+`scripts/figura_risultati.py`, `scripts/figura_skullstrip_prima_dopo.py` e `scripts/plot_predictions.py`.
+
 ### Fasi concluse
 
 Esplorazione dei dati, preparazione e split di WMH e ATLAS, sblocco GPU (`torch 2.6.0+cu124` su A100),
