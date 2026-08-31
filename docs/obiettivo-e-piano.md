@@ -159,6 +159,46 @@ Nota che rende tutto più semplice: MSLesSeg arriva già skull-strippato mentre 
 Prima dei test `522`/`523` sarebbe stato un problema di coerenza; ora **sappiamo per misura** che lo
 skull stripping non sposta il risultato, quindi si possono mescolare sorgenti strippate e non.
 
+### Proposta B: pretraining a un canale, poi espansione a due
+
+Alternativa all'aggiunta di dataset, e **complementare** ad essa: pre-addestrare a un solo canale sugli
+842 casi che già abbiamo, e poi espandere il primo strato convoluzionale da uno a due canali prima del
+fine-tuning sui dati che hanno la FLAIR. Usa anche i 763 casi solo-T1 che un modello a due canali non
+potrebbe mai vedere.
+
+**Perché nnU-Net non lo fa da solo.** `load_pretrained_weights` copia tutto tranne i `seg_layers` e
+verifica con un `assert` che ogni altro parametro abbia forma identica. Il primo strato passa da
+`[32, 1, 3, 3, 3]` a `[32, 2, 3, 3, 3]`: l'assert fallisce.
+
+**Non serve però abbandonare nnU-Net, basta sostituire quella funzione.** Il progetto ha già un trainer
+personalizzato (`scripts/nnunet_trainers/nnUNetTrainerWandb.py`), quindi il meccanismo esiste. Tre
+livelli, in ordine di costo:
+
+| livello | cosa si scrive | cosa consente |
+| --- | --- | --- |
+| 1, minimo | un trainer che sovrascrive il solo caricamento dei pesi | l'espansione da 1 a 2 canali; tutto il resto resta di nnU-Net |
+| 2, intermedio | + il controllo del fine-tuning | lr ridotto, encoder congelato nelle prime epoche |
+| 3, massimo | ciclo di training proprio | solo per ciò che nnU-Net non prevede, in particolare il **modality dropout** (oscurare a caso la FLAIR, così il modello resta usabile su pazienti che non ce l'hanno) |
+
+**Come inizializzare il canale nuovo**, l'unica decisione tecnica del livello 1. Due opzioni standard, da
+provare entrambe: il canale FLAIR **a zero** (il modello parte identico a quello a un canale e impara a
+usare la FLAIR strada facendo, opzione conservativa), oppure il filtro **duplicato e dimezzato** (parte
+trattando le due sequenze come intercambiabili, sfrutta subito la FLAIR ma da un punto meno affidabile).
+
+**Struttura a tre stadi:**
+
+| stadio | dati | casi | canali | cosa impara |
+| --- | --- | --- | --- | --- |
+| 1 | ATLAS + DBB + WMH in T1 | 842 | 1 | anatomia e lesioni cavitate |
+| 2 | WMH con T1 e FLAIR | 79 | 2 | a usare la FLAIR |
+| 3 | AInCP | ~10 | 2 | il dominio pediatrico |
+
+**Il rischio.** Allo stadio 2 il canale FLAIR parte da nulla e ci sono solo 79 casi per insegnare al
+modello a servirsene. Se non bastano resta un modello a T1 con un canale inerte, cioè si torna al punto
+di partenza dopo tre training. È esattamente il rischio che la proposta A elimina: **A fornisce i dati a
+due canali che rendono affidabile lo stadio 2 di B**, e B permette di sfruttare i casi solo-T1 che A non
+può usare. Se se ne sceglie una sola: A è la più sicura, B la più economica.
+
 ### D è necessariamente a un solo canale
 
 Vincolo da tenere presente fin d'ora, perché non è aggirabile: nnU-Net pretende **tutti i canali per tutti
