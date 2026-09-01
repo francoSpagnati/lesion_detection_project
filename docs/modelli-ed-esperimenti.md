@@ -409,10 +409,28 @@ non c'è ragione di preferirlo. Ma D non è nato per essere il modello finale: �
 partenza**, e "peggiore come modello" non implica "peggiore come inizializzazione" — sono due domande
 diverse, e la seconda si risponde solo con l'esperimento di fine-tuning simulato.
 
-Un argomento a favore che il numero da solo non mostra: D è **un solo modello che produce insieme la
-lesione e i sei tessuti**, che è esattamente ciò che serve al secondo stadio della pipeline prevista dal
-progetto — l'inpainting del "gemello sano" e la successiva parcellazione anatomica. Gli specialisti,
-per fare la stessa cosa, andrebbero fatti girare in due.
+**Il risultato più interessante non è nella tabella dei Dice.** Guardando le predizioni è emerso che D
+**non produce entrambe le cose su tutte le immagini**. Misurato su tutti i 151 casi di validation:
+
+| sorgente | casi | voxel predetti come lesione | voxel predetti come tessuto | casi con voxel dell'altro tipo |
+| --- | --- | --- | --- | --- |
+| ATLAS | 112 | 0.35% | **0.00%** | 2 |
+| WMH | 16 | 0.17% | **0.00%** | 0 |
+| DBB | 23 | **0.00%** | 20.84% | 0 |
+
+Su 149 casi su 151 il comportamento è **puro**: sulle immagini adulte D predice soltanto la lesione e
+nessun tessuto, su quelle pediatriche soltanto i tessuti e nessuna lesione. La rete non ha mediato fra
+le due annotazioni contraddittorie: **ha imparato a riconoscere da quale dataset viene l'immagine** e a
+cambiare comportamento di conseguenza. È di fatto un modello con due modalità, selezionate dal dominio.
+
+Questo spiega perché D non è crollata — non ha dovuto conciliare niente — ma **smonta l'argomento del
+"modello unico che serve a entrambi gli stadi"**: su un paziente con paralisi cerebrale, che non
+somiglia esattamente né a un adulto con ictus né a un neonato sano, non sappiamo quale delle due
+modalità verrebbe scelta. È un rischio da dichiarare, non un vantaggio.
+
+È anche la migliore motivazione empirica per la variante C: marcando `ignore` il tessuto non annotato di
+WMH e ATLAS si toglie alla rete proprio l'informazione con cui costruisce questa scorciatoia. Figura:
+`reports/figures/modello_unico_7_classi.png`.
 
 ---
 

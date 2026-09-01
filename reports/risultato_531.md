@@ -26,3 +26,14 @@ dai sei tessuti, che sono densi e facili: non descrive il compito che ci interes
 | D contro `Dataset503_DBB` | tronco | 23 | 0.9732 | 0.9639 | **-0.0093** | 1 / 22 | 7.868e-06 |
 | D contro `Dataset503_DBB` | cervelletto | 23 | 0.9806 | 0.9753 | **-0.0054** | 0 / 23 | 2.384e-07 |
 
+## Il modello ha imparato a distinguere le sorgenti
+
+Frazione di voxel che il modello assegna a ciascun gruppo di classi, misurata su
+**tutti i 151 casi** di validation.
+
+| sorgente | casi | voxel predetti come lesione | voxel predetti come tessuto | casi con almeno un voxel dell'altro tipo |
+| --- | --- | --- | --- | --- |
+| ATLAS | 112 | 0.3502% | 0.0000% | **2** |
+| WMH | 16 | 0.1695% | 0.0000% | **0** |
+| DBB | 23 | 0.0000% | 20.8415% | **0** |
+

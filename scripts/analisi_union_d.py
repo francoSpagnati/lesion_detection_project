@@ -15,8 +15,10 @@ il solo T1, perche' ATLAS e DBB la FLAIR non ce l'hanno.
 """
 import json
 import os
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
+import nibabel as nib
 import numpy as np
 from scipy.stats import wilcoxon
 
@@ -53,6 +55,40 @@ def appaiato(a: dict, b: dict, casi, classe_a: str, classe_b: str):
     x, y = np.array(x), np.array(y)
     p = wilcoxon(x, y).pvalue if len(x) > 1 and np.any(x != y) else float('nan')
     return len(x), x.mean(), y.mean(), y.mean() - x.mean(), p, int((y > x).sum()), int((y < x).sum())
+
+
+def regime(f: Path):
+    """Quanti voxel il modello assegna alla lesione e quanti ai tessuti, in un caso."""
+    a = np.asanyarray(nib.load(str(f)).dataobj)
+    return f.name[:-len('.nii.gz')], a.size, int((a == 1).sum()), int(((a >= 2) & (a <= 7)).sum())
+
+
+def analisi_regime(righe):
+    """Il modello unico predice davvero entrambe le cose su tutte le immagini?
+
+    E' la domanda che la tabella dei Dice non pone. Se il modello avesse imparato a riconoscere da
+    quale dataset viene un'immagine e a cambiare comportamento di conseguenza, i Dice per classe
+    resterebbero buoni ma il modello **non** sarebbe utilizzabile come segmentatore unico su un
+    paziente nuovo, che non somiglia esattamente a nessuna delle sorgenti.
+    """
+    vald = RES / 'Dataset531_UNION_D' / TR / 'fold_0' / 'validation'
+    file = sorted(vald.glob('*.nii.gz'))
+    with ProcessPoolExecutor(max_workers=12) as pool:
+        ris = list(pool.map(regime, file, chunksize=4))
+
+    righe += ['## Il modello ha imparato a distinguere le sorgenti', '',
+              'Frazione di voxel che il modello assegna a ciascun gruppo di classi, misurata su',
+              f'**tutti i {len(ris)} casi** di validation.', '',
+              '| sorgente | casi | voxel predetti come lesione | voxel predetti come tessuto | casi con almeno un voxel dell\'altro tipo |',
+              '| --- | --- | --- | --- | --- |']
+    for pref, etichetta in (('atlas', 'ATLAS'), ('wmh', 'WMH'), ('dbb', 'DBB')):
+        v = [r for r in ris if r[0].startswith(pref + '_')]
+        les = np.mean([l / n for _, n, l, _ in v])
+        tes = np.mean([t / n for _, n, _, t in v])
+        altro = sum(1 for _, _, l, t in v if (t > 0 if pref != 'dbb' else l > 0))
+        righe.append(f'| {etichetta} | {len(v)} | {les:.4%} | {tes:.4%} | **{altro}** |')
+    righe.append('')
+    return righe
 
 
 def main():
@@ -94,6 +130,8 @@ def main():
         righe.append(f'| D contro `Dataset503_DBB` | {NOMI[cl_d]} | {n} | {mb:.4f} | {md:.4f} | '
                      f'**{diff:+.4f}** | {su} / {giu} | {p:.4g} |')
     righe.append('')
+
+    righe = analisi_regime(righe)
 
     out = PROGETTO / 'reports' / 'risultato_531.md'
     out.write_text('\n'.join(righe) + '\n')
