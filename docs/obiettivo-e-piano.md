@@ -228,6 +228,46 @@ di partenza dopo tre training. È esattamente il rischio che la proposta A elimi
 due canali che rendono affidabile lo stadio 2 di B**, e B permette di sfruttare i casi solo-T1 che A non
 può usare. Se se ne sceglie una sola: A è la più sicura, B la più economica.
 
+### Proposta C: lesioni sintetiche sui cervelli pediatrici sani di DBB
+
+Affronta un problema diverso dalle altre due: **tutti i nostri dati lesionali sono di adulti**, e l'unico
+dataset pediatrico che abbiamo non ha annotazioni di lesione. L'idea è **inserire lesioni artificiali nei
+207 cervelli sani di DBB**, ottenendo un riferimento esatto per costruzione. È l'unica delle tre proposte
+che **non richiede dati esterni** ed è lavoro di sola CPU.
+
+**Perché non ricavarle invece dai 37 patologici con la modellazione normativa** (costruire dai sani la
+distribuzione di ogni voxel e chiamare lesione ciò che devia). Tre ragioni, la prima decisiva:
+
+1. **Fenotipo sbagliato.** I 37 patologici sono ACC, MCD, PFM e idrocefalo: *malformazioni*, strutture che
+   non si sono formate o si sono formate male, non danni acquisiti da ipossia. L'agenesia del corpo
+   calloso è una struttura *assente*, non *lesa*. Si etichetterebbe "qui differisce dal normale", che è
+   un altro concetto.
+2. **Circolare.** Serve allineare il cervello patologico a uno spazio comune, ed è esattamente ciò che si
+   degrada sull'anatomia distorta — il problema per cui DBB esiste.
+3. **Non verificabile**: nessun riferimento con cui controllare le etichette prodotte.
+
+E sarebbero 37 casi contro 207.
+
+**Perché DBB e non un dataset sano qualsiasi.** Ha la parcellazione dei tessuti, quindi sappiamo dove
+sono bianca e ventricoli in ogni soggetto e possiamo mettere le lesioni **dove clinicamente stanno** —
+periventricolari nella bianca, cavità nel territorio corticale-sottocorticale — invece che a caso.
+
+**Come si costruisce.**
+
+| passo | operazione | su cosa si basa |
+| --- | --- | --- |
+| 1 | trapianto di una maschera di lesione reale da ATLAS o WMH | la parcellazione DBB determina le posizioni ammissibili |
+| 2 | riempimento con il contrasto del fenotipo da riprodurre | i rapporti **già misurati**: 0.62 cavitate, 1.07 non cavitate (vedi `reports/failure_analysis_502.md`) |
+| 3 | dilatazione della maschera per un anello di transizione sfumato | è il passo decisivo: senza, la rete impara il bordo artificiale |
+
+**Il rischio e il suo controllo.** La rete può imparare l'artefatto di sintesi invece della lesione. Il
+test è netto: **si addestra sui sintetici e si valuta su ATLAS e WMH reali.** Se il Dice sui reali
+migliora, la sintesi ha insegnato qualcosa di vero; altrimenti no.
+
+**Ricaduta sullo stadio 2.** L'inpainting del gemello sano ha bisogno di coppie (con lesione, senza
+lesione) della stessa testa. **Nessun dataset reale può fornirle.** La sintesi le produce per
+costruzione, con il bersaglio dell'inpainting già noto. Un solo lavoro alimenta entrambi gli stadi.
+
 ### D è necessariamente a un solo canale
 
 Vincolo da tenere presente fin d'ora, perché non è aggirabile: nnU-Net pretende **tutti i canali per tutti

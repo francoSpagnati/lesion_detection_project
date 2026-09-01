@@ -59,6 +59,7 @@ Nessun training in esecuzione. La GPU 0 è libera.
 | Voce | Stato |
 | --- | --- |
 | **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire, per confrontarla direttamente con `531` |
+| **Proposta C** — lesioni sintetiche sui 207 cervelli pediatrici sani di DBB | proposta ai relatori; unica che non richiede dati esterni |
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
