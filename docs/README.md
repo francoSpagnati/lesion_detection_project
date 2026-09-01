@@ -68,11 +68,16 @@ Nessun training in esecuzione. La GPU 0 è libera.
 
 ### Materiale per gli incontri
 
-Le figure stanno in `reports/figures/`: `risultati.png` riassume tutti i confronti in due pannelli,
-`skullstrip_prima_dopo.png` mostra cosa toglie SynthStrip su WMH e ATLAS, `predizioni_<NNN>_fold_0.png`
-confronta predizione e riferimento per ognuno dei sette modelli, e `synthstrip/` contiene le 244 figure
-di validazione su DBB (il nome del file inizia con il Dice). Si rigenerano con
-`scripts/figura_risultati.py`, `scripts/figura_skullstrip_prima_dopo.py` e `scripts/plot_predictions.py`.
+Le figure stanno in `reports/figures/` e si rigenerano tutte da script.
+
+| figura | cosa mostra | script |
+| --- | --- | --- |
+| `risultati.png` | tutti i confronti in due pannelli | `figura_risultati.py` |
+| `flair_contro_t1.png` | **stesso paziente, stessa fetta: FLAIR contro T1** | `figura_flair_contro_t1.py` |
+| `modello_unico_7_classi.png` | le due modalità di `531`: tessuti sui pediatrici, lesione sugli adulti | `figura_modello_unico.py` |
+| `skullstrip_prima_dopo.png` | cosa toglie SynthStrip su WMH e ATLAS | `figura_skullstrip_prima_dopo.py` |
+| `predizioni_<NNN>_fold_0.png` | predizione contro riferimento, per ognuno dei nove modelli | `plot_predictions.py` |
+| `synthstrip/` | 244 figure di validazione su DBB, il nome inizia con il Dice | `run_synthstrip.py` |
 
 ### Fasi concluse
 
