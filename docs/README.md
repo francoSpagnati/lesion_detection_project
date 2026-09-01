@@ -29,11 +29,11 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 31 agosto 2026
+## Stato al 1 settembre 2026
 
-**In una riga:** tutte e cinque le ablazioni sono chiuse e **nessuna delle scorciatoie provate funziona**
-— né escludere i 1.5 T, né aggiungere il T1 alla FLAIR, né lo skull stripping; è in corso il training
-della **variante D**, il modello unico su tutti e tre i dataset, che è l'obiettivo prioritario.
+**In una riga:** tutte e cinque le ablazioni sono chiuse e nessuna delle scorciatoie provate funziona;
+la **variante D** è addestrata e dà la risposta più interessante finora — l'unione dei tre dataset
+**non crolla ma non guadagna**, e paga un pedaggio piccolo e sistematico su tutte e sette le classi.
 
 ### Risultati misurati
 
@@ -48,16 +48,11 @@ della **variante D**, il modello unico su tutti e tre i dataset, che è l'obiett
 | `521` applicato ai casi 1.5 T mai visti | **0.672** | nessun crollo fuori dominio; sui 9 casi puliti −0.072 con **p=0.25**, e due terzi vengono da un caso solo |
 | `522` WMH skull-stripped | **0.779** | +0.0045 appaiato, **p=0.86**: nessun effetto |
 | `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
+| `531` **variante D**, tutti e tre insieme | **0.603** lesione | −0.007 su ATLAS (p=0.073) e −0.022 su WMH (p=0.10): non crolla; ma perde su tutte e 7 le classi |
 
 ### In corso
 
-| Dataset | Domanda | Confronto | Stato |
-| --- | --- | --- | --- |
-| `531` **variante D** | un modello unico su tutti e tre i dataset regge? | contro `501`, `502`, `503` sugli stessi fold | avviato il 31/08 alle 16:34, GPU 0, ~7 ore |
-
-Il risultato di D **non va letto come un Dice medio unico**: sette classi, di cui sei dense e facili e
-una rara e difficile. Va riportato per classe e per sorgente, e la domanda vera è se il Dice della
-lesione sui casi ATLAS regge il confronto con lo 0.610 di `502` sugli stessi casi di validation.
+Nessun training in esecuzione. La GPU 0 è libera.
 
 ### Da fare dopo
 

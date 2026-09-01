@@ -398,11 +398,23 @@ Lettura completa e conseguenze in
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 setsid nohup bash scripts/run_baselines.sh 531 > reports/logs/coda_531.log 2>&1 < /dev/null &
+python scripts/analisi_union_d.py       # -> reports/risultato_531.md
+python scripts/plot_predictions.py 531  # -> reports/figures/predizioni_531_fold_0.png
 ```
 
-Avviato il 31 agosto alle 16:34. Verificato all'avvio che nnU-Net legga il **nostro**
-`splits_final.json` e non ne generi uno proprio: il log dice "This split has 691 training and 151
-validation cases", che sono i numeri attesi.
+Avviato il 31 agosto alle 16:34, concluso alle 23:40. Verificato all'avvio che nnU-Net legga il
+**nostro** `splits_final.json` e non ne generi uno proprio: il log dice "This split has 691 training and
+151 validation cases", che sono i numeri attesi.
+
+`scripts/analisi_union_d.py` esiste perche' il `summary.json` di D non e' leggibile come quello degli
+altri: riporta una media per classe calcolata su tutti i 151 casi, ma le classi non esistono ovunque —
+la lesione solo nei casi WMH e ATLAS, i tessuti solo in quelli DBB. Lo script misura ogni classe **sui
+soli casi che possono contenerla** e la confronta con la propria baseline sugli stessi casi.
+
+Esito: la lesione tiene (**-0.0072** su ATLAS con p=0.073, **-0.0225** su WMH con p=0.10, nessuna delle
+due significativa), ma D **perde su tutte e sette le classi**, e sui tessuti la perdita e' piccola e
+perfettamente sistematica (23 casi su 23 in cinque classi su sei). Lettura completa in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#531--variante-d-tutti-e-tre-i-dataset-in-un-modello-solo).
 
 ---
 

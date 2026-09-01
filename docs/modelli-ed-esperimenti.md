@@ -100,7 +100,7 @@ sono di validation.
 | **521** | ATLAS senza 1.5 T | T1 | lesione | 511 | 103 | **0.6160** | ablazione: escludere i 1.5 T? |
 | **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | **0.7785** | ablazione: skull stripping, +0.0045 con p=0.86 |
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
-| **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | *in corso* | variante D: il modello unico |
+| **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | **0.603** lesione | variante D: perde poco su tutto, non guadagna nulla |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -374,9 +374,45 @@ classe 1 sui casi ATLAS regge il confronto con lo 0.6103 di 502, sugli stessi ca
 perde, avremo quantificato il costo del conflitto invece di ipotizzarlo — che è un risultato
 riportabile, ed è esattamente ciò che motiva la variante C, dove quei voxel diventano `ignore`.
 
-**Stato: training avviato il 31 agosto alle 16:34** sulla GPU 0, con gli split corretti (691 train, 151
-validation letti dal nostro `splits_final.json`). Circa 7 ore. Subito dopo verrà costruita la stessa D
-sui volumi skull-stripped, per confrontare le due direttamente.
+**Risultato.** Concluso il 31 agosto alle 23:40, 7h06. nnU-Net stampa un Dice medio di **0.8966**, che
+è però la media sulle sette classi ed è dominato dai sei tessuti densi: non descrive il compito. Il
+numero va letto per classe e per sorgente (`scripts/analisi_union_d.py`, `reports/risultato_531.md`),
+misurando ogni classe **sui soli casi che possono contenerla** e confrontandola con la propria baseline
+sugli stessi casi.
+
+| confronto | classe | casi | baseline | D | differenza | p |
+| --- | --- | --- | --- | --- | --- | --- |
+| contro `502` | lesione su ATLAS | 112 | 0.6103 | **0.6031** | −0.0072 | 0.073 |
+| contro `511` | lesione su WMH | 16 | 0.6257 | **0.6032** | −0.0225 | 0.10 |
+| contro `503` | csf | 23 | 0.9278 | 0.9034 | −0.0245 | 2e-07 |
+| contro `503` | grigia | 23 | 0.9845 | 0.9741 | −0.0104 | 2e-07 |
+| contro `503` | bianca | 23 | 0.9892 | 0.9811 | −0.0080 | 2e-07 |
+| contro `503` | grigia profonda | 23 | 0.9718 | 0.9514 | −0.0205 | 2e-07 |
+| contro `503` | tronco | 23 | 0.9732 | 0.9639 | −0.0093 | 8e-06 |
+| contro `503` | cervelletto | 23 | 0.9806 | 0.9753 | −0.0054 | 2e-07 |
+
+Il confronto per WMH è con **511 e non con 501**: dentro D, WMH entra con il solo T1, perché ATLAS e DBB
+la FLAIR non ce l'hanno.
+
+**Cosa dice, e non è quello che ci si aspettava.** Il conflitto fra le etichette — tessuto sano che vale
+`0` in 635 casi su 842 e `2..7` negli altri 207 — **non ha fatto crollare niente**. Sulla lesione D
+perde 0.007 su ATLAS (p=0.073) e 0.022 su WMH (p=0.10): in nessuno dei due casi la differenza è
+significativa al 5%.
+
+Ma non guadagna neppure, e il costo c'è: **perde su tutte e sette le classi**. Sui tessuti la perdita è
+piccola (0.5–2.5 punti) e insieme *perfettamente sistematica* — in cinque classi su sei peggiorano
+**23 casi su 23**, con p dell'ordine di 1e-07. È la quantificazione precisa di quanto costa il
+conflitto: non un crollo, un pedaggio piccolo e pagato ovunque.
+
+**Come leggerlo per il progetto.** D come *modello finale* è leggermente peggiore degli specialisti, e
+non c'è ragione di preferirlo. Ma D non è nato per essere il modello finale: è un candidato **punto di
+partenza**, e "peggiore come modello" non implica "peggiore come inizializzazione" — sono due domande
+diverse, e la seconda si risponde solo con l'esperimento di fine-tuning simulato.
+
+Un argomento a favore che il numero da solo non mostra: D è **un solo modello che produce insieme la
+lesione e i sei tessuti**, che è esattamente ciò che serve al secondo stadio della pipeline prevista dal
+progetto — l'inpainting del "gemello sano" e la successiva parcellazione anatomica. Gli specialisti,
+per fare la stessa cosa, andrebbero fatti girare in due.
 
 ---
 
