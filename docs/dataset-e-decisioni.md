@@ -114,7 +114,20 @@ Il principio generale: **mai fidarsi della codifica dichiarata delle label, veri
 ## DBB — `Dataset503_DBB` (T1, 6 tessuti)
 
 Distorted Brain Benchmark, da brainlife (`60a14ca503bcad0ad27cada9`, DOI `10.25663/brainlife.pub.24`,
-licenza **CC-BY 4.0**, va citato). Report: [`reports/dbb_analysis.md`](../reports/dbb_analysis.md).
+licenza **CC-BY 4.0**, va citato). Articolo: Amorosino et al., *DBB — A Distorted Brain Benchmark for
+Automatic Tissue Segmentation in Paediatric Patients*, NeuroImage 2022.
+Report: [`reports/dbb_analysis.md`](../reports/dbb_analysis.md).
+
+**A cosa serve secondo i suoi autori**, che è la chiave per capire come possiamo usarlo. Il benchmark
+nasce perché gli strumenti basati su modelli e template — FreeSurfer, SPM e simili — **perdono
+accuratezza quando l'anatomia è fortemente distorta** da lesioni gravi. Si addestra sui sani e si valuta
+sui distorti, e il bersaglio è la robustezza della segmentazione **dei tessuti**, non il rilevamento
+delle lesioni: *distorted* qualifica l'anatomia dei pazienti, non le annotazioni.
+
+Vale la pena notare che **è esattamente la motivazione del secondo stadio della nostra pipeline**: il
+"gemello sano" per inpainting esiste perché la parcellazione anatomica convenzionale fallisce quando
+l'anatomia è alterata. DBB è quindi il benchmark del problema che lo stadio 2 affronta, non dello
+stadio 1.
 
 **Non è un dataset di lesioni**: segmenta 6 classi di tessuto normale (`1` CSF, `2` sostanza grigia, `3`
 sostanza bianca, `4` grigia profonda, `5` tronco encefalico, `6` cervelletto) su cervelli **pediatrici**.

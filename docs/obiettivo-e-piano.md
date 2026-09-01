@@ -159,6 +159,35 @@ Nota che rende tutto più semplice: MSLesSeg arriva già skull-strippato mentre 
 Prima dei test `522`/`523` sarebbe stato un problema di coerenza; ora **sappiamo per misura** che lo
 skull stripping non sposta il risultato, quindi si possono mescolare sorgenti strippate e non.
 
+### Quando serve uscire da nnU-Net e quando no
+
+Punto di confusione da tenere chiaro, perché riguarda due cose diverse.
+
+**Un modello a due canali non richiede nulla di speciale.** nnU-Net gestisce N canali da sempre:
+`Dataset512_WMH_T1_FLAIR` è stato costruito, pianificato, addestrato e valutato senza una riga di codice
+nostro. Anche il fine-tuning da un modello a due canali a un altro a due canali è supportato
+(`nnUNetv2_train ... -pretrained_weights`), perché le architetture combaciano.
+
+**Serve codice nostro solo per cambiare il numero di canali fra pretraining e fine-tuning**, cioè solo
+per la proposta B.
+
+| percorso | serve codice nostro? |
+| --- | --- |
+| addestrare a 2 canali su WMH, poi fine-tuning a 2 canali su AInCP | **no** |
+| addestrare a 1 canale su ATLAS/DBB, poi fine-tuning a 1 canale | **no** |
+| addestrare a 1 canale, poi **espandere a 2** e fare fine-tuning | **sì**, un trainer che sovrascrive il caricamento dei pesi |
+
+**Quali dataset hanno davvero la FLAIR.** Verificato sui file, non sulla documentazione:
+
+| dataset | file disponibili | FLAIR? |
+| --- | --- | --- |
+| WMH | `*_FLAIR_BiasCorr`, `*_T1w_BiasCorr_2FLAIR_Aligned`, `*_wmh` | **sì**, già co-registrata |
+| ATLAS | 955 `*_T1w`, 655 `*_desc-T1lesion_mask` | **no**, solo T1 |
+| DBB | `anat-t1w`, `mask`, `parcellation-volume` | **no**, solo T1 |
+
+Quindi «aggiungere la FLAIR ai dataset che abbiamo» si può fare **solo su WMH**, ed è già fatto: è il
+`512`. Per avere altra FLAIR servono dataset nuovi (proposta A) o l'espansione dei canali (proposta B).
+
 ### Proposta B: pretraining a un canale, poi espansione a due
 
 Alternativa all'aggiunta di dataset, e **complementare** ad essa: pre-addestrare a un solo canale sugli
