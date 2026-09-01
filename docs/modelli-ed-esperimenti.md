@@ -101,6 +101,7 @@ sono di validation.
 | **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | **0.7785** | ablazione: skull stripping, +0.0045 con p=0.86 |
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
 | **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | **0.603** lesione | variante D: perde poco su tutto, non guadagna nulla |
+| **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | *in corso* | **il test del pretraining**: simula AInCP |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -431,6 +432,52 @@ modalità verrebbe scelta. È un rischio da dichiarare, non un vantaggio.
 È anche la migliore motivazione empirica per la variante C: marcando `ignore` il tessuto non annotato di
 WMH e ATLAS si toglie alla rete proprio l'informazione con cui costruisce questa scorciatoia. Figura:
 `reports/figures/modello_unico_7_classi.png`.
+
+### 541 — il test del pretraining: serve davvero, con dieci casi?
+
+**Perché.** L'intero progetto poggia su una premessa mai misurata: che pre-addestrare sui dataset
+pubblici serva quando il bersaglio è di circa dieci pazienti. Se fosse falsa lo si scoprirebbe il giorno
+in cui arrivano i dati veri, cioè troppo tardi. Questo esperimento la verifica **adesso**, senza i
+pazienti.
+
+**Il disegno, e la parte che lo rende valido.** Servono casi di target che nessun modello di pretraining
+abbia mai visto. I **45 casi di ATLAS acquisiti a 1.5 T** sono esattamente questo: `Dataset521_ATLAS_3T`
+li esclude per costruzione, e lo script verifica prima di procedere che zero di essi compaia in un
+qualsiasi fold di 521 o di 503. Non si tocca alcun test set: vengono dal pool di sviluppo di ATLAS.
+
+| | |
+| --- | --- |
+| dataset | `Dataset541_SIM_AINCP`, 45 casi, costruito da `scripts/make_finetuning_sim_dataset.py` |
+| fold 0 | **10 casi di training** (quanti saranno i pazienti AInCP), **35 di validation** |
+| scelta dei 10 | stratificata per volume di lesione — mediana 13.7 ml contro 13.2 del gruppo di valutazione, con lo spettro coperto da 0.9 a 238 ml. Su questo compito il Dice dipende quasi solo dal volume, e dieci casi tutti piccoli o tutti grandi renderebbero il risultato illeggibile |
+| piano | **copiato da 502** con `nnUNetv2_move_plans_between_datasets`, non ricalcolato: il trasferimento dei pesi funziona solo fra architetture identiche |
+| budget | 250 epoche per entrambi i bracci, `nnUNetTrainerWandb_250epochs` |
+
+**I due bracci** differiscono *solo* per l'inizializzazione dei pesi: da zero, contro fine-tuning da
+`Dataset521_ATLAS_3T` (511 casi, stesso compito). Usano due identificativi di piano diversi
+(`nnUNetPlans` e `nnUNetPlansFT`) solo perché nnU-Net deriva da quel nome la cartella dei risultati: i
+due file sono identici e puntano agli stessi dati preprocessati.
+
+**Un vincolo scoperto preparando l'esperimento, che vale anche per il transfer DBB → ATLAS.** Volevamo un
+terzo braccio con i pesi di DBB, per misurare se il transfer *fra compiti diversi* funziona. **Non è
+possibile senza rilavorare DBB**: le convoluzioni trasposte del decoder hanno dimensione pari allo
+stride, e l'ultimo stadio di 503 usa `[2, 2, 1]` contro il `[2, 2, 2]` di 502. Le forme non combaciano e
+il caricamento si interrompe. Verificato caricando davvero i checkpoint prima di impegnare la GPU:
+
+| sorgente | i pesi si caricano in 541? |
+| --- | --- |
+| `Dataset521_ATLAS_3T` | **sì** |
+| `Dataset531_UNION_D` | sì, ma **ha visto i 45 casi**: inutilizzabile qui |
+| `Dataset503_DBB` | **no**, architettura incompatibile |
+
+Per usare DBB come sorgente di pretraining bisognerà spostarci sopra il piano di 502 e riaddestrarlo:
+sono 7 ore di GPU, ed è il prerequisito dell'esperimento «transfer DBB → ATLAS» già in programma.
+
+**Limiti da dichiarare quando si riporterà il risultato.** Una sola estrazione dei 10 casi, e con dieci
+casi la varianza è alta; una sola sorgente di pretraining; e i 45 casi di target vengono per 39 dalla
+coorte `r040`, quindi è in larga parte un solo scanner.
+
+**Stato: braccio 1 avviato il 1 settembre alle 15:51.**
 
 ---
 

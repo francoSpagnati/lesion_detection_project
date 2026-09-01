@@ -52,7 +52,13 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 
 ### In corso
 
-Nessun training in esecuzione. La GPU 0 è libera.
+| Dataset | Domanda | Stato |
+| --- | --- | --- |
+| `541` **test del pretraining** | con dieci casi di target, partire da pesi pre-addestrati serve? | avviato il 01/09 alle 15:51, GPU 0, due bracci da 250 epoche |
+
+È la verifica della premessa su cui poggia tutto il progetto, e si fa **senza i dati dei pazienti**:
+10 casi ATLAS a 1.5 T come target, 35 per valutare, e due bracci identici tranne l'inizializzazione
+dei pesi — da zero contro fine-tuning da `521`, che quei casi non li ha mai visti.
 
 ### Da fare dopo
 

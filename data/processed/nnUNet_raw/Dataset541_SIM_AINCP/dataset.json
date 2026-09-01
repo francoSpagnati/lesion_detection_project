@@ -1,0 +1,12 @@
+{
+  "channel_names": {
+    "0": "T1"
+  },
+  "labels": {
+    "background": 0,
+    "lesion": 1
+  },
+  "numTraining": 45,
+  "file_ending": ".nii.gz",
+  "description": "Simulazione del caso AInCP: i 45 casi ATLAS a 1.5 T, mai visti da Dataset521_ATLAS_3T ne da Dataset503_DBB. Fold 0: 10 casi di training, 35 di validation. Costruito da scripts/make_finetuning_sim_dataset.py."
+}
