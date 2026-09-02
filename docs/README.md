@@ -49,16 +49,13 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | `522` WMH skull-stripped | **0.779** | +0.0045 appaiato, **p=0.86**: nessun effetto |
 | `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
 | `531` **variante D**, tutti e tre insieme | **0.603** lesione | −0.007 su ATLAS (p=0.073) e −0.022 su WMH (p=0.10): non crolla; ma perde su tutte e 7 le classi |
+| `541` **test del pretraining** | **0.564** contro **0.451** da zero | +0.114 con **p=0.0001**: il pretraining serve. Ma lo zero-shot fa **0.677**: la ricetta di fine-tuning di default *danneggia* il modello |
 
 ### In corso
 
 | Dataset | Domanda | Stato |
 | --- | --- | --- |
-| `541` **test del pretraining** | con dieci casi di target, partire da pesi pre-addestrati serve? | avviato il 01/09 alle 15:51, GPU 0, due bracci da 250 epoche |
-
-È la verifica della premessa su cui poggia tutto il progetto, e si fa **senza i dati dei pazienti**:
-10 casi ATLAS a 1.5 T come target, 35 per valutare, e due bracci identici tranne l'inizializzazione
-dei pesi — da zero contro fine-tuning da `521`, che quei casi non li ha mai visti.
+| `541` con passo ridotto | un fine-tuning più prudente supera lo zero-shot invece di danneggiarlo? | avviato il 02/09 alle 17:30, due bracci a `1e-3` e `1e-4` |
 
 ### Da fare dopo
 

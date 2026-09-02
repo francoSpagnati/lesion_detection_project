@@ -101,7 +101,7 @@ sono di validation.
 | **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | **0.7785** | ablazione: skull stripping, +0.0045 con p=0.86 |
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
 | **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | **0.603** lesione | variante D: perde poco su tutto, non guadagna nulla |
-| **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | *in corso* | **il test del pretraining**: simula AInCP |
+| **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | **0.564** con pretraining, **0.451** da zero | **il test del pretraining**: il pretraining serve, la ricetta di fine-tuning no |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -477,7 +477,51 @@ sono 7 ore di GPU, ed è il prerequisito dell'esperimento «transfer DBB → ATL
 casi la varianza è alta; una sola sorgente di pretraining; e i 45 casi di target vengono per 39 dalla
 coorte `r040`, quindi è in larga parte un solo scanner.
 
-**Stato: braccio 1 avviato il 1 settembre alle 15:51.**
+**Risultato: il pretraining serve, e molto.** I due bracci, sugli stessi 35 casi di valutazione:
+
+| braccio | Dice |
+| --- | --- |
+| addestrato da zero sui 10 casi | 0.4507 |
+| fine-tuning da `521` sui 10 casi | **0.5642** |
+| **differenza** | **+0.1135** |
+
+Migliora in 24 casi su 35, peggiora in 5, Wilcoxon **p = 0.000124**. Il guadagno c'è su entrambe le
+fasce di volume: +0.087 sotto la mediana e +0.142 sopra. In alcuni casi è la differenza fra vedere e non
+vedere: `sub-r040s002` passa da **0.000 a 0.781**.
+
+**Ma c'è un terzo braccio, ed è quello che cambia la conclusione pratica.** Il modello pre-addestrato
+applicato **tale e quale**, senza vedere i 10 casi, sugli stessi 35 di valutazione:
+
+| | Dice sui 35 casi |
+| --- | --- |
+| da zero sui 10 | 0.4507 |
+| fine-tuning da `521` sui 10 | 0.5642 |
+| **`521` senza alcun fine-tuning** | **0.6772** |
+| differenza fine-tuning meno zero-shot | **−0.1130**, p = 0.013 |
+
+**Il fine-tuning con la ricetta predefinita peggiora un modello già buono.** Batte lo zero-shot in
+appena 13 casi su 35. La spiegazione più probabile è nel passo di apprendimento: nnU-Net riparte da
+`0.01`, che è il valore di un addestramento completo, e su dieci casi cancella le feature
+pre-addestrate invece di raffinarle.
+
+Due conclusioni distinte, ed entrambe contano:
+
+1. **La premessa del progetto regge**: senza pretraining, con dieci casi, si perde più di undici punti.
+2. **La ricetta di fine-tuning va progettata, non ereditata.** E va sempre misurato lo zero-shot come
+   termine di paragone: senza quel braccio avremmo concluso "il pretraining funziona" e adottato una
+   procedura che peggiora il modello.
+
+Una cautela sulla generalizzazione: qui il dominio di partenza e quello di arrivo sono molto vicini
+— stesso dataset, stesso protocollo di annotazione, cambia il campo magnetico. Sui pazienti AInCP, che
+sono pediatrici e con un'altra patologia, lo zero-shot renderà molto meno e il fine-tuning sarà
+necessario. Il risultato non dice "non fare fine-tuning": dice **"non farlo con i parametri di
+default, e misura sempre il punto di partenza"**.
+
+Report: `reports/test_pretraining.md`.
+
+**Seguito, in corso.** Lo stesso fine-tuning con passo di apprendimento ridotto, due bracci a `1e-3` e
+`1e-4`, avviati il 2 settembre alle 17:30 (`scripts/run_test_finetuning_lr.sh`). La domanda è se un
+passo più prudente permetta di superare lo zero-shot invece di danneggiarlo.
 
 ---
 

@@ -196,3 +196,31 @@ class nnUNetTrainerWandb_250epochs(nnUNetTrainerWandb):
                  device: torch.device = torch.device('cuda')):
         super().__init__(plans, configuration, fold, dataset_json, device)
         self.num_epochs = 250
+
+
+# --- varianti per il fine-tuning su pochi casi -------------------------------
+#
+# Il test del pretraining (reports/test_pretraining.md) ha mostrato che partire da pesi
+# pre-addestrati e poi rimettere il passo di apprendimento a 0.01 -- il valore di un
+# addestramento completo -- su dieci soli casi **cancella** le feature pre-addestrate:
+# il modello messo a punto rende meno del modello di partenza lasciato intatto.
+#
+# Queste varianti abbassano il passo iniziale. Lo scheduler resta quello polinomiale di
+# nnU-Net, quindi il decadimento e' lo stesso: cambia solo il punto di partenza.
+
+class nnUNetTrainerWandb_250epochs_lr1e3(nnUNetTrainerWandb_250epochs):
+    """Fine-tuning prudente: passo iniziale dieci volte piu' basso del default."""
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.initial_lr = 1e-3
+
+
+class nnUNetTrainerWandb_250epochs_lr1e4(nnUNetTrainerWandb_250epochs):
+    """Fine-tuning molto prudente: cento volte piu' basso del default."""
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.initial_lr = 1e-4
