@@ -222,9 +222,40 @@ trattando le due sequenze come intercambiabili, sfrutta subito la FLAIR ma da un
 
 | stadio | dati | casi | canali | cosa impara |
 | --- | --- | --- | --- | --- |
-| 1 | ATLAS + DBB + WMH in T1 | 842 | 1 | anatomia e lesioni cavitate |
+| 1 | ATLAS + WMH in T1 | **635** | 1 | lesioni cavitate |
 | 2 | WMH con T1 e FLAIR | 79 | 2 | a usare la FLAIR |
-| 3 | AInCP | ~10 | 2 | il dominio pediatrico |
+| 3 | AInCP | ~20 | 2 | il dominio pediatrico |
+
+**Correzione allo stadio 1: 635 casi, non 842.** I 207 pediatrici di DBB erano contati quando il
+piano prevedeva ancora il modello a 7 classi. Abbandonato il multiclasse (decisione del 7 settembre),
+un pretraining sul **solo compito lesionale** non può usarli: non contengono maschere di lesione.
+Restano utilizzabili solo come pretraining su compito diverso, che è la strada non ancora misurata.
+
+**Livello 1 realizzato e verificato (7 settembre).**
+`scripts/nnunet_trainers/nnUNetTrainerEspansioneCanali.py` sostituisce la sola
+`load_pretrained_weights`, agganciandola in `__init__` così vale solo per questo trainer. Quattro
+classi: `_zero`, `_duplica` e le due varianti `_lr1e3` — sono classi distinte e non un parametro
+perché nnU-Net ricava dal nome del trainer la cartella dei risultati, e una strategia scelta a
+runtime sovrascriverebbe l'altra.
+
+Due cose scoperte scrivendolo, entrambe capaci di produrre in silenzio un esperimento sbagliato:
+
+- **i canali vanno appaiati per nome, non per indice.** In `Dataset512` il canale 0 è la **FLAIR**;
+  il filtro pre-addestrato è un filtro T1 e va nella posizione 1. I nomi del modello di partenza si
+  leggono dal checkpoint, in `init_args['dataset_json']['channel_names']`.
+- **il primo strato compare sotto quattro chiavi**, non una: `ConvDropoutNormReLU` tiene sia
+  `conv.weight` sia `all_modules.0.weight`, e il decoder referenzia l'encoder. Vanno espanse tutte,
+  o `load_state_dict` riceve due valori in conflitto per lo stesso parametro.
+
+`scripts/verifica_espansione_canali.py` prova tutto su CPU sui pesi veri di 502: 14/14, e la verifica
+che conta è l'equivalenza funzionale — a parità di T1 la rete espansa con la strategia `zero` dà la
+stessa uscita del modello a un canale, **scarto massimo 0.00e+00**, qualunque cosa ci sia nel canale
+FLAIR.
+
+**Prerequisito rimasto prima di lanciare lo stadio 2:** i piani di 502 (1 mm, patch 128³) e di 512
+(3.0×0.98×1.2, patch 64×224×128) non coincidono, e il trasferimento funziona solo fra architetture
+identiche a meno dei canali. Va imposto il piano dello stadio 1 al dataset a due canali con
+`nnUNetv2_move_plans_between_datasets`.
 
 **Il rischio.** Allo stadio 2 il canale FLAIR parte da nulla e ci sono solo 79 casi per insegnare al
 modello a servirsene. Se non bastano resta un modello a T1 con un canale inerte, cioè si torna al punto
