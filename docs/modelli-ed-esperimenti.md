@@ -101,7 +101,7 @@ sono di validation.
 | **522** | WMH skull-stripped | FLAIR | lesione | 79 | 16 | **0.7785** | ablazione: skull stripping, +0.0045 con p=0.86 |
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
 | **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | **0.603** lesione | variante D: perde poco su tutto, non guadagna nulla |
-| **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | **0.564** con pretraining, **0.451** da zero | **il test del pretraining**: il pretraining serve, la ricetta di fine-tuning no |
+| **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | **0.685** al meglio, **0.451** da zero | **il test del pretraining**: vale +0.23, ma solo con il passo di apprendimento giusto |
 
 Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -519,9 +519,28 @@ default, e misura sempre il punto di partenza"**.
 
 Report: `reports/test_pretraining.md`.
 
-**Seguito, in corso.** Lo stesso fine-tuning con passo di apprendimento ridotto, due bracci a `1e-3` e
-`1e-4`, avviati il 2 settembre alle 17:30 (`scripts/run_test_finetuning_lr.sh`). La domanda è se un
-passo più prudente permetta di superare lo zero-shot invece di danneggiarlo.
+**Il seguito, e la risposta.** Lo stesso fine-tuning con passo di apprendimento ridotto, due bracci a
+`1e-3` e `1e-4` (`scripts/run_test_finetuning_lr.sh`, conclusi il 2 settembre). Il quadro completo, sugli
+stessi 35 casi:
+
+| configurazione | Dice |
+| --- | --- |
+| da zero sui 10 casi | 0.4507 |
+| fine-tuning, passo `1e-2` (default nnU-Net) | 0.5642 |
+| fine-tuning, passo `1e-3` | 0.6419 |
+| `521` senza alcun adattamento | 0.6772 |
+| **fine-tuning, passo `1e-4`** | **0.6851** |
+
+**Il pretraining vale oltre 23 punti di Dice** rispetto all'addestramento da zero. Ma ci si arriva solo
+riducendo il passo di **cento volte**: con il default il fine-tuning *peggiorava* il modello di partenza.
+La progressione è monotona e coincide esattamente con quella dell'overfitting misurato sulle curve
+(vedi `reports/curve_training.md`): divario fra dati visti e non visti +0.534 da zero, poi +0.398,
++0.275, +0.179. Meno overfitting, migliore il risultato — la stessa grandezza vista da due lati.
+
+**Conseguenze operative per AInCP**, ed è la ricetta che useremo sui pazienti veri:
+- passo di apprendimento **`1e-4`**, non il default;
+- **budget di epoche basso**: il minimo della perdita di validation cade fra l'epoca 69 e la 128 su 250;
+- **misurare sempre il modello non adattato** come termine di paragone, perché può batterlo.
 
 ---
 

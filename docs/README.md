@@ -49,13 +49,13 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | `522` WMH skull-stripped | **0.779** | +0.0045 appaiato, **p=0.86**: nessun effetto |
 | `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
 | `531` **variante D**, tutti e tre insieme | **0.603** lesione | −0.007 su ATLAS (p=0.073) e −0.022 su WMH (p=0.10): non crolla; ma perde su tutte e 7 le classi |
-| `541` **test del pretraining** | **0.564** contro **0.451** da zero | +0.114 con **p=0.0001**: il pretraining serve. Ma lo zero-shot fa **0.677**: la ricetta di fine-tuning di default *danneggia* il modello |
+| `541` **test del pretraining** | **0.685** contro **0.451** da zero | il pretraining vale **+0.23**, ma solo con passo `1e-4`: col default (0.564) *danneggia* il modello, che senza adattamento farebbe 0.677 |
 
 ### In corso
 
-| Dataset | Domanda | Stato |
-| --- | --- | --- |
-| `541` con passo ridotto | un fine-tuning più prudente supera lo zero-shot invece di danneggiarlo? | avviato il 02/09 alle 17:30, due bracci a `1e-3` e `1e-4` |
+| Cosa | Stato |
+| --- | --- |
+| Rivalutazione dei 4 bracci di `541` con `checkpoint_best` invece dell'ultima epoca | in corso su **CPU** (le GPU sono occupate da altri utenti), `scripts/run_val_best.sh` |
 
 ### Da fare dopo
 
@@ -69,6 +69,14 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | Prova sui 2 pazienti AInCP a 3 T | in attesa dei dati |
 | Dataset privato AInCP | non ancora consegnato |
 | Stadio 2 — inpainting e gemello sano | dopo la segmentazione |
+
+### Verifiche introdotte dopo i chiarimenti del relatore (7 settembre)
+
+| verifica | script | cosa ha detto |
+| --- | --- | --- |
+| nnU-Net fa early stopping? | — | **No**: nel trainer non compaiono `early`, `patience`, `stop`. Salva però `checkpoint_best` e la validation usa `checkpoint_final` |
+| curve di training e overfitting | `analisi_curve_training.py` | modesto sui dataset grandi, **massiccio sui 10 casi** (+0.534 di divario), e si riduce al ridursi del passo |
+| **rilevamento per singola lesione** | `metriche_per_lesione.py` | su ATLAS/T1 il modello trova l'**8.7%** delle lesioni minuscole; su WMH con FLAIR il **61.9%**, con solo T1 il **20.9%** |
 
 ### Materiale per gli incontri
 
