@@ -540,7 +540,13 @@ La progressione è monotona e coincide esattamente con quella dell'overfitting m
 **Conseguenze operative per AInCP**, ed è la ricetta che useremo sui pazienti veri:
 - passo di apprendimento **`1e-4`**, non il default;
 - **budget di epoche basso**: il minimo della perdita di validation cade fra l'epoca 69 e la 128 su 250;
-- **misurare sempre il modello non adattato** come termine di paragone, perché può batterlo.
+- **misurare sempre il modello non adattato** come termine di paragone, perché può batterlo;
+- **non fidarsi di `checkpoint_best`.** Misurato il 7 settembre sul braccio da zero: rivalutando con
+  il checkpoint migliore invece dell'ultima epoca si ottiene **0.4491 contro 0.4507**, cioè nulla.
+  Il motivo è che nnU-Net lo seleziona sulla **pseudo-Dice mediata esponenzialmente**, non sulla
+  perdita di validation: quella continua a salire anche quando il modello sta peggiorando sui dati
+  non visti. Traccia la grandezza sbagliata. Un criterio di arresto vero, sulla perdita di
+  validation, va scritto nel nostro trainer — sono poche righe.
 
 ---
 
