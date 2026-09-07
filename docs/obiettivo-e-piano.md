@@ -136,12 +136,16 @@ AInCP il confronto rilevante è un altro, ed è netto: **due canali `0.753` cont
 Il problema che ne nasce è di dati: dei nostri tre dataset **solo WMH ha entrambe le sequenze**, cioè 79
 casi di sviluppo. Servono sorgenti pubbliche con T1 e FLAIR appaiati — vedi la sezione seguente.
 
-**AInCP sarà tutto a 3 T.** L'utente preferisce quindi escludere i casi a 1.5 T dai dataset pubblici per
-coerenza di dominio. La misura dice che l'esclusione **non cambia nulla in nessuna direzione**
-(+0.0093 con p=0.67 su ATLAS, e il modello solo-3 T segmenta comunque bene i 1.5 T mai visti), quindi è
-una scelta gratuita che si può fare per pulizia del disegno sperimentale — ma non va presentata come un
-miglioramento. Applicata con coerenza tocca due dataset: `Dataset521_ATLAS_3T` esiste già (511 casi
-invece di 556), e su WMH andrebbero tolti i **10 casi** `Amsterdam_GE1T5` (8 di sviluppo, 2 di test).
+**AInCP contiene anche dati a 1.5 T — chiuso: i casi a basso campo restano.** Il relatore ha chiarito il
+5 settembre che la coorte AInCP non è tutta a 3 T come si era creduto. Cade quindi l'unico argomento
+rimasto a favore dell'esclusione, che era la coerenza di dominio: la misura già diceva che escluderli non
+cambia nulla (+0.0093 con p=0.67 su ATLAS, e il modello solo-3 T segmenta comunque bene i 1.5 T mai
+visti). **Decisione: si tengono, in tutti i dataset.** `Dataset521_ATLAS_3T` resta come sorgente di
+pretraining per l'esperimento 541, non come configurazione da adottare.
+
+Nota utile: quei 45 casi si sono rivelati preziosi per una ragione imprevista. Sono l'unico gruppo che
+**nessun** modello di pretraining ha mai visto, e per questo sono diventati la coorte di simulazione del
+test 541. Escluderli all'inizio avrebbe reso quella verifica impossibile.
 
 ### Dataset pubblici con T1 e FLAIR appaiati, da valutare
 
@@ -227,6 +231,57 @@ modello a servirsene. Se non bastano resta un modello a T1 con un canale inerte,
 di partenza dopo tre training. È esattamente il rischio che la proposta A elimina: **A fornisce i dati a
 due canali che rendono affidabile lo stadio 2 di B**, e B permette di sfruttare i casi solo-T1 che A non
 può usare. Se se ne sceglie una sola: A è la più sicura, B la più economica.
+
+### Decisione del 7 settembre: si resta sul solo compito lesionale
+
+Il relatore ha osservato che «non ha molto senso lavorare su due codomini diversi», e i dati gli danno
+ragione in modo più forte di quanto ci si aspettasse: il modello unico **non produce mai entrambe le
+cose**, ha imparato a riconoscere la sorgente dell'immagine (149 casi su 151). La rete ha rifiutato da
+sola l'unione dei due compiti.
+
+**Le varianti multiclasse (D e C con `ignore`) sono quindi abbandonate.** Restano tre usi legittimi di
+DBB, in ordine di solidità:
+
+1. **banco di prova per gli strumenti** — già usato così: le sue 244 maschere cerebrali sono l'unico modo
+   che avevamo per verificare SynthStrip sulle anatomie malformate;
+2. **il secondo stadio della pipeline** — la parcellazione anatomica del gemello sano è esattamente il
+   compito per cui DBB è nato;
+3. **pretraining su compito diverso** — il più incerto, e non ancora misurato. Richiede prima di
+   spostare il piano di 502 su DBB e riaddestrarlo, perché le architetture non sono compatibili per il
+   trasferimento dei pesi (verificato: le convoluzioni trasposte hanno dimensione pari allo stride).
+
+### La ricetta di fine-tuning per AInCP, misurata
+
+Dal test 541, e da usare sui pazienti veri:
+
+| parametro | valore | perché |
+| --- | --- | --- |
+| passo di apprendimento iniziale | **`1e-4`** | col default `1e-2` il fine-tuning *peggiora* il modello di partenza (0.564 contro 0.677) |
+| epoche | **basso**, molto meno di 250 | il minimo della perdita di validation cade fra l'epoca 69 e la 128 |
+| checkpoint | `checkpoint_best`, non l'ultima epoca | nnU-Net non fa early stopping ma il checkpoint migliore lo salva |
+| termine di paragone obbligatorio | il modello **non adattato** | può battere quello adattato, ed è successo |
+
+### Loss per le lesioni piccole: cosa provare, in ordine
+
+Richiesta del relatore. Prima però il problema è stato **quantificato** con le metriche di rilevamento per
+lesione (`scripts/metriche_per_lesione.py`): su ATLAS con il solo T1 il modello trova l'**8.7%** delle
+lesioni sotto i 10 voxel. Il problema esiste ed è enorme.
+
+La letteratura che testa esattamente questo su lesioni cerebrali piccole con nnU-Net
+([arXiv 2604.08015](https://arxiv.org/html/2604.08015v2)) trova che **Tversky fa peggio del default**
+(0.7706 contro 0.7796) e Focal Tversky è sostanzialmente pari (0.7802) — *in Dice*. Ma osserva che il
+default è il peggiore sulle metriche di lesione mancata. Il guadagno non sta nel Dice, sta nel non
+perdere lesioni. Da cui: **cambiare la loss senza cambiare la metrica non mostrerebbe nulla.**
+
+Ordine proposto, dal più economico:
+
+1. **`batch_dice: true`** — una riga nel JSON del piano, nessun codice. Attualmente è `false` su tutti i
+   nostri `3d_fullres`. È pensato esattamente per annotazioni piccole e sparse.
+2. **`nnUNetTrainerDiceTopK10Loss`** — già in nnU-Net, concentra l'addestramento sui voxel difficili.
+3. **Focal Tversky** — va implementata, poche decine di righe in `compound_losses.py`.
+
+Ognuna è un training da confrontare in modo appaiato guardando **sia il Dice sia il tasso di rilevamento
+per fascia di volume**.
 
 ### Proposta C: lesioni sintetiche sui cervelli pediatrici sani di DBB
 
