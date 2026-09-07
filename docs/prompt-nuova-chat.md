@@ -59,7 +59,9 @@ Due cose confermate su AInCP, che vincolano le scelte a monte:
   - avra' T1 **e FLAIR**  -> il modello finale sara' a due canali, quindi anche il
     pretraining dovra' esserlo (nnU-Net trasferisce i pesi solo fra architetture
     identiche);
-  - i pazienti saranno **tutti a 3 tesla**.
+  - contiene **anche acquisizioni a 1.5 T**, non solo 3 T (chiarito il 5 settembre:
+    una versione precedente dei documenti diceva il contrario);
+  - arriva a scaglioni su redcap.unipi: 10 soggetti, poi altri 10. In tutto ~20.
 
 La pipeline prevista ha due stadi: (1) trovare la lesione; (2) inpainting per generare un
 "gemello sano" virtuale su cui fare la parcellazione anatomica, perche' gli strumenti
