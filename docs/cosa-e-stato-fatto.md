@@ -416,6 +416,48 @@ due significativa), ma D **perde su tutte e sette le classi**, e sui tessuti la 
 perfettamente sistematica (23 casi su 23 in cinque classi su sei). Lettura completa in
 [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md#531--variante-d-tutti-e-tre-i-dataset-in-un-modello-solo).
 
+## 21. Verifiche richieste dai chiarimenti del 5 settembre
+
+```bash
+python scripts/analisi_curve_training.py    # -> reports/curve_training.md + figures/curve_training.png
+python scripts/metriche_per_lesione.py 502 501 511 512   # -> reports/metriche_per_lesione.md
+setsid nohup bash scripts/run_val_best.sh > reports/logs/coda_val_best.log 2>&1 < /dev/null &
+```
+
+**a. nnU-Net fa early stopping?** No, verificato nel sorgente: nel `nnUNetTrainer` non compaiono `early`,
+`patience` ne' `stop`. Salva pero' `checkpoint_best.pth` sulla pseudo-dice EMA, mentre la validation
+finale usa `checkpoint_final.pth`: il meccanismo per fermarsi al punto migliore esiste, non lo usiamo.
+
+**b. Curve di training.** `analisi_curve_training.py` estrae dai log le tre serie per epoca e calcola
+epoca del minimo, risalita dopo il minimo e divario finale fra dati visti e non visti. Il log va letto
+concatenando **tutti** i file in ordine di data: un training ripreso con `--c` ne apre uno nuovo, e su
+501 leggendo solo l'ultimo mancherebbero le prime 150 epoche.
+
+Esito: overfitting modesto sui dataset grandi (su 502, 503 e 531 il minimo cade oltre il 90% delle
+epoche), evidente su 501 (minimo all'epoca 347 su 1039), **massiccio sui 10 casi di 541** con divario
++0.534, che scende monotonicamente a +0.398, +0.275, +0.179 al ridursi del passo di apprendimento.
+
+**c. Metriche di rilevamento per lesione.** Erano nel piano da settimane (`docs/training.md`, passo 7) e
+non erano mai state implementate. Etichettano le componenti connesse di riferimento e predizione con
+connettivita' a 26 vicini; una lesione conta come rilevata se almeno un voxel della predizione ci cade
+dentro. Risultato che cambia la lettura di tutto il progetto:
+
+| ingresso | minuscole (<=10 vox) | piccole (<=50) | medie | grandi | totale |
+| --- | --- | --- | --- | --- | --- |
+| WMH, FLAIR | 61.9% | 92.8% | 98.1% | 100% | 72.8% |
+| WMH, FLAIR+T1 | 59.1% | 92.8% | 100% | 100% | 71.1% |
+| WMH, solo T1 | **20.9%** | 64.9% | 86.8% | 100% | **38.2%** |
+| ATLAS, solo T1 | **8.7%** | 5.9% | 44.4% | 82.1% | 64.3% |
+
+**Corregge una nostra conclusione precedente**: avevamo riportato che il modello a due canali peggiora,
+sulla base del Dice (0.753 contro 0.774). Sul *rilevamento* i due canali sono equivalenti alla sola FLAIR
+(71.1% contro 72.8%). Non perde lesioni, perde qualche punto di contorno.
+
+**d. In corso.** Rivalutazione dei quattro bracci di 541 con `checkpoint_best` invece di
+`checkpoint_final`, su CPU perche' le GPU sono occupate da altri utenti. `--val_best` riscrive la
+cartella `validation`, quindi i risultati originali sono stati copiati in `validation_final` prima di
+lanciare.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili
@@ -430,7 +472,8 @@ perfettamente sistematica (23 casi su 23 in cinque classi su sei). Lettura compl
 | `Dataset521_ATLAS_3T` | T1 | lesione | 511 | 92 | `scripts/make_atlas_3t_dataset.py` |
 | `Dataset522_WMH_SS` | FLAIR skull-stripped | lesione | 79 | 20 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
-| `Dataset531_UNION_D` | T1 | lesione + 6 tessuti | 842 | 156 | `scripts/make_union_dataset.py` |
+| `Dataset531_UNION_D` | T1 | lesione + 6 tessuti | 842 | 156 | `scripts/make_union_dataset.py` (abbandonato il 7/09) |
+| `Dataset541_SIM_AINCP` | T1 | lesione | 45 (10 train / 35 val) | — | `scripts/make_finetuning_sim_dataset.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
 501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522, 523 e 531 in `3d_fullres`.
