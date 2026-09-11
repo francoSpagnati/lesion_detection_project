@@ -56,3 +56,12 @@ synthstrip.1.pt
 # Maschere di skull stripping: 244 NIfTI rigenerabili con
 # scripts/run_synthstrip.py. Si versionano solo il report e il CSV di metriche.
 data/processed/synthstrip/
+
+# Preprocessing AInCP: immagini N4/registrate e campi di deformazione, ~250 MB
+# per soggetto, rigenerabili con scripts/preprocess_aincp.py. Si versionano solo
+# i manifesti, che sono il verbale di che cosa ha fatto la pipeline su ogni caso.
+data/processed/AINCP/*
+data/processed/AINCP/*/*
+!data/processed/AINCP/*/
+!data/processed/AINCP/*/manifesto.json
+!data/processed/AINCP/manifesti.json
