@@ -1,0 +1,63 @@
+{
+  "soggetto": "FSM_041_MR_1_anon",
+  "roi_presenti": [
+    "ROI_1",
+    "ROI_3"
+  ],
+  "roi_nella_lesione": [
+    "ROI_1"
+  ],
+  "stadi": {
+    "0_originale_spazio_FLAIR": {
+      "voxel": 9790,
+      "ml": 1.958,
+      "componenti": 10
+    },
+    "1_spazio_T1": {
+      "voxel": 10543,
+      "ml": 1.947,
+      "componenti": 18
+    },
+    "2_spazio_MNI": {
+      "voxel": 2880,
+      "ml": 2.88,
+      "componenti": 58
+    }
+  },
+  "geometria": {
+    "T1": {
+      "shape": [
+        158,
+        512,
+        512
+      ],
+      "spacing": [
+        1.0,
+        0.4297,
+        0.4297
+      ]
+    },
+    "FLAIR": {
+      "shape": [
+        204,
+        512,
+        512
+      ],
+      "spacing": [
+        0.8,
+        0.5,
+        0.5
+      ]
+    },
+    "T1_e_FLAIR_stessa_griglia": false
+  },
+  "n4": {
+    "T1_variazione_mediana_%": 20.15,
+    "FLAIR_variazione_mediana_%": 12.76
+  },
+  "perdita": {
+    "variazione_volume_%": 47.09,
+    "componenti_perse": -48
+  },
+  "secondi": 131.4
+}
