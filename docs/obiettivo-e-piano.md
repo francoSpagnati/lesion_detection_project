@@ -28,7 +28,7 @@ Modello di riferimento: **nnU-Net 3D con deep supervision**. Ingressi previsti a
 
 Il compito finale non è nessuno dei dataset pubblici. È il dataset privato **AInCP / Stella Maris**,
 segmentato a mano dalla Dr.ssa Francy Cruz: circa **10 pazienti**, classificati con punteggio MRICS.
-Non è ancora stato consegnato.
+Il primo lotto di 10 è arrivato l'11 settembre 2026 (vedi «Il primo lotto AInCP» più sotto).
 
 Da qui segue la conseguenza più importante per il piano: **con dieci casi il pretraining non è un
 esperimento accessorio, è il meccanismo centrale del progetto.** Tutti i dataset pubblici servono a
@@ -528,11 +528,64 @@ Il confronto va fatto contro la baseline 502 **sugli stessi fold**, altrimenti l
 attribuibile al pretraining.
 
 **5. All'arrivo di AInCP:** fine-tuning dai pesi migliori, con validazione incrociata su così pochi casi
-e metriche riportate per singolo paziente, non solo in media.
+e metriche riportate per singolo paziente, non solo in media. Il lotto è arrivato: il piano concreto
+è nella sezione «Il primo lotto AInCP».
 
 **6. Stadio 2 (inpainting e gemello sano):** interamente da fare. Va dopo, perché senza una maschera di
 lesione affidabile non c'è niente da inpaintare. SynthSeg è il riferimento indicato per la parcellazione
 sul cervello virtuale.
+
+## Il primo lotto AInCP: dieci pazienti, misurati e preprocessati (11 settembre)
+
+Archivio `dataset_FSM_v1.7z`, 10 pazienti con T1 e FLAIR **originali** (defacciate) e le ROI tracciate
+sulla FLAIR. La cartella `COREGISTERED` non è coregistrata: il responsabile lo ha scritto e il notebook
+lo verifica, T1 e FLAIR non condividono la griglia in nessun soggetto. Tutto il resto del vecchio
+archivio è stato cancellato. Analisi in `notebooks/aincp_primo_lotto.ipynb`, generato da
+`scripts/costruisci_notebook_aincp.py`.
+
+**Annotazioni.** Quattro ROI: `ROI_1` gliosi (iperintensa in FLAIR), `ROI_2` cistica, `ROI_4`
+encefalomalacia, `ROI_3` **ventricolo** dell'emisfero colpito — annotato ma escluso dal bersaglio.
+La maschera è `ROI_1 ∪ ROI_2 ∪ ROI_4`. La legenda ha tre versioni; i rapporti d'intensità sulla FLAIR
+(gliosi 2.5–4.4, cistica 0.10–0.41, encefalomalacia 0.46–1.08) dicono che tutti e dieci seguono
+l'ultima. Sovrapposizioni fra ROI trascurabili (max 35 voxel lesione∩ventricolo).
+
+**Dimensioni.** Volume di lesione mediana 7.2 ml (0.5–123.5), fra ATLAS 5.3 e WMH 10.9. Delle 158
+componenti connesse, 93 (59%) stanno sotto 1 mm³ e valgono lo 0.013% del volume: scorie del tracciato
+manuale (un voxel FLAIR vale 0.2 mm³). **Serve una soglia minima dichiarata prima di misurare**;
+proposta 10 mm³ (scarta l'84% delle componenti, lo 0.06% del volume). Da confermare con il clinico.
+
+**Preprocessing** (`scripts/preprocess_aincp.py`, ANTsPy, ~2 min/soggetto, output in
+`data/processed/AINCP/`, versionati solo i `manifesto.json`): N4 → FLAIR→T1 rigida (maschere in
+nearest neighbour) → T1→MNI152NLin2009aSym SyN → maschera binaria. Trasformazioni salvate.
+
+Due misure che cambiano la decisione sullo spazio di addestramento:
+
+- **FLAIR→T1 conserva il volume ma frammenta**: la FLAIR ha fette da 0.8 mm e la T1 da 1.0, e il
+  nearest neighbour scarta una fetta ogni cinque. I tre soggetti con FLAIR già a 1.0 mm (039, 054,
+  056) non cambiano numero di componenti. Colpisce quasi solo le componenti sotto soglia.
+- **MNI ingrandisce le lesioni**: +51% mediano, fino a +106%. Non è la risoluzione (0% ricampionando
+  a 1 mm senza registrare) né la deformazione non lineare (la sola affine fa peggio). È il
+  determinante della matrice affine — fattore di volume 1.6–2.5 — perché il template è adulto e i
+  pazienti sono bambini; prevede l'aumento misurato entro 4 punti su tutti e dieci
+  (`reports/aincp_scala_mni.json`, `scripts/figura_registrazione_aincp.py`). La registrazione in sé
+  è buona (figura `registrazione_mni.png`).
+
+Conseguenze: i volumi e le metriche vanno calcolati **in spazio nativo**; nnU-Net normalizza la
+spaziatura, non lo spazio anatomico, quindi i pesi di ATLAS non richiedono MNI. **Proposta: addestrare
+nello spazio T1 nativo con la FLAIR coregistrata**, MNI solo per analisi di gruppo. Da discutere con il
+responsabile, perché il docx prevedeva MNI.
+
+**Piano di addestramento proposto** (non lanciato; GPU occupate; prima si decide lo spazio):
+input 2 canali `{0: FLAIR, 1: T1}` come Dataset512; 5 fold per paziente con 039/054/056 su fold
+diversi; nessun test set (i lotti futuri lo saranno); confronti appaiati in Dice e rilevamento
+sopra soglia in spazio nativo.
+
+| | cosa | domanda |
+| --- | --- | --- |
+| T0 | da zero, solo AInCP | riferimento da battere |
+| T1 | ATLAS 502 → espansione a 2 canali (`zero` / `duplica`) → fine-tuning | Proposta B |
+| T2 | WMH 512 (già 2 canali) → fine-tuning diretto | conta più la quantità o la modalità? |
+| T3 | come T1 con lr 1e-3 | il fine-tuning a lr pieno cancella i pesi? |
 
 ## Cosa non conviene fare
 

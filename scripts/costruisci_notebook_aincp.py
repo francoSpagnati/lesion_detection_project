@@ -71,7 +71,7 @@ FIGURE.mkdir(parents=True, exist_ok=True)
 
 # I tre fenotipi lesionali prendono i primi tre slot della palette di riferimento, che sono
 # validati su tutte le coppie; il ventricolo e' grigio perche' non e' una serie, e' escluso.
-COL = {'ROI_1': '#2a78d6', 'ROI_2': '#eb6834', 'ROI_4': '#1baf7a', 'ROI_3': '#8a8a86'}
+COL = {'ROI_1': '#2a78d6', 'ROI_2': '#eb6834', 'ROI_4': '#1baf7a', 'ROI_3': '#c3c2b7'}
 NOME = {'ROI_1': 'Iperintensità (gliosi)', 'ROI_2': 'Cistica',
         'ROI_4': 'Encefalomalacia', 'ROI_3': 'Ventricolo (escluso)'}
 LESIONE = ['ROI_1', 'ROI_2', 'ROI_4']          # ROI_3 non entra mai nella maschera
@@ -553,19 +553,30 @@ def fetta_migliore(mask):
     conteggio = mask.reshape(mask.shape[0], -1).sum(axis=1)
     return int(np.argmax(conteggio))
 
+def ritaglio(sl):
+    '''La testa occupa il centro di un campo di vista 512x512 per meta' vuoto: senza ritaglio
+    le lesioni piccole sarebbero di pochi pixel sullo schermo.'''
+    pieno = sl > np.percentile(sl[sl > 0], 5) if (sl > 0).any() else sl > 0
+    r = np.where(pieno.any(axis=1))[0]; c = np.where(pieno.any(axis=0))[0]
+    if len(r) == 0: return slice(None), slice(None)
+    m = 12
+    return (slice(max(r[0] - m, 0), r[-1] + m), slice(max(c[0] - m, 0), c[-1] + m))
+
 n = len(soggetti)
 righe_g = (n + 4) // 5
-fig, axes = plt.subplots(righe_g, 5, figsize=(15, 4.6 * righe_g),
-                         gridspec_kw={'hspace': .18, 'wspace': .04})
+fig, axes = plt.subplots(righe_g, 5, figsize=(15, 3.55 * righe_g))
+fig.subplots_adjust(left=.005, right=.995, top=.90, bottom=.07, hspace=.20, wspace=.03)
 for ax, (k, s) in zip(np.ravel(axes), soggetti.items()):
     v = np.asanyarray(nib.load(str(s['FLAIR'])).dataobj).astype(np.float32)
     z = fetta_migliore(dati[k]['lesione'])
     sl = np.rot90(v[z])
+    box = ritaglio(sl)
+    sl = sl[box]
     lo, hi = np.percentile(sl[sl > 0], [1, 99.5]) if (sl > 0).any() else (0, 1)
-    ax.imshow(sl, cmap='gray', vmin=lo, vmax=hi, interpolation='nearest')
+    ax.imshow(sl, cmap='gray', vmin=lo, vmax=hi, interpolation='nearest', aspect='equal')
     for r in ['ROI_3'] + LESIONE:                    # il ventricolo sotto, i fenotipi sopra
         if r not in dati[k]['mask']: continue
-        m = np.rot90(dati[k]['mask'][r][z])
+        m = np.rot90(dati[k]['mask'][r][z])[box]
         if not m.any(): continue
         # Il ventricolo e' scuro sulla FLAIR quanto il fondo: riempirlo di grigio lo rende
         # invisibile, e una cavita' annotata sembrerebbe non annotata. Va quindi disegnato
@@ -577,8 +588,8 @@ for ax, (k, s) in zip(np.ravel(axes), soggetti.items()):
         rgba[..., :3] = np.array([int(COL[r][i:i+2], 16) / 255 for i in (1, 3, 5)])
         rgba[..., 3] = m * 0.62
         ax.imshow(rgba, interpolation='nearest')
-    ax.set_title(f"{k.replace('_anon','')}  ·  fetta {z}  ·  {dati[k]['vol_lesione']:.1f} ml",
-                 fontsize=9, loc='left', pad=6)
+    ax.set_title(f"{k.replace('_anon','')}\nfetta {z}  ·  {dati[k]['vol_lesione']:.1f} ml",
+                 fontsize=9, loc='left', pad=5, linespacing=1.4)
     ax.axis('off')
 for ax in np.ravel(axes)[n:]:
     ax.axis('off')
@@ -586,8 +597,8 @@ manici = [plt.Line2D([], [], marker='s', ls='', ms=9, color=COL[r], label=NOME[r
           for r in LESIONE]
 manici.append(plt.Line2D([], [], ls='-', lw=1.4, color=COL['ROI_3'], label=NOME['ROI_3']))
 fig.legend(handles=manici, frameon=False, ncol=4, loc='lower center', fontsize=9.5,
-           bbox_to_anchor=(.5, .005))
-fig.suptitle('Primo lotto AInCP — maschere sulla FLAIR', x=.012, y=.995,
+           bbox_to_anchor=(.5, .0))
+fig.suptitle('Primo lotto AInCP — maschere sulla FLAIR', x=.008, y=.985,
              ha='left', fontweight='bold', fontsize=12)
 fig.savefig(FIGURE / 'panoramica_maschere.png', bbox_inches='tight')
 plt.show()

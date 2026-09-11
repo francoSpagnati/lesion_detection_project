@@ -1,0 +1,82 @@
+[
+ {
+  "soggetto": "FSM_032_MR_1_anon",
+  "fattore_volume_affine": 2.245,
+  "previsto_%": 124.5,
+  "misurato_solo_affine_%": 124.5,
+  "misurato_syn_%": 106.0,
+  "nativo_ml": 123.424
+ },
+ {
+  "soggetto": "FSM_039_MR_2_anon",
+  "fattore_volume_affine": 1.836,
+  "previsto_%": 83.6,
+  "misurato_solo_affine_%": 86.2,
+  "misurato_syn_%": 100.1,
+  "nativo_ml": 1.418
+ },
+ {
+  "soggetto": "FSM_040_MR_1_anon",
+  "fattore_volume_affine": 1.621,
+  "previsto_%": 62.1,
+  "misurato_solo_affine_%": 62.5,
+  "misurato_syn_%": 42.8,
+  "nativo_ml": 55.618
+ },
+ {
+  "soggetto": "FSM_041_MR_1_anon",
+  "fattore_volume_affine": 1.765,
+  "previsto_%": 76.5,
+  "misurato_solo_affine_%": 81.0,
+  "misurato_syn_%": 47.9,
+  "nativo_ml": 1.947
+ },
+ {
+  "soggetto": "FSM_045_MR_1_anon",
+  "fattore_volume_affine": 2.48,
+  "previsto_%": 148.0,
+  "misurato_solo_affine_%": 148.2,
+  "misurato_syn_%": 67.8,
+  "nativo_ml": 9.513
+ },
+ {
+  "soggetto": "FSM_046_MR_1_anon",
+  "fattore_volume_affine": 1.626,
+  "previsto_%": 62.6,
+  "misurato_solo_affine_%": 64.1,
+  "misurato_syn_%": 12.5,
+  "nativo_ml": 0.471
+ },
+ {
+  "soggetto": "FSM_052_MR_1_anon",
+  "fattore_volume_affine": 1.896,
+  "previsto_%": 89.6,
+  "misurato_solo_affine_%": 87.7,
+  "misurato_syn_%": 74.1,
+  "nativo_ml": 4.837
+ },
+ {
+  "soggetto": "FSM_053_MR_1_anon",
+  "fattore_volume_affine": 1.777,
+  "previsto_%": 77.7,
+  "misurato_solo_affine_%": 82.4,
+  "misurato_syn_%": 32.3,
+  "nativo_ml": 0.592
+ },
+ {
+  "soggetto": "FSM_054_MR_1_anon",
+  "fattore_volume_affine": 1.706,
+  "previsto_%": 70.6,
+  "misurato_solo_affine_%": 70.0,
+  "misurato_syn_%": 55.6,
+  "nativo_ml": 33.773
+ },
+ {
+  "soggetto": "FSM_056_MR_1_anon",
+  "fattore_volume_affine": 1.752,
+  "previsto_%": 75.2,
+  "misurato_solo_affine_%": 75.0,
+  "misurato_syn_%": 42.2,
+  "nativo_ml": 12.505
+ }
+]
