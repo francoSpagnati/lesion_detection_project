@@ -1,0 +1,566 @@
+{
+ "dataset": "Dataset541_SIM_AINCP",
+ "run": "nnUNetTrainerWandb_250epochs_lr1e3__nnUNetPlans__3d_fullres",
+ "fold": [
+  0
+ ],
+ "soglia_mm3": 10.0,
+ "classe": 1,
+ "casi": [
+  {
+   "caso": "sub-r029s004",
+   "lesioni": [
+    {
+     "mm3": 340.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 21755.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 20.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 131.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 184.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 50.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 213.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r029s010",
+   "lesioni": [
+    {
+     "mm3": 395.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 178.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 412.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r039s002",
+   "lesioni": [
+    {
+     "mm3": 2810.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r039s003",
+   "lesioni": [
+    {
+     "mm3": 918.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 0,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s001",
+   "lesioni": [
+    {
+     "mm3": 1096.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 321.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s002",
+   "lesioni": [
+    {
+     "mm3": 777.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 271.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s004",
+   "lesioni": [
+    {
+     "mm3": 225.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 83.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 483.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1500.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s008",
+   "lesioni": [
+    {
+     "mm3": 8207.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 90.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 269.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 696.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s011",
+   "lesioni": [
+    {
+     "mm3": 11443.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1729.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s013",
+   "lesioni": [
+    {
+     "mm3": 4585.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s015",
+   "lesioni": [
+    {
+     "mm3": 127857.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s016",
+   "lesioni": [
+    {
+     "mm3": 25213.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s022",
+   "lesioni": [
+    {
+     "mm3": 2192.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s028",
+   "lesioni": [
+    {
+     "mm3": 238005.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s030",
+   "lesioni": [
+    {
+     "mm3": 359826.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s032",
+   "lesioni": [
+    {
+     "mm3": 130660.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s037",
+   "lesioni": [
+    {
+     "mm3": 373955.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s039",
+   "lesioni": [
+    {
+     "mm3": 29253.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s042",
+   "lesioni": [
+    {
+     "mm3": 60267.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1155.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 291.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s044",
+   "lesioni": [
+    {
+     "mm3": 275322.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s045",
+   "lesioni": [
+    {
+     "mm3": 3183.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s046",
+   "lesioni": [
+    {
+     "mm3": 170.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 217.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s049",
+   "lesioni": [
+    {
+     "mm3": 9586.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s054",
+   "lesioni": [
+    {
+     "mm3": 7053.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s056",
+   "lesioni": [
+    {
+     "mm3": 1067.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s059",
+   "lesioni": [
+    {
+     "mm3": 3838.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 76716.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s063",
+   "lesioni": [
+    {
+     "mm3": 284.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 214.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1047.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s067",
+   "lesioni": [
+    {
+     "mm3": 221027.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s069",
+   "lesioni": [
+    {
+     "mm3": 72786.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s072",
+   "lesioni": [
+    {
+     "mm3": 46756.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s075",
+   "lesioni": [
+    {
+     "mm3": 30419.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 30649.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s076",
+   "lesioni": [
+    {
+     "mm3": 194642.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s078",
+   "lesioni": [
+    {
+     "mm3": 6439.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 18.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s085",
+   "lesioni": [
+    {
+     "mm3": 162.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 0,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s086",
+   "lesioni": [
+    {
+     "mm3": 297067.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  }
+ ]
+}

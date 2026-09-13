@@ -442,21 +442,66 @@ non erano mai state implementate. Etichettano le componenti connesse di riferime
 connettivita' a 26 vicini; una lesione conta come rilevata se almeno un voxel della predizione ci cade
 dentro. Risultato che cambia la lettura di tutto il progetto:
 
-| ingresso | minuscole (<=10 vox) | piccole (<=50) | medie | grandi | totale |
+| ingresso | minuscole (<=10 mm³) | piccole (<=50) | medie (<=200) | grandi | totale |
 | --- | --- | --- | --- | --- | --- |
-| WMH, FLAIR | 61.9% | 92.8% | 98.1% | 100% | 72.8% |
-| WMH, FLAIR+T1 | 59.1% | 92.8% | 100% | 100% | 71.1% |
-| WMH, solo T1 | **20.9%** | 64.9% | 86.8% | 100% | **38.2%** |
+| WMH, FLAIR | 45.2% | 75.4% | 95.4% | 98.7% | 72.8% |
+| WMH, FLAIR+T1 | 43.4% | 72.0% | 97.7% | 100% | 71.1% |
+| WMH, solo T1 | **11.9%** | 31.2% | 73.3% | 93.4% | **38.2%** |
 | ATLAS, solo T1 | **8.7%** | 5.9% | 44.4% | 82.1% | 64.3% |
+
+Le fasce sono in **mm³** dal 13 settembre (prima erano in voxel: su ATLAS coincidono, su WMH un voxel
+vale 3.5 mm³ e le fasce vecchie erano tre volte e mezzo più larghe). I totali non cambiano; le righe per
+fascia sì, e la conclusione qualitativa resta identica.
 
 **Corregge una nostra conclusione precedente**: avevamo riportato che il modello a due canali peggiora,
 sulla base del Dice (0.753 contro 0.774). Sul *rilevamento* i due canali sono equivalenti alla sola FLAIR
 (71.1% contro 72.8%). Non perde lesioni, perde qualche punto di contorno.
 
-**d. In corso.** Rivalutazione dei quattro bracci di 541 con `checkpoint_best` invece di
-`checkpoint_final`, su CPU perche' le GPU sono occupate da altri utenti. `--val_best` riscrive la
-cartella `validation`, quindi i risultati originali sono stati copiati in `validation_final` prima di
-lanciare.
+**d. Rivalutazione con `checkpoint_best`** (conclusa l'8 settembre, letta solo il 13). `--val_best`
+riscrive la cartella `validation`, quindi i risultati originali stanno in `validation_final`. Da zero
+0.4507 → 0.4491; fine-tuning a passo `1e-2` 0.5642 → **0.6763**; `1e-3` 0.6419 → 0.6624; `1e-4`
+0.6851 → 0.6873. Corregge la lettura del 7 settembre, fatta sul solo braccio da zero: il criterio
+di nnU-Net **vede** l'overfitting del fine-tuning e recupera undici punti dove il passo e' sbagliato.
+Dettaglio in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
+
+## 22. Primo lotto AInCP e preparazione del training (11-13 settembre)
+
+```bash
+python scripts/costruisci_notebook_aincp.py && jupyter nbconvert --execute --inplace notebooks/aincp_primo_lotto.ipynb
+ITK_GLOBAL_DEFAULT_NUMBER_OF_THREADS=24 python scripts/preprocess_aincp.py     # ~2 min/paziente
+python scripts/figura_registrazione_aincp.py                                  # -> reports/aincp_scala_mni.json
+python scripts/make_aincp_dataset.py && nnUNetv2_extract_fingerprint -d 504
+nnUNetv2_move_plans_between_datasets -s 502 -t 504 -sp nnUNetPlans -tp nnUNetPlansDa502   # + 3 correzioni a mano
+nnUNetv2_preprocess -d 504 -plans_name nnUNetPlansDa502 -c 3d_fullres
+python scripts/make_aincp_dataset.py --solo-split
+```
+
+**a. I dati.** Dieci pazienti, T1 e FLAIR originali non allineate, ROI sulla FLAIR; `COREGISTERED`
+e' un nome fuorviante. Bersaglio = ROI_1 ∪ ROI_2 ∪ ROI_4, ventricolo (ROI_3) escluso. Le misure
+stanno nel notebook e in [obiettivo-e-piano.md](obiettivo-e-piano.md): mediana 7.2 ml, 59% delle
+componenti sotto 1 mm³ per lo 0.013% del volume, legenda confermata dai rapporti d'intensita'.
+
+**b. Preprocessing** (`preprocess_aincp.py`, ANTsPy): N4 → FLAIR→T1 rigida → T1→MNI SyN → maschera
+binaria. Due misure: FLAIR→T1 frammenta le lesioni sottili (fette 0.8 → 1.0 mm), MNI le **ingrandisce**
+(+51% mediano) perche' il template e' adulto — il determinante dell'affine lo prevede entro 4 punti.
+Decisione: si addestra in spazio T1 nativo.
+
+**c. Dataset504 e piano.** Il piano di 502 trasferito su 504 richiede tre correzioni a mano per il
+secondo canale (documentate in `make_aincp_dataset.py`). Il ricampionamento a 1 mm conserva il
+volume ma spezza le componenti (≥10 mm³: da 29 a 48): le metriche si calcolano sulla griglia originale.
+
+**d. Tre strumenti per il training vero** (13 settembre):
+- `metriche_per_lesione.py`: fasce in **mm³**, `--soglia-mm3` simmetrica, `--fold all`, `--trainer`,
+  JSON per caso in `reports/lesioni_per_caso/`. Il report per 501/502/511/512 e' stato rigenerato:
+  cambiano le righe per fascia su WMH, non i totali.
+- `nnUNetTrainerWandb.pazienza_val`: arresto sulla perdita di validazione, `checkpoint_val_best`,
+  `checkpoint_final` = epoca migliore, ultima epoca in `checkpoint_ultima_epoca`. Tre classi con
+  pazienza 50: `nnUNetTrainerWandb_250ep_arresto50` (T0) e le due `EspansioneCanali_*_250ep_lr1e4_arresto50`.
+  Provato a CPU con epoche minuscole.
+- `confronto_fold.py`: unisce i fold in una predizione fuori-fold per paziente e confronta due
+  trainer appaiati in Dice e rilevamento. Provato su 541 (`lr1e3` contro `lr1e4`).
+
+Nessun training lanciato: le quattro GPU sono occupate da altri utenti dall'11 settembre.
 
 ---
 
@@ -474,6 +519,7 @@ lanciare.
 | `Dataset523_ATLAS_SS` | T1 skull-stripped | lesione | 556 | 99 | `scripts/make_skullstripped_datasets.py` |
 | `Dataset531_UNION_D` | T1 | lesione + 6 tessuti | 842 | 156 | `scripts/make_union_dataset.py` (abbandonato il 7/09) |
 | `Dataset541_SIM_AINCP` | T1 | lesione | 45 (10 train / 35 val) | — | `scripts/make_finetuning_sim_dataset.py` |
+| `Dataset504_AINCP` | FLAIR + T1, spazio T1 nativo | lesione | 10 (5 fold) | — (i lotti futuri) | `scripts/make_aincp_dataset.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
 501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522, 523 e 531 in `3d_fullres`.

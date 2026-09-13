@@ -541,12 +541,27 @@ La progressione è monotona e coincide esattamente con quella dell'overfitting m
 - passo di apprendimento **`1e-4`**, non il default;
 - **budget di epoche basso**: il minimo della perdita di validation cade fra l'epoca 69 e la 128 su 250;
 - **misurare sempre il modello non adattato** come termine di paragone, perché può batterlo;
-- **non fidarsi di `checkpoint_best`.** Misurato il 7 settembre sul braccio da zero: rivalutando con
-  il checkpoint migliore invece dell'ultima epoca si ottiene **0.4491 contro 0.4507**, cioè nulla.
-  Il motivo è che nnU-Net lo seleziona sulla **pseudo-Dice mediata esponenzialmente**, non sulla
-  perdita di validation: quella continua a salire anche quando il modello sta peggiorando sui dati
-  non visti. Traccia la grandezza sbagliata. Un criterio di arresto vero, sulla perdita di
-  validation, va scritto nel nostro trainer — sono poche righe.
+- **`checkpoint_best` protegge dall'overfitting del fine-tuning, non da quello da zero.** La
+  rivalutazione dei quattro bracci con `--val_best` (`scripts/run_val_best.sh`, conclusa l'8
+  settembre; i risultati originali stanno in `validation_final/`, quelli con `checkpoint_best` in
+  `validation/`) dice:
+
+  | braccio | ultima epoca | `checkpoint_best` | differenza |
+  | --- | --- | --- | --- |
+  | da zero | 0.4507 | 0.4491 | −0.002 |
+  | fine-tuning, passo `1e-2` | 0.5642 | **0.6763** | **+0.112** |
+  | fine-tuning, passo `1e-3` | 0.6419 | 0.6624 | +0.021 |
+  | fine-tuning, passo `1e-4` | 0.6851 | 0.6873 | +0.002 |
+
+  **Questo corregge quanto scritto il 7 settembre**, quando era stato letto il solo braccio da
+  zero («0.4491 contro 0.4507, cioè nulla») e se ne era concluso che il criterio di nnU-Net —
+  la pseudo-Dice mediata esponenzialmente — traccia la grandezza sbagliata. Sul braccio da zero
+  è vero perché il modello non diventa mai buono, e il migliore coincide con l'ultimo. Sul
+  fine-tuning con il passo di default il checkpoint migliore **recupera undici punti** e riporta
+  il modello quasi al livello del non adattato (0.6772): l'overfitting c'è, ma la pseudo-Dice lo
+  vede. Con il passo `1e-4` il minimo e l'ultima epoca quasi coincidono, quindi la ricetta resta
+  la stessa; ma il criterio di arresto è una protezione in più che costa niente, ed è stato
+  scritto (vedi sotto).
 
 ---
 
@@ -570,6 +585,34 @@ La progressione è monotona e coincide esattamente con quella dell'overfitting m
    confronti appaiati, caso per caso.
 
 ## Quarta parte: cosa non è ancora stato addestrato
+
+### 504 — i dieci pazienti AInCP: T0, T1, T1' (pronti, in attesa di una GPU)
+
+`Dataset504_AINCP` (`scripts/make_aincp_dataset.py`): spazio T1 nativo, due canali `{0: FLAIR,
+1: T1}`, label ROI_1+ROI_2+ROI_4, piano `nnUNetPlansDa502` trasferito da 502 (1 mm, patch 128³) con
+le tre correzioni per canale documentate nello script, split a 5 fold per paziente fissato a mano e
+versionato. Coda: `scripts/run_aincp_504.sh <fold>`.
+
+| sigla | trainer | pesi di partenza | variabile isolata |
+| --- | --- | --- | --- |
+| **T1** | `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50` | 502, canale FLAIR a zero | — (è la Proposta B) |
+| **T0** | `nnUNetTrainerWandb_250ep_arresto50` | nessuno | il pretraining |
+| **T1'** | `nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50` | 502, filtro duplicato | l'inizializzazione del canale nuovo |
+
+Tutti: 250 epoche, passo `1e-4` per i due di espansione e default per T0, e **arresto sulla perdita
+di validazione** con pazienza 50 (`nnUNetTrainerWandb.pazienza_val`): a ogni miglioramento si salva
+`checkpoint_val_best.pth`; dopo 50 epoche senza miglioramento il training si ferma;
+`checkpoint_final.pth` — quello su cui nnU-Net esegue la validazione — riceve i pesi dell'epoca
+migliore, e l'ultima epoca resta in `checkpoint_ultima_epoca.pth`. Restano quindi confrontabili tre
+scelte del checkpoint: ultima epoca, `checkpoint_best` di nnU-Net (pseudo-Dice), minimo della
+perdita di validazione. Verificato a CPU con epoche minuscole (`pazienza_val = 1`): si ferma, i file
+esistono, `checkpoint_final` coincide con `checkpoint_val_best` e non con l'ultima epoca.
+
+La valutazione: `scripts/metriche_per_lesione.py 504 --trainer <nome> --fold all --soglia-mm3 10`
+(fasce in mm³, soglia simmetrica su riferimento e predizione, griglia originale) e
+`scripts/confronto_fold.py 504 <base> <variante>`, che unisce i cinque fold in dieci predizioni
+fuori-fold, una per paziente, e le confronta appaiate in Dice e in rilevamento. Con dieci coppie il
+p di Wilcoxon non scende sotto 0.002 nemmeno se tutte concordano: contano le coppie e le grandezze.
 
 | Modello | Domanda | Stato |
 | --- | --- | --- |

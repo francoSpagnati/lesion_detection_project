@@ -8,6 +8,8 @@
 #   T1  espansione da ATLAS (502), canale FLAIR a zero, 250 epoche, passo 1e-4   <- Proposta B
 #   T0  da zero, stesso piano e stesso budget di epoche                            <- riferimento
 #   T1' come T1 ma con il filtro duplicato sui due canali
+# Tutti e tre con l'arresto sulla perdita di validazione (pazienza 50 epoche): checkpoint_final
+# riceve i pesi dell'epoca migliore, l'ultima epoca resta in checkpoint_ultima_epoca.pth.
 # Tutti sul piano nnUNetPlansDa502 (1 mm, patch 128^3), che e' quello di 502: il trasferimento
 # dei pesi funziona solo fra architetture identiche a meno dei canali. Una sola variabile cambia
 # fra T1 e T0 (il pretraining) e fra T1 e T1' (l'inizializzazione del canale nuovo).
@@ -38,7 +40,7 @@ lancia() {   # trainer, [pesi]
     return 0
 }
 
-lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4 "$PESI"
-lancia nnUNetTrainerWandb_250epochs
-lancia nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4 "$PESI"
+lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50 "$PESI"
+lancia nnUNetTrainerWandb_250ep_arresto50
+lancia nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50 "$PESI"
 echo "[$(date +%H:%M)] coda fold $FOLD finita"

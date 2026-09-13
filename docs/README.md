@@ -55,7 +55,7 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 
 | Cosa | Stato |
 | --- | --- |
-| Rivalutazione dei 4 bracci di `541` con `checkpoint_best` invece dell'ultima epoca | in corso su **CPU** (le GPU sono occupate da altri utenti), `scripts/run_val_best.sh` |
+| Training su `504` AInCP: T0, T1 (Proposta B), T1' — `scripts/run_aincp_504.sh` | **pronti, in attesa di una GPU libera** (dal 11/9 tutte e quattro occupate al 100%) |
 
 ### Da fare dopo
 
@@ -66,17 +66,18 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
-| Prova sui 2 pazienti AInCP a 3 T | in attesa dei dati |
-| Dataset privato AInCP | non ancora consegnato |
+| Stadio 2 della Proposta B: WMH a due canali con i pesi espansi, prima di AInCP | da decidere dopo il primo giro su 504 |
+| Modality dropout (uso del modello con un solo canale) | variabile a sé, dopo la prima catena |
+| Dataset privato AInCP | **primo lotto arrivato l'11/9**: 10 pazienti, analizzati e preprocessati (`notebooks/aincp_primo_lotto.ipynb`) |
 | Stadio 2 — inpainting e gemello sano | dopo la segmentazione |
 
 ### Verifiche introdotte dopo i chiarimenti del relatore (7 settembre)
 
 | verifica | script | cosa ha detto |
 | --- | --- | --- |
-| nnU-Net fa early stopping? | — | **No**: nel trainer non compaiono `early`, `patience`, `stop`. Salva però `checkpoint_best` e la validation usa `checkpoint_final` |
+| nnU-Net fa early stopping? | — | **No**. Il suo `checkpoint_best` (pseudo-Dice) recupera però **+0.112** sul fine-tuning a passo default di `541` e nulla sul braccio da zero. Dal 13/9 il trainer del progetto ha l'arresto sulla perdita di validazione (`pazienza_val`) |
 | curve di training e overfitting | `analisi_curve_training.py` | modesto sui dataset grandi, **massiccio sui 10 casi** (+0.534 di divario), e si riduce al ridursi del passo |
-| **rilevamento per singola lesione** | `metriche_per_lesione.py` | su ATLAS/T1 il modello trova l'**8.7%** delle lesioni minuscole; su WMH con FLAIR il **61.9%**, con solo T1 il **20.9%** |
+| **rilevamento per singola lesione** | `metriche_per_lesione.py` | su ATLAS/T1 il modello trova l'**8.7%** delle lesioni sotto 10 mm³; su WMH con FLAIR il **45.2%**, con solo T1 l'**11.9%** (fasce in mm³ dal 13/9; totali invariati: 72.8% e 38.2%) |
 
 ### Materiale per gli incontri
 

@@ -146,7 +146,7 @@ Quello che questi numeri stabiliscono:
    la 128: il budget di epoche va tenuto basso.
 6. **L'overfitting sui pochi casi è massiccio**: divario fra dati visti e non visti +0.534 da zero,
    poi +0.398, +0.275, +0.179 al ridursi del passo — la stessa progressione dei Dice.
-7. Su ATLAS con il solo T1: delle 23 lesioni sotto i 10 voxel il modello ne trova 2 (8.7%); sopra i
+7. Su ATLAS con il solo T1: delle 23 lesioni sotto i 10 mm³ il modello ne trova 2 (8.7%); sopra i
    200 voxel l'82.1%; in totale 64.3% con 1.1 falsi positivi per caso.
 8. **SynthStrip** (skull stripping) funziona ma taglia il liquido nei ventricoli dilatati; la perdita
    di lesione da ritaglio è nulla su WMH e sotto il 6.5% nel caso peggiore su ATLAS.

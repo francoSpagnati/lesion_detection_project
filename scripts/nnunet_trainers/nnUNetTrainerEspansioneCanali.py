@@ -292,10 +292,14 @@ class nnUNetTrainerEspansioneCanali_duplica_lr1e3(nnUNetTrainerEspansioneCanali_
 # Il test 541 (docs/modelli-ed-esperimenti.md) ha misurato sui dieci casi simulati che il
 # fine-tuning rende solo con passo 1e-4 -- cento volte sotto il default -- e che il minimo
 # della perdita di validazione cade fra l'epoca 69 e la 128 su 250. Queste due classi sono
-# quella ricetta applicata al trainer di espansione: 250 epoche, passo 1e-4. Il riferimento
-# da zero con lo stesso budget e' nnUNetTrainerWandb_250epochs, sullo stesso piano.
+# quella ricetta applicata al trainer di espansione: 250 epoche, passo 1e-4, e l'arresto
+# sulla perdita di validazione di nnUNetTrainerWandb (pazienza 50 epoche: il minimo cadeva
+# fra la 69 e la 128, e con due soli casi di validazione la curva e' rumorosa). Il riferimento
+# da zero con lo stesso budget e lo stesso arresto e' nnUNetTrainerWandb_250ep_arresto50.
 
-class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4(nnUNetTrainerEspansioneCanali_zero):
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50(nnUNetTrainerEspansioneCanali_zero):
+    pazienza_val = 50
+
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
                  device: torch.device = torch.device('cuda')):
         super().__init__(plans, configuration, fold, dataset_json, device)
@@ -303,7 +307,9 @@ class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4(nnUNetTrainerEspansioneCana
         self.initial_lr = 1e-4
 
 
-class nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4(nnUNetTrainerEspansioneCanali_duplica):
+class nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50(nnUNetTrainerEspansioneCanali_duplica):
+    pazienza_val = 50
+
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
                  device: torch.device = torch.device('cuda')):
         super().__init__(plans, configuration, fold, dataset_json, device)

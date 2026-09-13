@@ -296,7 +296,7 @@ Dal test 541, e da usare sui pazienti veri:
 
 Richiesta del relatore. Prima però il problema è stato **quantificato** con le metriche di rilevamento per
 lesione (`scripts/metriche_per_lesione.py`): su ATLAS con il solo T1 il modello trova l'**8.7%** delle
-lesioni sotto i 10 voxel. Il problema esiste ed è enorme.
+lesioni sotto i 10 mm³ (un voxel di ATLAS vale 1 mm³). Il problema esiste ed è enorme.
 
 La letteratura che testa esattamente questo su lesioni cerebrali piccole con nnU-Net
 ([arXiv 2604.08015](https://arxiv.org/html/2604.08015v2)) trova che **Tversky fa peggio del default**
@@ -580,12 +580,23 @@ input 2 canali `{0: FLAIR, 1: T1}` come Dataset512; 5 fold per paziente con 039/
 diversi; nessun test set (i lotti futuri lo saranno); confronti appaiati in Dice e rilevamento
 sopra soglia in spazio nativo.
 
-| | cosa | domanda |
-| --- | --- | --- |
-| T0 | da zero, solo AInCP | riferimento da battere |
-| T1 | ATLAS 502 → espansione a 2 canali (`zero` / `duplica`) → fine-tuning | Proposta B |
-| T2 | WMH 512 (già 2 canali) → fine-tuning diretto | conta più la quantità o la modalità? |
-| T3 | come T1 con lr 1e-3 | il fine-tuning a lr pieno cancella i pesi? |
+| | cosa | trainer | domanda |
+| --- | --- | --- | --- |
+| T0 | da zero, solo AInCP | `nnUNetTrainerWandb_250ep_arresto50` | riferimento da battere |
+| T1 | ATLAS 502 → espansione a 2 canali, FLAIR a zero → fine-tuning | `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50` | **Proposta B** |
+| T1' | come T1 con il filtro duplicato | `..._duplica_250ep_lr1e4_arresto50` | l'inizializzazione conta? |
+| T2 | WMH 512 (già 2 canali) → fine-tuning diretto | da scrivere | conta più la quantità o la modalità? |
+
+Il 13 settembre il responsabile ha scelto la Proposta B. `Dataset504_AINCP` è costruito e
+preprocessato (`scripts/make_aincp_dataset.py`), la coda è `scripts/run_aincp_504.sh <fold>`; tutto
+è pronto e fermo solo per le GPU. Tre strumenti scritti per il training vero:
+`metriche_per_lesione.py` con fasce in mm³, soglia simmetrica e fold uniti; l'arresto sulla perdita
+di validazione nel trainer (`pazienza_val`, 50 epoche); `confronto_fold.py` per il confronto
+appaiato sulle dieci predizioni fuori-fold. Dettagli in `docs/modelli-ed-esperimenti.md`.
+
+**Ancora da decidere**: lo stadio 2 su WMH prima di AInCP (farlo dopo il primo giro, se la FLAIR
+resta inerte); la conferma clinica della soglia 10 mm³; il modality dropout, che serve se si vuole
+davvero usare il modello con un solo canale — l'espansione da sola non lo garantisce.
 
 ## Cosa non conviene fare
 

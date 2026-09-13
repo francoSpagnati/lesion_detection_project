@@ -1,0 +1,3615 @@
+{
+ "dataset": "Dataset501_WMH",
+ "run": "nnUNetTrainerWandb__nnUNetPlans__3d_fullres",
+ "fold": [
+  0
+ ],
+ "soglia_mm3": 0.0,
+ "classe": 1,
+ "casi": [
+  {
+   "caso": "Amsterdam_GE1T5_156",
+   "lesioni": [
+    {
+     "mm3": 188.90844345092773,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.67253303527832,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.33626651763916,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.05897760391235,
+     "rilevata": true
+    },
+    {
+     "mm3": 510.0527973175049,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": true
+    },
+    {
+     "mm3": 212.5219988822937,
+     "rilevata": true
+    },
+    {
+     "mm3": 51.94982194900513,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.05897760391235,
+     "rilevata": true
+    },
+    {
+     "mm3": 18.890844345092773,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": true
+    },
+    {
+     "mm3": 165.29488801956177,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": false
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": false
+    },
+    {
+     "mm3": 23.613555431365967,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.16813325881958,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.16813325881958,
+     "rilevata": true
+    },
+    {
+     "mm3": 330.58977603912354,
+     "rilevata": true
+    },
+    {
+     "mm3": 170.01759910583496,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": false
+    },
+    {
+     "mm3": 75.5633773803711,
+     "rilevata": true
+    },
+    {
+     "mm3": 217.2447099685669,
+     "rilevata": true
+    },
+    {
+     "mm3": 18.890844345092773,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.16813325881958,
+     "rilevata": false
+    },
+    {
+     "mm3": 37.78168869018555,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.05897760391235,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.445422172546387,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.722711086273193,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 26,
+   "voxel_mm3": 4.722711086273193,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_100",
+   "lesioni": [
+    {
+     "mm3": 80.86248421669006,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 66.79944348335266,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 112.50432586669922,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": false
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 130.08312678337097,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 358.60753870010376,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 165.24072861671448,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 200.39833045005798,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 137.11464715003967,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 411.343941450119,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 397.2809007167816,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 355.0917785167694,
+     "rilevata": true
+    },
+    {
+     "mm3": 101.95704531669617,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": false
+    },
+    {
+     "mm3": 140.63040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 175.78800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 42.18912220001221,
+     "rilevata": false
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 63.28368330001831,
+     "rilevata": true
+    },
+    {
+     "mm3": 70.31520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 344.54449796676636,
+     "rilevata": true
+    },
+    {
+     "mm3": 147.66192770004272,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 854.3297245502472,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 63.28368330001831,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": false
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 341.028737783432,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 101.95704531669617,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 81,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_104",
+   "lesioni": [
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 6665.881307601929,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 66.79944348335266,
+     "rilevata": true
+    },
+    {
+     "mm3": 214.46137118339539,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 137.11464715003967,
+     "rilevata": true
+    },
+    {
+     "mm3": 165.24072861671448,
+     "rilevata": true
+    },
+    {
+     "mm3": 6778.385633468628,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 161.72496843338013,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 140.63040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 284.7765748500824,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 650.4156339168549,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 207.42985081672668,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 137.11464715003967,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 362.1232988834381,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 358.60753870010376,
+     "rilevata": true
+    },
+    {
+     "mm3": 6599.081864118576,
+     "rilevata": true
+    },
+    {
+     "mm3": 636.3525931835175,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": false
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 4194.30189871788,
+     "rilevata": true
+    },
+    {
+     "mm3": 116.02008605003357,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": false
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 119.53584623336792,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.76792311668396,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 9,
+   "componenti_predette": 82,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_113",
+   "lesioni": [
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 133.59888696670532,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 9126.913435935974,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 232.04017210006714,
+     "rilevata": true
+    },
+    {
+     "mm3": 112.50432586669922,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 235.5559322834015,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 66.79944348335266,
+     "rilevata": true
+    },
+    {
+     "mm3": 277.7450544834137,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 87.89400458335876,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 137.11464715003967,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.76792311668396,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 94.92552495002747,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 130.08312678337097,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.76792311668396,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 10223.830613136292,
+     "rilevata": true
+    },
+    {
+     "mm3": 63.28368330001831,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 98.44128513336182,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 161.72496843338013,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 281.26081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.73640275001526,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.76792311668396,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": false
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 6,
+   "componenti_predette": 81,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_115",
+   "lesioni": [
+    {
+     "mm3": 421.89122200012207,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 105.47280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 794.5618014335632,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 1286.7682271003723,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 42.18912220001221,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 105.47280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 66.79944348335266,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 9,
+   "componenti_predette": 44,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_116",
+   "lesioni": [
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 467.5961043834686,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 168.75648880004883,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 91.40976476669312,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": false
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 664.4786746501923,
+     "rilevata": true
+    },
+    {
+     "mm3": 172.27224898338318,
+     "rilevata": true
+    },
+    {
+     "mm3": 91.40976476669312,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 56.25216293334961,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 73.83096385002136,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 10,
+   "componenti_predette": 38,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_121",
+   "lesioni": [
+    {
+     "mm3": 123.05160641670227,
+     "rilevata": true
+    },
+    {
+     "mm3": 4507.204555034637,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.76792311668396,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 281.26081466674805,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 316.41841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 84.37824440002441,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": false
+    },
+    {
+     "mm3": 98.44128513336182,
+     "rilevata": false
+    },
+    {
+     "mm3": 3111.4477622509003,
+     "rilevata": true
+    },
+    {
+     "mm3": 239.07169246673584,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 84.37824440002441,
+     "rilevata": true
+    },
+    {
+     "mm3": 42.18912220001221,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 249.6189730167389,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 63.28368330001831,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 32,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_123",
+   "lesioni": [
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 358.60753870010376,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 305.8711359500885,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 101.95704531669617,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 284.7765748500824,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 646.8998737335205,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": false
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 19,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Amsterdam_GE3T_126",
+   "lesioni": [
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 2359.0750830173492,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 84.37824440002441,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 7340.907262802124,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.673362016677856,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 42.18912220001221,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.610321283340454,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.126081466674805,
+     "rilevata": false
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": false
+    },
+    {
+     "mm3": 3860.304681301117,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 295.32385540008545,
+     "rilevata": true
+    },
+    {
+     "mm3": 70.31520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.22064256668091,
+     "rilevata": true
+    },
+    {
+     "mm3": 42.18912220001221,
+     "rilevata": true
+    },
+    {
+     "mm3": 45.70488238334656,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 101.95704531669617,
+     "rilevata": true
+    },
+    {
+     "mm3": 1262.1579058170319,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": false
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 7.031520366668701,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.641841650009155,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.578800916671753,
+     "rilevata": false
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 21.094561100006104,
+     "rilevata": true
+    },
+    {
+     "mm3": 10.547280550003052,
+     "rilevata": false
+    },
+    {
+     "mm3": 330.48145723342896,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.063040733337402,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    },
+    {
+     "mm3": 94.92552495002747,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.5157601833343506,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 6,
+   "componenti_predette": 38,
+   "voxel_mm3": 3.5157601833343506,
+   "fold": 0
+  },
+  {
+   "caso": "Singapore_56",
+   "lesioni": [
+    {
+     "mm3": 20.99999165534973,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": true
+    },
+    {
+     "mm3": 7190.9971425533295,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 95.99996185302734,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 26.99998927116394,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": true
+    },
+    {
+     "mm3": 302.99987959861755,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 29.999988079071045,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.9999988079071045,
+     "rilevata": false
+    },
+    {
+     "mm3": 8261.996716976166,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.99998450279236,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": true
+    },
+    {
+     "mm3": 65.9999737739563,
+     "rilevata": true
+    },
+    {
+     "mm3": 26.99998927116394,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.999997615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.999996423721313,
+     "rilevata": true
+    },
+    {
+     "mm3": 20.99999165534973,
+     "rilevata": true
+    },
+    {
+     "mm3": 26.99998927116394,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.999994039535522,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.999992847442627,
+     "rilevata": true
+    },
+    {
+     "mm3": 20.99999165534973,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.99997615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 26.99998927116394,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.999985694885254,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 16,
+   "componenti_predette": 39,
+   "voxel_mm3": 2.9999988079071045,
+   "fold": 0
+  },
+  {
+   "caso": "Singapore_58",
+   "lesioni": [
+    {
+     "mm3": 14.999991655349731,
+     "rilevata": true
+    },
+    {
+     "mm3": 41.99997663497925,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": false
+    },
+    {
+     "mm3": 65.99996328353882,
+     "rilevata": true
+    },
+    {
+     "mm3": 26.999984979629517,
+     "rilevata": true
+    },
+    {
+     "mm3": 17.999989986419678,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.9999783039093,
+     "rilevata": true
+    },
+    {
+     "mm3": 776.9995677471161,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999996662139893,
+     "rilevata": false
+    },
+    {
+     "mm3": 89.99994993209839,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": true
+    },
+    {
+     "mm3": 191.99989318847656,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.999979972839355,
+     "rilevata": true
+    },
+    {
+     "mm3": 59.999966621398926,
+     "rilevata": true
+    },
+    {
+     "mm3": 140.99992156028748,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.999993324279785,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.9999983310699463,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.9999783039093,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.999996662139893,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 15,
+   "voxel_mm3": 2.9999983310699463,
+   "fold": 0
+  },
+  {
+   "caso": "Singapore_60",
+   "lesioni": [
+    {
+     "mm3": 27.000002145767212,
+     "rilevata": true
+    },
+    {
+     "mm3": 72.0000057220459,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.000001907348633,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.000001907348633,
+     "rilevata": true
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 9297.000738859177,
+     "rilevata": true
+    },
+    {
+     "mm3": 378.00003004074097,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.000002145767212,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.000002145767212,
+     "rilevata": false
+    },
+    {
+     "mm3": 39.00000309944153,
+     "rilevata": true
+    },
+    {
+     "mm3": 48.000003814697266,
+     "rilevata": true
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 18.000001430511475,
+     "rilevata": false
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 45.00000357627869,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.000001668930054,
+     "rilevata": false
+    },
+    {
+     "mm3": 33.00000262260437,
+     "rilevata": false
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 6.000000476837158,
+     "rilevata": false
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 10374.000824451447,
+     "rilevata": true
+    },
+    {
+     "mm3": 6.000000476837158,
+     "rilevata": false
+    },
+    {
+     "mm3": 9.000000715255737,
+     "rilevata": false
+    },
+    {
+     "mm3": 111.00000882148743,
+     "rilevata": false
+    },
+    {
+     "mm3": 201.0000159740448,
+     "rilevata": true
+    },
+    {
+     "mm3": 39.00000309944153,
+     "rilevata": true
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 15.000001192092896,
+     "rilevata": false
+    },
+    {
+     "mm3": 21.000001668930054,
+     "rilevata": true
+    },
+    {
+     "mm3": 279.00002217292786,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.000000238418579,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.000000715255737,
+     "rilevata": false
+    },
+    {
+     "mm3": 54.000004291534424,
+     "rilevata": true
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 48.000003814697266,
+     "rilevata": true
+    },
+    {
+     "mm3": 12.000000953674316,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 11,
+   "componenti_predette": 38,
+   "voxel_mm3": 3.000000238418579,
+   "fold": 0
+  },
+  {
+   "caso": "Utrecht_0",
+   "lesioni": [
+    {
+     "mm3": 16.531245231628418,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286452770233154,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020830154418945,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.04166030883789,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.57290554046631,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": false
+    },
+    {
+     "mm3": 30.3072829246521,
+     "rilevata": true
+    },
+    {
+     "mm3": 46.83852815628052,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.593735694885254,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.81769800186157,
+     "rilevata": true
+    },
+    {
+     "mm3": 44.08332061767578,
+     "rilevata": true
+    },
+    {
+     "mm3": 6959.654242515564,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.552075386047363,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020830154418945,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.796867847442627,
+     "rilevata": true
+    },
+    {
+     "mm3": 517.9790172576904,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531245231628418,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 27.552075386047363,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531245231628418,
+     "rilevata": true
+    },
+    {
+     "mm3": 498.6925644874573,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": true
+    },
+    {
+     "mm3": 74.39060354232788,
+     "rilevata": true
+    },
+    {
+     "mm3": 228.68222570419312,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776037693023682,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020830154418945,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020830154418945,
+     "rilevata": true
+    },
+    {
+     "mm3": 88.16664123535156,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": false
+    },
+    {
+     "mm3": 35.81769800186157,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286452770233154,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 60.6145658493042,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776037693023682,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": true
+    },
+    {
+     "mm3": 12618.850526809692,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.593735694885254,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531245231628418,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 49.593735694885254,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.57290554046631,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531245231628418,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 35.81769800186157,
+     "rilevata": false
+    },
+    {
+     "mm3": 1013.916374206543,
+     "rilevata": true
+    },
+    {
+     "mm3": 206.64056539535522,
+     "rilevata": false
+    },
+    {
+     "mm3": 118.47392416000366,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": false
+    },
+    {
+     "mm3": 93.67705631256104,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286452770233154,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062490463256836,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020830154418945,
+     "rilevata": true
+    },
+    {
+     "mm3": 60.6145658493042,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 104.69788646697998,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.593735694885254,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 27.552075386047363,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062490463256836,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776037693023682,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776037693023682,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510415077209473,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552075386047363,
+     "rilevata": false
+    },
+    {
+     "mm3": 220.4166030883789,
+     "rilevata": true
+    },
+    {
+     "mm3": 195.61973524093628,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.796867847442627,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265622615814209,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 57,
+   "voxel_mm3": 2.7552075386047363,
+   "fold": 0
+  },
+  {
+   "caso": "Utrecht_11",
+   "lesioni": [
+    {
+     "mm3": 30.30730390548706,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531256675720215,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.041675567626953,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286466121673584,
+     "rilevata": true
+    },
+    {
+     "mm3": 143.2708911895752,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.348979473114014,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.55209445953369,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.55209445953369,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.755209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776047229766846,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776047229766846,
+     "rilevata": false
+    },
+    {
+     "mm3": 195.6198706626892,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265628337860107,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020837783813477,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.755209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020837783813477,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.041675567626953,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.796885013580322,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.041675567626953,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.55209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.041675567626953,
+     "rilevata": true
+    },
+    {
+     "mm3": 305.828248500824,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531256675720215,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020837783813477,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.755209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 121.22921562194824,
+     "rilevata": false
+    },
+    {
+     "mm3": 41.32814168930054,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286466121673584,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776047229766846,
+     "rilevata": false
+    },
+    {
+     "mm3": 44.083351135253906,
+     "rilevata": true
+    },
+    {
+     "mm3": 52.348979473114014,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020837783813477,
+     "rilevata": false
+    },
+    {
+     "mm3": 595.1252403259277,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265628337860107,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 90.92191171646118,
+     "rilevata": false
+    },
+    {
+     "mm3": 30.30730390548706,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.755209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776047229766846,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.755209445953369,
+     "rilevata": false
+    },
+    {
+     "mm3": 27.55209445953369,
+     "rilevata": true
+    },
+    {
+     "mm3": 66.12502670288086,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265628337860107,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265628337860107,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": false
+    },
+    {
+     "mm3": 30.30730390548706,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.8177227973938,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776047229766846,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531256675720215,
+     "rilevata": false
+    },
+    {
+     "mm3": 33.06251335144043,
+     "rilevata": true
+    },
+    {
+     "mm3": 30.30730390548706,
+     "rilevata": true
+    },
+    {
+     "mm3": 55.10418891906738,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510418891906738,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 39,
+   "voxel_mm3": 2.755209445953369,
+   "fold": 0
+  },
+  {
+   "caso": "Utrecht_31",
+   "lesioni": [
+    {
+     "mm3": 74.39062285423279,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286457777023315,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776041269302368,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": true
+    },
+    {
+     "mm3": 28447.52522110939,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 129.49478793144226,
+     "rilevata": true
+    },
+    {
+     "mm3": 71.63541460037231,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 854.1145586967468,
+     "rilevata": true
+    },
+    {
+     "mm3": 30.30729079246521,
+     "rilevata": true
+    },
+    {
+     "mm3": 121.22916316986084,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286457777023315,
+     "rilevata": false
+    },
+    {
+     "mm3": 44.08333206176758,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776041269302368,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776041269302368,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 523.48956823349,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 41.328123807907104,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.552082538604736,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 413.28123807907104,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 63.369789838790894,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 104.697913646698,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 96.43228888511658,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 41.328123807907104,
+     "rilevata": true
+    },
+    {
+     "mm3": 74.39062285423279,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.796874284744263,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.57291555404663,
+     "rilevata": true
+    },
+    {
+     "mm3": 143.27082920074463,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286457777023315,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062499046325684,
+     "rilevata": true
+    },
+    {
+     "mm3": 34401.530257701874,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": true
+    },
+    {
+     "mm3": 77.14583110809326,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": true
+    },
+    {
+     "mm3": 90.92187237739563,
+     "rilevata": true
+    },
+    {
+     "mm3": 126.73957967758179,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.286457777023315,
+     "rilevata": false
+    },
+    {
+     "mm3": 71.63541460037231,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": true
+    },
+    {
+     "mm3": 187.3541612625122,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 129.49478793144226,
+     "rilevata": true
+    },
+    {
+     "mm3": 96.43228888511658,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062499046325684,
+     "rilevata": true
+    },
+    {
+     "mm3": 30.30729079246521,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776041269302368,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062499046325684,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 99.18749713897705,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.552082538604736,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": true
+    },
+    {
+     "mm3": 49.593748569488525,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 71.63541460037231,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": true
+    },
+    {
+     "mm3": 88.16666412353516,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.062499046325684,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531249523162842,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.020833015441895,
+     "rilevata": false
+    },
+    {
+     "mm3": 22.04166603088379,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": true
+    },
+    {
+     "mm3": 27.552082538604736,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776041269302368,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.510416507720947,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552082538604736,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265624761581421,
+     "rilevata": false
+    },
+    {
+     "mm3": 132.24999618530273,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 83,
+   "voxel_mm3": 2.7552082538604736,
+   "fold": 0
+  },
+  {
+   "caso": "Utrecht_33",
+   "lesioni": [
+    {
+     "mm3": 13.776042461395264,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 13.776042461395264,
+     "rilevata": true
+    },
+    {
+     "mm3": 126.73959064483643,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552084922790527,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.57291889190674,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833969116211,
+     "rilevata": true
+    },
+    {
+     "mm3": 33.06250190734863,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 99.1875057220459,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.28645944595337,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": true
+    },
+    {
+     "mm3": 154.29167556762695,
+     "rilevata": true
+    },
+    {
+     "mm3": 60.61458683013916,
+     "rilevata": true
+    },
+    {
+     "mm3": 68.88021230697632,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552084922790527,
+     "rilevata": true
+    },
+    {
+     "mm3": 1438.2188329696655,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776042461395264,
+     "rilevata": false
+    },
+    {
+     "mm3": 30.30729341506958,
+     "rilevata": false
+    },
+    {
+     "mm3": 68.88021230697632,
+     "rilevata": true
+    },
+    {
+     "mm3": 181.84376049041748,
+     "rilevata": true
+    },
+    {
+     "mm3": 57.85937833786011,
+     "rilevata": true
+    },
+    {
+     "mm3": 13.776042461395264,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.57291889190674,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833969116211,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 41.32812738418579,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.817710399627686,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552084922790527,
+     "rilevata": false
+    },
+    {
+     "mm3": 19.28645944595337,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 796.2552542686462,
+     "rilevata": true
+    },
+    {
+     "mm3": 35.817710399627686,
+     "rilevata": true
+    },
+    {
+     "mm3": 82.65625476837158,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": false
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.28645944595337,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.7552084922790527,
+     "rilevata": false
+    },
+    {
+     "mm3": 38.57291889190674,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.265625476837158,
+     "rilevata": false
+    },
+    {
+     "mm3": 27.552084922790527,
+     "rilevata": true
+    },
+    {
+     "mm3": 19.28645944595337,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.7552084922790527,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.5104169845581055,
+     "rilevata": false
+    },
+    {
+     "mm3": 44.083335876464844,
+     "rilevata": true
+    },
+    {
+     "mm3": 11.020833969116211,
+     "rilevata": false
+    },
+    {
+     "mm3": 27.552084922790527,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.041667938232422,
+     "rilevata": true
+    },
+    {
+     "mm3": 16.531250953674316,
+     "rilevata": false
+    },
+    {
+     "mm3": 24.796876430511475,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 49,
+   "voxel_mm3": 2.7552084922790527,
+   "fold": 0
+  }
+ ]
+}
