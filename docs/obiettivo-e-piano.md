@@ -549,10 +549,16 @@ La maschera è `ROI_1 ∪ ROI_2 ∪ ROI_4`. La legenda ha tre versioni; i rappor
 (gliosi 2.5–4.4, cistica 0.10–0.41, encefalomalacia 0.46–1.08) dicono che tutti e dieci seguono
 l'ultima. Sovrapposizioni fra ROI trascurabili (max 35 voxel lesione∩ventricolo).
 
-**Dimensioni.** Volume di lesione mediana 7.2 ml (0.5–123.5), fra ATLAS 5.3 e WMH 10.9. Delle 158
-componenti connesse, 93 (59%) stanno sotto 1 mm³ e valgono lo 0.013% del volume: scorie del tracciato
-manuale (un voxel FLAIR vale 0.2 mm³). **Serve una soglia minima dichiarata prima di misurare**;
-proposta 10 mm³ (scarta l'84% delle componenti, lo 0.06% del volume). Da confermare con il clinico.
+**Dimensioni.** Volume di lesione mediana 7.2 ml (0.5–123.5), fra ATLAS 5.3 e WMH 10.9. Le componenti
+connesse sono **65** con la connettività a 26 vicini, quella di `metriche_per_lesione.py` (con quella a
+6, il default di scipy, sarebbero 158: una lesione sottile e obliqua si spezza). Di queste, 42 (65%)
+stanno sotto 10 mm³ e valgono lo 0.03% del volume.
+
+**Nessuna soglia, per ora** (decisione del 14 settembre): `figura_lesioni_piccole.py` misura che le
+componenti minuscole di gliosi, anche da un solo voxel, hanno intensità FLAIR 2.3–4.4 volte il tessuto
+sano, cioè il segnale di una lesione vera e non di rumore. Solo 3 componenti su 65 cadono dove
+l'immagine ha il livello dell'aria, fuori dal cervello. La soglia resta una domanda per il clinico, con
+le due figure in mano.
 
 **Preprocessing** (`scripts/preprocess_aincp.py`, ANTsPy, ~2 min/soggetto, output in
 `data/processed/AINCP/`, versionati solo i `manifesto.json`): N4 → FLAIR→T1 rigida (maschere in

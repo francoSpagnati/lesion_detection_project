@@ -1,0 +1,227 @@
+{
+ "totale_componenti": 65,
+ "fasce": [
+  {
+   "fascia": "< 1 mm³",
+   "componenti": 22,
+   "volume_ml": 0.008,
+   "intensita_mediana": 0.689,
+   "quota_sopra_1": 0.455
+  },
+  {
+   "fascia": "1 – 10 mm³",
+   "componenti": 20,
+   "volume_ml": 0.0711,
+   "intensita_mediana": 3.138,
+   "quota_sopra_1": 0.95
+  },
+  {
+   "fascia": "10 – 100 mm³",
+   "componenti": 8,
+   "volume_ml": 0.3209,
+   "intensita_mediana": 3.462,
+   "quota_sopra_1": 1.0
+  },
+  {
+   "fascia": "> 100 mm³",
+   "componenti": 15,
+   "volume_ml": 243.8885,
+   "intensita_mediana": 3.106,
+   "quota_sopra_1": 0.733
+  }
+ ],
+ "per_paziente": {
+  "FSM_032": {
+   "componenti": 11,
+   "sotto_1mm3": 8,
+   "sotto_10mm3": 10
+  },
+  "FSM_040": {
+   "componenti": 11,
+   "sotto_1mm3": 2,
+   "sotto_10mm3": 9
+  },
+  "FSM_045": {
+   "componenti": 2,
+   "sotto_1mm3": 1,
+   "sotto_10mm3": 1
+  },
+  "FSM_056": {
+   "componenti": 7,
+   "sotto_1mm3": 2,
+   "sotto_10mm3": 3
+  },
+  "FSM_054": {
+   "componenti": 14,
+   "sotto_1mm3": 8,
+   "sotto_10mm3": 12
+  },
+  "FSM_041": {
+   "componenti": 6,
+   "sotto_1mm3": 1,
+   "sotto_10mm3": 3
+  },
+  "FSM_039": {
+   "componenti": 2,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 1
+  },
+  "FSM_052": {
+   "componenti": 5,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 2
+  },
+  "FSM_053": {
+   "componenti": 5,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 1
+  },
+  "FSM_046": {
+   "componenti": 2,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 0
+  }
+ },
+ "esempi_mostrati": [
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.3145666122436523
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.3089812397956848
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.3581322729587555
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.8734734058380127
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.17835865914821625
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.025245755910873413
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.0
+  },
+  {
+   "paziente": "FSM_040",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.017558187246322632
+  },
+  {
+   "paziente": "FSM_040",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_4",
+   "intensita_rapporto": 0.6395467519760132
+  },
+  {
+   "paziente": "FSM_045",
+   "mm3": 0.20000000298023224,
+   "voxel": 1,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 0.003926878795027733
+  },
+  {
+   "paziente": "FSM_056",
+   "mm3": 0.2197723686695099,
+   "voxel": 1,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 0.5247524976730347
+  },
+  {
+   "paziente": "FSM_056",
+   "mm3": 0.4395447373390198,
+   "voxel": 2,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 3.504950523376465
+  },
+  {
+   "paziente": "FSM_054",
+   "mm3": 0.4395470917224884,
+   "voxel": 2,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 3.1157586574554443
+  },
+  {
+   "paziente": "FSM_054",
+   "mm3": 0.6593206375837326,
+   "voxel": 3,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.5272374153137207
+  },
+  {
+   "paziente": "FSM_054",
+   "mm3": 1.098867729306221,
+   "voxel": 5,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 3.0
+  },
+  {
+   "paziente": "FSM_039",
+   "mm3": 1.5384152382612228,
+   "voxel": 7,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.592219114303589
+  },
+  {
+   "paziente": "FSM_054",
+   "mm3": 2.197735458612442,
+   "voxel": 10,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.8657586574554443
+  },
+  {
+   "paziente": "FSM_041",
+   "mm3": 2.2000000327825546,
+   "voxel": 11,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 3.632183790206909
+  },
+  {
+   "paziente": "FSM_041",
+   "mm3": 4.000000059604645,
+   "voxel": 20,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 3.1666667461395264
+  },
+  {
+   "paziente": "FSM_032",
+   "mm3": 5.200000077486038,
+   "voxel": 26,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 2.5574917793273926
+  }
+ ]
+}

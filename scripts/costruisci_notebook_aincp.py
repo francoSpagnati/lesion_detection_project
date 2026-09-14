@@ -402,9 +402,16 @@ co(r"""
 FASCE = [('< 1 mm³', 0, 1), ('1 - 10 mm³', 1, 10),
          ('10 - 100 mm³', 10, 100), ('> 100 mm³', 100, np.inf)]
 
+# Connettivita' a 26 vicini: due voxel che si toccano anche solo per uno spigolo sono la stessa
+# lesione. E' la stessa scelta di scripts/metriche_per_lesione.py, e i due conteggi devono
+# coincidere o non sarebbero confrontabili. Con la connettivita' a 6 (il default di
+# ndimage.label) le stesse dieci maschere danno 158 componenti invece di 65: una lesione
+# sottile e obliqua si spezza in tanti frammenti che sembrano lesioni minuscole distinte.
+STRUTTURA = np.ones((3, 3, 3), dtype=bool)
+
 conteggi = {}
 for k in soggetti:
-    et, n = ndimage.label(dati[k]['lesione'])
+    et, n = ndimage.label(dati[k]['lesione'], structure=STRUTTURA)
     # dimensione di ogni componente in mm cubi, non in voxel
     dim = (np.bincount(et.ravel())[1:] * dati[k]['ml_voxel'] * 1000.0) if n else np.array([])
     conteggi[k] = {'n': int(n), 'dim': dim,
@@ -452,7 +459,7 @@ ax.set_ylim(0, 108)
 ax.grid(axis='y', color=GRIGLIA, lw=.8)
 ax.set_axisbelow(True)
 ax.legend(frameon=False, loc='lower right', fontsize=8.5)
-ax.set_title('La maggior parte delle componenti è più piccola di un millimetro cubo',
+ax.set_title('Due terzi delle componenti stanno sotto i dieci millimetri cubi',
              loc='left', fontweight='bold', pad=14)
 fig.tight_layout()
 fig.savefig(FIGURE / 'dimensioni_lesioni.png', bbox_inches='tight')
@@ -460,22 +467,46 @@ plt.show()
 """)
 
 md(r"""
-### Che cosa dice quella tabella
+### Che cosa dice quella tabella, e che cosa non dice
 
-Le due colonne vanno lette insieme, perché dicono cose opposte. **Per numero** la maggior parte
-delle componenti è sotto il millimetro cubo; **per volume** quelle stesse componenti non valgono
-quasi nulla, mentre una manciata di lesioni grandi contiene quasi tutto.
+Le due colonne vanno lette insieme, perché dicono cose opposte. **Per numero** due terzi delle
+componenti stanno sotto i dieci millimetri cubi; **per volume** quelle stesse componenti non
+valgono quasi nulla (0.08 ml su 244), mentre quindici lesioni grandi contengono tutto il resto.
 
-Una componente da 0.2 mm³ è **un singolo voxel** del tracciato manuale. Componenti così non sono
-lesioni: sono scorie del disegno a mano, e vanno trattate di conseguenza.
+Verrebbe da concludere che le componenti minuscole siano imprecisioni del disegno a mano, e che
+convenga scartarle. **La misura dice il contrario**, ed è il motivo per cui questa conclusione è
+stata verificata invece che assunta: `scripts/figura_lesioni_piccole.py` guarda una per una le
+componenti sotto i 10 mm³, e per ciascuna misura l'intensità sulla FLAIR rispetto al tessuto sano
+dello stesso paziente — lo stesso rapporto della sezione 5. Le componenti di gliosi, **anche
+quelle da un solo voxel**, stanno quasi tutte fra 2.3 e 4.4: hanno il segnale di una lesione vera,
+non del rumore. Solo tre componenti su 65 in tutto il lotto cadono dove l'immagine ha il livello
+dell'aria, cioè fuori dal cervello, e quelle sì sono errori di tracciato.
 
-- **Per le metriche di rilevamento serve una soglia minima.** Contare ogni voxel isolato come una
-  lesione mancata renderebbe il tasso di rilevamento su AInCP incomparabile con quello misurato su
-  WMH e ATLAS, e dominato dal rumore di annotazione invece che dal bersaglio clinico.
-- **Anche per l'addestramento conviene filtrarle**, perché insegnano alla rete a produrre voxel
-  isolati, che è il difetto opposto a quello che ci interessa.
-- La soglia va **scelta una volta e dichiarata**, non aggiustata guardando i risultati.
+Quindi, per ora, **nessuna soglia: tutto ciò che è annotato conta come lesione.** La scelta è
+conservativa e va dichiarata prima di misurare, non aggiustata dopo. Resta una domanda per il
+clinico, alla quale la figura degli esempi serve a rispondere guardando: un singolo voxel
+iperintenso in mezzo a sostanza bianca normale è una lesione da trovare, o la punta di qualcosa
+che sulla sua risoluzione non si vede? Se la risposta fosse «ignorabile», la soglia si introduce
+allora, una volta, e si rimisura tutto.
+""")
 
+md(r"""
+### Una scelta che cambia i numeri: come si contano le componenti
+
+Due voxel che si toccano solo per uno spigolo sono la stessa lesione o due lesioni? Con la
+connettività a **6 vicini** (solo le facce, il default di `scipy`) le dieci maschere danno **158**
+componenti; con quella a **26 vicini** (facce, spigoli e angoli) ne danno **65**. Il volume totale
+è identico: cambia solo quanti pezzi si conta.
+
+Qui si usa **26**, per due ragioni. Una lesione sottile e obliqua, disegnata a mano su fette da
+0.8 mm, con la connettività a 6 si spezza in tanti frammenti che sembrerebbero lesioni minuscole
+distinte — e la sezione precedente le conterebbe come tali. E soprattutto è la stessa scelta di
+`scripts/metriche_per_lesione.py`, che è lo strumento con cui misureremo quante lesioni il modello
+trova: se i due conteggi usassero convenzioni diverse, il numeratore e il denominatore del tasso
+di rilevamento verrebbero da due definizioni di «lesione».
+""")
+
+md(r"""
 ## 7. Quanto costerebbe portare le maschere nello spazio della T1
 
 La domanda della sezione 2, con un numero. Si simula il percorso `FLAIR → T1` applicando alla
@@ -497,7 +528,7 @@ for k, s in soggetti.items():
     rip = affine_transform(m, M[:3, :3], offset=M[:3, 3], output_shape=t1.shape,
                            order=0, mode='constant', cval=0) > 0
     n_pre = conteggi[k]['n']
-    n_post = int(ndimage.label(rip)[1])
+    n_post = int(ndimage.label(rip, structure=STRUTTURA)[1])
     v_pre = dati[k]['vol_lesione']
     v_post = float(rip.sum()) * float(np.prod(t1.header.get_zooms()[:3])) / 1000.0
     dv = 100.0 * (v_post - v_pre) / v_pre if v_pre else 0.0

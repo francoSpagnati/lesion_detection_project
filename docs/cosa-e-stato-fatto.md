@@ -478,8 +478,9 @@ python scripts/make_aincp_dataset.py --solo-split
 
 **a. I dati.** Dieci pazienti, T1 e FLAIR originali non allineate, ROI sulla FLAIR; `COREGISTERED`
 e' un nome fuorviante. Bersaglio = ROI_1 ∪ ROI_2 ∪ ROI_4, ventricolo (ROI_3) escluso. Le misure
-stanno nel notebook e in [obiettivo-e-piano.md](obiettivo-e-piano.md): mediana 7.2 ml, 59% delle
-componenti sotto 1 mm³ per lo 0.013% del volume, legenda confermata dai rapporti d'intensita'.
+stanno nel notebook e in [obiettivo-e-piano.md](obiettivo-e-piano.md): mediana 7.2 ml, 65 componenti
+connesse (26 vicini) di cui 42 sotto i 10 mm³ per lo 0.03% del volume, legenda confermata dai
+rapporti d'intensita'.
 
 **b. Preprocessing** (`preprocess_aincp.py`, ANTsPy): N4 → FLAIR→T1 rigida → T1→MNI SyN → maschera
 binaria. Due misure: FLAIR→T1 frammenta le lesioni sottili (fette 0.8 → 1.0 mm), MNI le **ingrandisce**
@@ -490,7 +491,19 @@ Decisione: si addestra in spazio T1 nativo.
 secondo canale (documentate in `make_aincp_dataset.py`). Il ricampionamento a 1 mm conserva il
 volume ma spezza le componenti (≥10 mm³: da 29 a 48): le metriche si calcolano sulla griglia originale.
 
-**d. Tre strumenti per il training vero** (13 settembre):
+**d. Le componenti piccole non sono rumore** (14 settembre, `scripts/figura_lesioni_piccole.py`).
+Due correzioni in una. Primo, il conteggio: il notebook usava la connettivita' a **6 vicini** (il
+default di scipy) e `metriche_per_lesione.py` quella a **26**; le stesse maschere davano 158
+componenti contro 65. Il volume e' identico, cambia quanti pezzi si conta, e con 6 vicini una
+lesione sottile e obliqua si spezza in frammenti che sembrano lesioni minuscole distinte. Ora si usa
+26 ovunque. Secondo, la sostanza: misurando l'intensita' FLAIR di ogni componente rispetto al tessuto
+sano, quelle di gliosi **anche da un solo voxel** stanno fra 2.3 e 4.4 volte, cioe' hanno il segnale
+di una lesione vera. Solo 3 componenti su 65 cadono dove l'immagine ha il livello dell'aria, fuori
+dal cervello. **Corregge quanto scritto il 13 settembre** («scorie del disegno a mano»): quella
+lettura veniva dal conteggio, non dall'immagine. Decisione: **nessuna soglia**, tutto cio' che e'
+annotato conta come lesione, in attesa del parere del clinico sulle due figure.
+
+**e. Tre strumenti per il training vero** (13 settembre):
 - `metriche_per_lesione.py`: fasce in **mm³**, `--soglia-mm3` simmetrica, `--fold all`, `--trainer`,
   JSON per caso in `reports/lesioni_per_caso/`. Il report per 501/502/511/512 e' stato rigenerato:
   cambiano le righe per fascia su WMH, non i totali.

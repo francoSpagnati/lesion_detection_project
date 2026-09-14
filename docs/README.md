@@ -55,7 +55,7 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP: T0, T1 (Proposta B), T1' — `scripts/run_aincp_504.sh` | **pronti, in attesa di una GPU libera** (dal 11/9 tutte e quattro occupate al 100%) |
+| Training su `504` AInCP: T0, T1 (Proposta B), T1' — `scripts/attendi_gpu_e_lancia.sh` | **in corso dal 14/9**: fold 0 e 1 in parallelo sulle GPU 2 e 3, condivise con un altro utente |
 
 ### Da fare dopo
 
