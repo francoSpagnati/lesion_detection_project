@@ -30,12 +30,18 @@ lancia() {   # trainer, [pesi]
         echo "[$(date +%H:%M)] $TR fold $FOLD: gia' completato, salto."; return 0
     fi
     local gpu; gpu=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits -i "$CUDA_VISIBLE_DEVICES")
-    if [ "$gpu" -gt 30000 ]; then echo "[$(date +%H:%M)] STOP: GPU $CUDA_VISIBLE_DEVICES occupata (${gpu}MiB)"; exit 1; fi
+    # SOGLIA_MEM: memoria oltre la quale la scheda si considera occupata. 30 GB per default;
+    # 60 GB quando si e' deciso di condividere la scheda con il job di un altro utente.
+    if [ "$gpu" -gt "${SOGLIA_MEM:-30000}" ]; then echo "[$(date +%H:%M)] STOP: GPU $CUDA_VISIBLE_DEVICES occupata (${gpu}MiB)"; exit 1; fi
     echo "[$(date +%H:%M)] avvio $TR fold $FOLD ${W:+(pesi: 502)}"
     df -h /home | tail -1
     nnUNetv2_train 504 3d_fullres "$FOLD" --npz -tr "$TR" -p nnUNetPlansDa502 \
         ${W:+-pretrained_weights "$W"} >> "reports/logs/train_504_${TR}_fold${FOLD}.log" 2>&1
     local rc=$?; echo "[$(date +%H:%M)] $TR fold $FOLD: codice $rc"
+    # Codice 127 = comando non trovato: un problema di ambiente, non del training. Va detto
+    # esplicitamente perche' il sintomo (un fold che "fallisce" subito) e' identico a quello di
+    # un errore vero, e la coda esterna lo ritenterebbe all'infinito.
+    [ "$rc" -eq 127 ] && echo "AMBIENTE: nnUNetv2_train non e' nel PATH (manca il venv?)"
     [ "$rc" -ne 0 ] && { echo "STOP: $TR fallito"; exit 1; }
     return 0
 }

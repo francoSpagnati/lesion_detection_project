@@ -18,6 +18,12 @@ cd /home/ccantini/lesion_detection_project || exit 1
 source scripts/env.sh
 MAX_GPU="${MAX_GPU:-2}"
 INTERVALLO="${INTERVALLO:-300}"
+# Soglie per considerare una scheda disponibile. Con i default (5 GB, 20%) si aspetta una
+# scheda del tutto libera. Il 13 settembre l'utente ha deciso di condividere le schede con il
+# job dell'altro utente (~50 GB su 80 per scheda): SOGLIA_MEM=60000 SOGLIA_UTIL=101.
+SOGLIA_MEM="${SOGLIA_MEM:-5000}"
+SOGLIA_UTIL="${SOGLIA_UTIL:-20}"
+export SOGLIA_MEM
 PRIMO_TRAINER=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50
 
 log() { echo "[$(date '+%d/%m %H:%M')] $*"; }
@@ -25,24 +31,47 @@ log() { echo "[$(date '+%d/%m %H:%M')] $*"; }
 fold_iniziato() { [ -d "$nnUNet_results/Dataset504_AINCP/${PRIMO_TRAINER}__nnUNetPlansDa502__3d_fullres/fold_$1" ]; }
 fold_finito()   { grep -q "coda fold $1 finita" "reports/logs/coda_504_fold$1.log" 2>/dev/null; }
 fold_in_corso() { pgrep -f "run_aincp_504.sh $1\$" >/dev/null; }
+# Un fold che e' fallito non va ritentato: se fallisce, fallisce per un motivo che il tempo non
+# cambia. La notte del 13 settembre la coda ha rilanciato lo stesso fold ogni tredici minuti per
+# diciassette ore perche' `nnUNetv2_train` non era nel PATH, e nessuno se ne e' accorto fino al
+# mattino. Per riprovare dopo aver corretto il problema si cancella il log del fold.
+fold_fallito()  { grep -q "^STOP: .* fallito" "reports/logs/coda_504_fold$1.log" 2>/dev/null; }
 
-gpu_libere() {
-    # indice delle schede con poca memoria usata e poco carico; le schede su cui ho appena
-    # lanciato qualcosa vengono escluse dal chiamante
-    nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader,nounits \
-      | awk -F', *' '$2 < 5000 && $3 < 20 {print $1}'
+gpu_nostre() {
+    # schede su cui gira gia' un nostro fold: l'ultima assegnazione di ogni fold in corso
+    for f in 0 1 2 3 4; do
+        fold_in_corso "$f" || continue
+        grep "^fold $f ->" reports/logs/coda_504_assegnazioni.log 2>/dev/null | tail -1 \
+          | sed 's/.*GPU \([0-9]*\).*/\1/'
+    done
 }
 
-log "in attesa di una GPU libera (max $MAX_GPU in parallelo, controllo ogni ${INTERVALLO}s)"
+gpu_libere() {
+    # indice delle schede sotto le soglie, dalla meno carica alla piu' carica, escluse quelle
+    # su cui gira gia' un nostro fold (una scheda, un fold)
+    local nostre; nostre=$(gpu_nostre | tr '\n' ' ')
+    nvidia-smi --query-gpu=index,memory.used,utilization.gpu --format=csv,noheader,nounits \
+      | awk -F', *' -v m="$SOGLIA_MEM" -v u="$SOGLIA_UTIL" '$2 < m && $3 < u {print $2, $1}' \
+      | sort -n | awk -v n=" $nostre " '{ if (index(n, " " $2 " ") == 0) print $2 }'
+}
+
+log "in attesa di una GPU disponibile (max $MAX_GPU in parallelo, soglie ${SOGLIA_MEM} MiB / ${SOGLIA_UTIL}%, controllo ogni ${INTERVALLO}s)"
 while :; do
-    da_fare=()
+    da_fare=(); falliti=0
     for f in 0 1 2 3 4; do
         fold_finito "$f" && continue
+        fold_fallito "$f" && { falliti=$((falliti + 1)); continue; }
         fold_in_corso "$f" && continue
         da_fare+=("$f")
     done
     if [ "${#da_fare[@]}" -eq 0 ]; then
-        log "tutti i fold sono finiti o in corso: esco"; break
+        if [ "$falliti" -gt 0 ] && ! pgrep -f "run_aincp_504.sh" >/dev/null; then
+            log "ESCO: $falliti fold falliti e nessuno in corso. Leggere reports/logs/coda_504_fold*.log,"
+            log "      correggere, cancellare il log del fold e rilanciare questo script."
+        else
+            log "tutti i fold sono finiti o in corso: esco"
+        fi
+        break
     fi
     attivi=$(pgrep -fc "run_aincp_504.sh")
     for gpu in $(gpu_libere); do
