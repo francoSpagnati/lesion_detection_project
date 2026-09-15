@@ -586,7 +586,7 @@ La progressione è monotona e coincide esattamente con quella dell'overfitting m
 
 ## Quarta parte: cosa non è ancora stato addestrato
 
-### 504 — i dieci pazienti AInCP: T0, T1, T1' (pronti, in attesa di una GPU)
+### 504 — i dieci pazienti AInCP: T0, T1, T1' (conclusi il 15 settembre)
 
 `Dataset504_AINCP` (`scripts/make_aincp_dataset.py`): spazio T1 nativo, due canali `{0: FLAIR,
 1: T1}`, label ROI_1+ROI_2+ROI_4, piano `nnUNetPlansDa502` trasferito da 502 (1 mm, patch 128³) con
@@ -613,6 +613,59 @@ La valutazione: `scripts/metriche_per_lesione.py 504 --trainer <nome> --fold all
 `scripts/confronto_fold.py 504 <base> <variante>`, che unisce i cinque fold in dieci predizioni
 fuori-fold, una per paziente, e le confronta appaiate in Dice e in rilevamento. Con dieci coppie il
 p di Wilcoxon non scende sotto 0.002 nemmeno se tutte concordano: contano le coppie e le grandezze.
+
+**Risultato (15 settembre, 15 training, 14–15/9 su due GPU condivise).** Nessuna soglia sulle
+lesioni. Report: `reports/confronto_504_*.md`, `reports/metriche_per_lesione_504_*.md`, figura
+`reports/figures/aincp/predizioni_504.png` (`scripts/figura_predizioni_504.py`).
+
+| variante | fold 0 | fold 1 | fold 2 | fold 3 | fold 4 | **Dice medio** | lesioni rilevate (71) | FP / paziente | epoca migliore |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| T0, da zero | 0.583 | 0.664 | 0.665 | 0.435 | 0.560 | **0.581** | 27 (38.0%) | 7.9 | 75, 26, 92, 86, 80 |
+| T1, espansione `zero` | 0.465 | 0.672 | 0.516 | 0.488 | 0.635 | **0.555** | 25 (35.2%) | 2.6 | 106, 126, 89, 28, 28 |
+| T1', espansione `duplica` | 0.648 | 0.718 | 0.606 | 0.464 | 0.543 | **0.596** | 20 (28.2%) | 3.2 | 47, 199, 135, 57, 185 |
+
+Appaiati sulle dieci predizioni fuori-fold: T1 contro T0 **−0.026** (migliora 5, peggiora 5,
+p = 0.92); T1' contro T0 **+0.015** (5 e 5, p = 0.49); T1' contro T1 +0.041 (6 e 4, p = 0.38).
+**Nessuna variante si distingue in Dice.** Quello che le distingue sono i falsi positivi: il modello
+da zero ne produce 7.9 per paziente, i due pre-addestrati 2.6 e 3.2. Sulle lesioni sopra i 10 mm³
+tutte e tre trovano quasi tutto (22, 17 e 18 su 25); sotto i 10 mm³ nessuna (5, 8 e 2 su 46).
+
+**Perché la Proposta B non ha reso, misurato sui pesi.** Norma del filtro FLAIR contro quella del
+filtro T1 nel primo strato, sui cinque fold:
+
+| variante | ‖FLAIR‖ / ‖T1‖ | spostamento del T1 dalla partenza |
+| --- | --- | --- |
+| `zero` | 0.04 – 0.08 | 1.5 – 3.0 % |
+| `duplica` | 1.2 – 1.4 | 15 – 29 % |
+| da zero | 1.0 – 1.3 | — |
+
+Con `zero` il canale FLAIR **è rimasto quasi a zero** e il T1 si è mosso del 2%: dopo 250 epoche a
+passo `1e-4` su otto pazienti, il modello è ancora il 502 a solo T1, e la FLAIR — la sequenza su
+cui le lesioni si vedono — non è mai entrata in gioco. È esattamente il rischio scritto nel piano
+(«resta un modello a T1 con un canale inerte»). La ricetta `1e-4` era stata misurata su 541, dove
+dominio e canale erano gli stessi del pre-addestramento; qui servono un canale nuovo e un dominio
+nuovo, e quel passo non basta a impararli. `duplica` parte con la FLAIR già attiva e infatti la usa
+(rapporto 1.2–1.4), ma trattandola come una copia del T1 non ne impara il contrasto proprio.
+
+Questo **corregge l'aspettativa** scritta prima del training (che il pretraining valesse +23 punti
+come su 541): su AInCP il modello da zero arriva a 0.58 perché le lesioni sono grandi (mediana
+7.2 ml) e il Dice le premia; il vantaggio del pretraining, se c'è, va cercato nel rilevamento delle
+piccole e nei falsi positivi, non nella media.
+
+Il Dice per paziente dipende dalla forma della lesione più che dal modello: FSM_041 (gliosi
+sottile ad anello attorno a una cavità) sta a 0.04–0.06 con tutte e tre; FSM_040 (cavità da 56 ml)
+a 0.83–0.92.
+
+**Prossimi esperimenti, in ordine di costo, una variabile ciascuno:**
+
+1. **Passo differenziato**: primo strato (il canale FLAIR) a `1e-2`, tutto il resto a `1e-4`. Sono
+   due gruppi di parametri nell'ottimizzatore — il «livello 2» del trainer di espansione. Risponde
+   direttamente alla diagnosi: lascia imparare la FLAIR senza cancellare il resto.
+2. **Stadio 2 su WMH**: la rete espansa addestrata sui 79 casi a due canali di Dataset512 (piano
+   `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi adattata su
+   504. Risponde alla stessa diagnosi con i dati invece che con il passo.
+3. Passo `1e-3` su tutto (il T3 del piano).
+4. Modality dropout, per l'uso a un solo canale: dopo, come variabile a sé.
 
 | Modello | Domanda | Stato |
 | --- | --- | --- |

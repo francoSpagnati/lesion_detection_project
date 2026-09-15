@@ -50,12 +50,13 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
 | `531` **variante D**, tutti e tre insieme | **0.603** lesione | −0.007 su ATLAS (p=0.073) e −0.022 su WMH (p=0.10): non crolla; ma perde su tutte e 7 le classi |
 | `541` **test del pretraining** | **0.685** contro **0.451** da zero | il pretraining vale **+0.23**, ma solo con passo `1e-4`: col default (0.564) *danneggia* il modello, che senza adattamento farebbe 0.677 |
+| `504` **AInCP**, 10 pazienti, 5 fold | da zero **0.581**, Proposta B `zero` **0.555**, `duplica` **0.596** | nessuna differenza appaiata (5 pazienti su 10 in ogni verso); i pre-addestrati fanno un terzo dei falsi positivi (2.6 contro 7.9 per paziente). Con `zero` la FLAIR non ha imparato: passo troppo basso per un canale nuovo |
 
 ### In corso
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP: T0, T1 (Proposta B), T1' — `scripts/attendi_gpu_e_lancia.sh` | **in corso dal 14/9**: fold 0 e 1 in parallelo sulle GPU 2 e 3, condivise con un altro utente |
+| Training su `504` AInCP: T0, T1 (Proposta B), T1' | **conclusi il 15/9**: Dice 0.581 / 0.555 / 0.596, nessuna differenza appaiata; con passo `1e-4` il canale FLAIR di T1 è rimasto inerte (‖FLAIR‖/‖T1‖ = 0.05). Prossimo: passo differenziato sul primo strato |
 
 ### Da fare dopo
 

@@ -246,6 +246,29 @@ Da citare, con il ruolo che hanno nella tesi:
 
 ## Aggiornamenti
 
-*(da completare alla fine del lavoro: risultati di T0–T3 con Dice e rilevamento per fold e per
-paziente, decisione finale sullo spazio di addestramento, soglia adottata, eventuali lotti
-successivi, e ogni scostamento dal piano descritto sopra)*
+**15 settembre 2026 — primo training sui dieci pazienti (Dataset504, spazio T1 nativo, 2 canali,
+5 fold per paziente, nessuna soglia sulle lesioni).** Tre varianti, 250 epoche con arresto sulla
+perdita di validazione (pazienza 50):
+
+| variante | Dice medio fuori-fold | lesioni rilevate (71) | falsi positivi / paziente |
+| --- | --- | --- | --- |
+| da zero (riferimento) | 0.581 | 38.0% | 7.9 |
+| Proposta B, canale FLAIR a zero, passo 1e-4 | 0.555 | 35.2% | 2.6 |
+| Proposta B, filtro duplicato, passo 1e-4 | 0.596 | 28.2% | 3.2 |
+
+Nessuna differenza appaiata in Dice (5 pazienti migliorano e 5 peggiorano in ogni confronto). Le
+lesioni sopra 10 mm³ vengono trovate quasi tutte da tutte (22, 17, 18 su 25); quelle sotto quasi
+mai (5, 8, 2 su 46). Il Dice per paziente dipende dalla forma della lesione: 0.04 su una gliosi
+sottile ad anello (FSM_041), 0.92 su una cavità da 56 ml (FSM_040). **Diagnosi sui pesi**: con passo
+1e-4 il canale FLAIR dell'espansione «zero» è rimasto a norma 0.05 di quella del T1 — la rete è
+ancora il modello ATLAS a un canale, la FLAIR non ha imparato. La ricetta misurata sulla simulazione
+(stesso dominio, stesso canale) non trasferisce a un canale e un dominio nuovi. Prossimo esperimento:
+passo differenziato (primo strato a 1e-2, resto a 1e-4); poi lo stadio 2 su WMH.
+
+Correzioni a quanto scritto sopra: le componenti connesse di AInCP sono **65** con connettività a 26
+vicini (158 era con 6 vicini); 42 sotto 10 mm³ per lo 0.03% del volume; guardate una per una **non
+sono rumore** (gliosi da un voxel con intensità FLAIR 2.3–4.4× il tessuto sano), quindi nessuna
+soglia. E `checkpoint_best` di nnU-Net recupera +0.112 sul fine-tuning a passo default di 541: la
+frase «nessun arresto anticipato nativo» resta vera, ma il suo criterio non è inutile.
+
+*(da completare alla fine: esperimenti successivi, decisione finale, eventuali lotti successivi)*

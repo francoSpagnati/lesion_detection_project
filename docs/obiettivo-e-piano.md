@@ -600,9 +600,11 @@ preprocessato (`scripts/make_aincp_dataset.py`), la coda è `scripts/run_aincp_5
 di validazione nel trainer (`pazienza_val`, 50 epoche); `confronto_fold.py` per il confronto
 appaiato sulle dieci predizioni fuori-fold. Dettagli in `docs/modelli-ed-esperimenti.md`.
 
-**Ancora da decidere**: lo stadio 2 su WMH prima di AInCP (farlo dopo il primo giro, se la FLAIR
-resta inerte); la conferma clinica della soglia 10 mm³; il modality dropout, che serve se si vuole
-davvero usare il modello con un solo canale — l'espansione da sola non lo garantisce.
+**Esito del primo giro (15 settembre)**: T0 0.581, T1 0.555, T1' 0.596, nessuna differenza appaiata;
+il canale FLAIR di T1 è rimasto inerte (passo `1e-4` troppo basso per un canale nuovo). La FLAIR va
+fatta imparare: **prossimo esperimento il passo differenziato** (primo strato a `1e-2`, resto a
+`1e-4`), poi lo stadio 2 su WMH se non basta. Soglia: nessuna, in attesa del clinico. Modality
+dropout: dopo, come variabile a sé. Dettaglio in `docs/modelli-ed-esperimenti.md`.
 
 ## Cosa non conviene fare
 

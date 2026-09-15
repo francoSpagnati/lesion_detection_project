@@ -1,0 +1,389 @@
+{
+ "dataset": "Dataset504_AINCP",
+ "run": "nnUNetTrainerWandb_250ep_arresto50__nnUNetPlansDa502__3d_fullres",
+ "fold": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "soglia_mm3": 0.0,
+ "classe": 1,
+ "casi": [
+  {
+   "caso": "FSM_032",
+   "lesioni": [
+    {
+     "mm3": 123412.56814205647,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.692842125892639,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.431410551071167,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.3692842125892639,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.18464210629463196,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.1078526377677917,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.18464210629463196,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.7385684251785278,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.3692842125892639,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.18464210629463196,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 10,
+   "voxel_mm3": 0.18464210629463196,
+   "fold": 0
+  },
+  {
+   "caso": "FSM_039",
+   "lesioni": [
+    {
+     "mm3": 1416.7597962915897,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.2924955785274506,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 4,
+   "componenti_predette": 6,
+   "voxel_mm3": 0.1846422255039215,
+   "fold": 0
+  },
+  {
+   "caso": "FSM_046",
+   "lesioni": [
+    {
+     "mm3": 310.7525896579027,
+     "rilevata": true
+    },
+    {
+     "mm3": 160.2693094611168,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 39,
+   "componenti_predette": 42,
+   "voxel_mm3": 0.18464206159114838,
+   "fold": 1
+  },
+  {
+   "caso": "FSM_054",
+   "lesioni": [
+    {
+     "mm3": 151.40602618455887,
+     "rilevata": true
+    },
+    {
+     "mm3": 33604.382870167494,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.323546916246414,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.738565981388092,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.800678879022598,
+     "rilevata": true
+    },
+    {
+     "mm3": 0.369282990694046,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.369282990694046,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.184641495347023,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.369282990694046,
+     "rilevata": true
+    },
+    {
+     "mm3": 0.553924486041069,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.400339439511299,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.738565981388092,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.923207476735115,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.738565981388092,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.031056448817253,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 8,
+   "componenti_predette": 12,
+   "voxel_mm3": 0.184641495347023,
+   "fold": 1
+  },
+  {
+   "caso": "FSM_053",
+   "lesioni": [
+    {
+     "mm3": 60.747375532984734,
+     "rilevata": true
+    },
+    {
+     "mm3": 401.41274896264076,
+     "rilevata": true
+    },
+    {
+     "mm3": 63.70165519416332,
+     "rilevata": true
+    },
+    {
+     "mm3": 21.60317002236843,
+     "rilevata": true
+    },
+    {
+     "mm3": 38.03635063767433,
+     "rilevata": true
+    },
+    {
+     "mm3": 6.831771716475487,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 8,
+   "voxel_mm3": 0.1846424788236618,
+   "fold": 2
+  },
+  {
+   "caso": "FSM_056",
+   "lesioni": [
+    {
+     "mm3": 351.0053805708885,
+     "rilevata": true
+    },
+    {
+     "mm3": 28.804229021072388,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.53927481174469,
+     "rilevata": false
+    },
+    {
+     "mm3": 12055.308415293694,
+     "rilevata": true
+    },
+    {
+     "mm3": 64.2555878162384,
+     "rilevata": true
+    },
+    {
+     "mm3": 0.369284987449646,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.184642493724823,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 9,
+   "voxel_mm3": 0.184642493724823,
+   "fold": 2
+  },
+  {
+   "caso": "FSM_040",
+   "lesioni": [
+    {
+     "mm3": 55564.70487874746,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.8464206159114838,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.031062677502632,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.18464206159114838,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.477136492729187,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.6617785543203354,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.031062677502632,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.36928412318229675,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.7385682463645935,
+     "rilevata": false
+    },
+    {
+     "mm3": 6.462472155690193,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.2924944311380386,
+     "rilevata": false
+    },
+    {
+     "mm3": 35.26663376390934,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 8,
+   "voxel_mm3": 0.18464206159114838,
+   "fold": 3
+  },
+  {
+   "caso": "FSM_041",
+   "lesioni": [
+    {
+     "mm3": 1737.2972977161407,
+     "rilevata": true
+    },
+    {
+     "mm3": 20.495270490646362,
+     "rilevata": false
+    },
+    {
+     "mm3": 182.61101365089417,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.215704917907715,
+     "rilevata": false
+    },
+    {
+     "mm3": 3.1389153003692627,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.9232103824615479,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 7,
+   "componenti_predette": 12,
+   "voxel_mm3": 0.18464207649230957,
+   "fold": 3
+  },
+  {
+   "caso": "FSM_045",
+   "lesioni": [
+    {
+     "mm3": 9512.943655237556,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 0.18464206159114838,
+   "fold": 4
+  },
+  {
+   "caso": "FSM_052",
+   "lesioni": [
+    {
+     "mm3": 416.18223279714584,
+     "rilevata": true
+    },
+    {
+     "mm3": 26.58839464187622,
+     "rilevata": true
+    },
+    {
+     "mm3": 4.062115848064423,
+     "rilevata": false
+    },
+    {
+     "mm3": 4360.681362897158,
+     "rilevata": true
+    },
+    {
+     "mm3": 22.710920423269272,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.2924914062023163,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.3692832589149475,
+     "rilevata": false
+    },
+    {
+     "mm3": 4.246757477521896,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.5539248883724213,
+     "rilevata": false
+    },
+    {
+     "mm3": 0.738566517829895,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 9,
+   "componenti_predette": 18,
+   "voxel_mm3": 0.18464162945747375,
+   "fold": 4
+  }
+ ]
+}

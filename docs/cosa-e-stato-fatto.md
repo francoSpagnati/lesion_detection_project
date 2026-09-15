@@ -514,7 +514,25 @@ annotato conta come lesione, in attesa del parere del clinico sulle due figure.
 - `confronto_fold.py`: unisce i fold in una predizione fuori-fold per paziente e confronta due
   trainer appaiati in Dice e rilevamento. Provato su 541 (`lr1e3` contro `lr1e4`).
 
-Nessun training lanciato: le quattro GPU sono occupate da altri utenti dall'11 settembre.
+## 23. Primo training sui pazienti (14-15 settembre)
+
+```bash
+MAX_GPU=2 SOGLIA_MEM=60000 SOGLIA_UTIL=101 setsid nohup bash scripts/attendi_gpu_e_lancia.sh > reports/logs/attesa_gpu.log 2>&1 < /dev/null &
+python scripts/metriche_per_lesione.py 504 --trainer <nome>__ --fold all --soglia-mm3 0
+python scripts/confronto_fold.py 504 nnUNetTrainerWandb_250ep_arresto50 nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50 --soglia-mm3 0
+python scripts/figura_predizioni_504.py
+```
+
+Lanciato il 13 sera e ritentato a vuoto per 17 ore (`nnUNetv2_train` non era nel PATH dello script
+staccato: corretto in `env.sh`, vedi commit e2e84e8). Rilanciato il 14 alle 11:44 su due GPU
+condivise con il job di un altro utente, per decisione dell'utente. Quindici training in 20 ore;
+l'arresto sulla perdita di validazione si e' attivato in tutti, fra l'epoca 26 e la 199.
+
+**Esito**: Dice medio fuori-fold 0.581 da zero, 0.555 Proposta B `zero`, 0.596 `duplica`; nessuna
+differenza appaiata. Diagnosi sui pesi: con passo `1e-4` il canale FLAIR dell'espansione `zero` e'
+rimasto a norma 0.05 di quella del T1 — il modello e' ancora il 502 a solo T1. Il passo misurato su
+541 non trasferisce a un canale e un dominio nuovi. Dettaglio e prossimi esperimenti in
+[modelli-ed-esperimenti.md](modelli-ed-esperimenti.md), sezione 504.
 
 ---
 
