@@ -658,9 +658,15 @@ a 0.83–0.92.
 
 **Prossimi esperimenti, in ordine di costo, una variabile ciascuno:**
 
-1. **Passo differenziato**: primo strato (il canale FLAIR) a `1e-2`, tutto il resto a `1e-4`. Sono
-   due gruppi di parametri nell'ottimizzatore — il «livello 2» del trainer di espansione. Risponde
-   direttamente alla diagnosi: lascia imparare la FLAIR senza cancellare il resto.
+1. **Passo differenziato — in corso dal 15 settembre sera**, trainer
+   `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50`: il primo strato va in un
+   gruppo dell'ottimizzatore a `1e-2`, tutto il resto resta a `1e-4`, e uno scheduler per gruppo
+   fa decadere ciascuno dal proprio passo. Il primo strato è un solo tensore `[32, 2, 3, 3, 3]`
+   con entrambi i canali: un hook sul gradiente frena la fetta del T1 di un fattore 0.01, così il
+   filtro pre-addestrato resta di fatto a `1e-4` e solo la FLAIR impara a passo pieno. Verificato a
+   CPU: per passo la FLAIR si muove 100 volte più del T1. Una sola variabile rispetto a T1.
+   Il confronto che conta: `confronto_fold.py 504 <T1 zero> <T1 primo1e2>`, più la norma del
+   filtro FLAIR, che stavolta deve crescere.
 2. **Stadio 2 su WMH**: la rete espansa addestrata sui 79 casi a due canali di Dataset512 (piano
    `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi adattata su
    504. Risponde alla stessa diagnosi con i dati invece che con il passo.

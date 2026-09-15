@@ -56,7 +56,7 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP: T0, T1 (Proposta B), T1' | **conclusi il 15/9**: Dice 0.581 / 0.555 / 0.596, nessuna differenza appaiata; con passo `1e-4` il canale FLAIR di T1 è rimasto inerte (‖FLAIR‖/‖T1‖ = 0.05). Prossimo: passo differenziato sul primo strato |
+| Training su `504` AInCP: T0, T1 (Proposta B), T1' | **conclusi il 15/9**: Dice 0.581 / 0.555 / 0.596, nessuna differenza appaiata; con passo `1e-4` il canale FLAIR di T1 è rimasto inerte (‖FLAIR‖/‖T1‖ = 0.05). **In corso dal 15/9 sera**: la stessa variante con il canale FLAIR a passo `1e-2` (`_primo1e2_`), cinque fold |
 
 ### Da fare dopo
 
