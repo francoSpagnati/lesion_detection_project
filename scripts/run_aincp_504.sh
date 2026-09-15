@@ -46,7 +46,11 @@ lancia() {   # trainer, [pesi]
     return 0
 }
 
+# Secondo giro (15 settembre): il passo differenziato sul canale FLAIR, una variabile rispetto
+# alla variante `zero` gia' misurata. Le tre del primo giro restano nella coda e vengono saltate
+# perche' hanno gia' il checkpoint_final.
 lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50 "$PESI"
 lancia nnUNetTrainerWandb_250ep_arresto50
 lancia nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50 "$PESI"
+lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50 "$PESI"
 echo "[$(date +%H:%M)] coda fold $FOLD finita"

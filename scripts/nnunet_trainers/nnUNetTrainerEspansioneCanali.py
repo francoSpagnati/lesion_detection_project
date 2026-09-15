@@ -64,6 +64,7 @@ Uso
 """
 import torch
 
+from nnunetv2.training.lr_scheduler.polylr import PolyLRScheduler
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
 
 from nnUNetTrainerWandb import nnUNetTrainerWandb
@@ -212,6 +213,21 @@ def carica_pesi_espandendo(network, fname: str, canali_nuovi: list, strategia: s
             'espansi': espansi, 'copiati': copiati, 'saltati': len(saltati)}
 
 
+class PolyLRSchedulerPerGruppo(PolyLRScheduler):
+    """Lo scheduler polinomiale di nnU-Net, ma ogni gruppo di parametri decade dal SUO passo
+    iniziale. Quello originale scrive lo stesso `initial_lr` in tutti i gruppi, e vanificherebbe
+    il passo differenziato al primo `step()`."""
+
+    def step(self, current_step=None):
+        if current_step is None or current_step == -1:
+            current_step = self.ctr
+            self.ctr += 1
+        fattore = (1 - current_step / self.max_steps) ** self.exponent
+        for gruppo in self.optimizer.param_groups:
+            gruppo['lr'] = gruppo['initial_lr'] * fattore     # initial_lr lo scrive _LRScheduler
+        self._last_lr = [g['lr'] for g in self.optimizer.param_groups]
+
+
 class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
     """Base: non usarla direttamente, usa una delle due sottoclassi con la strategia nel nome.
 
@@ -223,10 +239,62 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
 
     strategia = 'zero'
 
+    # --- passo differenziato sul canale nuovo ("livello 2" della proposta B) -------------
+    #
+    # Misurato su 504 (docs/modelli-ed-esperimenti.md): con passo 1e-4 su tutta la rete il
+    # filtro FLAIR partito da zero e' rimasto a 0.04-0.08 della norma del T1 dopo 250 epoche.
+    # Il passo che protegge i pesi pre-addestrati e' lo stesso che impedisce al canale nuovo
+    # di imparare. Se `lr_primo_strato` e' impostato, il primo strato convoluzionale va in un
+    # gruppo dell'ottimizzatore con quel passo e tutto il resto tiene `initial_lr`.
+    #
+    # Il primo strato e' un solo tensore [32, 2, 3, 3, 3] che contiene ENTRAMBI i canali: i
+    # gruppi dell'ottimizzatore non possono separarli. Per lasciare al filtro T1 pre-addestrato
+    # il passo basso, un hook sul gradiente moltiplica la fetta dei canali gia' presenti nel
+    # modello di partenza per initial_lr / lr_primo_strato: con SGD e' equivalente a dargli
+    # quel passo (il termine di weight decay resta al passo alto, ma vale 3e-7 per passo).
+    lr_primo_strato = None
+
     def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
                  device: torch.device = torch.device('cuda')):
         super().__init__(plans, configuration, fold, dataset_json, device)
         self._installa_caricamento_espandibile()
+
+    def _primo_strato(self):
+        modulo = self.network
+        for attributo in ('module', '_orig_mod'):        # DDP e torch.compile avvolgono la rete
+            modulo = getattr(modulo, attributo, modulo)
+        return modulo.encoder.stages[0][0].convs[0].conv
+
+    def configure_optimizers(self):
+        if self.lr_primo_strato is None:
+            return super().configure_optimizers()
+        primo = list(self._primo_strato().parameters())
+        ids = {id(p) for p in primo}
+        resto = [p for p in self.network.parameters() if id(p) not in ids]
+        # il gruppo del resto per primo: nnU-Net logga il passo di param_groups[0]
+        optimizer = torch.optim.SGD(
+            [{'params': resto, 'lr': self.initial_lr},
+             {'params': primo, 'lr': self.lr_primo_strato}],
+            self.initial_lr, weight_decay=self.weight_decay, momentum=0.99, nesterov=True)
+        self.print_to_log_file(
+            f'passo differenziato: primo strato ({sum(p.numel() for p in primo)} parametri) a '
+            f'{self.lr_primo_strato}, resto ({sum(p.numel() for p in resto)}) a {self.initial_lr}')
+        return optimizer, PolyLRSchedulerPerGruppo(optimizer, self.initial_lr, self.num_epochs)
+
+    def _frena_canali_preaddestrati(self, canali_nuovi, canali_pre):
+        vecchi = [i for i, n in enumerate(canali_nuovi) if n in canali_pre]
+        fattore = self.initial_lr / self.lr_primo_strato
+        peso = self._primo_strato().weight
+
+        def freno(grad):
+            g = grad.clone()
+            g[:, vecchi] *= fattore
+            return g
+
+        peso.register_hook(freno)
+        self.print_to_log_file(
+            f'  canali {[canali_nuovi[i] for i in vecchi]} del primo strato frenati di '
+            f'{fattore:g}: passo effettivo {self.initial_lr}; gli altri a {self.lr_primo_strato}')
 
     def _installa_caricamento_espandibile(self):
         from nnunetv2.run import run_training
@@ -237,6 +305,8 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
         def load_pretrained_weights(network, fname, verbose=False):
             riepilogo = carica_pesi_espandendo(
                 network, fname, canali_nuovi, strategia, log=self.print_to_log_file)
+            if self.lr_primo_strato is not None:
+                self._frena_canali_preaddestrati(canali_nuovi, riepilogo['canali_pre'])
             # Finisce nel config del run W&B: senza, a distanza di settimane non si
             # distingue quale dei due esperimenti di inizializzazione fosse.
             if getattr(self, '_wandb_attivo', False):
@@ -315,6 +385,15 @@ class nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50(nnUNetTrainerE
         super().__init__(plans, configuration, fold, dataset_json, device)
         self.num_epochs = 250
         self.initial_lr = 1e-4
+
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50):
+    """Come la variante `zero` misurata su 504, con una sola differenza: il canale FLAIR del
+    primo strato impara a passo pieno (1e-2) invece che a 1e-4. Il filtro T1 dello stesso
+    strato e tutto il resto della rete restano a 1e-4."""
+
+    lr_primo_strato = 1e-2
 
 
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

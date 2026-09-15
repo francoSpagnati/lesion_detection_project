@@ -24,18 +24,22 @@ INTERVALLO="${INTERVALLO:-300}"
 SOGLIA_MEM="${SOGLIA_MEM:-5000}"
 SOGLIA_UTIL="${SOGLIA_UTIL:-20}"
 export SOGLIA_MEM
-PRIMO_TRAINER=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50
+# L'ULTIMO trainer della coda di run_aincp_504.sh: un fold e' finito quando ha il suo
+# checkpoint. Cosi' aggiungere una variante in fondo alla coda basta a far ripartire i fold,
+# e le variante gia' fatte vengono saltate da run_aincp_504.sh stesso.
+ULTIMO_TRAINER=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50
 
 log() { echo "[$(date '+%d/%m %H:%M')] $*"; }
 
-fold_iniziato() { [ -d "$nnUNet_results/Dataset504_AINCP/${PRIMO_TRAINER}__nnUNetPlansDa502__3d_fullres/fold_$1" ]; }
-fold_finito()   { grep -q "coda fold $1 finita" "reports/logs/coda_504_fold$1.log" 2>/dev/null; }
+fold_finito()   { [ -f "$nnUNet_results/Dataset504_AINCP/${ULTIMO_TRAINER}__nnUNetPlansDa502__3d_fullres/fold_$1/checkpoint_final.pth" ]; }
 fold_in_corso() { pgrep -f "run_aincp_504.sh $1\$" >/dev/null; }
 # Un fold che e' fallito non va ritentato: se fallisce, fallisce per un motivo che il tempo non
 # cambia. La notte del 13 settembre la coda ha rilanciato lo stesso fold ogni tredici minuti per
 # diciassette ore perche' `nnUNetv2_train` non era nel PATH, e nessuno se ne e' accorto fino al
 # mattino. Per riprovare dopo aver corretto il problema si cancella il log del fold.
-fold_fallito()  { grep -q "^STOP: .* fallito" "reports/logs/coda_504_fold$1.log" 2>/dev/null; }
+# Conta solo uno STOP successivo all'ultima riga "coda fold N finita": il log e' cumulativo
+# fra un giro e l'altro, e un fallimento gia' superato non deve bloccare il giro nuovo.
+fold_fallito()  { [ -f "reports/logs/coda_504_fold$1.log" ] && awk 'BEGIN{s=0;e=0} /coda fold .* finita/{s=NR} /^STOP: .* fallito/{if (NR>s) e=1} END{exit !e}' "reports/logs/coda_504_fold$1.log"; }
 
 gpu_nostre() {
     # schede su cui gira gia' un nostro fold: l'ultima assegnazione di ogni fold in corso
