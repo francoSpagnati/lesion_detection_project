@@ -561,6 +561,32 @@ primo strato in un gruppo con `weight_decay=0` e applicando il decadimento dentr
 
 ---
 
+## 25. Il terzo giro e l'analisi per fenotipo (22 settembre)
+
+```bash
+MAX_GPU=2 setsid nohup bash scripts/attendi_gpu_e_lancia.sh > reports/logs/attesa_gpu.log 2>&1 < /dev/null &
+python scripts/analisi_rilevamento_504.py        # ~6 min a CPU
+```
+
+In coda su due GPU libere: il passo differenziato con il freno corretto e il controllo a passo
+`1e-3` uniforme, cinque fold ciascuno. Verificato al primo minuto che il run reale registra il
+decadimento dentro il freno e produce l'epoca 1.
+
+**Proposta respinta**: un modello solo-FLAIR, suggerito perché su WMH la FLAIR da sola batte
+FLAIR+T1. Il progetto usa i due canali perché vedono fenotipi diversi, e il valore di ciascuno si
+misura per fenotipo — cosa che l'analisi di oggi fa senza addestrare nulla.
+
+**Esito dell'analisi**: il pre-addestramento su ATLAS porta l'encefalomalacia da 0.40 a 0.78–0.81 di
+copertura (4 pazienti su 4); la FLAIR attiva migliora la gliosi (7 su 10), dove però il modello da
+zero resta il migliore; i falsi positivi calano con il pre-addestramento (8 pazienti su 10,
+p = 0.033); Dice e numero di lesioni rilevate non distinguono le varianti. 27 lesioni su 71
+spariscono dal bersaglio quando nnU-Net lo ricampiona a 1 mm. Stadio 2 su WMH promosso a prossimo
+esperimento. Trovato in `/data01/fsm_mri_data/` un undicesimo paziente (FSM_028) preparato da un
+altro utente: non usato, domanda per il responsabile. Dettaglio in
+[obiettivo-e-piano.md](obiettivo-e-piano.md) e [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |

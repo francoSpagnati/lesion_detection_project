@@ -209,6 +209,13 @@ Da citare, con il ruolo che hanno nella tesi:
   Image Analysis — strumenti indicati dal responsabile.
 - Dataset MSLesSeg (https://iplab.dmi.unict.it/mfs/ms-les-seg/) e ISLES 2015: candidati per
   un'espansione futura con T1+FLAIR appaiati, non usati.
+- **Havaei et al. 2016**, *HeMIS: Hetero-Modal Image Segmentation*, MICCAI 2016 (arXiv 1607.05194)
+  — il riferimento classico per segmentare con modalità mancanti; motiva il requisito di un modello
+  a due canali utilizzabile con una sola sequenza.
+- **Addison et al. 2025**, *Modality-Agnostic Input Channels Enable Segmentation of Brain lesions in
+  Multimodal MRI with Sequences Unavailable During Training* (arXiv 2509.09290) — alternativa recente
+  al modality dropout: un canale «agnostico» addestrato su contrasti sintetici. Da discutere nei
+  lavori correlati, non usato.
 
 ---
 
@@ -270,5 +277,47 @@ vicini (158 era con 6 vicini); 42 sotto 10 mm³ per lo 0.03% del volume; guardat
 sono rumore** (gliosi da un voxel con intensità FLAIR 2.3–4.4× il tessuto sano), quindi nessuna
 soglia. E `checkpoint_best` di nnU-Net recupera +0.112 sul fine-tuning a passo default di 541: la
 frase «nessun arresto anticipato nativo» resta vera, ma il suo criterio non è inutile.
+
+**16–22 settembre 2026 — passo differenziato, analisi per fenotipo, e come vanno riportati i
+risultati.**
+
+Passo differenziato (primo strato a 1e-2, resto a 1e-4, il filtro T1 pre-addestrato frenato):
+Dice 0.621, il canale FLAIR entra nel regime di un modello da zero (norma 0.65–2.7 volte quella del
+T1, contro 0.04–0.08). Il freno aveva un difetto (il weight decay sfuggiva allo scalamento e ha
+ristretto il filtro T1 del 40–60%, coseno 0.996 con la partenza): la ripetizione corretta e il
+controllo a passo 1e-3 uniforme sono in corso.
+
+**Inquadramento statistico, da rispettare in tutta la tesi.** Con dieci pazienti nessuna variante
+si distingue nel Dice (miglior variante contro da zero: +0.039, IC 95% [−0.036, +0.110], Wilcoxon
+p = 0.275) né nel numero di lesioni rilevate. Si distinguono i falsi positivi (7.9 → 2.3 per
+paziente, 8 pazienti su 10, p = 0.033). L'argomento si regge su evidenze meccanicistiche e per
+fenotipo, non sulla classifica dei Dice medi, che vanno sempre riportati con l'intervallo.
+
+**Il risultato principale: ogni sorgente porta il suo fenotipo.** Copertura dei voxel:
+
+| | gliosi (FLAIR) | cistica (T1) | encefalomalacia (T1) |
+| --- | --- | --- | --- |
+| da zero | 0.585 | 0.834 | 0.401 |
+| pre-addestrato su ATLAS, FLAIR inattiva | 0.472 | 0.933 | 0.809 |
+| pre-addestrato su ATLAS, FLAIR attiva | 0.525 | 0.933 | 0.775 |
+
+Il pre-addestramento su ictus cronici (cavità) porta l'encefalomalacia da 0.02–0.48 a 0.61–0.87 in
+tutti e quattro i pazienti che la hanno; la FLAIR porta la gliosi. È l'argomento a favore
+dell'architettura a due canali, ed è il motivo del prossimo esperimento (stadio intermedio su WMH,
+iperintensità della sostanza bianca ≈ gliosi).
+
+**Rilevamento per dimensione**: 100% delle lesioni sopra 50 mm³ (18/18), 11% di quelle sotto
+10 mm³. Il tasso globale (35–38%) va sempre scomposto, perché dipende da 46 componenti minuscole.
+**Limite strutturale**: il piano a 1 mm (necessario per trasferire i pesi di ATLAS) cancella 27 delle
+71 lesioni annotate dal bersaglio di addestramento (20 delle 24 sotto 1 mm³); va dichiarato come
+compromesso fra trasferimento e risoluzione.
+
+**Posizionamento rispetto a Simarro et al. 2025**, da scrivere nell'introduzione: loro hanno 35
+pazienti di addestramento contro 10, ma un *silver standard* generato automaticamente; qui la
+verità di riferimento è manuale e per fenotipo. Loro puntano alla volumetria del tessuto sano; qui
+l'endpoint è il rilevamento, scomposto per dimensione e fenotipo. Il contributo metodologico non è
+l'espansione dei canali in sé (tecnica nota) ma la misura di che cosa trasferisce e per quale
+fenotipo, e i risultati negativi (template adulto che ingrandisce le lesioni pediatriche di 1.6–2.5
+volte; passo di fine-tuning che non trasferisce a un canale nuovo).
 
 *(da completare alla fine: esperimenti successivi, decisione finale, eventuali lotti successivi)*

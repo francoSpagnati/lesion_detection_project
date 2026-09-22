@@ -687,7 +687,11 @@ Con il passo differenziato il canale FLAIR entra nello stesso regime di un model
 zero, mentre a `1e-4` restava a un ventesimo. **La causa individuata dopo il primo giro era quella
 giusta**: non mancavano i dati, mancava il passo sul canale nuovo. Il guadagno è +0.065 di Dice
 sulla stessa variante a passo uniforme e +0.039 sul modello da zero, con 7 coppie su 10 in
-miglioramento; su FSM_039 la differenza è +0.438, da 0.036 a 0.474.
+miglioramento; su FSM_039 la differenza è +0.438, da 0.036 a 0.474. **Ma nessuna di queste
+differenze è distinguibile dal rumore**: contro il modello da zero l'intervallo al 95% (bootstrap
+sulle dieci differenze appaiate) è [−0.036, +0.110], Wilcoxon p = 0.275; la deviazione standard
+del Dice fra pazienti è 0.24–0.31. Il rilevamento non si muove (25 lesioni contro 27, p = 0.75).
+La prova è sui pesi, non sul Dice.
 
 **Il confronto però non è pulito, per un difetto del freno.** L'hook scalava il gradiente, ma
 `torch.optim.SGD` aggiunge il decadimento dei pesi *dopo* l'hook e lo moltiplica per il passo del
@@ -701,18 +705,58 @@ gruppo con `weight_decay=0` e applicando il decadimento dentro il freno, dove vi
 al gradiente; verificato numericamente che l'aggiornamento della fetta pre-addestrata vale ora
 esattamente `1e-4 · (gradiente + wd · peso)`.
 
-**Prossimi esperimenti, in ordine di costo, una variabile ciascuno:**
+### Per fenotipo, per dimensione, e che cosa è significativo (22 settembre)
 
-1. **Ripetere il passo differenziato con il freno corretto**: stessa configurazione, cinque fold.
-   Separa «la FLAIR ha imparato» da «il T1 si è ristretto» e rende il confronto a una variabile.
-2. **Passo `1e-3` su tutto** (il T3 del piano): il controllo che dice se serviva davvero un passo
-   *differenziato* o solo un passo *più grande*. Senza questo, il risultato qui sopra resta
-   ambiguo.
-3. **Stadio 2 su WMH**: la rete espansa addestrata sui 79 casi a due canali di Dataset512 (piano
-   `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi adattata su
-   504. Risponde alla stessa diagnosi con i dati invece che con il passo.
-4. **Modality dropout**, per l'uso a un solo canale: dopo, come variabile a sé. Il responsabile
-   ha chiesto che il modello possa funzionare anche con una sola sequenza in ingresso.
+`scripts/analisi_rilevamento_504.py` → `reports/analisi_rilevamento_504.md`. Porta le singole ROI in
+spazio T1 con la trasformazione salvata e misura, per ogni variante, rilevamento e copertura dei
+voxel per fenotipo, falsi positivi appaiati, e quali lesioni sopravvivono al ricampionamento a 1 mm
+del piano. Due controlli interni: le ROI trasportate ricostruiscono `labelsTr` a meno di 26 voxel in
+tutto (arrotondamenti dell'header); il ricampionamento riproduce **esattamente** il bersaglio salvato
+da nnU-Net in tutti e dieci i casi.
+
+| | gliosi | cistica | encefalomalacia | falsi positivi / paziente |
+| --- | --- | --- | --- | --- |
+| da zero | **0.585** | 0.834 | 0.401 | 7.9 |
+| B `zero` 1e-4 (FLAIR spenta) | 0.472 | **0.933** | **0.809** | 2.6 |
+| B `duplica` 1e-4 | 0.499 | 0.917 | 0.559 | 3.2 |
+| B passo differenziato (FLAIR attiva) | 0.525 | **0.933** | 0.775 | **2.3** |
+
+Copertura dei voxel = frazione dei voxel di quel fenotipo toccata dalla predizione, sui pazienti che
+lo hanno (gliosi 10, cistica 4, encefalomalacia 4).
+
+- **Il pre-addestramento su ATLAS porta le cavità.** Encefalomalacia da 0.02–0.48 (da zero) a
+  0.61–0.87 (pre-addestrati) in 4 pazienti su 4; FSM_045 da 0.018 a 0.612. Le lesioni di ATLAS
+  sono ictus cronici, cioè cavità ipointense in T1.
+- **La FLAIR porta la gliosi.** Accendere il canale FLAIR migliora la gliosi in 7 pazienti su 10
+  (0.472 → 0.525, p = 0.084); ma il modello da zero, che la FLAIR la usa in pieno, resta il migliore
+  su questo fenotipo. La variante `zero` a passo 1e-4, con il filtro FLAIR a 0.05 della norma del
+  T1, è di fatto un modello a sola T1: l'esperimento naturale che misura il contributo della FLAIR
+  senza addestrare un modello a un canale.
+- **I falsi positivi sono l'unica differenza significativa**: meno in 8 pazienti su 10 con il
+  passo differenziato (p = 0.033) e con `zero` (p = 0.043), 6 su 10 con `duplica` (p = 0.062). Da
+  zero sono per lo più minuscoli (63 su 79 sotto 10 mm³, mediana 0.9 mm³).
+- **27 lesioni su 71 non esistono nel bersaglio a 1 mm**: 20 delle 24 sotto 1 mm³ e 7 delle 22 fra 1
+  e 10 mm³ (gliosi 18, cistica 7, encefalomalacia 2). Il tetto del rilevamento con questo piano è 44.
+  Fra le 44 visibili il modello da zero ne trova 24, il passo differenziato 21; fra le 26 piccole
+  visibili, 6 e 4.
+
+**Prossimi esperimenti, in ordine, una variabile ciascuno:**
+
+1. **In corso dal 22 settembre: il passo differenziato con il freno corretto**
+   (`nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50`) e il **controllo a
+   passo `1e-3` uniforme** (`nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50`), entrambi
+   dai pesi di 502, cinque fold, in coda con `run_aincp_504.sh`. Il primo separa «la FLAIR ha imparato» da «il T1 si è
+   ristretto»; il secondo dice se serviva un passo *differenziato* o solo un passo *più grande*.
+   Si leggono con `analisi_rilevamento_504.py`, non solo con il Dice.
+2. **Stadio 2 su WMH, ora il principale**: la rete espansa addestrata sui 79 casi a due canali di
+   Dataset512 (piano `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi
+   adattata su 504. L'analisi per fenotipo gli dà una ragione precisa: le iperintensità di WMH sono
+   il fenotipo più vicino alla gliosi, e la gliosi è l'unico fenotipo su cui la Proposta B resta sotto
+   il modello da zero. Il criterio di successo è la copertura della gliosi senza perdere le cavità.
+3. **Modality dropout**, per l'uso a un solo canale: dopo, come variabile a sé. Il responsabile
+   ha chiesto che il modello possa funzionare anche con una sola sequenza in ingresso. Riferimento
+   classico per le modalità mancanti: HeMIS (Havaei et al., MICCAI 2016); alternativa recente con un
+   canale «agnostico» addestrato su contrasti sintetici: Addison et al. 2025 (arXiv 2509.09290).
 
 | Modello | Domanda | Stato |
 | --- | --- | --- |

@@ -29,11 +29,13 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 1 settembre 2026
+## Stato al 22 settembre 2026
 
-**In una riga:** tutte e cinque le ablazioni sono chiuse e nessuna delle scorciatoie provate funziona;
-la **variante D** è addestrata e dà la risposta più interessante finora — l'unione dei tre dataset
-**non crolla ma non guadagna**, e paga un pedaggio piccolo e sistematico su tutte e sette le classi.
+**In una riga:** sui dieci pazienti AInCP **ogni sorgente porta il suo fenotipo** — il
+pre-addestramento su ATLAS porta le cavità (encefalomalacia da 0.40 a 0.78–0.81 di copertura), la FLAIR
+porta la gliosi — e il pre-addestramento taglia i falsi positivi (7.9 → 2.3 per paziente, p = 0.033);
+il Dice medio invece non distingue nessuna variante con dieci pazienti. Prossimo esperimento
+principale: lo stadio intermedio su WMH, per la gliosi.
 
 ### Risultati misurati
 
@@ -50,13 +52,14 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | `523` ATLAS skull-stripped | **0.607** | −0.0037 appaiato, **p=0.58**: nessun effetto |
 | `531` **variante D**, tutti e tre insieme | **0.603** lesione | −0.007 su ATLAS (p=0.073) e −0.022 su WMH (p=0.10): non crolla; ma perde su tutte e 7 le classi |
 | `541` **test del pretraining** | **0.685** contro **0.451** da zero | il pretraining vale **+0.23**, ma solo con passo `1e-4`: col default (0.564) *danneggia* il modello, che senza adattamento farebbe 0.677 |
-| `504` **AInCP**, 10 pazienti, 5 fold | da zero **0.581**, Proposta B `zero` **0.555**, `duplica` **0.596** | nessuna differenza appaiata (5 pazienti su 10 in ogni verso); i pre-addestrati fanno un terzo dei falsi positivi (2.6 contro 7.9 per paziente). Con `zero` la FLAIR non ha imparato: passo troppo basso per un canale nuovo |
+| `504` **AInCP**, 10 pazienti, 5 fold | da zero **0.581**, Proposta B `zero` **0.555**, `duplica` **0.596**, passo differenziato **0.621** | nessuna differenza di Dice distinguibile dal rumore (miglior variante: IC 95% [−0.036, +0.110]); i pre-addestrati fanno un terzo dei falsi positivi (p = 0.033). Con il passo differenziato la FLAIR impara. Per fenotipo: ATLAS porta le cavità, la FLAIR la gliosi (`reports/analisi_rilevamento_504.md`) |
 
 ### In corso
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP: T0, T1 (Proposta B), T1' | **conclusi il 15/9**: Dice 0.581 / 0.555 / 0.596, nessuna differenza appaiata; con passo `1e-4` il canale FLAIR di T1 è rimasto inerte (‖FLAIR‖/‖T1‖ = 0.05). **In corso dal 15/9 sera**: la stessa variante con il canale FLAIR a passo `1e-2` (`_primo1e2_`), cinque fold |
+| Training su `504` AInCP | quattro varianti concluse (da zero, `zero`, `duplica`, passo differenziato). **In corso dal 22/9**: il passo differenziato con il freno corretto (`_wdfix_`) e il controllo a passo `1e-3` uniforme, cinque fold ciascuno |
+| Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il paziente `FSM_028` in `/data01/fsm_mri_data/`; il secondo lotto, atteso da agosto |
 
 ### Da fare dopo
 
@@ -67,7 +70,7 @@ la **variante D** è addestrata e dà la risposta più interessante finora — l
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
-| Stadio 2 della Proposta B: WMH a due canali con i pesi espansi, prima di AInCP | da decidere dopo il primo giro su 504 |
+| **Stadio 2 della Proposta B: WMH a due canali con i pesi espansi, prima di AInCP** | **prossimo esperimento principale** (22/9): la gliosi è l'unico fenotipo su cui la Proposta B resta sotto il modello da zero, e WMH è il fenotipo più vicino |
 | Modality dropout (uso del modello con un solo canale) | variabile a sé, dopo la prima catena |
 | Dataset privato AInCP | **primo lotto arrivato l'11/9**: 10 pazienti, analizzati e preprocessati (`notebooks/aincp_primo_lotto.ipynb`) |
 | Stadio 2 — inpainting e gemello sano | dopo la segmentazione |

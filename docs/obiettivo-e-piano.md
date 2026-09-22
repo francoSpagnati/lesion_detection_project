@@ -606,6 +606,63 @@ fatta imparare: **prossimo esperimento il passo differenziato** (primo strato a 
 `1e-4`), poi lo stadio 2 su WMH se non basta. Soglia: nessuna, in attesa del clinico. Modality
 dropout: dopo, come variabile a sé. Dettaglio in `docs/modelli-ed-esperimenti.md`.
 
+### Decisioni del 22 settembre, dopo il secondo giro e l'analisi per fenotipo
+
+**Il modello a due canali è una premessa, non una variabile.** Su WMH la FLAIR da sola batte
+FLAIR+T1 (0.774 contro 0.754, p = 0.025), e un modello solo-FLAIR su AInCP avrebbe probabilmente un
+Dice migliore. La proposta è stata respinta dall'utente, e a ragione: T1 e FLAIR vedono lesioni
+*diverse* — la gliosi è iperintensa in FLAIR, le cavità (cistica, encefalomalacia) sono ipointense in
+T1 — e su WMH le lesioni sono definite sulla FLAIR per costruzione, quindi quel confronto non misura
+la domanda della tesi. Il valore di ciascun canale si misura **per fenotipo**, non sul Dice
+complessivo. Il responsabile vuole inoltre un modello a due canali utilizzabile anche con una sola
+sequenza.
+
+**La misura per fenotipo sostiene la premessa** (`scripts/analisi_rilevamento_504.py`,
+`reports/analisi_rilevamento_504.md`). Copertura dei voxel di ciascun fenotipo:
+
+| | gliosi (FLAIR) | cistica (T1) | encefalomalacia (T1) |
+| --- | --- | --- | --- |
+| da zero | **0.585** | 0.834 | 0.401 |
+| Proposta B, FLAIR spenta (passo 1e-4) | 0.472 | **0.933** | **0.809** |
+| Proposta B, FLAIR attiva (passo differenziato) | 0.525 | **0.933** | 0.775 |
+
+Il pre-addestramento su ATLAS porta l'encefalomalacia da 0.02–0.48 a 0.61–0.87 **in tutti e quattro i
+pazienti che la hanno**: le lesioni di ATLAS sono ictus cronici, cioè cavità, e il sapere trasferito è
+quello. La gliosi invece la impara meglio il modello da zero, che usa la FLAIR in pieno; attivare la
+FLAIR nella Proposta B la migliora (7 pazienti su 10, p = 0.084) ma non la porta ancora a quel livello.
+Ogni sorgente porta il suo fenotipo.
+
+**Conseguenza: lo stadio 2 su WMH diventa il prossimo esperimento principale**, non più un ripiego.
+WMH ha 79 casi a due canali con iperintensità della sostanza bianca in FLAIR, il fenotipo più vicino
+alla gliosi: è per la gliosi quello che ATLAS è stato per le cavità. È anche la via di espansione ad
+altri dataset già prevista nel piano, e resta a due canali.
+
+**Che cosa si può affermare e che cosa no.** Con dieci pazienti nessuna variante si distingue dalle
+altre nel Dice (passo differenziato contro da zero: +0.039, IC 95% [−0.036, +0.110], p = 0.275) né
+nel numero di lesioni rilevate (27 contro 25 su 71, p = 0.75). Si distinguono i **falsi positivi**:
+7.9 per paziente da zero, 2.3–3.2 con il pre-addestramento, in meno in 8 pazienti su 10 (p = 0.033
+e 0.043, non corretti per confronti multipli ma concordi in tutte e tre le varianti pre-addestrate).
+L'argomento della tesi va costruito su tre evidenze più solide del Dice medio: i pesi (la norma del
+filtro FLAIR), la copertura per fenotipo, i falsi positivi. I Dice medi si riportano sempre con il
+loro intervallo.
+
+**Un limite strutturale: 27 lesioni su 71 non arrivano alla rete.** Il piano `nnUNetPlansDa502`
+lavora a 1 mm isotropo, quello di 502, perché il trasferimento dei pesi richiede la stessa
+architettura. Ricampionando l'annotazione come fa nnU-Net (procedura verificata: riproduce voxel per
+voxel il bersaglio salvato), spariscono 20 delle 24 componenti sotto 1 mm³ e 7 delle 22 fra 1 e
+10 mm³. Il bersaglio di addestramento ha 50 componenti, non 71. Il tetto del rilevamento è quindi
+44 lesioni su 71, e la domanda al clinico sulle lesioni minuscole cambia natura: anche se sono lesioni
+da trovare, questa configurazione non può impararle. Una strada c'è — un piano con la stessa
+architettura a spaziatura più fine, a cui i pesi restano trasferibili — ma costa campo visivo e va
+decisa solo dopo la risposta del clinico. Anche fra le piccole che esistono a 1 mm il modello ne
+rileva poche (4–6 su 26): la risoluzione non è l'unica causa.
+
+**Due fatti sui dati.** Il secondo lotto di dieci pazienti, atteso da agosto, non è arrivato: quando
+arriva è il test set, e non si guarda prima della configurazione finale. In `/data01/fsm_mri_data/`
+c'è un undicesimo paziente, `FSM_028`, preparato ad aprile da un altro utente (T1, FLAIR e maschera
+binaria già a 1 mm in spazio T1, senza distinzione di fenotipo): non è usato, e prima di usarlo va
+chiesto al responsabile chi l'ha segmentato e se la maschera include il ventricolo.
+
 ## Cosa non conviene fare
 
 - **Training congiunto a testa condivisa** sui tre dataset: semantiche di label incompatibili.
