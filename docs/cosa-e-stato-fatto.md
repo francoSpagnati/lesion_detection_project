@@ -536,6 +536,31 @@ rimasto a norma 0.05 di quella del T1 — il modello e' ancora il 502 a solo T1.
 
 ---
 
+## 24. Il passo differenziato, e un difetto nel freno (16 e 22 settembre)
+
+```bash
+# i cinque fold sono girati da soli, accodati da attendi_gpu_e_lancia.sh fra il 15 sera e il 16
+python scripts/confronto_fold.py 504 nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50 \
+    nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50 --soglia-mm3 0
+```
+
+**Esito**: Dice medio fuori-fold **0.621**, il migliore delle quattro varianti (0.581 da zero,
+0.555 `zero` a passo uniforme, 0.596 `duplica`), con 7 coppie su 10 in miglioramento rispetto a
+`zero`. La norma del filtro FLAIR passa da 0.04–0.08 volte quella del T1 a 0.65–2.7, cioe' nello
+stesso regime di un modello addestrato da zero: **la diagnosi del primo giro era giusta**, il
+canale nuovo non imparava perche' il passo era troppo piccolo, non perche' mancassero i dati.
+
+**Difetto trovato il 22 settembre.** Il freno sui canali pre-addestrati scalava il gradiente
+dentro un hook, ma `torch.optim.SGD` aggiunge il decadimento dei pesi *dopo* l'hook e lo moltiplica
+per il passo del gruppo: il canale T1 ha ricevuto un decadimento cento volte piu' forte del suo
+passo. La norma del suo filtro e' scesa da 8.36 a 3.50–7.49 in proporzione alla durata del fold,
+con coseno 0.996–0.9998 rispetto alla partenza — direzione intatta, solo scala ridotta: decadimento
+puro, non apprendimento. I run del 16 settembre restano validi come misura, ma **non sono a una
+variabile sola**: il T1 e' stato insieme frenato e rimpicciolito. Corretto mettendo il peso del
+primo strato in un gruppo con `weight_decay=0` e applicando il decadimento dentro il freno.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |

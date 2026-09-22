@@ -656,22 +656,63 @@ Il Dice per paziente dipende dalla forma della lesione più che dal modello: FSM
 sottile ad anello attorno a una cavità) sta a 0.04–0.06 con tutte e tre; FSM_040 (cavità da 56 ml)
 a 0.83–0.92.
 
+### Il passo differenziato: la diagnosi era giusta (16 settembre)
+
+Trainer `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50`, cinque fold conclusi
+fra il 15 e il 16 settembre. Il primo strato va in un gruppo dell'ottimizzatore a `1e-2`, tutto il
+resto resta a `1e-4`, e uno scheduler per gruppo fa decadere ciascuno dal proprio passo. Il primo
+strato è un solo tensore `[32, 2, 3, 3, 3]` con entrambi i canali: un hook sul gradiente frena la
+fetta del T1 di un fattore 0.01, così il filtro pre-addestrato resta di fatto a `1e-4` e solo la
+FLAIR impara a passo pieno. Il log dei run conferma che il meccanismo era attivo davvero e non
+solo nella verifica a CPU.
+
+| Variante | Dice medio | Coppie vinte contro `zero 1e-4` |
+| --- | --- | --- |
+| da zero (riferimento) | 0.581 | — |
+| B `zero`, passo `1e-4` | 0.555 | — |
+| B `duplica`, passo `1e-4` | 0.596 | — |
+| **B `zero`, primo strato `1e-2`** | **0.621** | **7 / 10** |
+
+Il numero che conta non è la media ma la diagnosi che la spiega. La norma del filtro FLAIR rispetto
+a quella del T1, primo strato, fold per fold:
+
+| Variante | rapporto FLAIR / T1 |
+| --- | --- |
+| B `zero`, passo `1e-4` | 0.044 – 0.077 |
+| B `duplica` | 1.18 – 1.41 |
+| B `zero`, primo strato `1e-2` | 0.65 – 2.72 |
+| da zero | 0.98 – 1.31 |
+
+Con il passo differenziato il canale FLAIR entra nello stesso regime di un modello addestrato da
+zero, mentre a `1e-4` restava a un ventesimo. **La causa individuata dopo il primo giro era quella
+giusta**: non mancavano i dati, mancava il passo sul canale nuovo. Il guadagno è +0.065 di Dice
+sulla stessa variante a passo uniforme e +0.039 sul modello da zero, con 7 coppie su 10 in
+miglioramento; su FSM_039 la differenza è +0.438, da 0.036 a 0.474.
+
+**Il confronto però non è pulito, per un difetto del freno.** L'hook scalava il gradiente, ma
+`torch.optim.SGD` aggiunge il decadimento dei pesi *dopo* l'hook e lo moltiplica per il passo del
+gruppo: la fetta del T1 ha quindi ricevuto un decadimento cento volte più forte del suo passo. Si
+vede nei numeri: la norma del filtro T1 scende da 8.36 a 3.50–7.49, tanto più quanto più a lungo
+gira il fold (223 epoche → 3.50; 66 epoche → 7.49), e il coseno con il filtro di partenza resta fra
+0.996 e 0.9998. Direzione intatta, solo la scala ridotta: non è apprendimento, è decadimento. Il
+canale T1 è stato quindi frenato come voluto *e* rimpicciolito come non voluto, e le due cose non
+sono separate in questi run. Corretto il 22 settembre mettendo il peso del primo strato in un
+gruppo con `weight_decay=0` e applicando il decadimento dentro il freno, dove viene scalato insieme
+al gradiente; verificato numericamente che l'aggiornamento della fetta pre-addestrata vale ora
+esattamente `1e-4 · (gradiente + wd · peso)`.
+
 **Prossimi esperimenti, in ordine di costo, una variabile ciascuno:**
 
-1. **Passo differenziato — in corso dal 15 settembre sera**, trainer
-   `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50`: il primo strato va in un
-   gruppo dell'ottimizzatore a `1e-2`, tutto il resto resta a `1e-4`, e uno scheduler per gruppo
-   fa decadere ciascuno dal proprio passo. Il primo strato è un solo tensore `[32, 2, 3, 3, 3]`
-   con entrambi i canali: un hook sul gradiente frena la fetta del T1 di un fattore 0.01, così il
-   filtro pre-addestrato resta di fatto a `1e-4` e solo la FLAIR impara a passo pieno. Verificato a
-   CPU: per passo la FLAIR si muove 100 volte più del T1. Una sola variabile rispetto a T1.
-   Il confronto che conta: `confronto_fold.py 504 <T1 zero> <T1 primo1e2>`, più la norma del
-   filtro FLAIR, che stavolta deve crescere.
-2. **Stadio 2 su WMH**: la rete espansa addestrata sui 79 casi a due canali di Dataset512 (piano
+1. **Ripetere il passo differenziato con il freno corretto**: stessa configurazione, cinque fold.
+   Separa «la FLAIR ha imparato» da «il T1 si è ristretto» e rende il confronto a una variabile.
+2. **Passo `1e-3` su tutto** (il T3 del piano): il controllo che dice se serviva davvero un passo
+   *differenziato* o solo un passo *più grande*. Senza questo, il risultato qui sopra resta
+   ambiguo.
+3. **Stadio 2 su WMH**: la rete espansa addestrata sui 79 casi a due canali di Dataset512 (piano
    `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi adattata su
    504. Risponde alla stessa diagnosi con i dati invece che con il passo.
-3. Passo `1e-3` su tutto (il T3 del piano).
-4. Modality dropout, per l'uso a un solo canale: dopo, come variabile a sé.
+4. **Modality dropout**, per l'uso a un solo canale: dopo, come variabile a sé. Il responsabile
+   ha chiesto che il modello possa funzionare anche con una sola sequenza in ingresso.
 
 | Modello | Domanda | Stato |
 | --- | --- | --- |

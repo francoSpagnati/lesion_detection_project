@@ -268,13 +268,22 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
     def configure_optimizers(self):
         if self.lr_primo_strato is None:
             return super().configure_optimizers()
-        primo = list(self._primo_strato().parameters())
-        ids = {id(p) for p in primo}
+        peso = self._primo_strato().weight
+        primo = [p for p in self._primo_strato().parameters() if p is not peso]   # il bias
+        ids = {id(p) for p in primo} | {id(peso)}
         resto = [p for p in self.network.parameters() if id(p) not in ids]
-        # il gruppo del resto per primo: nnU-Net logga il passo di param_groups[0]
+        # il gruppo del resto per primo: nnU-Net logga il passo di param_groups[0].
+        # Il PESO del primo strato sta in un gruppo a se' con weight_decay=0: il freno sui
+        # canali pre-addestrati vive in un hook sul gradiente, e l'ottimizzatore aggiunge il
+        # decadimento DOPO, al passo del gruppo. Lasciandolo qui il canale T1 riceverebbe un
+        # decadimento cento volte piu' forte del suo passo -- e' successo davvero nei run del
+        # 15 settembre, dove la norma del filtro T1 e' scesa da 8.36 a 3.5 con coseno 0.996
+        # rispetto alla partenza: non aveva imparato niente, si era solo ristretto. Il
+        # decadimento del peso lo applica il freno, cosi' viene scalato insieme al gradiente.
         optimizer = torch.optim.SGD(
             [{'params': resto, 'lr': self.initial_lr},
-             {'params': primo, 'lr': self.lr_primo_strato}],
+             {'params': primo, 'lr': self.lr_primo_strato},
+             {'params': [peso], 'lr': self.lr_primo_strato, 'weight_decay': 0.0}],
             self.initial_lr, weight_decay=self.weight_decay, momentum=0.99, nesterov=True)
         self.print_to_log_file(
             f'passo differenziato: primo strato ({sum(p.numel() for p in primo)} parametri) a '
@@ -286,8 +295,13 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
         fattore = self.initial_lr / self.lr_primo_strato
         peso = self._primo_strato().weight
 
+        wd = self.weight_decay
+
         def freno(grad):
-            g = grad.clone()
+            # il gruppo di questo peso ha weight_decay=0 (vedi configure_optimizers): il
+            # decadimento va aggiunto qui, prima del freno, cosi' i canali pre-addestrati lo
+            # ricevono scalato come il resto del loro aggiornamento e non cento volte tanto.
+            g = grad + wd * peso.detach()
             g[:, vecchi] *= fattore
             return g
 
@@ -295,6 +309,8 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
         self.print_to_log_file(
             f'  canali {[canali_nuovi[i] for i in vecchi]} del primo strato frenati di '
             f'{fattore:g}: passo effettivo {self.initial_lr}; gli altri a {self.lr_primo_strato}')
+        self.print_to_log_file(
+            f'  decadimento dei pesi ({wd:g}) applicato dentro il freno, non dall\'ottimizzatore')
 
     def _installa_caricamento_espandibile(self):
         from nnunetv2.run import run_training
