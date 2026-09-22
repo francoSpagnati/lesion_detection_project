@@ -285,9 +285,12 @@ class nnUNetTrainerEspansioneCanali(nnUNetTrainerWandb):
              {'params': primo, 'lr': self.lr_primo_strato},
              {'params': [peso], 'lr': self.lr_primo_strato, 'weight_decay': 0.0}],
             self.initial_lr, weight_decay=self.weight_decay, momentum=0.99, nesterov=True)
+        # il conteggio somma i due gruppi del primo strato (peso + bias): stanno separati solo
+        # per il weight_decay, il passo e' lo stesso
         self.print_to_log_file(
-            f'passo differenziato: primo strato ({sum(p.numel() for p in primo)} parametri) a '
-            f'{self.lr_primo_strato}, resto ({sum(p.numel() for p in resto)}) a {self.initial_lr}')
+            f'passo differenziato: primo strato ({peso.numel() + sum(p.numel() for p in primo)} '
+            f'parametri) a {self.lr_primo_strato}, resto ({sum(p.numel() for p in resto)}) a '
+            f'{self.initial_lr}')
         return optimizer, PolyLRSchedulerPerGruppo(optimizer, self.initial_lr, self.num_epochs)
 
     def _frena_canali_preaddestrati(self, canali_nuovi, canali_pre):
@@ -407,9 +410,44 @@ class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50(
         nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50):
     """Come la variante `zero` misurata su 504, con una sola differenza: il canale FLAIR del
     primo strato impara a passo pieno (1e-2) invece che a 1e-4. Il filtro T1 dello stesso
-    strato e tutto il resto della rete restano a 1e-4."""
+    strato e tutto il resto della rete restano a 1e-4.
+
+    ATTENZIONE ai risultati gia' in archivio sotto questo nome (504, 15-16 settembre): sono
+    stati prodotti prima che il freno fosse corretto, quando il decadimento dei pesi sfuggiva
+    allo scalamento e il filtro T1 veniva decaduto cento volte piu' del dovuto. Restano una
+    misura valida ma non a una variabile sola. La ripetizione pulita sta sotto il nome
+    `..._primo1e2_wdfix_arresto50`, che con il codice di oggi e' identico a questo."""
 
     lr_primo_strato = 1e-2
+
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50):
+    """Stessa ricetta della classe sopra, eseguita con il freno corretto (22 settembre).
+
+    Il nome e' diverso solo per non sovrascrivere i risultati del 15-16 settembre: il confronto
+    fra i due dice quanto del guadagno veniva dal passo sulla FLAIR e quanto dal restringimento
+    involontario del filtro T1."""
+
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50(
+        nnUNetTrainerEspansioneCanali_zero):
+    """Il controllo del passo differenziato: passo 1e-3 su TUTTA la rete, nessuna
+    differenziazione fra primo strato e resto.
+
+    Serve a rispondere alla domanda che il passo differenziato da solo lascia aperta: il canale
+    FLAIR ha imparato perche' il suo passo era grande, o sarebbe bastato alzare il passo
+    ovunque? Se questo arriva allo stesso Dice, la complicazione del freno non si giustifica;
+    se resta indietro, vuol dire che il resto della rete pre-addestrata va davvero tenuto
+    lento. Una sola variabile rispetto a `..._zero_250ep_lr1e4_arresto50`: il passo."""
+
+    pazienza_val = 50
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.num_epochs = 250
+        self.initial_lr = 1e-3
 
 
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

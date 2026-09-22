@@ -27,7 +27,7 @@ export SOGLIA_MEM
 # L'ULTIMO trainer della coda di run_aincp_504.sh: un fold e' finito quando ha il suo
 # checkpoint. Cosi' aggiungere una variante in fondo alla coda basta a far ripartire i fold,
 # e le variante gia' fatte vengono saltate da run_aincp_504.sh stesso.
-ULTIMO_TRAINER=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50
+ULTIMO_TRAINER=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50
 
 log() { echo "[$(date '+%d/%m %H:%M')] $*"; }
 

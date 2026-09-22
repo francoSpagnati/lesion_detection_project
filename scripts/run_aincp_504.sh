@@ -53,4 +53,13 @@ lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50 "$PESI"
 lancia nnUNetTrainerWandb_250ep_arresto50
 lancia nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50 "$PESI"
 lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50 "$PESI"
+
+# Terzo giro (22 settembre). Il freno del passo differenziato scalava il gradiente ma non il
+# decadimento dei pesi, che SGD aggiunge dopo l'hook e moltiplica per il passo del gruppo: nei run
+# del 16 il filtro T1 e' stato decaduto cento volte piu' del dovuto (norma da 8.36 a 3.50, coseno
+# 0.996 con la partenza -- si era solo ristretto). Corretto il freno, la ricetta si ripete sotto un
+# nome nuovo per non sovrascrivere quei risultati, e si aggiunge il controllo che le da' senso:
+# passo 1e-3 uniforme, per sapere se serviva un passo *differenziato* o solo un passo *piu' grande*.
+lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50 "$PESI"
+lancia nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50 "$PESI"
 echo "[$(date +%H:%M)] coda fold $FOLD finita"
