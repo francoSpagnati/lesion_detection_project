@@ -784,6 +784,44 @@ il modello da zero sulla gliosi *e* i pre-addestrati sulle cavità con evidenza 
 FLAIR, ed è quella con meno falsi positivi. Il passo 1e-3 uniforme sarebbe più semplice e ha lo
 stesso Dice, ma non mostra di usare la FLAIR.
 
+### Con la soglia di 1 mm³ decisa il 23 settembre
+
+Metriche ricalcolate con `--soglia-mm3 1.001` (le componenti fino a 1 mm³ ignorate sia nel
+riferimento sia nella predizione): restano **47 lesioni**. Report in
+`reports/metriche_per_lesione_504_<trainer>_soglia1.md`.
+
+| Variante | rilevate su 47 | sopra 50 mm³ (18) | falsi positivi / paziente |
+| --- | --- | --- | --- |
+| da zero | 25 (53%) | 18 | 3.9 |
+| B `zero` 1e-4 (FLAIR spenta) | 20 (43%) | 15 | 0.8 |
+| B `duplica` 1e-4 | 19 (40%) | 15 | 1.5 |
+| B differenziato, freno difettoso | 22 (47%) | 17 | 1.2 |
+| **B differenziato, freno corretto** | 21 (45%) | 17 | 0.9 |
+| B 1e-3 uniforme | 21 (45%) | 17 | 1.0 |
+
+Differenziato corretto contro da zero: 4 lesioni in meno (meno in 3 pazienti, p = 0.25, non
+significativo), falsi positivi da 39 a 9 (meno in 8 pazienti su 10, p = 0.02). Il compromesso è
+quello classico: il modello da zero trova qualche lesione in più con quattro volte i falsi
+positivi. **Correzione**: il «100% delle lesioni sopra 50 mm³» scritto in precedenza vale per il
+modello da zero; la ricetta scelta ne trova 17 su 18, e già senza soglia (la soglia non tocca le
+lesioni più grandi di 1 mm³).
+
+### Stadio 2: `Dataset542_WMH_MNI` (dal 23 settembre, in corso)
+
+WMH a due canali (0 FLAIR, 1 T1) portato su MNI152NLin2009aSym, lo spazio di ATLAS, con
+`scripts/make_wmh_mni_dataset.py`; piano `nnUNetPlansDa502` trasferito da 502 con le tre correzioni
+per canale, split copiato da 512. Fold 0, pesi di partenza 502, `scripts/run_stadio2_542.sh`:
+
+| trainer | passo | modality dropout | domanda |
+| --- | --- | --- | --- |
+| `nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50` | differenziato | 0.3 | impara la FLAIR senza dimenticare le cavità? |
+| `nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50` | 1e-3 uniforme | 0.3 | adattando di più tutta la rete, quanto si dimentica? |
+
+Si leggono con il Dice su WMH (riferimento 512: 0.753) e con la rete applicata ai casi di
+validazione di ATLAS con la FLAIR vuota (riferimento 502: 0.610): la seconda misura l'oblio delle
+cavità. Il modality dropout è in `nnUNetTrainerWandb.DropoutModalita`, verificato a CPU (30% degli
+esempi con un canale azzerato, metà FLAIR e metà T1, segmentazione intatta).
+
 **Prossimi esperimenti, in ordine, una variabile ciascuno:**
 
 1. **Concluso il 23 settembre**: il terzo giro, qui sopra. Ricetta scelta: passo differenziato

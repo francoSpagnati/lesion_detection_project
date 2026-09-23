@@ -629,6 +629,28 @@ salva ancora `checkpoint_val_best.pth`, che a fine addestramento è una copia di
 
 ---
 
+## 28. Dopo l'incontro del 23 settembre: MNI, soglia, stadio 2
+
+```bash
+python scripts/confronto_template_aincp.py         # template adulto contro pediatrico, ~20 min
+python scripts/elenco_residui_annotazione.py       # componenti <= 1 mm3, per il clinico
+python scripts/make_wmh_mni_dataset.py --processi 12 && nnUNetv2_extract_fingerprint -d 542 -np 16
+python scripts/make_wmh_mni_dataset.py --piano && nnUNetv2_preprocess -d 542 -plans_name nnUNetPlansDa502 -c 3d_fullres -np 16
+CUDA_VISIBLE_DEVICES=1 setsid nohup bash scripts/run_stadio2_542.sh <trainer> > reports/logs/stadio2_<breve>.log 2>&1 < /dev/null &
+```
+
+Decisioni dell'incontro: standardizzazione in MNI con ritorno al nativo alla fine; componenti fino a
+1 mm³ tolte; 17 pazienti a 1.5 T in arrivo e nessun altro; split 70/30 stratificato per centro;
+Proposta B confermata. Misurato che la proporzione di cervello lesionato si conserva in MNI (mediana
+−10%) e che il template pediatrico MNIPediatricAsym allinea meglio (Dice 0.95–0.98 contro 0.82–0.93)
+senza togliere l'ingrandimento. Le maschere del cervello (SynthStrip) sono salvate come
+`data/processed/AINCP/<soggetto>/cervello_inT1.nii.gz` e `cervello_FLAIR_originale.nii.gz`, le
+trasformazioni verso il template pediatrico in `transforms_ped/`, i template in `data/templates/`.
+Aggiunto il modality dropout al trainer di base. Costruito `Dataset542_WMH_MNI` e lanciato lo
+stadio 2 in due varianti. Metriche di 504 ricalcolate con la soglia: 47 lesioni.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |

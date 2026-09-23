@@ -1,0 +1,202 @@
+{
+ "FSM_032": {
+  "adulto": {
+   "scala_affine": 2.2450389509157884,
+   "lesione_ml_nativo": 123.42381304979286,
+   "lesione_ml_template": 254.32500000000002,
+   "perc_nativo": 9.152827179658443,
+   "perc_template": 9.403646318629148,
+   "lesione_fuori_cervello_%": 0.02398505848815492,
+   "dice_cervello_template": 0.8216890379704099
+  },
+  "pediatrico": {
+   "scala_affine": 1.7016836381869853,
+   "lesione_ml_nativo": 123.42381304979286,
+   "lesione_ml_template": 193.954,
+   "perc_nativo": 9.152827179658443,
+   "perc_template": 9.116706001578411,
+   "lesione_fuori_cervello_%": 0.014951998927580767,
+   "dice_cervello_template": 0.969663321171795
+  }
+ },
+ "FSM_039": {
+  "adulto": {
+   "scala_affine": 1.8360117453246778,
+   "lesione_ml_nativo": 1.418052349853974,
+   "lesione_ml_template": 2.841,
+   "perc_nativo": 0.08760689781123064,
+   "perc_template": 0.11352021347074567,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.8592617704868134
+  },
+  "pediatrico": {
+   "scala_affine": 1.485873580742019,
+   "lesione_ml_nativo": 1.418052349853974,
+   "lesione_ml_template": 2.678,
+   "perc_nativo": 0.08760689781123064,
+   "perc_template": 0.12224319457346118,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9606559761975155
+  }
+ },
+ "FSM_040": {
+  "adulto": {
+   "scala_affine": 1.6211772654269796,
+   "lesione_ml_nativo": 55.618071671394006,
+   "lesione_ml_template": 79.232,
+   "perc_nativo": 4.039299158041849,
+   "perc_template": 3.5603215037900764,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9173410415870209
+  },
+  "pediatrico": {
+   "scala_affine": 1.5184741295507012,
+   "lesione_ml_nativo": 55.618071671394006,
+   "lesione_ml_template": 77.759,
+   "perc_nativo": 4.039299158041849,
+   "perc_template": 3.623661846861037,
+   "lesione_fuori_cervello_%": 0.0012860247688370478,
+   "dice_cervello_template": 0.9696181525118138
+  }
+ },
+ "FSM_041": {
+  "adulto": {
+   "scala_affine": 1.7653163529646052,
+   "lesione_ml_nativo": 1.946681438649719,
+   "lesione_ml_template": 2.842,
+   "perc_nativo": 0.1402816970373059,
+   "perc_template": 0.1282613679648053,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9195678452741578
+  },
+  "pediatrico": {
+   "scala_affine": 1.6152395602814882,
+   "lesione_ml_nativo": 1.946681438649719,
+   "lesione_ml_template": 2.262,
+   "perc_nativo": 0.1402816970373059,
+   "perc_template": 0.10555384972902246,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9743818650514818
+  }
+ },
+ "FSM_045": {
+  "adulto": {
+   "scala_affine": 2.4804773012756955,
+   "lesione_ml_nativo": 9.5129445509506,
+   "lesione_ml_template": 16.043,
+   "perc_nativo": 0.8584095007026092,
+   "perc_template": 0.699104755463676,
+   "lesione_fuori_cervello_%": 0.8913544848220407,
+   "dice_cervello_template": 0.9019075504905018
+  },
+  "pediatrico": {
+   "scala_affine": 2.1867295201510473,
+   "lesione_ml_nativo": 9.5129445509506,
+   "lesione_ml_template": 13.577,
+   "perc_nativo": 0.8584095007026092,
+   "perc_template": 0.623721731077026,
+   "lesione_fuori_cervello_%": 0.6702511600500847,
+   "dice_cervello_template": 0.9655362532625735
+  }
+ },
+ "FSM_046": {
+  "adulto": {
+   "scala_affine": 1.6256884648356784,
+   "lesione_ml_nativo": 0.47102194346916754,
+   "lesione_ml_template": 0.522,
+   "perc_nativo": 0.034708026043944906,
+   "perc_template": 0.023905345821510413,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9267174608509611
+  },
+  "pediatrico": {
+   "scala_affine": 1.5229899508042333,
+   "lesione_ml_nativo": 0.47102194346916754,
+   "lesione_ml_template": 0.46,
+   "perc_nativo": 0.034708026043944906,
+   "perc_template": 0.021511018083751745,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9757565333733701
+  }
+ },
+ "FSM_052": {
+  "adulto": {
+   "scala_affine": 1.8964497624493766,
+   "lesione_ml_nativo": 4.837426052593519,
+   "lesione_ml_template": 8.277000000000001,
+   "perc_nativo": 0.36975763860936467,
+   "perc_template": 0.3842539892407026,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9323164503736219
+  },
+  "pediatrico": {
+   "scala_affine": 1.70133331261437,
+   "lesione_ml_nativo": 4.837426052593519,
+   "lesione_ml_template": 7.76,
+   "perc_nativo": 0.36975763860936467,
+   "perc_template": 0.3677261539540513,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9743287420081501
+  }
+ },
+ "FSM_053": {
+  "adulto": {
+   "scala_affine": 1.7773537649731312,
+   "lesione_ml_nativo": 0.5923330603628901,
+   "lesione_ml_template": 0.759,
+   "perc_nativo": 0.04293395785646594,
+   "perc_template": 0.03363000700514375,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.910311498721356
+  },
+  "pediatrico": {
+   "scala_affine": 1.6371008002886565,
+   "lesione_ml_nativo": 0.5923330603628901,
+   "lesione_ml_template": 0.623,
+   "perc_nativo": 0.04293395785646594,
+   "perc_template": 0.02839104355997255,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9626872547550874
+  }
+ },
+ "FSM_054": {
+  "adulto": {
+   "scala_affine": 1.7061642906126095,
+   "lesione_ml_nativo": 33.77332419016293,
+   "lesione_ml_template": 52.614000000000004,
+   "perc_nativo": 2.53129714707521,
+   "perc_template": 2.30526766850484,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9049492225364288
+  },
+  "pediatrico": {
+   "scala_affine": 1.5880770689576613,
+   "lesione_ml_nativo": 33.77332419016293,
+   "lesione_ml_template": 53.411,
+   "perc_nativo": 2.53129714707521,
+   "perc_template": 2.4495020371623917,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9651420236908824
+  }
+ },
+ "FSM_056": {
+  "adulto": {
+   "scala_affine": 1.752062848588047,
+   "lesione_ml_nativo": 12.505466426014387,
+   "lesione_ml_template": 18.033,
+   "perc_nativo": 0.8830549361660072,
+   "perc_template": 0.7618984042510492,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.887024702648946
+  },
+  "pediatrico": {
+   "scala_affine": 1.6306716797762721,
+   "lesione_ml_nativo": 12.505466426014387,
+   "lesione_ml_template": 17.605,
+   "perc_nativo": 0.8830549361660072,
+   "perc_template": 0.7735431969281481,
+   "lesione_fuori_cervello_%": 0.0,
+   "dice_cervello_template": 0.9501122174893649
+  }
+ }
+}

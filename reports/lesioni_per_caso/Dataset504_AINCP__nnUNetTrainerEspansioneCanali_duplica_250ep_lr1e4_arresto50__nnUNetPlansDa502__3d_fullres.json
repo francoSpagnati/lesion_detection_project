@@ -8,7 +8,7 @@
   3,
   4
  ],
- "soglia_mm3": 0.0,
+ "soglia_mm3": 1.001,
  "classe": 1,
  "casi": [
   {
@@ -27,36 +27,12 @@
      "rilevata": false
     },
     {
-     "mm3": 0.3692842125892639,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.18464210629463196,
-     "rilevata": false
-    },
-    {
      "mm3": 1.1078526377677917,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.18464210629463196,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.7385684251785278,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.3692842125892639,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.18464210629463196,
      "rilevata": false
     }
    ],
-   "falsi_positivi": 1,
-   "componenti_predette": 12,
+   "falsi_positivi": 0,
+   "componenti_predette": 7,
    "voxel_mm3": 0.18464210629463196,
    "fold": 0
   },
@@ -72,8 +48,8 @@
      "rilevata": false
     }
    ],
-   "falsi_positivi": 3,
-   "componenti_predette": 6,
+   "falsi_positivi": 2,
+   "componenti_predette": 5,
    "voxel_mm3": 0.1846422255039215,
    "fold": 0
   },
@@ -89,8 +65,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 12,
-   "componenti_predette": 14,
+   "falsi_positivi": 4,
+   "componenti_predette": 6,
    "voxel_mm3": 0.18464206159114838,
    "fold": 1
   },
@@ -110,31 +86,7 @@
      "rilevata": false
     },
     {
-     "mm3": 0.738565981388092,
-     "rilevata": false
-    },
-    {
      "mm3": 4.800678879022598,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.369282990694046,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.369282990694046,
-     "rilevata": true
-    },
-    {
-     "mm3": 0.184641495347023,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.369282990694046,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.553924486041069,
      "rilevata": false
     },
     {
@@ -142,24 +94,12 @@
      "rilevata": false
     },
     {
-     "mm3": 0.738565981388092,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.923207476735115,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.738565981388092,
-     "rilevata": false
-    },
-    {
      "mm3": 2.031056448817253,
      "rilevata": false
     }
    ],
-   "falsi_positivi": 3,
-   "componenti_predette": 7,
+   "falsi_positivi": 1,
+   "componenti_predette": 4,
    "voxel_mm3": 0.184641495347023,
    "fold": 1
   },
@@ -191,8 +131,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 2,
-   "componenti_predette": 3,
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
    "voxel_mm3": 0.1846424788236618,
    "fold": 2
   },
@@ -218,18 +158,10 @@
     {
      "mm3": 64.2555878162384,
      "rilevata": true
-    },
-    {
-     "mm3": 0.369284987449646,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.184642493724823,
-     "rilevata": false
     }
    ],
-   "falsi_positivi": 4,
-   "componenti_predette": 9,
+   "falsi_positivi": 1,
+   "componenti_predette": 5,
    "voxel_mm3": 0.184642493724823,
    "fold": 2
   },
@@ -249,10 +181,6 @@
      "rilevata": false
     },
     {
-     "mm3": 0.18464206159114838,
-     "rilevata": false
-    },
-    {
      "mm3": 1.477136492729187,
      "rilevata": false
     },
@@ -262,14 +190,6 @@
     },
     {
      "mm3": 2.031062677502632,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.36928412318229675,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.7385682463645935,
      "rilevata": false
     },
     {
@@ -286,7 +206,7 @@
     }
    ],
    "falsi_positivi": 2,
-   "componenti_predette": 7,
+   "componenti_predette": 5,
    "voxel_mm3": 0.18464206159114838,
    "fold": 3
   },
@@ -312,10 +232,6 @@
     {
      "mm3": 3.1389153003692627,
      "rilevata": false
-    },
-    {
-     "mm3": 0.9232103824615479,
-     "rilevata": false
     }
    ],
    "falsi_positivi": 2,
@@ -331,8 +247,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 3,
-   "componenti_predette": 7,
+   "falsi_positivi": 2,
+   "componenti_predette": 6,
    "voxel_mm3": 0.18464206159114838,
    "fold": 4
   },
@@ -364,19 +280,7 @@
      "rilevata": false
     },
     {
-     "mm3": 0.3692832589149475,
-     "rilevata": false
-    },
-    {
      "mm3": 4.246757477521896,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.5539248883724213,
-     "rilevata": false
-    },
-    {
-     "mm3": 0.738566517829895,
      "rilevata": false
     }
    ],

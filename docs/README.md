@@ -58,7 +58,9 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP | sei varianti concluse (23/9). **Ricetta scelta: passo differenziato con il freno corretto** — gliosi al livello del modello da zero, cavità al livello dei pre-addestrati, falsi positivi 1.6 per paziente (10 su 10, p = 0.002). Prossimo: stadio intermedio su WMH |
+| Training su `504` AInCP | sei varianti concluse (23/9). Ricetta scelta: passo differenziato con il freno corretto. Con la soglia di 1 mm³ (47 lesioni): rilevate 21 contro 25 del modello da zero, falsi positivi 0.9 contro 3.9 per paziente |
+| **Stadio 2 su WMH in MNI** (`Dataset542`) | **in corso dal 23/9**, due varianti (passo differenziato, 1e-3), entrambe con modality dropout |
+| Incontro del 23/9 | standardizzazione in MNI (template pediatrico proposto), soglia 1 mm³, 17 pazienti a 1.5 T in arrivo, split 70/30 per centro. Dettaglio in [obiettivo-e-piano.md](obiettivo-e-piano.md) |
 | Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il paziente `FSM_028` in `/data01/fsm_mri_data/`; il secondo lotto, atteso da agosto |
 
 ### Da fare dopo

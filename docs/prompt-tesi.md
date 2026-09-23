@@ -331,4 +331,16 @@ un effetto della media pesata e non va usata. Il rapporto fra le norme dei filtr
 individua un canale spento, ma non misura quanto un canale è usato: per quello si usa la copertura
 per fenotipo.
 
+**23 settembre 2026 — decisioni del responsabile e piano finale.** Spazio standard: i pazienti
+vengono registrati su un template MNI e le predizioni riportate nello spazio nativo per volumi e
+metriche. Misurato: la proporzione di cervello lesionato si conserva (variazione relativa mediana
+−10%) anche se il volume assoluto cresce fino a 2 volte; il template pediatrico MNIPediatricAsym
+(Fonov et al. 2011) allinea l'anatomia dei bambini meglio di quello adulto (Dice del cervello
+0.95–0.98 contro 0.82–0.93) pur restando in scala MNI. Le componenti annotate fino a 1 mm³ sono
+residui del tracciato e si escludono (restano 47 lesioni sui primi dieci pazienti). In arrivo 17
+pazienti a 1.5 T, per un totale di 27: split 70/30 stratificato per centro di acquisizione, test
+usato una volta. Stadio 2 della Proposta B (WMH a due canali, in MNI) avviato, con modality
+dropout. **Correzione**: «100% delle lesioni sopra 50 mm³» vale per il modello da zero; la ricetta
+scelta ne trova 17 su 18.
+
 *(da completare alla fine: esperimenti successivi, decisione finale, eventuali lotti successivi)*

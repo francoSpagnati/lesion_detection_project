@@ -680,6 +680,79 @@ c'è un undicesimo paziente, `FSM_028`, preparato ad aprile da un altro utente (
 binaria già a 1 mm in spazio T1, senza distinzione di fenotipo): non è usato, e prima di usarlo va
 chiesto al responsabile chi l'ha segmentato e se la maschera include il ventricolo.
 
+### Incontro del 23 settembre: decisioni e piano del training finale
+
+**Spazio di lavoro: standardizzazione in MNI** (indicazione del responsabile). La pipeline di un
+paziente nuovo sarà nativo → template → modello → nativo: si standardizza per il modello e si torna
+nello spazio del paziente per volumi e metriche. L'obiezione dell'11 settembre (il template adulto
+ingrandisce i bambini) è stata misurata contro l'argomento del responsabile, che conta la
+*proporzione* di cervello lesionato (`scripts/confronto_template_aincp.py`, maschera del cervello
+del paziente portata nel template con la stessa trasformazione della lesione):
+
+| | ingrandimento del cervello | % lesionata: variazione relativa | allineamento al template (Dice) |
+| --- | --- | --- | --- |
+| MNI152NLin2009aSym (adulto, di ATLAS) | 1.62–2.48, mediana 1.77 | mediana −10% (−31 … +30%) | 0.82–0.93 |
+| MNIPediatricAsym cohort-1 (4.5–18.5 anni) | 1.49–2.19, mediana 1.62 | mediana −11% (−38 … +40%) | **0.95–0.98** |
+
+Il responsabile ha ragione sulla proporzione: il volume assoluto cresce fino a 2 volte, la
+percentuale lesionata cambia di poco, e le variazioni grandi sono sulle lesioni sotto 1.5 ml, dove
+pochi voxel pesano molto. Il template pediatrico **non** toglie l'ingrandimento (è anch'esso in
+spazio MNI, con cervello da ~2 l) ma allinea molto meglio l'anatomia dei bambini, che è lo scopo
+della standardizzazione. **Proposta, da confermare: MNIPediatricAsym per AInCP**; ATLAS e WMH
+(adulti) nel template adulto. *(Correzione: una prima misura con SynthStrip applicato
+all'immagine già in MNI dava +50–55% su FSM_032 e FSM_039; misurava la maschera, non la
+registrazione, ed è stata sostituita.)* Per i pazienti nuovi, le età permetterebbero una coorte più
+stretta del template (sei disponibili).
+
+**Orientamento.** Le immagini appaiono «in verticale» nelle figure perché T1 e FLAIR sono acquisite
+in fette sagittali. L'ordine degli assi è lo stesso di ATLAS (sinistra-destra, antero-posteriore,
+supero-inferiore); in 6 pazienti su 10 il verso sinistra-destra è invertito (LAS contro RAS), cosa
+che il ribaltamento casuale dell'augmentation copre già. In MNI tutti diventano RAS.
+
+**Soglia: le componenti fino a 1 mm³ sono residui del tracciato**, per indicazione clinica. Si
+tolgono dal bersaglio e si ignorano simmetricamente nelle metriche. Sulle annotazioni originali
+sono 22, di cui 4 fuori dal cervello (SynthStrip sulla FLAIR originale; il vecchio criterio di
+intensità ne dava 3). L'elenco per il clinico, con paziente, file ROI, fetta sagittale e
+coordinate, è in `reports/residui_annotazione.md` (`scripts/elenco_residui_annotazione.py`). Con la
+soglia restano **47 lesioni** sui dieci pazienti.
+
+**Dati: 17 pazienti a 1.5 T in arrivo, nessun altro dopo.** Il totale sarà 27 (più FSM_028, se
+utilizzabile). L'esperienza su ATLAS dice che i dati a 1.5 T non peggiorano i modelli.
+
+**Split: 70% per il fine-tuning, 30% di test, consapevole del centro.** Centro e scanner equivalgono
+a parametri di acquisizione diversi: lo split va stratificato per centro (e campo magnetico), e i
+risultati riportati anche per centro. Con 27 pazienti: ~19 per l'addestramento (cinque fold per
+l'arresto anticipato e le scelte) e ~8 di test, usati una volta sola alla fine. Serve l'elenco del
+centro di ogni paziente. Nota da dichiarare: i dieci pazienti attuali hanno orientato la ricetta, e
+quelli che finiranno nel test porteranno un piccolo ottimismo.
+
+**Architettura: Proposta B confermata.**
+
+**Il training finale**, con tutto ciò che è stato misurato:
+
+| stadio | dati | spazio | cosa |
+| --- | --- | --- | --- |
+| 1 | ATLAS, 556 casi, T1 | MNI adulto | esistente: `Dataset502`, fold 0 |
+| 2 | WMH, 79 casi, FLAIR + T1 | MNI adulto | `Dataset542_WMH_MNI`, in corso dal 23/9 (sotto) |
+| 3 | AInCP, ~19 pazienti di addestramento | MNI pediatrico (da confermare) | cinque fold, insieme dei cinque modelli, test sugli ~8 |
+
+Allo stadio 3: soglia 1 mm³ sulle annotazioni; passo di adattamento da decidere in
+cross-validation sui soli pazienti di addestramento (la ricetta del 23/9 era pensata per un canale
+FLAIR nuovo, che dopo lo stadio 2 non lo è più); modality dropout (p = 0.3) per l'uso con una sola
+sequenza; arresto sulla perdita di validazione; metriche nello spazio nativo, per fenotipo, per
+dimensione e per centro.
+
+**Stadio 2, lanciato il 23 settembre** sulle GPU 1 e 2: WMH portato nel template di ATLAS
+(`scripts/make_wmh_mni_dataset.py`; contrasto locale delle lesioni conservato al 90% in mediana,
+sovrapposizioni controllate a occhio), piano e split di 512. Due varianti, una variabile fra loro:
+passo differenziato contro 1e-3 uniforme, entrambe con modality dropout. Il rischio che le separa è
+l'**oblio delle cavità**: WMH non ne ha, e riaddestrare tutta la rete a passo pieno potrebbe
+cancellare ciò che ATLAS ha insegnato. Si misura valutando la rete sui casi di ATLAS con la FLAIR
+vuota, oltre al Dice di validazione su WMH (512: 0.753).
+
+**Domande aperte**: centro (e scanner) di ognuno dei 27 pazienti; età, per la coorte del template;
+conferma del template pediatrico; FSM_028.
+
 ## Cosa non conviene fare
 
 - **Training congiunto a testa condivisa** sui tre dataset: semantiche di label incompatibili.

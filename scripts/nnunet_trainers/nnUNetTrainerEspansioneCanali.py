@@ -450,4 +450,46 @@ class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50(
         self.initial_lr = 1e-3
 
 
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50):
+    """La ricetta scelta il 23 settembre con il modality dropout: in un esempio su tre di
+    addestramento una delle due sequenze, a caso, viene azzerata. Una variabile rispetto alla
+    ricetta: serve a verificare in cross-validation che il dropout non costi nulla quando entrambe
+    le sequenze ci sono, prima di usarlo nel modello finale."""
+
+    p_dropout_modalita = 0.3
+
+
+# --- Stadio 2 della Proposta B: WMH a due canali in MNI (Dataset542), dai pesi di ATLAS (502) ------
+#
+# WMH non ha cavita': riaddestrando tutta la rete a passo pieno su WMH si rischia di cancellare il
+# sapere sulle cavita' portato da ATLAS, che su AInCP e' il vantaggio misurato (encefalomalacia da
+# 0.40 a 0.81 di copertura). Due varianti, una variabile fra loro (il passo), entrambe con il
+# modality dropout: (A) il passo differenziato, che tiene lento tutto tranne il primo strato;
+# (B) 1e-3 uniforme, che lascia adattare di piu' anche il resto. Il dropout serve anche a misurare
+# l'oblio: con la FLAIR a zero la rete deve ancora riconoscere le lesioni di ATLAS.
+
+class nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50(nnUNetTrainerEspansioneCanali_zero):
+    pazienza_val = 50
+    lr_primo_strato = 1e-2
+    p_dropout_modalita = 0.3
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.num_epochs = 500
+        self.initial_lr = 1e-4
+
+
+class nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50(nnUNetTrainerEspansioneCanali_zero):
+    pazienza_val = 50
+    p_dropout_modalita = 0.3
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.num_epochs = 500
+        self.initial_lr = 1e-3
+
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

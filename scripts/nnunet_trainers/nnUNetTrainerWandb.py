@@ -32,7 +32,38 @@ from pathlib import Path
 import torch
 from batchgenerators.utilities.file_and_folder_operations import isfile, join
 
+import numpy as np
+from batchgeneratorsv2.transforms.base.basic_transform import ImageOnlyTransform
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
+
+
+class DropoutModalita(ImageOnlyTransform):
+    """Azzera a caso UNA delle sequenze di un esempio di addestramento (modality dropout).
+
+    Serve al requisito del responsabile: un modello a due canali che si possa usare anche con una
+    sola sequenza. Con probabilita' `p` un esempio perde un canale scelto a caso, mai tutti; il
+    canale vale 0, che e' esattamente cio' che la rete riceve in inferenza quando la sequenza manca
+    (un'immagine nulla resta nulla dopo la normalizzazione z-score di nnU-Net).
+
+    Eredita da ImageOnlyTransform e non da BasicTransform: la seconda, se la trasformazione non
+    gestisce la segmentazione, la sostituisce con None."""
+
+    def __init__(self, p: float):
+        super().__init__()
+        self.p = p
+
+    def get_parameters(self, **data_dict) -> dict:
+        c = data_dict['image'].shape[0]
+        if c < 2 or np.random.rand() >= self.p:
+            return {'canale': None}
+        return {'canale': int(np.random.randint(c))}
+
+    def _apply_to_image(self, img: torch.Tensor, canale=None, **params) -> torch.Tensor:
+        if canale is None:
+            return img
+        img = img.clone()
+        img[canale] = 0
+        return img
 
 PROGETTO = Path('/home/ccantini/lesion_detection_project')
 
@@ -187,6 +218,18 @@ class nnUNetTrainerWandb(nnUNetTrainer):
     #
     # Il contatore riparte da zero se il training viene ripreso con `--c`: non vale la pena
     # di serializzarlo per run da 250 epoche.
+
+    # probabilita' di modality dropout per esempio (None = spento); vedi DropoutModalita
+    p_dropout_modalita = None
+
+    def get_training_transforms(self, *args, **kwargs):
+        # nnU-Net la dichiara statica ma la chiama come self.get_training_transforms(...): un metodo
+        # d'istanza qui la sostituisce e puo' leggere l'attributo della classe. Il dropout va in
+        # coda, dopo le trasformazioni d'intensita', cosi' il canale azzerato resta esattamente 0.
+        t = nnUNetTrainer.get_training_transforms(*args, **kwargs)
+        if self.p_dropout_modalita:
+            t.transforms.append(DropoutModalita(self.p_dropout_modalita))
+        return t
 
     pazienza_val = None
     _best_val_loss = None
