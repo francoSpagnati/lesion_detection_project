@@ -753,6 +753,36 @@ vuota, oltre al Dice di validazione su WMH (512: 0.753).
 **Domande aperte**: centro (e scanner) di ognuno dei 27 pazienti; età, per la coorte del template;
 conferma del template pediatrico; FSM_028.
 
+### Sera del 23 settembre: lo stadio 2 in sequenza dimentica, si passa al congiunto
+
+**Stadio 2 misurato** (`docs/modelli-ed-esperimenti.md`, `reports/oblio_atlas_stadio2.md`): su WMH
+la rete impara bene (0.735, contro 0.753 di 512), ma **dimentica le cavità di ATLAS** (con la FLAIR
+vuota, Dice da 0.610 a 0.217), in entrambe le varianti. Il training in sequenza butta lo strato di
+segmentazione a ogni passaggio. **Decisione: stadi 1 e 2 fusi in un training congiunto**
+(`Dataset543_ATLAS_WMH_MNI`, ATLAS con FLAIR vuota + WMH), reso possibile dal modality dropout. Il
+punto «training congiunto» di *Cosa non conviene fare* resta valido per DBB (etichette
+incompatibili), non per ATLAS + WMH, che hanno una sola classe `lesione` in comune.
+
+**Tutto è già in MNI tranne i pazienti**: ATLAS lo è di origine, WMH da 542. Non c'è niente da
+rifare negli stadi 1 e 2; lo spazio cambia solo allo stadio 3. I dieci pazienti sono ora anche nel
+template pediatrico (`Dataset505_AINCP_MNI`, la stessa pipeline che servirà per i 27), e 505 serve a
+provare la strategia prima che arrivino i 17: stesso split di 504, metriche riportate nel nativo.
+
+**Centro, campo ed età, dal foglio `SITE & MRFIELD` di `docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx`**:
+tutti e dieci i pazienti attuali sono **IRCCS Stella Maris, 3 T**; età 3–15 anni (FSM_032 ha 3 anni,
+sotto il criterio di inclusione dei 5 annotato nel foglio, e sotto la coorte 4.5–18.5 del template).
+Il foglio elenca 68 sessioni di 57 pazienti in 16 centri (18 grafie). Delle sessioni a 1.5 T, 20
+sono di Stella Maris (con un'etichetta di sito diversa da quella dei 3 T, quindi verosimilmente un
+altro scanner) e 18 di altri 13 centri, quasi tutti con una o due sessioni (Carpi 3, Niguarda,
+Microcitemico, San Pietro 2 ciascuno, …). Quando arrivano i 17 si incrocia il loro ID con il foglio:
+lo split 70/30 si stratifica per **centro e campo**, e con un solo centro a 3 T lo strato che conta
+sarà «Stella Maris 3 T / Stella Maris 1.5 T / altri centri». FSM_028 risulta Stella Maris 1.5 T.
+
+| stadio | dati | spazio | stato |
+| --- | --- | --- | --- |
+| 1+2 | ATLAS (FLAIR vuota) + WMH, 635 casi | MNI adulto | `Dataset543`, in corso |
+| 3 | AInCP: oggi 10 (505), poi ~19 di addestramento | MNI pediatrico | A, B su 505 in corso; D dopo 543 |
+
 ## Cosa non conviene fare
 
 - **Training congiunto a testa condivisa** sui tre dataset: semantiche di label incompatibili.

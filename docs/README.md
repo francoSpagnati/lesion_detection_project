@@ -59,7 +59,9 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 | Cosa | Stato |
 | --- | --- |
 | Training su `504` AInCP | sei varianti concluse (23/9). Ricetta scelta: passo differenziato con il freno corretto. Con la soglia di 1 mm³ (47 lesioni): rilevate 21 contro 25 del modello da zero, falsi positivi 0.9 contro 3.9 per paziente |
-| **Stadio 2 su WMH in MNI** (`Dataset542`) | **in corso dal 23/9**, due varianti (passo differenziato, 1e-3), entrambe con modality dropout |
+| **Stadio 2 su WMH in MNI** (`Dataset542`) | concluso il 23/9: impara WMH (0.735) ma **dimentica le cavità di ATLAS** (0.610 → 0.217 con FLAIR vuota), in entrambe le varianti. Sostituito dal congiunto |
+| **Stadi 1+2 congiunti** (`Dataset543`, ATLAS con FLAIR vuota + WMH) | in corso dal 23/9 sulla GPU 1 |
+| **Stadio 3 nel template pediatrico** (`Dataset505`, i dieci pazienti) | esperimenti A (pesi 502) e B (pesi 542) in corso sulle GPU 2 e 3; D dai pesi di 543 dopo. Metriche nel nativo con `scripts/porta_505_nativo.py` |
 | Incontro del 23/9 | standardizzazione in MNI (template pediatrico proposto), soglia 1 mm³, 17 pazienti a 1.5 T in arrivo, split 70/30 per centro. Dettaglio in [obiettivo-e-piano.md](obiettivo-e-piano.md) |
 | Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il paziente `FSM_028` in `/data01/fsm_mri_data/`; il secondo lotto, atteso da agosto |
 
@@ -72,7 +74,6 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 | Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
 | Transfer DBB → ATLAS | pianificato |
 | Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
-| **Stadio 2 della Proposta B: WMH a due canali con i pesi espansi, prima di AInCP** | **prossimo esperimento principale** (22/9): la gliosi è l'unico fenotipo su cui la Proposta B resta sotto il modello da zero, e WMH è il fenotipo più vicino |
 | Modality dropout (uso del modello con un solo canale) | variabile a sé, dopo la prima catena |
 | Dataset privato AInCP | **primo lotto arrivato l'11/9**: 10 pazienti, analizzati e preprocessati (`notebooks/aincp_primo_lotto.ipynb`) |
 | Stadio 2 — inpainting e gemello sano | dopo la segmentazione |

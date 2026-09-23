@@ -806,7 +806,7 @@ positivi. **Correzione**: il «100% delle lesioni sopra 50 mm³» scritto in pre
 modello da zero; la ricetta scelta ne trova 17 su 18, e già senza soglia (la soglia non tocca le
 lesioni più grandi di 1 mm³).
 
-### Stadio 2: `Dataset542_WMH_MNI` (dal 23 settembre, in corso)
+### Stadio 2: `Dataset542_WMH_MNI` (23 settembre): impara WMH, dimentica le cavità
 
 WMH a due canali (0 FLAIR, 1 T1) portato su MNI152NLin2009aSym, lo spazio di ATLAS, con
 `scripts/make_wmh_mni_dataset.py`; piano `nnUNetPlansDa502` trasferito da 502 con le tre correzioni
@@ -821,6 +821,60 @@ Si leggono con il Dice su WMH (riferimento 512: 0.753) e con la rete applicata a
 validazione di ATLAS con la FLAIR vuota (riferimento 502: 0.610): la seconda misura l'oblio delle
 cavità. Il modality dropout è in `nnUNetTrainerWandb.DropoutModalita`, verificato a CPU (30% degli
 esempi con un canale azzerato, metà FLAIR e metà T1, segmentazione intatta).
+
+**Risultati** (fold 0, arresto sulla perdita di validazione alle epoche 207 e 192;
+`reports/oblio_atlas_stadio2.md`, `scripts/oblio_atlas_stadio2.py`):
+
+| variante | Dice WMH (16 casi, in MNI) | Dice ATLAS con FLAIR vuota (112 casi) |
+| --- | --- | --- |
+| 512, riferimento (spazio nativo) | 0.753 | — |
+| 502, riferimento | — | **0.610** |
+| 1e-3 uniforme | **0.735** (meglio in 16 casi su 16, p = 3·10⁻⁵) | 0.217 (peggio in 96 su 112, p = 10⁻¹⁶) |
+| passo differenziato | 0.708 | 0.220 |
+
+Su WMH la variante a 1e-3 è a −0.02 da 512 (p = 0.14; 512 è misurato nello spazio nativo, quindi il
+confronto è solo indicativo). **Ma entrambe hanno dimenticato ATLAS**: il Dice sulle cavità crolla
+da 0.61 a 0.22, e sulle lesioni piccole (terzile sotto 1.5 ml) da 0.49 a 0.04. Tenere lento il resto
+della rete non serve: le due varianti dimenticano uguale. La causa più probabile è che nnU-Net
+**non trasferisce lo strato di segmentazione finale** (`seg_layers`): allo stadio 2 viene
+riaddestrato da capo sui soli WMH, e il criterio di decisione della rete diventa quello di WMH. È il
+motivo già scritto contro la catena DBB → ATLAS → WMH in `obiettivo-e-piano.md`.
+
+### Stadio 1+2 congiunto: `Dataset543_ATLAS_WMH_MNI` (dal 23 settembre, in corso)
+
+La risposta all'oblio: ATLAS e WMH **nello stesso training**, così la rete li rivede entrambi a ogni
+epoca. 635 casi in MNI adulto (556 ATLAS con la FLAIR tutta zero, 79 WMH), una classe `lesione`,
+split = unione dei fold di 502 e 542 (validazione del fold 0: gli stessi 112 + 16 casi, confronti
+appaiati). `scripts/make_union_atlas_wmh_mni.py`. Il vecchio ostacolo («nnU-Net vuole tutti i canali
+per tutti i casi») cade col modality dropout: una FLAIR vuota è esattamente ciò che la rete vede
+quando il dropout spegne la FLAIR. Trainer `..._zero_500ep_lr1e3_dropmod30_arresto50` dai pesi di
+502, lo stesso della variante migliore di 542: una variabile rispetto a 542, i dati. Criteri: Dice su
+ATLAS vicino a 0.610 **e** Dice su WMH vicino a 0.735, dalla validazione di nnU-Net separata per sorgente.
+
+### Stadio 3 nel template pediatrico: `Dataset505_AINCP_MNI` (dal 23 settembre, in corso)
+
+I dieci pazienti in MNIPediatricAsym cohort-1, che ha **la stessa griglia di ATLAS** (197×233×189 a
+1 mm, stessa origine). `scripts/make_aincp_mni_dataset.py`: FLAIR ed etichetta portate dalla griglia
+originale al template in una sola interpolazione (rigida FLAIR→T1 composta con SyN T1→template),
+etichetta senza le 22 componenti fino a 1 mm³ e trasportata con interpolazione lineare e soglia 0.5.
+Split identico a 504. Controllo a vista: allineamento corretto in tutti e dieci. Nel passaggio a 1 mm
+le lesioni sottili si spezzano (FSM_052: da 5 a 13 componenti): tocca il bersaglio di addestramento,
+non le metriche, che si fanno nel nativo.
+
+**Il ritorno al nativo** (`scripts/porta_505_nativo.py`, trasformazione inversa, lineare + soglia 0.5)
+ha un costo che fa da tetto a qualunque modello: l'etichetta di 505 riportata nel nativo ricalca
+quella di 504 con Dice 0.72–0.97 (media 0.867). Il tetto analogo di 504 (1 mm di nnU-Net e ritorno) è
+0.79–0.98 (media 0.886). La perdita viene quasi tutta dalla griglia a 1 mm, che serve comunque per
+i pesi di ATLAS; il template aggiunge ~0.02, solo sui pazienti con lesioni minuscole (FSM_046, 041, 053).
+
+| esperimento | pesi | trainer | confronto |
+| --- | --- | --- | --- |
+| A | 502 | `..._zero_250ep_lr1e4_primo1e2_wdfix_arresto50` | contro la stessa ricetta su 504: **nativo o template** |
+| B | 542 (1e-3) | `..._zero_250ep_lr1e4_arresto50_da542` | contro A: lo stadio 2 in sequenza serve ai pazienti? |
+| D | 543 | da decidere a 543 finito | contro A e B: lo stadio congiunto |
+
+Da pesi a due canali il passo differenziato non ha senso (non c'è un canale nuovo, frenerebbe
+entrambi): da 542 e 543 si usano passi uniformi. `scripts/run_aincp_505.sh <A|B|C>`.
 
 **Prossimi esperimenti, in ordine, una variabile ciascuno:**
 

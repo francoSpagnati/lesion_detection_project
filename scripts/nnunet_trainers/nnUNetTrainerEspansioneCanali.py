@@ -492,4 +492,22 @@ class nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50(nnUNetT
         self.num_epochs = 500
         self.initial_lr = 1e-3
 
+# --- Stadio 3 dai pesi dello stadio 2 (Dataset505, pazienti nel template pediatrico) ----------------
+#
+# I pesi di 542 hanno gia' i due canali, FLAIR e T1, entrambi addestrati: non c'e' un canale nuovo da
+# far correre, e il passo differenziato frenerebbe tutti e due, cioe' degenererebbe in 1e-4 uniforme.
+# Da questi pesi le ricette sensate sono quindi due passi uniformi, 1e-4 e 1e-3. Le classi non
+# aggiungono nulla alle madri: esistono perche' il nome della cartella dei risultati dica da quali
+# pesi si e' partiti, che nnU-Net non registra nel percorso.
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50_da542(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50):
+    """Stadio 3 da 542, passo 1e-4 su tutta la rete."""
+
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50_da542(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50):
+    """Stadio 3 da 542, passo 1e-3 su tutta la rete."""
+
+
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

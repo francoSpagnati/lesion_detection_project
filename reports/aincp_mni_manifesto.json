@@ -1,0 +1,82 @@
+{
+ "FSM_032": {
+  "componenti": 11,
+  "tolte_fino_a_1mm3": 8,
+  "ml_prima": 123.473,
+  "ml_dopo": 123.471,
+  "componenti_nel_template": 7,
+  "ml_nel_template": 194.241
+ },
+ "FSM_039": {
+  "componenti": 2,
+  "tolte_fino_a_1mm3": 0,
+  "ml_prima": 1.43,
+  "ml_dopo": 1.43,
+  "componenti_nel_template": 5,
+  "ml_nel_template": 2.59
+ },
+ "FSM_040": {
+  "componenti": 11,
+  "tolte_fino_a_1mm3": 2,
+  "ml_prima": 55.663,
+  "ml_dopo": 55.663,
+  "componenti_nel_template": 17,
+  "ml_nel_template": 77.75
+ },
+ "FSM_041": {
+  "componenti": 6,
+  "tolte_fino_a_1mm3": 1,
+  "ml_prima": 1.958,
+  "ml_dopo": 1.957,
+  "componenti_nel_template": 4,
+  "ml_nel_template": 2.179
+ },
+ "FSM_045": {
+  "componenti": 2,
+  "tolte_fino_a_1mm3": 1,
+  "ml_prima": 9.513,
+  "ml_dopo": 9.513,
+  "componenti_nel_template": 2,
+  "ml_nel_template": 13.627
+ },
+ "FSM_046": {
+  "componenti": 2,
+  "tolte_fino_a_1mm3": 0,
+  "ml_prima": 0.471,
+  "ml_dopo": 0.471,
+  "componenti_nel_template": 6,
+  "ml_nel_template": 0.428
+ },
+ "FSM_052": {
+  "componenti": 5,
+  "tolte_fino_a_1mm3": 0,
+  "ml_prima": 4.934,
+  "ml_dopo": 4.934,
+  "componenti_nel_template": 13,
+  "ml_nel_template": 7.817
+ },
+ "FSM_053": {
+  "componenti": 5,
+  "tolte_fino_a_1mm3": 0,
+  "ml_prima": 0.602,
+  "ml_dopo": 0.602,
+  "componenti_nel_template": 5,
+  "ml_nel_template": 0.615
+ },
+ "FSM_054": {
+  "componenti": 14,
+  "tolte_fino_a_1mm3": 8,
+  "ml_prima": 33.77,
+  "ml_dopo": 33.766,
+  "componenti_nel_template": 13,
+  "ml_nel_template": 53.007
+ },
+ "FSM_056": {
+  "componenti": 7,
+  "tolte_fino_a_1mm3": 2,
+  "ml_prima": 12.474,
+  "ml_dopo": 12.474,
+  "componenti_nel_template": 9,
+  "ml_nel_template": 17.183
+ }
+}

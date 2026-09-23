@@ -649,6 +649,25 @@ trasformazioni verso il template pediatrico in `transforms_ped/`, i template in 
 Aggiunto il modality dropout al trainer di base. Costruito `Dataset542_WMH_MNI` e lanciato lo
 stadio 2 in due varianti. Metriche di 504 ricalcolate con la soglia: 47 lesioni.
 
+## 29. Oblio dello stadio 2, training congiunto, pazienti nel template (23 settembre, sera)
+
+```bash
+python scripts/oblio_atlas_stadio2.py --gpu 1               # 542 su ATLAS con FLAIR vuota, ~30 min
+python scripts/make_union_atlas_wmh_mni.py && nnUNetv2_extract_fingerprint -d 543 -np 12
+python scripts/make_union_atlas_wmh_mni.py --piano && nnUNetv2_preprocess -d 543 -plans_name nnUNetPlansDa502 -c 3d_fullres -np 12
+DS=543 CUDA_VISIBLE_DEVICES=1 setsid nohup bash scripts/run_stadio2_542.sh nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50 > reports/logs/stadio2_543_lr1e3.log 2>&1 < /dev/null &
+python scripts/make_aincp_mni_dataset.py && nnUNetv2_extract_fingerprint -d 505 -np 8
+python scripts/make_aincp_mni_dataset.py --piano && nnUNetv2_preprocess -d 505 -plans_name nnUNetPlansDa502 -c 3d_fullres -np 8
+CUDA_VISIBLE_DEVICES=2 setsid nohup bash scripts/run_aincp_505.sh A > reports/logs/coda_505_A.log 2>&1 < /dev/null &
+python scripts/porta_505_nativo.py                          # a fold finiti: predizioni nel nativo
+```
+
+Lo stadio 2 in sequenza impara WMH (0.735) ma dimentica ATLAS (0.610 → 0.217 con la FLAIR vuota),
+in entrambe le varianti: sostituito da un training congiunto ATLAS + WMH (543). I dieci pazienti sono
+stati portati nel template pediatrico (505) riusando le trasformazioni di `transforms_ped/`; i
+centri e le età sono stati letti dal foglio Excel in `docs/`. Aggiunti i trainer `..._da542`.
+
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili
@@ -666,6 +685,9 @@ stadio 2 in due varianti. Metriche di 504 ricalcolate con la soglia: 47 lesioni.
 | `Dataset531_UNION_D` | T1 | lesione + 6 tessuti | 842 | 156 | `scripts/make_union_dataset.py` (abbandonato il 7/09) |
 | `Dataset541_SIM_AINCP` | T1 | lesione | 45 (10 train / 35 val) | — | `scripts/make_finetuning_sim_dataset.py` |
 | `Dataset504_AINCP` | FLAIR + T1, spazio T1 nativo | lesione | 10 (5 fold) | — (i lotti futuri) | `scripts/make_aincp_dataset.py` |
+| `Dataset505_AINCP_MNI` | FLAIR + T1, template pediatrico | lesione | 10 (split di 504) | — | `scripts/make_aincp_mni_dataset.py` |
+| `Dataset542_WMH_MNI` | FLAIR + T1, MNI adulto | lesione | 79 (split di 512) | — | `scripts/make_wmh_mni_dataset.py` |
+| `Dataset543_ATLAS_WMH_MNI` | FLAIR (vuota per ATLAS) + T1, MNI adulto | lesione | 635 (unione dei fold) | — | `scripts/make_union_atlas_wmh_mni.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
 501, 502 e 503 sono preprocessati in `2d` e `3d_fullres` (passo 10); 512, 522, 523 e 531 in `3d_fullres`.

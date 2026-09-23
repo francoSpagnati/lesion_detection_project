@@ -1,0 +1,674 @@
+{
+ "sub-r001s006": {
+  "mm3": 3009,
+  "502": 0.22253841775754127,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.458637937668334,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4489293625399951
+ },
+ "sub-r001s008": {
+  "mm3": 2083,
+  "502": 0.17067833698030635,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.010155721056194989
+ },
+ "sub-r001s024": {
+  "mm3": 1040,
+  "502": 0.8389544688026982,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.038872691933916424,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.10692831397677213
+ },
+ "sub-r001s027": {
+  "mm3": 1184,
+  "502": 0.8011444921316166,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.012389887559979947,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.01782192681323497
+ },
+ "sub-r001s029": {
+  "mm3": 2676,
+  "502": 0.5025662959794697,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5290185353995746,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.46788154897494305
+ },
+ "sub-r001s031": {
+  "mm3": 38266,
+  "502": 0.8086585979344835,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.09206917113893857,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.32882096069868993
+ },
+ "sub-r002s001": {
+  "mm3": 11072,
+  "502": 0.764034401876466,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5047492820852661,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.554527215066986
+ },
+ "sub-r002s009": {
+  "mm3": 55548,
+  "502": 0.8801591993405551,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.8068181818181818,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5746969696969697
+ },
+ "sub-r002s010": {
+  "mm3": 152153,
+  "502": 0.9319074879484422,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.7289167383646369,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.3933807974175081
+ },
+ "sub-r003s003": {
+  "mm3": 171930,
+  "502": 0.9454626106039735,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.7260192085442155,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.30087285267008906
+ },
+ "sub-r003s005": {
+  "mm3": 230745,
+  "502": 0.9459159330335466,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6361339016459727,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.23343195924451068
+ },
+ "sub-r004s009": {
+  "mm3": 97176,
+  "502": 0.9187808524138821,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.7204772902232487,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.41440193596663005
+ },
+ "sub-r004s012": {
+  "mm3": 15656,
+  "502": 0.6423922752988217,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.15243988187315427,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.15628795853915298
+ },
+ "sub-r004s015": {
+  "mm3": 66519,
+  "502": 0.8624459321334046,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6253420734423726,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.38098829817037694
+ },
+ "sub-r004s016": {
+  "mm3": 7419,
+  "502": 0.8272599859845831,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5997920997920998,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.7513818722139674
+ },
+ "sub-r004s023": {
+  "mm3": 38728,
+  "502": 0.7995376524302145,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.7013262599469496,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.6895810955961332
+ },
+ "sub-r004s025": {
+  "mm3": 22017,
+  "502": 0.33385699246902584,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.10511734028683181,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.557176443928278
+ },
+ "sub-r004s030": {
+  "mm3": 152494,
+  "502": 0.910076204411698,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.8005893872702874,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.423708643190343
+ },
+ "sub-r005s068": {
+  "mm3": 70418,
+  "502": 0.8869980957011466,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.4770066889632107,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4014108615592095
+ },
+ "sub-r005s073": {
+  "mm3": 449,
+  "502": 0.8406091370558376,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r005s075": {
+  "mm3": 24708,
+  "502": 0.5770741066145488,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.13304040587062874,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.21951165223584926
+ },
+ "sub-r009s008": {
+  "mm3": 6161,
+  "502": 0.40119760479041916,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.18697780558725016,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.19085626268991107
+ },
+ "sub-r009s011": {
+  "mm3": 4732,
+  "502": 0.6159932184232834,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.30856903853191825,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.31340026189436926
+ },
+ "sub-r009s021": {
+  "mm3": 5232,
+  "502": 0.7081748167393523,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6220052436488563,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.6445188428191261
+ },
+ "sub-r009s025": {
+  "mm3": 991,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r009s035": {
+  "mm3": 35,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r009s039": {
+  "mm3": 23,
+  "502": 0.5846153846153846,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r009s049": {
+  "mm3": 27394,
+  "502": 0.08209345273354472,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.039684343844380215,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.049188202517052554
+ },
+ "sub-r009s061": {
+  "mm3": 593,
+  "502": 0.31475667189952905,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.022694029519968087,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.024832632726140433
+ },
+ "sub-r009s076": {
+  "mm3": 72,
+  "502": 0.3402985074626866,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r009s079": {
+  "mm3": 82,
+  "502": 0.20322180916976457,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0039966856752936585,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.004191264790820107
+ },
+ "sub-r009s087": {
+  "mm3": 1324,
+  "502": 0.29497774952320405,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.04984272925235906,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.022454205239314556
+ },
+ "sub-r009s088": {
+  "mm3": 16881,
+  "502": 0.1948246578079728,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.4287088058858547,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4117412822117299
+ },
+ "sub-r009s093": {
+  "mm3": 1426,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.3523059617547806,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.340227944280287
+ },
+ "sub-r009s096": {
+  "mm3": 5377,
+  "502": 0.5820910065283056,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.1089615931721195,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.16567087113668216
+ },
+ "sub-r009s098": {
+  "mm3": 6196,
+  "502": 0.0321918889064226,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.24246432579765914,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.2308093389722496
+ },
+ "sub-r009s100": {
+  "mm3": 205,
+  "502": 0.22627737226277372,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.1596884128529698,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.15089820359281436
+ },
+ "sub-r009s105": {
+  "mm3": 9053,
+  "502": 0.790475189234651,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.001692047377326565,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.023807408723460956
+ },
+ "sub-r009s118": {
+  "mm3": 1265,
+  "502": 0.7193548387096774,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r009s124": {
+  "mm3": 1398,
+  "502": 0.3029168616440493,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.04364321790193567,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0428149283134508
+ },
+ "sub-r010s003": {
+  "mm3": 8662,
+  "502": 0.644075682382134,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5059217068981104,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4987729057591623
+ },
+ "sub-r010s004": {
+  "mm3": 556,
+  "502": 0.8721030042918455,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0034662045060658577
+ },
+ "sub-r010s008": {
+  "mm3": 945,
+  "502": 0.6677618069815195,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.018639798488664986,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.04859202020952522
+ },
+ "sub-r010s023": {
+  "mm3": 152,
+  "502": 0.6004056795131846,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.049228201919065497
+ },
+ "sub-r011s003": {
+  "mm3": 307,
+  "502": 0.524822695035461,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.03397187883363216,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.03807991418610888
+ },
+ "sub-r011s018": {
+  "mm3": 2035,
+  "502": 0.7031185031185031,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.4309590131317151,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4530499344882807
+ },
+ "sub-r011s019": {
+  "mm3": 915,
+  "502": 0.8434237995824635,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.11223799864773495,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.25014749262536873
+ },
+ "sub-r011s025": {
+  "mm3": 2492,
+  "502": 0.81311353954436,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.25117103430814025,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.28971362527289074
+ },
+ "sub-r011s028": {
+  "mm3": 225,
+  "502": 0.844,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.010462074978204011
+ },
+ "sub-r015s006": {
+  "mm3": 1469,
+  "502": 0.20451359686010653,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.014294144646252704,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.024658203125
+ },
+ "sub-r015s016": {
+  "mm3": 85149,
+  "502": 0.9126404526687445,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0011856851321924915,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.030244479935669054
+ },
+ "sub-r017s116": {
+  "mm3": 52387,
+  "502": 0.7807853186998076,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6919863109825217,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5969832665566815
+ },
+ "sub-r017s117": {
+  "mm3": 509,
+  "502": 0.850828729281768,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0007601672367920942
+ },
+ "sub-r018s001": {
+  "mm3": 30117,
+  "502": 0.8958182723665398,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.13627959140371618,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5704409138775697
+ },
+ "sub-r019s001": {
+  "mm3": 237,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r019s008": {
+  "mm3": 2631,
+  "502": 0.6921937804104082,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.04156674660271783
+ },
+ "sub-r019s010": {
+  "mm3": 1227,
+  "502": 0.7789566755083996,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r024s018": {
+  "mm3": 19138,
+  "502": 0.8283244133388226,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.48645411308789854,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.6360280315354774
+ },
+ "sub-r027s032": {
+  "mm3": 1425,
+  "502": 0.1510862706211124,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 6.333523339033504e-05,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.00014369880729989942
+ },
+ "sub-r027s047": {
+  "mm3": 12541,
+  "502": 0.8709301478621895,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.18697579998931566,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0926935020800375
+ },
+ "sub-r027s048": {
+  "mm3": 146575,
+  "502": 0.8478120509028805,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.440543718545694,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.32722012178543397
+ },
+ "sub-r028s005": {
+  "mm3": 4920,
+  "502": 0.6673858921161826,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.1371642723297939,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.09510969481554112
+ },
+ "sub-r031s002": {
+  "mm3": 31373,
+  "502": 0.8134062888409503,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6106865231977743,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5989781606892406
+ },
+ "sub-r031s012": {
+  "mm3": 8364,
+  "502": 0.7923756760321857,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.1673913043478261,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.1943178512556967
+ },
+ "sub-r031s014": {
+  "mm3": 1767,
+  "502": 0.4859038142620232,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r031s019": {
+  "mm3": 11622,
+  "502": 0.8409090909090909,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.22260942291608588,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.32698531242220563
+ },
+ "sub-r031s025": {
+  "mm3": 39117,
+  "502": 0.053127720432781994,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.39927831258086344,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.40779870961676323
+ },
+ "sub-r031s030": {
+  "mm3": 34754,
+  "502": 0.764280718116111,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.03761553918285331,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.10010607593063127
+ },
+ "sub-r031s036": {
+  "mm3": 7704,
+  "502": 0.49638445314853874,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.3323288421786666,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.3303060712493728
+ },
+ "sub-r034s003": {
+  "mm3": 45070,
+  "502": 0.7488287257251172,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0873509155047875,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.2835142436546581
+ },
+ "sub-r034s012": {
+  "mm3": 2045,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r034s014": {
+  "mm3": 22883,
+  "502": 0.5090451953148954,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.546370401572592,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5435373335839899
+ },
+ "sub-r034s032": {
+  "mm3": 401,
+  "502": 0.6331811263318112,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.015873015873015872,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.011789581598000897
+ },
+ "sub-r034s033": {
+  "mm3": 698,
+  "502": 0.8031306441902468,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r035s003": {
+  "mm3": 271,
+  "502": 0.40180995475113124,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r035s005": {
+  "mm3": 1159,
+  "502": 0.7549467275494672,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.11704834605597965,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.12480193163811967
+ },
+ "sub-r038s016": {
+  "mm3": 6257,
+  "502": 0.8013762320996839,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.002705139765554554,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.01501843171164611
+ },
+ "sub-r038s018": {
+  "mm3": 1789,
+  "502": 0.17953861584754263,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.24604072398190044,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.25345402572653647
+ },
+ "sub-r038s020": {
+  "mm3": 3937,
+  "502": 0.5992074724030569,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.06310679611650485,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.07467693836978131
+ },
+ "sub-r038s026": {
+  "mm3": 523,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.11503531786074672,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.1329136061559986
+ },
+ "sub-r038s056": {
+  "mm3": 205676,
+  "502": 0.9035354181193496,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.33862346414042577,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.2469845144315354
+ },
+ "sub-r038s071": {
+  "mm3": 113294,
+  "502": 0.8204037092217311,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.025357804344165683,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.11869918699186992
+ },
+ "sub-r038s085": {
+  "mm3": 27027,
+  "502": 0.7688594089129597,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.4840081660428717,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.3147965543544996
+ },
+ "sub-r038s089": {
+  "mm3": 4337,
+  "502": 0.7001563721657545,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.3725202057310801,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.5055593374177445
+ },
+ "sub-r040s030": {
+  "mm3": 359826,
+  "502": 0.8914022049140449,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5870908205859744,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.23111372110899447
+ },
+ "sub-r040s031": {
+  "mm3": 238162,
+  "502": 0.9083802183741182,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.2582413049793945,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.24194674160506052
+ },
+ "sub-r040s045": {
+  "mm3": 3183,
+  "502": 0.8471467391304348,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.215633423180593,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.27549081697276756
+ },
+ "sub-r040s046": {
+  "mm3": 387,
+  "502": 0.793010752688172,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r040s049": {
+  "mm3": 9586,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0007008690776562938,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.03367823087847434
+ },
+ "sub-r040s054": {
+  "mm3": 7053,
+  "502": 0.6982812921803293,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.2658647140864714,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.13851440655564368
+ },
+ "sub-r040s059": {
+  "mm3": 80554,
+  "502": 0.8375397467938565,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.051761975632520246,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.21423866064686128
+ },
+ "sub-r040s063": {
+  "mm3": 1545,
+  "502": 0.1091570648878108,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r040s075": {
+  "mm3": 61068,
+  "502": 0.7905642220868536,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.15572304173142906,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.21453839016469498
+ },
+ "sub-r042s028": {
+  "mm3": 219586,
+  "502": 0.9021679749273988,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.35425417548681687,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.14211987560550604
+ },
+ "sub-r042s030": {
+  "mm3": 6373,
+  "502": 0.6455876372509151,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.1593891489524979,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.1719255040788056
+ },
+ "sub-r044s003": {
+  "mm3": 43268,
+  "502": 0.7228307089658016,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.11589628860213336,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.49695163257011243
+ },
+ "sub-r045s002": {
+  "mm3": 5290,
+  "502": 0.8411143862318151,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.5946246112838738,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.7239066780013224
+ },
+ "sub-r046s007": {
+  "mm3": 1427,
+  "502": 0.8494915254237289,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.07602122670615821,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.06125308600787349
+ },
+ "sub-r046s008": {
+  "mm3": 1135,
+  "502": 0.523989898989899,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.21521647751155948,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.13679544015199493
+ },
+ "sub-r047s007": {
+  "mm3": 15646,
+  "502": 0.8254463193934948,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.12496875781054737,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.4082237317531435
+ },
+ "sub-r047s014": {
+  "mm3": 28799,
+  "502": 0.6922929863244159,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.2570329340500423,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.48510006725261473
+ },
+ "sub-r047s018": {
+  "mm3": 66057,
+  "502": 0.8623999100495531,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.6342398229826243,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.6413286302175191
+ },
+ "sub-r047s046": {
+  "mm3": 1009,
+  "502": 0.8613600421718502,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r048s011": {
+  "mm3": 1157,
+  "502": 0.006230529595015576,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.07892937383999218,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.07140047206923682
+ },
+ "sub-r048s032": {
+  "mm3": 7469,
+  "502": 0.6257396449704142,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.40477765241411506,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.40558529879901606
+ },
+ "sub-r048s037": {
+  "mm3": 95223,
+  "502": 0.9274085782771692,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.3654280654616512,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.322069825436409
+ },
+ "sub-r049s007": {
+  "mm3": 2635,
+  "502": 0.769034994697773,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.00046176579239009976,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0001849283402681461
+ },
+ "sub-r049s026": {
+  "mm3": 922,
+  "502": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.04671115347950429
+ },
+ "sub-r050s002": {
+  "mm3": 884,
+  "502": 0.6666666666666666,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r050s005": {
+  "mm3": 5758,
+  "502": 0.6031237484981978,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.0
+ },
+ "sub-r052s002": {
+  "mm3": 1701,
+  "502": 0.7575899112564223,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.0947379476945699,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.23619081779053086
+ },
+ "sub-r052s032": {
+  "mm3": 18825,
+  "502": 0.7305931601752796,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50": 0.20194629399282946,
+  "nnUNetTrainerEspansioneCanali_zero_500ep_lr1e4_primo1e2_dropmod30_arresto50": 0.2531664212076583
+ }
+}
