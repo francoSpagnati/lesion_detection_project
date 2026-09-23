@@ -603,6 +603,32 @@ paziente) e ridimensionato il rapporto fra le norme dei filtri come misura dell'
 
 ---
 
+## 27. Pulizia del disco: 110 GB di dati ricreabili (23 settembre)
+
+`/home` era al 99% (64 GB liberi); dopo la pulizia 167 GB. Tolto **solo ciò che si ricrea da ciò
+che resta**, dopo aver verificato che la sorgente esistesse:
+
+| cosa | dove | GB circa | come si ricrea |
+| --- | --- | --- | --- |
+| mappe di probabilità `.npz` e i loro `.pkl` (845 casi), prodotte da `--npz` | `validation*/` di tutti i dataset **tranne 504** | 45 | prima si rigenerano i volumi preprocessati (riga sotto), poi `nnUNetv2_train <ID> 3d_fullres <fold> -tr <trainer> -p <piano> --val --npz`: rifà la sola validazione, stesse predizioni |
+| volumi preprocessati (`nnUNetPlans_3d_fullres/`, `_2d/`, `gt_segmentations/`) | `nnUNet_preprocessed/` di 502, 503, 511, 521, 522, 523, 531, 541, 599 | 58 | `nnUNetv2_preprocess -d <ID> -plans_name nnUNetPlans -c 3d_fullres` (per 541 anche `nnUNetPlansFT`): usa i piani salvati, quindi dà lo stesso risultato |
+| `checkpoint_val_best.pth` (30 file) | `Dataset504_AINCP/*/fold_*/` | 7.5 | identici a `checkpoint_final.pth` nei pesi, verificato su tutti e 30: `cp checkpoint_final.pth checkpoint_val_best.pth` |
+
+**Restano intatti**: tutti i `.json` delle cartelle preprocessate, e in particolare
+`splits_final.json`, che non si rigenera mai; tutti i checkpoint dei modelli; le predizioni
+`.nii.gz` e i `summary.json` di validazione, che sono ciò che leggono gli script di analisi; i
+preprocessati di 501, 504 e 512 (piccoli, e 504 e 512 servono allo stadio 2); i `.npz` di 504;
+`data/` per intero, compreso l'archivio `dataset_FSM_v1.7z`, unica copia sulla macchina dei dati
+AInCP originali oltre alla cartella estratta.
+
+Le sorgenti dei dati grezzi: 501, 502, 511, 512, 521, 531, 541 e 599 sono collegamenti a `/data01`
+(sola lettura); 503 punta a `data/raw/DBB`; 522 e 523 stanno in `data/processed/nnUNet_raw`.
+Unico script che non gira più senza rigenerare: `inspect_failures.py`, che legge i `.npz` di 502
+(il suo report `reports/failure_analysis_502.md` resta). Nota per i training futuri: il trainer
+salva ancora `checkpoint_val_best.pth`, che a fine addestramento è una copia di `checkpoint_final`.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |
