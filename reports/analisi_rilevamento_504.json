@@ -15,6 +15,14 @@
   [
    "B passo differenziato (FLAIR attiva)",
    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50"
+  ],
+  [
+   "B passo differenziato, freno corretto",
+   "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50"
+  ],
+  [
+   "B passo 1e-3 uniforme",
+   "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50"
   ]
  ],
  "controlli": [
@@ -110,7 +118,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -123,7 +133,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -136,7 +148,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -149,7 +163,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -162,7 +178,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -175,7 +193,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -188,7 +208,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -201,7 +223,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -214,7 +238,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -227,7 +253,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -240,7 +268,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -253,7 +283,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -266,7 +298,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -279,7 +313,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -292,7 +328,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -305,7 +343,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -318,7 +358,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -331,7 +373,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -344,7 +388,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -357,7 +403,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -370,7 +418,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -383,7 +433,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -396,7 +448,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -409,7 +463,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -422,7 +478,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -435,7 +493,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -448,7 +508,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -461,7 +523,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -474,7 +538,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -487,7 +553,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -500,7 +568,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -513,7 +583,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -526,7 +598,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -539,7 +613,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -552,7 +628,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -565,7 +643,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -578,7 +658,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -591,7 +673,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -604,7 +688,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -617,7 +703,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -630,7 +718,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -643,7 +733,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -656,7 +748,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -669,7 +763,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -682,7 +778,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -695,7 +793,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -708,7 +808,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -721,7 +823,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -734,7 +838,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -747,7 +853,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -760,7 +868,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -773,7 +883,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -786,7 +898,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -799,7 +913,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -812,7 +928,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -825,7 +943,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -838,7 +958,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -851,7 +973,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -864,7 +988,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -877,7 +1003,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -890,7 +1018,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -903,7 +1033,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -916,7 +1048,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -929,7 +1063,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -942,7 +1078,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -955,7 +1093,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -968,7 +1108,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -981,7 +1123,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": true,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -994,7 +1138,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": true,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": true,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": true,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": true
    }
   },
   {
@@ -1007,7 +1153,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   },
   {
@@ -1020,7 +1168,9 @@
     "nnUNetTrainerWandb_250ep_arresto50": false,
     "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50": false,
     "nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50": false,
-    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": false,
+    "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": false
    }
   }
  ],
@@ -1074,6 +1224,11 @@
    "caso": "FSM_039",
    "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50",
    "mm3": 12.371029108762741
+  },
+  {
+   "caso": "FSM_039",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 2.215706706047058
   },
   {
    "caso": "FSM_040",
@@ -1511,6 +1666,91 @@
    "mm3": 23.080257698893547
   },
   {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.18464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 12.55566018819809
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 3.1389150470495224
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.18464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 1.8464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 26.403814807534218
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 23.81882594525814
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.36928412318229675
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.18464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.9232103079557419
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 34.3434234559536
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.18464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.9232103079557419
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.5539261847734451
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 3.6928412318229675
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.18464206159114838
+  },
+  {
+   "caso": "FSM_046",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 24.742036253213882
+  },
+  {
    "caso": "FSM_052",
    "trainer": "nnUNetTrainerWandb_250ep_arresto50",
    "mm3": 15.325255244970322
@@ -1656,6 +1896,56 @@
    "mm3": 0.1846424788236618
   },
   {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 1.6617823094129562
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.1846424788236618
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.1846424788236618
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.1846424788236618
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.7385699152946472
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 1.2924973517656326
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 1.846424788236618
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.5539274364709854
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.5539274364709854
+  },
+  {
+   "caso": "FSM_053",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 0.1846424788236618
+  },
+  {
    "caso": "FSM_054",
    "trainer": "nnUNetTrainerWandb_250ep_arresto50",
    "mm3": 33.05082766711712
@@ -1771,6 +2061,41 @@
    "mm3": 10.339923739433289
   },
   {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 26.588375329971313
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 228.40152974426746
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 0.184641495347023
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 24.188035890460014
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 10.155282244086266
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 1.292490467429161
+  },
+  {
+   "caso": "FSM_054",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
+   "mm3": 1.477131962776184
+  },
+  {
    "caso": "FSM_056",
    "trainer": "nnUNetTrainerWandb_250ep_arresto50",
    "mm3": 2.400352418422699
@@ -1823,6 +2148,16 @@
   {
    "caso": "FSM_056",
    "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50",
+   "mm3": 0.369284987449646
+  },
+  {
+   "caso": "FSM_056",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50",
+   "mm3": 5.53927481174469
+  },
+  {
+   "caso": "FSM_056",
+   "trainer": "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50",
    "mm3": 0.369284987449646
   }
  ],
@@ -2216,6 +2551,202 @@
      "caso": "FSM_054",
      "voxel": 2742,
      "coperti": 1731
+    }
+   ]
+  },
+  "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50": {
+   "ROI_1": [
+    {
+     "caso": "FSM_032",
+     "voxel": 53203,
+     "coperti": 12683
+    },
+    {
+     "caso": "FSM_039",
+     "voxel": 7680,
+     "coperti": 1978
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 20178,
+     "coperti": 13365
+    },
+    {
+     "caso": "FSM_041",
+     "voxel": 10546,
+     "coperti": 494
+    },
+    {
+     "caso": "FSM_045",
+     "voxel": 14374,
+     "coperti": 12212
+    },
+    {
+     "caso": "FSM_046",
+     "voxel": 2551,
+     "coperti": 1889
+    },
+    {
+     "caso": "FSM_052",
+     "voxel": 26204,
+     "coperti": 12385
+    },
+    {
+     "caso": "FSM_053",
+     "voxel": 3209,
+     "coperti": 2571
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 36641,
+     "coperti": 27839
+    },
+    {
+     "caso": "FSM_056",
+     "voxel": 29857,
+     "coperti": 24884
+    }
+   ],
+   "ROI_2": [
+    {
+     "caso": "FSM_032",
+     "voxel": 480201,
+     "coperti": 449415
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 218589,
+     "coperti": 212476
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 143585,
+     "coperti": 137296
+    },
+    {
+     "caso": "FSM_056",
+     "voxel": 37870,
+     "coperti": 20900
+    }
+   ],
+   "ROI_4": [
+    {
+     "caso": "FSM_032",
+     "voxel": 163122,
+     "coperti": 127351
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 68956,
+     "coperti": 44527
+    },
+    {
+     "caso": "FSM_045",
+     "voxel": 37743,
+     "coperti": 15804
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 2742,
+     "coperti": 1777
+    }
+   ]
+  },
+  "nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50": {
+   "ROI_1": [
+    {
+     "caso": "FSM_032",
+     "voxel": 53203,
+     "coperti": 22326
+    },
+    {
+     "caso": "FSM_039",
+     "voxel": 7680,
+     "coperti": 2993
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 20178,
+     "coperti": 13199
+    },
+    {
+     "caso": "FSM_041",
+     "voxel": 10546,
+     "coperti": 399
+    },
+    {
+     "caso": "FSM_045",
+     "voxel": 14374,
+     "coperti": 9891
+    },
+    {
+     "caso": "FSM_046",
+     "voxel": 2551,
+     "coperti": 1694
+    },
+    {
+     "caso": "FSM_052",
+     "voxel": 26204,
+     "coperti": 10769
+    },
+    {
+     "caso": "FSM_053",
+     "voxel": 3209,
+     "coperti": 2476
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 36641,
+     "coperti": 30968
+    },
+    {
+     "caso": "FSM_056",
+     "voxel": 29857,
+     "coperti": 23106
+    }
+   ],
+   "ROI_2": [
+    {
+     "caso": "FSM_032",
+     "voxel": 480201,
+     "coperti": 448320
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 218589,
+     "coperti": 210032
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 143585,
+     "coperti": 138338
+    },
+    {
+     "caso": "FSM_056",
+     "voxel": 37870,
+     "coperti": 27750
+    }
+   ],
+   "ROI_4": [
+    {
+     "caso": "FSM_032",
+     "voxel": 163122,
+     "coperti": 139541
+    },
+    {
+     "caso": "FSM_040",
+     "voxel": 68956,
+     "coperti": 55412
+    },
+    {
+     "caso": "FSM_045",
+     "voxel": 37743,
+     "coperti": 12422
+    },
+    {
+     "caso": "FSM_054",
+     "voxel": 2742,
+     "coperti": 1714
     }
    ]
   }

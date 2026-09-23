@@ -628,14 +628,23 @@ sequenza.
 
 Il pre-addestramento su ATLAS porta l'encefalomalacia da 0.02–0.48 a 0.61–0.87 **in tutti e quattro i
 pazienti che la hanno**: le lesioni di ATLAS sono ictus cronici, cioè cavità, e il sapere trasferito è
-quello. La gliosi invece la impara meglio il modello da zero, che usa la FLAIR in pieno; attivare la
-FLAIR nella Proposta B la migliora (7 pazienti su 10, p = 0.084) ma non la porta ancora a quel livello.
-Ogni sorgente porta il suo fenotipo.
+quello. La gliosi la porta la FLAIR: con il passo differenziato e il freno corretto (23 settembre) la sua
+copertura supera quella del modello con la FLAIR spenta in 9 pazienti su 10 (p = 0.006) e arriva al
+livello del modello da zero (4 su 10, p = 0.49). Ogni sorgente porta il suo fenotipo. *(Il 22
+settembre qui si leggeva che sulla gliosi la Proposta B restava sotto il modello da zero: era un
+effetto della media pesata sul paziente con più gliosi, e paziente per paziente non regge.)*
 
 **Conseguenza: lo stadio 2 su WMH diventa il prossimo esperimento principale**, non più un ripiego.
 WMH ha 79 casi a due canali con iperintensità della sostanza bianca in FLAIR, il fenotipo più vicino
-alla gliosi: è per la gliosi quello che ATLAS è stato per le cavità. È anche la via di espansione ad
-altri dataset già prevista nel piano, e resta a due canali.
+alla gliosi: può essere per la gliosi quello che ATLAS è stato per le cavità, cioè portarla oltre
+quello che otto pazienti insegnano. È anche la via di espansione ad altri dataset già prevista nel
+piano, e resta a due canali.
+
+**Ricetta di adattamento decisa il 23 settembre: passo differenziato con il freno corretto**
+(primo strato 1e-2, resto 1e-4, arresto sulla perdita di validazione). Raggiunge il modello da zero
+sulla gliosi e i pre-addestrati sulle cavità, con meno falsi positivi di tutte (10 pazienti su 10,
+p = 0.002). Il passo 1e-3 uniforme ha lo stesso Dice ma non mostra di usare la FLAIR. Dettaglio in
+`docs/modelli-ed-esperimenti.md`.
 
 **Che cosa si può affermare e che cosa no.** Con dieci pazienti nessuna variante si distingue dalle
 altre nel Dice (passo differenziato contro da zero: +0.039, IC 95% [−0.036, +0.110], p = 0.275) né
@@ -656,6 +665,14 @@ da trovare, questa configurazione non può impararle. Una strada c'è — un pia
 architettura a spaziatura più fine, a cui i pesi restano trasferibili — ma costa campo visivo e va
 decisa solo dopo la risposta del clinico. Anche fra le piccole che esistono a 1 mm il modello ne
 rileva poche (4–6 su 26): la risoluzione non è l'unica causa.
+
+**Per l'incontro del 23 settembre, sulle lesioni piccole.** Sono due popolazioni. Fra 1 e 10 mm³
+(20 componenti) il 95% è più brillante del tessuto sano (mediana 3.1 volte) e la griglia a 1 mm le
+vede quasi tutte: la domanda è se siano lesioni da trovare. Sotto 1 mm³ (22 componenti, da uno a
+cinque voxel originali) l'intensità mediana è 0.69 volte il tessuto sano, meno della metà sono più
+brillanti, e 20 su 24 spariscono comunque a 1 mm: la domanda è se si possano ignorare. Se sì, la
+soglia proposta è **1 mm³**, che coincide con un voxel della griglia di lavoro della rete e quindi
+non è arbitraria. Più le tre componenti fuori dal cervello.
 
 **Due fatti sui dati.** Il secondo lotto di dieci pazienti, atteso da agosto, non è arrivato: quando
 arriva è il test set, e non si guarda prima della configurazione finale. In `/data01/fsm_mri_data/`

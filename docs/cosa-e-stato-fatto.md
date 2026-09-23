@@ -587,6 +587,22 @@ altro utente: non usato, domanda per il responsabile. Dettaglio in
 
 ---
 
+## 26. Il terzo giro letto per fenotipo (23 settembre)
+
+```bash
+python scripts/analisi_rilevamento_504.py        # ora sulle sei varianti, ~8 min
+```
+
+Dieci addestramenti conclusi nella notte, codice 0. Il freno corretto tiene il filtro T1 fermo
+(norma 8.37–8.43) e non cambia il risultato (Dice 0.615 contro 0.621): il guadagno del 16
+settembre veniva dalla FLAIR. Passo differenziato e passo 1e-3 uniforme sono indistinguibili nel Dice
+e nella copertura per paziente; il differenziato è l'unico con evidenza significativa che la FLAIR
+porti la gliosi (9 su 10, p = 0.006) e ha meno falsi positivi (10 su 10, p = 0.002): è la ricetta
+scelta. Corretta l'affermazione del 22 settembre sulla gliosi (media pesata, non paziente per
+paziente) e ridimensionato il rapporto fra le norme dei filtri come misura dell'uso della FLAIR.
+
+---
+
 ## Dataset nnU-Net attualmente disponibili
 
 | Dataset | Canale | Classi | Sviluppo | Test | Prodotto da |

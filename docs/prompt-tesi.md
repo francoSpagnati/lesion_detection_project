@@ -320,4 +320,15 @@ l'espansione dei canali in sé (tecnica nota) ma la misura di che cosa trasferis
 fenotipo, e i risultati negativi (template adulto che ingrandisce le lesioni pediatriche di 1.6–2.5
 volte; passo di fine-tuning che non trasferisce a un canale nuovo).
 
+**23 settembre 2026 — terzo giro e ricetta scelta.** Il freno corretto non cambia il risultato
+(Dice 0.615 contro 0.621; il filtro T1 ora resta fermo). Il passo 1e-3 uniforme ha lo stesso Dice
+(0.627, indistinguibile). Ricetta scelta: **passo differenziato con il freno corretto**, perché è
+l'unica con evidenza significativa che la FLAIR porti la gliosi (copertura migliore del modello con
+FLAIR spenta in 9 pazienti su 10, p = 0.006), raggiunge il modello da zero sulla gliosi e i
+pre-addestrati sulle cavità (4 su 4), e ha meno falsi positivi (1.6 contro 7.9 per paziente, 10 su
+10, p = 0.002). Correzione: la frase «sulla gliosi la Proposta B resta sotto il modello da zero» era
+un effetto della media pesata e non va usata. Il rapporto fra le norme dei filtri del primo strato
+individua un canale spento, ma non misura quanto un canale è usato: per quello si usa la copertura
+per fenotipo.
+
 *(da completare alla fine: esperimenti successivi, decisione finale, eventuali lotti successivi)*

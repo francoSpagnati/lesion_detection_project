@@ -28,6 +28,8 @@ Totale: **27 lesioni su 71** non esistono nel bersaglio di addestramento. Il ber
 | B zero, passo 1e-4 (FLAIR spenta) | 19/54 | 5/13 | 1/4 | 25/71 | **19/44** |
 | B duplica, passo 1e-4 | 15/54 | 4/13 | 1/4 | 20/71 | **19/44** |
 | B passo differenziato (FLAIR attiva) | 19/54 | 5/13 | 1/4 | 25/71 | **21/44** |
+| B passo differenziato, freno corretto | 19/54 | 4/13 | 1/4 | 24/71 | **20/44** |
+| B passo 1e-3 uniforme | 20/54 | 5/13 | 1/4 | 26/71 | **21/44** |
 
 ## 3. Copertura dei voxel per fenotipo
 
@@ -39,6 +41,8 @@ Frazione dei voxel di ciascun fenotipo coperta dalla predizione (sensibilita' a 
 | B zero, passo 1e-4 (FLAIR spenta) | 0.472 (10 pazienti) | 0.933 (4 pazienti) | 0.809 (4 pazienti) |
 | B duplica, passo 1e-4 | 0.499 (10 pazienti) | 0.917 (4 pazienti) | 0.559 (4 pazienti) |
 | B passo differenziato (FLAIR attiva) | 0.525 (10 pazienti) | 0.933 (4 pazienti) | 0.775 (4 pazienti) |
+| B passo differenziato, freno corretto | 0.540 (10 pazienti) | 0.932 (4 pazienti) | 0.695 (4 pazienti) |
+| B passo 1e-3 uniforme | 0.576 (10 pazienti) | 0.937 (4 pazienti) | 0.767 (4 pazienti) |
 
 Paziente per paziente, gliosi (ROI_1): FLAIR spenta contro FLAIR attiva.
 
@@ -65,9 +69,13 @@ Migliora in 7 pazienti su 10, Wilcoxon p = 0.084.
 | B zero, passo 1e-4 (FLAIR spenta) | 26 | 2.6 | 0.4 | 22 | 0 |
 | B duplica, passo 1e-4 | 32 | 3.2 | 0.6 | 26 | 0 |
 | B passo differenziato (FLAIR attiva) | 23 | 2.3 | 1.5 | 16 | 0 |
+| B passo differenziato, freno corretto | 16 | 1.6 | 1.8 | 11 | 1 |
+| B passo 1e-3 uniforme | 21 | 2.1 | 0.9 | 17 | 0 |
 
 Appaiati contro «da zero», per paziente:
 
 - B zero, passo 1e-4 (FLAIR spenta): meno falsi positivi in **8** pazienti su 10, di piu' in 1, Wilcoxon p = 0.043
 - B duplica, passo 1e-4: meno falsi positivi in **6** pazienti su 10, di piu' in 2, Wilcoxon p = 0.062
 - B passo differenziato (FLAIR attiva): meno falsi positivi in **8** pazienti su 10, di piu' in 2, Wilcoxon p = 0.033
+- B passo differenziato, freno corretto: meno falsi positivi in **10** pazienti su 10, di piu' in 0, Wilcoxon p = 0.002
+- B passo 1e-3 uniforme: meno falsi positivi in **9** pazienti su 10, di piu' in 1, Wilcoxon p = 0.008

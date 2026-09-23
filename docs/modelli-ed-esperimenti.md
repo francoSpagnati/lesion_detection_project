@@ -740,19 +740,61 @@ lo hanno (gliosi 10, cistica 4, encefalomalacia 4).
   Fra le 44 visibili il modello da zero ne trova 24, il passo differenziato 21; fra le 26 piccole
   visibili, 6 e 4.
 
+### Il terzo giro: freno corretto e passo uniforme a 1e-3 (22–23 settembre)
+
+Dieci addestramenti, tutti conclusi con codice 0, letti con `analisi_rilevamento_504.py`.
+
+| Variante | Dice | ‖FLAIR‖/‖T1‖ | ‖T1‖ finale | gliosi | cistica | encefalomalacia | FP / paziente |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| da zero | 0.581 | 0.98–1.31 | — | 0.585 | 0.834 | 0.401 | 7.9 |
+| B `zero` 1e-4 (FLAIR spenta) | 0.555 | 0.04–0.08 | 8.28–8.34 | 0.472 | 0.933 | 0.809 | 2.6 |
+| B differenziato, freno difettoso | 0.621 | 0.65–2.72 | 3.50–7.49 | 0.525 | 0.933 | 0.775 | 2.3 |
+| **B differenziato, freno corretto** | **0.615** | 0.63–1.75 | **8.37–8.43** | 0.540 | 0.932 | 0.695 | **1.6** |
+| B 1e-3 uniforme | 0.627 | 0.09–0.31 | 7.71–8.35 | 0.576 | 0.937 | 0.767 | 2.1 |
+
+Copertura = frazione dei voxel del fenotipo toccata dalla predizione, sommata sui pazienti.
+
+- **Il freno corretto funziona e non cambia il risultato.** Il filtro T1 resta a 8.37–8.43 con
+  coseno 0.999 dalla partenza; il Dice passa da 0.621 a 0.615 (3 pazienti su 10 meglio,
+  p = 0.49). Il guadagno del 16 settembre veniva dalla FLAIR, non dal T1 ristretto.
+- **Passo differenziato e passo 1e-3 uniforme non si distinguono nel Dice** (+0.012 per il
+  secondo, 5 su 10, p = 0.70) né nella copertura per paziente di nessun fenotipo (gliosi 3 su
+  10, p = 0.85; cavità 2 su 4).
+- **La FLAIR porta la gliosi, ora con significatività**: rispetto al modello con la FLAIR
+  spenta, la copertura della gliosi migliora in 9 pazienti su 10 con il passo differenziato
+  corretto (p = 0.006) e in 8 su 10 con il modello da zero (p = 0.014); con il passo 1e-3
+  uniforme solo in 7 su 10 (p = 0.19).
+- **Correzione a quanto scritto il 22 settembre**: sulla gliosi la Proposta B non «resta sotto il
+  modello da zero». Era un effetto della media pesata sul paziente con più gliosi (FSM_032);
+  paziente per paziente il differenziato corretto è alla pari (4 su 10, p = 0.49).
+- **Il pre-addestramento porta le cavità**, confermato con entrambe le ricette nuove: sopra il
+  modello da zero in 4 pazienti su 4 sia per la cistica sia per l'encefalomalacia.
+- **Falsi positivi**: meno del modello da zero in 10 pazienti su 10 con il differenziato
+  corretto (p = 0.002) e in 9 su 10 con 1e-3 (p = 0.008). Reggono anche la correzione per
+  confronti multipli.
+- **Il rapporto fra le norme dei filtri non misura l'uso della FLAIR.** Con il passo 1e-3
+  uniforme resta a 0.09–0.31 eppure la gliosi è coperta quasi come da zero: con tutta la rete
+  che si adatta, anche un filtro FLAIR piccolo può bastare. Diagnostica utile per trovare un
+  canale spento del tutto (0.05), non per confrontare ricette. La misura vera dell'uso di un
+  canale è la copertura per fenotipo, o l'ablazione del canale in inferenza.
+- **Rilevamento**: 24–27 lesioni su 71 per tutte le varianti; nessuna differenza.
+
+**Ricetta scelta: il passo differenziato con il freno corretto.** È l'unica variante che raggiunge
+il modello da zero sulla gliosi *e* i pre-addestrati sulle cavità con evidenza significativa per la
+FLAIR, ed è quella con meno falsi positivi. Il passo 1e-3 uniforme sarebbe più semplice e ha lo
+stesso Dice, ma non mostra di usare la FLAIR.
+
 **Prossimi esperimenti, in ordine, una variabile ciascuno:**
 
-1. **In corso dal 22 settembre: il passo differenziato con il freno corretto**
-   (`nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_arresto50`) e il **controllo a
-   passo `1e-3` uniforme** (`nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50`), entrambi
-   dai pesi di 502, cinque fold, in coda con `run_aincp_504.sh`. Il primo separa «la FLAIR ha imparato» da «il T1 si è
-   ristretto»; il secondo dice se serviva un passo *differenziato* o solo un passo *più grande*.
-   Si leggono con `analisi_rilevamento_504.py`, non solo con il Dice.
-2. **Stadio 2 su WMH, ora il principale**: la rete espansa addestrata sui 79 casi a due canali di
+1. **Concluso il 23 settembre**: il terzo giro, qui sopra. Ricetta scelta: passo differenziato
+   con il freno corretto.
+2. **Stadio 2 su WMH, il principale**: la rete espansa addestrata sui 79 casi a due canali di
    Dataset512 (piano `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi
-   adattata su 504. L'analisi per fenotipo gli dà una ragione precisa: le iperintensità di WMH sono
-   il fenotipo più vicino alla gliosi, e la gliosi è l'unico fenotipo su cui la Proposta B resta sotto
-   il modello da zero. Il criterio di successo è la copertura della gliosi senza perdere le cavità.
+   adattata su 504 con il passo differenziato corretto. ATLAS ha portato le cavità oltre quello che
+   otto pazienti insegnano; WMH, iperintensità della sostanza bianca in FLAIR, è il candidato per
+   fare lo stesso con la gliosi, oggi ferma al livello del modello da zero, e con le lesioni
+   piccole, che nessuna variante rileva. Criterio: copertura della gliosi sopra il modello da zero,
+   paziente per paziente, senza perdere le cavità.
 3. **Modality dropout**, per l'uso a un solo canale: dopo, come variabile a sé. Il responsabile
    ha chiesto che il modello possa funzionare anche con una sola sequenza in ingresso. Riferimento
    classico per le modalità mancanti: HeMIS (Havaei et al., MICCAI 2016); alternativa recente con un

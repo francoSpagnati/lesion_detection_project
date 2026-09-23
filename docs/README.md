@@ -33,7 +33,7 @@ riesplorare i dati da zero.
 
 **In una riga:** sui dieci pazienti AInCP **ogni sorgente porta il suo fenotipo** — il
 pre-addestramento su ATLAS porta le cavità (encefalomalacia da 0.40 a 0.78–0.81 di copertura), la FLAIR
-porta la gliosi — e il pre-addestramento taglia i falsi positivi (7.9 → 2.3 per paziente, p = 0.033);
+porta la gliosi — e il pre-addestramento taglia i falsi positivi (7.9 → 1.6 per paziente, 10 su 10, p = 0.002);
 il Dice medio invece non distingue nessuna variante con dieci pazienti. Prossimo esperimento
 principale: lo stadio intermedio su WMH, per la gliosi.
 
@@ -58,7 +58,7 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP | quattro varianti concluse (da zero, `zero`, `duplica`, passo differenziato). **In corso dal 22/9**: il passo differenziato con il freno corretto (`_wdfix_`) e il controllo a passo `1e-3` uniforme, cinque fold ciascuno |
+| Training su `504` AInCP | sei varianti concluse (23/9). **Ricetta scelta: passo differenziato con il freno corretto** — gliosi al livello del modello da zero, cavità al livello dei pre-addestrati, falsi positivi 1.6 per paziente (10 su 10, p = 0.002). Prossimo: stadio intermedio su WMH |
 | Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il paziente `FSM_028` in `/data01/fsm_mri_data/`; il secondo lotto, atteso da agosto |
 
 ### Da fare dopo
