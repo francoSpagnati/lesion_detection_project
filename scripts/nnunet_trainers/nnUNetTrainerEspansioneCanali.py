@@ -510,4 +510,10 @@ class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e3_arresto50_da542(
     """Stadio 3 da 542, passo 1e-3 su tutta la rete."""
 
 
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50_da543(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50):
+    """Stadio 3 dai pesi del training congiunto ATLAS + WMH (543), passo 1e-4 su tutta la rete.
+    Una variabile rispetto a `_da542`: i pesi di partenza."""
+
+
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

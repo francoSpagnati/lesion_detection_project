@@ -874,7 +874,24 @@ i pesi di ATLAS; il template aggiunge ~0.02, solo sui pazienti con lesioni minus
 | D | 543 | da decidere a 543 finito | contro A e B: lo stadio congiunto |
 
 Da pesi a due canali il passo differenziato non ha senso (non c'è un canale nuovo, frenerebbe
-entrambi): da 542 e 543 si usano passi uniformi. `scripts/run_aincp_505.sh <A|B|C>`.
+entrambi): da 542 e 543 si usano passi uniformi. `scripts/run_aincp_505.sh <A|B|C|D> [fold]`.
+
+**543 finito** (24/9, arresto all'epoca 165): su ATLAS **non dimentica** (0.616 contro 0.610 di
+502, p = 0.11), su WMH rende meno della sequenza (0.671 contro 0.735, peggio in 16 casi su 16). WMH
+è il 12% dei casi e l'arresto guarda una perdita di validazione dominata da ATLAS.
+
+**A e B finiti** (24/9), nel nativo contro la ricetta su 504 (`reports/confronto_505_504.md`):
+
+| variante | Dice | lesioni rilevate (≥ 1 mm³) | falsi positivi |
+| --- | --- | --- | --- |
+| 504 ricetta, nativo | 0.615 | 21/47 | 9 |
+| 505 A, ricetta nel template | 0.563 (−0.05, p = 0.49) | 23/47 | 15 |
+| 505 B, da 542 | 0.600 (−0.02, p = 0.77) | 25/47 | 32 (p = 0.03) |
+
+Nessuna differenza di Dice distinguibile dal rumore: il template non aiuta né danneggia in modo
+misurabile su dieci pazienti, e i due pazienti che perdono di più con A (FSM_045, FSM_046) sono fra
+quelli con il tetto del ritorno al nativo più basso. B trova qualche lesione in più ma con tre volte
+i falsi positivi della ricetta, vicino al modello da zero. D (da 543) in corso.
 
 **Prossimi esperimenti, in ordine, una variabile ciascuno:**
 

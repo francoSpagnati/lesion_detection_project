@@ -1,0 +1,250 @@
+{
+ "504 da zero": {
+  "FSM_032": {
+   "dice": 0.8065777183050862,
+   "lesioni": 4,
+   "rilevate": 1,
+   "fp": 1
+  },
+  "FSM_039": {
+   "dice": 0.35986004615499145,
+   "lesioni": 2,
+   "rilevate": 1,
+   "fp": 4
+  },
+  "FSM_040": {
+   "dice": 0.8253135362183082,
+   "lesioni": 9,
+   "rilevate": 2,
+   "fp": 1
+  },
+  "FSM_041": {
+   "dice": 0.044436607300299774,
+   "lesioni": 5,
+   "rilevate": 2,
+   "fp": 4
+  },
+  "FSM_045": {
+   "dice": 0.3529063794016003,
+   "lesioni": 1,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_046": {
+   "dice": 0.4479323875641413,
+   "lesioni": 2,
+   "rilevate": 2,
+   "fp": 18
+  },
+  "FSM_052": {
+   "dice": 0.7674626540181005,
+   "lesioni": 7,
+   "rilevate": 4,
+   "fp": 5
+  },
+  "FSM_053": {
+   "dice": 0.6431105854523951,
+   "lesioni": 6,
+   "rilevate": 6,
+   "fp": 0
+  },
+  "FSM_054": {
+   "dice": 0.8803433922996878,
+   "lesioni": 6,
+   "rilevate": 3,
+   "fp": 4
+  },
+  "FSM_056": {
+   "dice": 0.6861447061319754,
+   "lesioni": 5,
+   "rilevate": 3,
+   "fp": 2
+  }
+ },
+ "504 ricetta (nativo)": {
+  "FSM_032": {
+   "dice": 0.8857175847921934,
+   "lesioni": 4,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_039": {
+   "dice": 0.3901765460104547,
+   "lesioni": 2,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_040": {
+   "dice": 0.9091693242425909,
+   "lesioni": 9,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_041": {
+   "dice": 0.08937941016826488,
+   "lesioni": 5,
+   "rilevate": 2,
+   "fp": 0
+  },
+  "FSM_045": {
+   "dice": 0.6131636517084763,
+   "lesioni": 1,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_046": {
+   "dice": 0.6392554991539763,
+   "lesioni": 2,
+   "rilevate": 2,
+   "fp": 5
+  },
+  "FSM_052": {
+   "dice": 0.6049636034979725,
+   "lesioni": 7,
+   "rilevate": 2,
+   "fp": 0
+  },
+  "FSM_053": {
+   "dice": 0.5627326472520254,
+   "lesioni": 6,
+   "rilevate": 6,
+   "fp": 1
+  },
+  "FSM_054": {
+   "dice": 0.8287869907715537,
+   "lesioni": 6,
+   "rilevate": 2,
+   "fp": 2
+  },
+  "FSM_056": {
+   "dice": 0.6263329616886804,
+   "lesioni": 5,
+   "rilevate": 3,
+   "fp": 1
+  }
+ },
+ "505 A: ricetta nel template": {
+  "FSM_032": {
+   "dice": 0.8926052043293741,
+   "lesioni": 4,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_039": {
+   "dice": 0.48031251937744157,
+   "lesioni": 2,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_040": {
+   "dice": 0.892400438751803,
+   "lesioni": 9,
+   "rilevate": 2,
+   "fp": 0
+  },
+  "FSM_041": {
+   "dice": 0.12249955744379536,
+   "lesioni": 5,
+   "rilevate": 2,
+   "fp": 0
+  },
+  "FSM_045": {
+   "dice": 0.3507627629484227,
+   "lesioni": 1,
+   "rilevate": 1,
+   "fp": 2
+  },
+  "FSM_046": {
+   "dice": 0.4372146118721461,
+   "lesioni": 2,
+   "rilevate": 2,
+   "fp": 8
+  },
+  "FSM_052": {
+   "dice": 0.6445379616026295,
+   "lesioni": 7,
+   "rilevate": 3,
+   "fp": 1
+  },
+  "FSM_053": {
+   "dice": 0.3905372104484968,
+   "lesioni": 6,
+   "rilevate": 6,
+   "fp": 3
+  },
+  "FSM_054": {
+   "dice": 0.8335194502244303,
+   "lesioni": 6,
+   "rilevate": 2,
+   "fp": 1
+  },
+  "FSM_056": {
+   "dice": 0.5871876965296439,
+   "lesioni": 5,
+   "rilevate": 3,
+   "fp": 0
+  }
+ },
+ "505 B: da 542 (sequenza)": {
+  "FSM_032": {
+   "dice": 0.8507758973863633,
+   "lesioni": 4,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_039": {
+   "dice": 0.57161013583287,
+   "lesioni": 2,
+   "rilevate": 1,
+   "fp": 2
+  },
+  "FSM_040": {
+   "dice": 0.8707045990959156,
+   "lesioni": 9,
+   "rilevate": 3,
+   "fp": 2
+  },
+  "FSM_041": {
+   "dice": 0.1421087098886706,
+   "lesioni": 5,
+   "rilevate": 2,
+   "fp": 3
+  },
+  "FSM_045": {
+   "dice": 0.43191276043454974,
+   "lesioni": 1,
+   "rilevate": 1,
+   "fp": 6
+  },
+  "FSM_046": {
+   "dice": 0.4788113424714869,
+   "lesioni": 2,
+   "rilevate": 2,
+   "fp": 12
+  },
+  "FSM_052": {
+   "dice": 0.693104916946666,
+   "lesioni": 7,
+   "rilevate": 3,
+   "fp": 0
+  },
+  "FSM_053": {
+   "dice": 0.5138087639621947,
+   "lesioni": 6,
+   "rilevate": 6,
+   "fp": 4
+  },
+  "FSM_054": {
+   "dice": 0.8339228886319769,
+   "lesioni": 6,
+   "rilevate": 3,
+   "fp": 2
+  },
+  "FSM_056": {
+   "dice": 0.6151960003821291,
+   "lesioni": 5,
+   "rilevate": 3,
+   "fp": 1
+  }
+ }
+}
