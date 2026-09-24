@@ -582,7 +582,7 @@ zero resta il migliore; i falsi positivi calano con il pre-addestramento (8 pazi
 p = 0.033); Dice e numero di lesioni rilevate non distinguono le varianti. 27 lesioni su 71
 spariscono dal bersaglio quando nnU-Net lo ricampiona a 1 mm. Stadio 2 su WMH promosso a prossimo
 esperimento. Trovato in `/data01/fsm_mri_data/` un undicesimo paziente (FSM_028) preparato da un
-altro utente: non usato, domanda per il responsabile. Dettaglio in
+altro utente: non usato (escluso definitivamente il 24/9, provenienza ignota). Dettaglio in
 [obiettivo-e-piano.md](obiettivo-e-piano.md) e [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md).
 
 ---
@@ -674,8 +674,9 @@ Scritti `scripts/pipeline_aincp.py` (dai file ricevuti al dataset, due formati d
 facoltativa, centro e campo dal foglio Excel, split 70/30 per strato), `scripts/postprocessing_aincp.py`
 (scelta di soglia, volume minimo e maschera del cervello sui fuori-fold; valutazione nel nativo con
 volume e percentuale di cervello lesionato), `scripts/run_stadio3.sh` e `scripts/predici_test.sh`.
-Collaudati sugli 11 casi: le immagini nel template coincidono con quelle di 505, le etichette a meno
-di 1–5 voxel di arrotondamento; FSM_028 controllato a vista. D su 505 finito; due varianti di 543
+Collaudati sui dieci pazienti del primo lotto: le immagini nel template coincidono con quelle di 505, le etichette a meno
+di 1–5 voxel di arrotondamento. FSM_028, usato per provare il secondo formato, è poi stato escluso
+(provenienza ignota): la pipeline legge solo i lotti AInCP in `data/raw/AINCP/`. D su 505 finito; due varianti di 543
 lanciate. La procedura è in `obiettivo-e-piano.md`.
 
 ---

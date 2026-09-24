@@ -677,8 +677,8 @@ non è arbitraria. Più le tre componenti fuori dal cervello.
 **Due fatti sui dati.** Il secondo lotto di dieci pazienti, atteso da agosto, non è arrivato: quando
 arriva è il test set, e non si guarda prima della configurazione finale. In `/data01/fsm_mri_data/`
 c'è un undicesimo paziente, `FSM_028`, preparato ad aprile da un altro utente (T1, FLAIR e maschera
-binaria già a 1 mm in spazio T1, senza distinzione di fenotipo): non è usato, e prima di usarlo va
-chiesto al responsabile chi l'ha segmentato e se la maschera include il ventricolo.
+binaria già a 1 mm in spazio T1, senza distinzione di fenotipo). **Deciso il 24/9: non si usa.** Si
+usano solo i pazienti consegnati da AInCP; FSM_028 è di provenienza ignota.
 
 ### Incontro del 23 settembre: decisioni e piano del training finale
 
@@ -716,8 +716,8 @@ intensità ne dava 3). L'elenco per il clinico, con paziente, file ROI, fetta sa
 coordinate, è in `reports/residui_annotazione.md` (`scripts/elenco_residui_annotazione.py`). Con la
 soglia restano **47 lesioni** sui dieci pazienti.
 
-**Dati: 17 pazienti a 1.5 T in arrivo, nessun altro dopo.** Il totale sarà 27 (più FSM_028, se
-utilizzabile). L'esperienza su ATLAS dice che i dati a 1.5 T non peggiorano i modelli.
+**Dati: 17 pazienti a 1.5 T in arrivo, nessun altro dopo.** Il totale sarà 27 (FSM_028 escluso,
+sotto). L'esperienza su ATLAS dice che i dati a 1.5 T non peggiorano i modelli.
 
 **Split: 70% per il fine-tuning, 30% di test, consapevole del centro.** Centro e scanner equivalgono
 a parametri di acquisizione diversi: lo split va stratificato per centro (e campo magnetico), e i
@@ -751,7 +751,7 @@ cancellare ciò che ATLAS ha insegnato. Si misura valutando la rete sui casi di 
 vuota, oltre al Dice di validazione su WMH (512: 0.753).
 
 **Domande aperte**: centro (e scanner) di ognuno dei 27 pazienti; età, per la coorte del template;
-conferma del template pediatrico; FSM_028.
+conferma del template pediatrico. *(FSM_028: escluso il 24/9, provenienza ignota.)*
 
 ### Sera del 23 settembre: lo stadio 2 in sequenza dimentica, si passa al congiunto
 
@@ -776,7 +776,7 @@ sono di Stella Maris (con un'etichetta di sito diversa da quella dei 3 T, quindi
 altro scanner) e 18 di altri 13 centri, quasi tutti con una o due sessioni (Carpi 3, Niguarda,
 Microcitemico, San Pietro 2 ciascuno, …). Quando arrivano i 17 si incrocia il loro ID con il foglio:
 lo split 70/30 si stratifica per **centro e campo**, e con un solo centro a 3 T lo strato che conta
-sarà «Stella Maris 3 T / Stella Maris 1.5 T / altri centri». FSM_028 risulta Stella Maris 1.5 T.
+sarà «Stella Maris 3 T / Stella Maris 1.5 T / altri centri».
 
 | stadio | dati | spazio | stato |
 | --- | --- | --- | --- |
@@ -785,9 +785,11 @@ sarà «Stella Maris 3 T / Stella Maris 1.5 T / altri centri». FSM_028 risulta 
 
 ### Il giorno in cui arrivano i pazienti (procedura pronta dal 24/9)
 
-Collaudata sugli 11 casi disponibili (i dieci del primo lotto e FSM_028, che è nel formato con
-etichetta unica già in T1: se i 17 arrivano così, **non avranno i fenotipi**, e va chiesto se la loro
-etichetta include il ventricolo).
+Collaudata sui dieci pazienti del primo lotto (e, per il solo formato, su FSM_028, poi escluso).
+**Si usano solo i lotti consegnati da AInCP**, estratti in `data/raw/AINCP/<lotto>/` come il primo:
+la pipeline non legge altre cartelle. Se un lotto arriva con un'etichetta unica già in T1, invece che
+con una ROI per fenotipo, quei casi **non avranno i fenotipi**, e va chiesto se l'etichetta include
+il ventricolo.
 
 ```bash
 source scripts/env.sh

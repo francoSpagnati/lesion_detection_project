@@ -16,14 +16,17 @@ paziente che funziona anche sui casi nuovi:
     etichetta: ROI_1|ROI_2|ROI_4, meno le componenti <= 1 mm3 --> template (lineare, soglia 0.5)
     SynthStrip su T1_N4 --> cervello_inT1 (postprocessing e % di cervello lesionato)
 
-DUE FORMATI DI INGRESSO, perche' sono gia' due:
-  - primo lotto (data/raw/AINCP/dataset_FSM_v1/<caso>/COREGISTERED): T1 e FLAIR originali, una ROI
-    per fenotipo disegnata sulla FLAIR (ROI_1 gliosi, ROI_2 cistica, ROI_3 ventricolo, escluso,
-    ROI_4 encefalomalacia);
-  - /data01/fsm_mri_data/<caso>/ (FSM_028): T1 originale, FLAIR gia' allineata alla T1, e
-    un'etichetta **unica e binaria** gia' nello spazio T1. Senza fenotipi: su questi casi la
-    copertura per fenotipo non si puo' misurare.
-Un formato nuovo va aggiunto a `trova_casi`, non adattato a mano.
+SOLO DATI CONSEGNATI DA AInCP. I pazienti si leggono esclusivamente dai lotti ricevuti da AInCP ed
+estratti sotto data/raw/AINCP/<lotto>/ (il primo e' dataset_FSM_v1). Altri file presenti sulla
+macchina non si usano, anche se sembrano dello stesso studio: FSM_028 in /data01/fsm_mri_data/,
+di provenienza ignota, e' escluso per decisione dell'utente (24/9).
+
+FORMATO. Quello del primo lotto: <caso>/COREGISTERED/ con T1 e FLAIR originali e una ROI per
+fenotipo disegnata sulla FLAIR (ROI_1 gliosi, ROI_2 cistica, ROI_3 ventricolo, escluso, ROI_4
+encefalomalacia). E' riconosciuto anche un formato piatto con FLAIR ed etichetta unica gia' allineate
+alla T1 (`*flair_in_T1*`, `*seg_in_T1*`), nel caso un lotto arrivi cosi': senza fenotipi, su quei
+casi la copertura per fenotipo non si puo' misurare. Un formato diverso va aggiunto a `trova_casi`,
+non adattato a mano.
 
 FLAIR MANCANTE. Fra i 1.5 T ci sono esami senza FLAIR 3D (foglio Excel, colonne "Sub_optimal").
 Il caso si tiene: il canale FLAIR e' tutto zero, che e' cio' che il modality dropout ha insegnato
@@ -45,8 +48,7 @@ from pathlib import Path
 import numpy as np
 
 PROGETTO = Path(__file__).resolve().parent.parent
-LOTTO1 = PROGETTO / 'data/raw/AINCP/dataset_FSM_v1'
-NUOVI = Path('/data01/fsm_mri_data')
+LOTTI = PROGETTO / 'data/raw/AINCP'            # un sottocartella per lotto consegnato da AInCP
 PROC = PROGETTO / 'data/processed/AINCP'
 TEMPLATE = PROGETTO / 'data/templates/tpl-MNIPediatricAsym_cohort-1_res-1_T1w.nii.gz'
 EXCEL = PROGETTO / 'docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx'
@@ -68,29 +70,34 @@ def paziente(nome: str) -> str:
 
 def trova_casi() -> dict:
     casi = {}
-    for d in sorted(LOTTO1.glob('FSM_*_anon')):
-        co = d / 'COREGISTERED'
-        t1 = next(iter(co.glob('*_T1_original.nii.gz')), None)
-        fl = next(iter(co.glob('*_FLAIR_original.nii.gz')), None)
-        roi = {}
-        for f in sorted(co.glob('ROI_*.nii')):
-            m = re.match(r'ROI_(\d+)', f.name, re.I)            # FSM_052 ha 'ROI_1 - Copia.nii'
-            if m:
-                roi.setdefault(f'ROI_{m.group(1)}', f)
-        if t1:
-            casi[paziente(d.name)] = {'formato': 'lotto1', 'sessione': d.name, 'T1': t1, 'FLAIR': fl,
-                                      'roi': roi, 'etichetta_T1': None}
-    if NUOVI.exists():
-        for d in sorted(NUOVI.glob('FSM_*')):
+    for lotto in sorted(d for d in LOTTI.iterdir() if d.is_dir()):
+        for d in sorted(lotto.glob('FSM_*')):
+            if not d.is_dir():
+                continue
             p = paziente(d.name)
             if p in casi:
+                print(f'ATTENZIONE: {p} compare in piu\' lotti, tengo {casi[p]["lotto"]}')
                 continue
-            t1 = next(iter(d.glob('*_T1_original.nii.gz')), None)
-            fl = next(iter(d.glob('*flair_in_T1.nii.gz')), None) or next(iter(d.glob('*FLAIR*.nii.gz')), None)
-            seg = next(iter(d.glob('*seg_in_T1.nii.gz')), None)
-            if t1:
-                casi[p] = {'formato': 'allineato_T1', 'sessione': d.name, 'T1': t1, 'FLAIR': fl,
-                           'roi': {}, 'etichetta_T1': seg}
+            co = d / 'COREGISTERED'
+            if co.is_dir():
+                t1 = next(iter(co.glob('*_T1_original.nii.gz')), None)
+                fl = next(iter(co.glob('*_FLAIR_original.nii.gz')), None)
+                roi = {}
+                for f in sorted(co.glob('ROI_*.nii')):
+                    m = re.match(r'ROI_(\d+)', f.name, re.I)            # FSM_052 ha 'ROI_1 - Copia.nii'
+                    if m:
+                        roi.setdefault(f'ROI_{m.group(1)}', f)
+                formato, seg = 'coregistered', None
+            else:
+                t1 = next(iter(d.glob('*_T1_original.nii.gz')), None)
+                fl = next(iter(d.glob('*flair_in_T1.nii.gz')), None)
+                seg = next(iter(d.glob('*seg_in_T1.nii.gz')), None)
+                roi, formato = {}, 'allineato_T1'
+            if t1 is None or not (roi or seg):
+                print(f'ATTENZIONE: {lotto.name}/{d.name}: formato non riconosciuto o senza etichetta, saltato')
+                continue
+            casi[p] = {'formato': formato, 'lotto': lotto.name, 'sessione': d.name, 'T1': t1, 'FLAIR': fl,
+                       'roi': roi, 'etichetta_T1': seg}
     return casi
 
 
@@ -172,7 +179,7 @@ def prepara(p: str, c: dict, tpl, gpu: bool):
         if not (dest / 'FLAIR_N4.nii.gz').exists():
             ants.image_write(ants.n4_bias_field_correction(ants.image_read(str(c['FLAIR']))), str(dest / 'FLAIR_N4.nii.gz'))
         fln = ants.image_read(str(dest / 'FLAIR_N4.nii.gz'))
-        if c['formato'] == 'lotto1':
+        if c['formato'] == 'coregistered':
             if not (dest / 'transforms' / 'FLAIR_to_T1_0.mat').exists():
                 reg = ants.registration(fixed=t1n, moving=fln, type_of_transform='Rigid')
                 salva_trasf(reg['fwdtransforms'], dest / 'transforms', 'FLAIR_to_T1')

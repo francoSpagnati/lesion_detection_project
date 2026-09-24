@@ -63,7 +63,7 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 | **Stadi 1+2 congiunti** (`Dataset543`, ATLAS con FLAIR vuota + WMH) | in corso dal 23/9 sulla GPU 1 |
 | **Stadio 3 nel template pediatrico** (`Dataset505`, i dieci pazienti) | esperimenti A (pesi 502) e B (pesi 542) in corso sulle GPU 2 e 3; D dai pesi di 543 dopo. Metriche nel nativo con `scripts/porta_505_nativo.py` |
 | Incontro del 23/9 | standardizzazione in MNI (template pediatrico proposto), soglia 1 mm³, 17 pazienti a 1.5 T in arrivo, split 70/30 per centro. Dettaglio in [obiettivo-e-piano.md](obiettivo-e-piano.md) |
-| Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il paziente `FSM_028` in `/data01/fsm_mri_data/`; il secondo lotto, atteso da agosto |
+| Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il secondo lotto (17 pazienti a 1.5 T). `FSM_028` escluso il 24/9: si usano solo i dati consegnati da AInCP |
 
 ### Da fare dopo
 
