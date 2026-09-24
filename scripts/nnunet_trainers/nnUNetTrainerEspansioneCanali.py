@@ -516,4 +516,57 @@ class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50_da543(
     Una variabile rispetto a `_da542`: i pesi di partenza."""
 
 
+# --- Stadio 1+2 congiunto (543), due varianti a una variabile ----------------------------------------
+#
+# 543 conserva ATLAS (0.616 contro 0.610) ma rende meno della sequenza su WMH (0.671 contro 0.735):
+# WMH e' il 12% dei casi di addestramento, e l'arresto guarda una perdita di validazione fatta per 7/8
+# di ATLAS (si e' fermato all'epoca 165). Due correzioni possibili, provate separatamente.
+
+class nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50_wmhx4(
+        nnUNetTrainerEspansioneCanali_zero_500ep_lr1e3_dropmod30_arresto50):
+    """WMH campionato 4 volte piu' spesso (dal 12% a circa il 36% degli esempi).
+
+    Il campionatore di nnU-Net pesca con `np.random.choice` dalla lista dei casi di addestramento,
+    quindi ripetere una chiave nella lista ne moltiplica la probabilita'. Si ripete qui, nel
+    trainer, e non in splits_final.json, che non si tocca: la validazione resta identica."""
+
+    ripetizioni_wmh = 4
+
+    def do_split(self):
+        tr, val = super().do_split()
+        wmh = [k for k in tr if k.startswith('wmh_')]
+        tr = list(tr) + wmh * (self.ripetizioni_wmh - 1)
+        self.print_to_log_file(f'sovracampionamento: {len(wmh)} casi WMH ripetuti {self.ripetizioni_wmh} '
+                               f'volte, {len(tr)} voci nella lista di addestramento')
+        return tr, val
+
+
+class nnUNetTrainerEspansioneCanali_zero_1000ep_lr1e3_dropmod30(nnUNetTrainerEspansioneCanali_zero):
+    """Come 543 ma senza arresto anticipato e con le 1000 epoche standard di nnU-Net: il checkpoint
+    finale e' l'ultima epoca, come per 502."""
+
+    p_dropout_modalita = 0.3
+
+    def __init__(self, plans: dict, configuration: str, fold: int, dataset_json: dict,
+                 device: torch.device = torch.device('cuda')):
+        super().__init__(plans, configuration, fold, dataset_json, device)
+        self.num_epochs = 1000
+        self.initial_lr = 1e-3
+
+
+# --- Stadio 3 finale (27 pazienti): le due ricette candidate, con il modality dropout ------------------
+#
+# Il modello finale deve funzionare anche con una sola sequenza (richiesta del responsabile, e fra i
+# 1.5 T ci sono esami senza FLAIR 3D): il dropout resta acceso anche allo stadio 3, altrimenti
+# l'adattamento ai pazienti, che hanno quasi sempre entrambe le sequenze, lo farebbe disimparare.
+#   - dai pesi di 502 (un canale): `..._primo1e2_wdfix_dropmod30_arresto50`, gia' definita sopra;
+#   - da pesi a due canali (543 o sue varianti): questa classe, passo 1e-4 uniforme.
+
+class nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c(
+        nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50):
+    """Stadio 3 da pesi gia' a due canali (stadio 1+2 congiunto), passo 1e-4, modality dropout 0.3."""
+
+    p_dropout_modalita = 0.3
+
+
 assert issubclass(nnUNetTrainerEspansioneCanali, nnUNetTrainer)

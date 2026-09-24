@@ -246,5 +246,67 @@
    "rilevate": 3,
    "fp": 1
   }
+ },
+ "505 D: da 543 (congiunto)": {
+  "FSM_032": {
+   "dice": 0.875665381533585,
+   "lesioni": 4,
+   "rilevate": 1,
+   "fp": 0
+  },
+  "FSM_039": {
+   "dice": 0.5636856368563685,
+   "lesioni": 2,
+   "rilevate": 1,
+   "fp": 3
+  },
+  "FSM_040": {
+   "dice": 0.883045492002232,
+   "lesioni": 9,
+   "rilevate": 2,
+   "fp": 4
+  },
+  "FSM_041": {
+   "dice": 0.08990318118948824,
+   "lesioni": 5,
+   "rilevate": 2,
+   "fp": 2
+  },
+  "FSM_045": {
+   "dice": 0.3289992925084506,
+   "lesioni": 1,
+   "rilevate": 1,
+   "fp": 1
+  },
+  "FSM_046": {
+   "dice": 0.5069341258048539,
+   "lesioni": 2,
+   "rilevate": 2,
+   "fp": 8
+  },
+  "FSM_052": {
+   "dice": 0.6978526532233568,
+   "lesioni": 7,
+   "rilevate": 4,
+   "fp": 2
+  },
+  "FSM_053": {
+   "dice": 0.486652977412731,
+   "lesioni": 6,
+   "rilevate": 6,
+   "fp": 1
+  },
+  "FSM_054": {
+   "dice": 0.8325182958513216,
+   "lesioni": 6,
+   "rilevate": 3,
+   "fp": 3
+  },
+  "FSM_056": {
+   "dice": 0.6017966054310161,
+   "lesioni": 5,
+   "rilevate": 3,
+   "fp": 1
+  }
  }
 }

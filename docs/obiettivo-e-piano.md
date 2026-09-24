@@ -783,6 +783,36 @@ sarà «Stella Maris 3 T / Stella Maris 1.5 T / altri centri». FSM_028 risulta 
 | 1+2 | ATLAS (FLAIR vuota) + WMH, 635 casi | MNI adulto | `Dataset543`, in corso |
 | 3 | AInCP: oggi 10 (505), poi ~19 di addestramento | MNI pediatrico | A, B su 505 in corso; D dopo 543 |
 
+### Il giorno in cui arrivano i pazienti (procedura pronta dal 24/9)
+
+Collaudata sugli 11 casi disponibili (i dieci del primo lotto e FSM_028, che è nel formato con
+etichetta unica già in T1: se i 17 arrivano così, **non avranno i fenotipi**, e va chiesto se la loro
+etichetta include il ventricolo).
+
+```bash
+source scripts/env.sh
+python scripts/pipeline_aincp.py elenco                        # formato, FLAIR, centro e campo di ognuno
+CUDA_VISIBLE_DEVICES=<libera> python scripts/pipeline_aincp.py prepara --gpu   # ~5 min a paziente nuovo
+#   controllo a vista di ogni paziente nuovo nel template, prima di andare avanti
+python scripts/pipeline_aincp.py dataset --id 506 --prova      # lo split, senza scrivere
+python scripts/pipeline_aincp.py dataset --id 506              # 70/30 per strato, fissato qui
+nnUNetv2_extract_fingerprint -d 506 && python scripts/pipeline_aincp.py piano --id 506
+nnUNetv2_preprocess -d 506 -plans_name nnUNetPlansDa502 -c 3d_fullres
+# le due ricette candidate in cross-validation sui soli ~19 di addestramento, fold divisi sulle GPU
+CUDA_VISIBLE_DEVICES=1 setsid nohup bash scripts/run_stadio3.sh 506 A "0 1 2" > reports/logs/s3_A1.log 2>&1 < /dev/null &
+CUDA_VISIBLE_DEVICES=2 setsid nohup bash scripts/run_stadio3.sh 506 A "3 4"   > reports/logs/s3_A2.log 2>&1 < /dev/null &
+PESI_2C=<migliore variante di 543> CUDA_VISIBLE_DEVICES=3 setsid nohup bash scripts/run_stadio3.sh 506 D ...
+python scripts/postprocessing_aincp.py scegli --run <run>      # per ciascuna ricetta
+python scripts/postprocessing_aincp.py valuta --run <run>      # fuori-fold: si sceglie la ricetta qui
+CUDA_VISIBLE_DEVICES=1 bash scripts/predici_test.sh 506 <trainer scelto>   # UNA volta
+```
+
+Split: strati «Stella Maris 3 T / Stella Maris 1.5 T / altri centri», 30% di test per strato scelto
+lungo la scala dei volumi, cinque fold a serpentina sul resto; tutto in `split_aincp.json` accanto al
+dataset e in `reports/split_Dataset506_*.md`. Modello finale: insieme dei cinque fold, ribaltamenti
+come augmentation al test, probabilità riportate nel nativo, postprocessing congelato. Tempi stimati:
+preparazione mezza giornata, due ricette × cinque fold ~5 ore su tre GPU, test un'ora.
+
 ## Cosa non conviene fare
 
 - **Training congiunto a testa condivisa** sui tre dataset: semantiche di label incompatibili.

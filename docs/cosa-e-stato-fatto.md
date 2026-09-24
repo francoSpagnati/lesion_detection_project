@@ -668,6 +668,16 @@ stati portati nel template pediatrico (505) riusando le trasformazioni di `trans
 centri e le età sono stati letti dal foglio Excel in `docs/`. Aggiunti i trainer `..._da542`.
 
 
+## 30. Pronti per i pazienti nuovi: pipeline, postprocessing, valutazione (24 settembre)
+
+Scritti `scripts/pipeline_aincp.py` (dai file ricevuti al dataset, due formati di ingresso, FLAIR
+facoltativa, centro e campo dal foglio Excel, split 70/30 per strato), `scripts/postprocessing_aincp.py`
+(scelta di soglia, volume minimo e maschera del cervello sui fuori-fold; valutazione nel nativo con
+volume e percentuale di cervello lesionato), `scripts/run_stadio3.sh` e `scripts/predici_test.sh`.
+Collaudati sugli 11 casi: le immagini nel template coincidono con quelle di 505, le etichette a meno
+di 1–5 voxel di arrotondamento; FSM_028 controllato a vista. D su 505 finito; due varianti di 543
+lanciate. La procedura è in `obiettivo-e-piano.md`.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili

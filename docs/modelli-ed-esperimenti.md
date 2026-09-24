@@ -891,7 +891,38 @@ entrambi): da 542 e 543 si usano passi uniformi. `scripts/run_aincp_505.sh <A|B|
 Nessuna differenza di Dice distinguibile dal rumore: il template non aiuta né danneggia in modo
 misurabile su dieci pazienti, e i due pazienti che perdono di più con A (FSM_045, FSM_046) sono fra
 quelli con il tetto del ritorno al nativo più basso. B trova qualche lesione in più ma con tre volte
-i falsi positivi della ricetta, vicino al modello da zero. D (da 543) in corso.
+i falsi positivi della ricetta, vicino al modello da zero.
+
+**D finito** (24/9): Dice 0.587 (−0.03, p = 0.43), 25/47 lesioni, 25 falsi positivi (p = 0.02 contro
+la ricetta). Né lo stadio in sequenza né quello congiunto cambiano il Dice in modo distinguibile su
+dieci pazienti; a soglia 0.5 i falsi positivi restano la differenza più netta.
+
+### Postprocessing, scelto sulle predizioni fuori-fold (24 settembre)
+
+`scripts/postprocessing_aincp.py`: probabilità riportate nel nativo e poi tagliate; griglia di soglia
+(0.3–0.7), volume minimo della componente (0–100 mm³) e maschera del cervello, obiettivo F1 per lesione
+(`reports/postprocessing_Dataset505_*.md`, `reports/valutazione_cv_*.md`):
+
+| | soglia / vmin | Dice | lesioni rilevate | falsi positivi | F1 lesioni |
+| --- | --- | --- | --- | --- | --- |
+| D, default | 0.5 / 0 | 0.595 | 27/47 | 22 | 0.610 |
+| **D, postprocessato** | 0.4 / 20 mm³ | 0.593 | **28/47** | **6** | **0.680** |
+| A, default | 0.5 / 0 | 0.569 | 25/47 | 12 | 0.607 |
+| A, postprocessato | 0.3 / 50 mm³ | 0.568 | 24/47 | 2 | 0.649 |
+
+Il postprocessing toglie **tre quarti dei falsi positivi senza perdere lesioni né Dice**: i falsi
+positivi erano macchie piccole. La maschera del cervello non cambia nulla (nessun falso positivo
+cadeva fuori). Con il postprocessing D trova più lesioni di A a parità quasi di falsi positivi.
+Percentuale di cervello lesionato, predetta contro vera: Pearson 0.989, Spearman 0.903, scarto medio
+−0.12 punti (D). I parametri sono scelti e misurati sugli stessi dieci pazienti, quindi ottimisti:
+sul dataset finale si scelgono sui fuori-fold dei pazienti di addestramento e si provano sul test.
+Lesioni per fascia (D): 100% sopra 200 mm³, 86% fra 50 e 200, 29–38% sotto 50.
+
+### Varianti del congiunto (dal 24 settembre, in corso)
+
+`..._500ep_lr1e3_dropmod30_arresto50_wmhx4` (WMH campionato 4 volte più spesso, GPU 1) e
+`..._1000ep_lr1e3_dropmod30` (1000 epoche senza arresto, GPU 2), una variabile ciascuna rispetto a
+543. Si scelgono su ATLAS (≥ 0.610) e WMH (verso 0.735) dalla validazione del fold 0, prima dei pazienti.
 
 **Prossimi esperimenti, in ordine, una variabile ciascuno:**
 
