@@ -185,8 +185,8 @@ hanno tutte le ROI.
   clinico, con paziente, file, fetta e coordinate: `reports/residui_annotazione.md` (46 componenti,
   12 fuori dal cervello).
 - **Nomi irregolari**: FSM_052 ha `ROI_1 - Copia.nii` come unica ROI_1 (la ricerca usa una regex);
-  FSM_030 ha **due ROI_1 diverse** (Dice 0.72 fra loro): si usa `ROI_1.nii`, la più recente, in attesa
-  del clinico. FSM_049 contiene anche file già elaborati da altri, ignorati.
+  FSM_030 ha **due ROI_1 diverse** (Dice 0.72 fra loro, differenze ai bordi): **si usa `ROI_1.nii`**,
+  decisione dell'utente del 1/10 dopo il confronto in `scripts/figura_roi_fsm030.py`. FSM_049 contiene anche file già elaborati da altri, ignorati.
 - **Età sotto i 5 anni** in 4 pazienti (FSM_032, 028, 035, 036), che il foglio segna fuori dal
   criterio d'inclusione dello studio clinico: inclusi (decisione dell'utente, 1/10), da dichiarare.
 - **Spazio**: i pazienti si registrano sul template **MNIPediatricAsym cohort-1**, che ha la stessa

@@ -72,7 +72,7 @@ Sui pazienti AInCP (cinque fold, dieci pazienti; dettaglio nel registro):
 | --- | --- |
 | **Modello finale** `Dataset506_AINCP_FINALE` | 15 run (A, D, Z × 5 fold) dal 1/10 sulle 4 GPU condivise con un altro utente; fine prevista il 2/10 |
 | Split | 12 di addestramento, **5 di test** (FSM_030, 046, 049, 052, 054), per strato di acquisizione: `reports/split_Dataset506_AINCP_FINALE.md` |
-| Domande aperte al clinico | FSM_030 ha due ROI_1 diverse (si usa la più recente); 46 componenti residue da correggere, 12 fuori dal cervello (`reports/residui_annotazione.md`); encefalomalacia a intensità marginale (FSM_040, FSM_045) |
+| Domande aperte al clinico | 46 componenti residue da correggere, 12 fuori dal cervello (`reports/residui_annotazione.md`); encefalomalacia a intensità marginale (FSM_040, FSM_045) |
 
 ### Dopo il modello finale
 

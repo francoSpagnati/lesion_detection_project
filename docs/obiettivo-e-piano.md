@@ -841,7 +841,8 @@ fra i dieci su cui si è scelta la ricetta); **tutti e 17 i pazienti**, anche i 
 foglio segna fuori dal criterio d'età dello studio (FSM_032, 028, 035, 036); **GPU condivise** con il
 job di un altro utente (23 GB su 80 occupati). Da chiedere al clinico: FSM_030 ha due ROI_1 diverse
 (`ROI_1.nii` del 31/3 ore 16:05, 5151 voxel, e `FSM_030_FLAIR_original_ROI_1 - Copia.nii` delle 12:25,
-6460 voxel, Dice 0.72): si usa la più recente, `ROI_1.nii`.
+6460 voxel, Dice 0.72). **Deciso dall'utente (1/10): si usa `ROI_1.nii`**, dopo il confronto fetta per
+fetta (`scripts/figura_roi_fsm030.py`).
 
 **Le fasi**, ognuna con il suo criterio, fissato prima di guardare i risultati:
 

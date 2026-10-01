@@ -186,7 +186,7 @@ PROSSIMI PASSI, in ordine (procedura in docs/obiettivo-e-piano.md, «1 ottobre»
    fatta, le altre sono confronto).
 4. Ablazione dei canali in inferenza sul modello scelto; risultati per fenotipo, centro, dimensione.
 5. Figure, documenti, artefatto per i relatori.
-Da chiedere al clinico prima del test: quale delle due ROI_1 di FSM_030 e' giusta.
+FSM_030: si usa ROI_1.nii, non la copia (decisione dell'utente, 1/10).
 
 ARTEFATTI ESISTENTI, da AGGIORNARE passando il loro url e non ricreare:
   IL PRINCIPALE, pesi di partenza e risultati sui pazienti (versione 7, 23/9; da aggiornare con il
