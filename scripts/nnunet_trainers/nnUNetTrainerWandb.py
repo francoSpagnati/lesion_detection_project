@@ -346,6 +346,13 @@ class nnUNetTrainerWandb_250ep_arresto50(nnUNetTrainerWandb_250epochs):
     pazienza_val = 50
 
 
+class nnUNetTrainerWandb_250ep_dropmod30_arresto50(nnUNetTrainerWandb_250ep_arresto50):
+    """Il riferimento da zero per il dataset finale: come T0, con il modality dropout acceso come
+    nelle due ricette pre-addestrate, cosi' che l'unica differenza resti il pretraining."""
+
+    p_dropout_modalita = 0.3
+
+
 # --- varianti per il fine-tuning su pochi casi -------------------------------
 #
 # Il test del pretraining (reports/test_pretraining.md) ha mostrato che partire da pesi

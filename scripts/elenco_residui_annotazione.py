@@ -24,9 +24,14 @@ componente e' fuori se nessuno dei suoi voxel cade nella maschera del cervello. 
 le componenti fuori dal cervello piu' grandi di 1 mm³, se ce ne sono, perche' sono comunque errori.
 
 La connettivita' e' a 26 vicini, lo standard del progetto.
+
+Copre tutti i lotti AInCP in data/raw/AINCP/ (dal 1/10 anche il secondo). La maschera del cervello
+sulla FLAIR originale, se manca (pazienti nuovi), si calcola qui con SynthStrip su CPU.
 """
 import csv
 import re
+import subprocess
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -38,7 +43,7 @@ from matplotlib.patches import Circle
 from scipy import ndimage
 
 PROGETTO = Path(__file__).resolve().parent.parent
-LOTTO = PROGETTO / 'data/raw/AINCP/dataset_FSM_v1'
+LOTTI = PROGETTO / 'data/raw/AINCP'
 PROC = PROGETTO / 'data/processed/AINCP'
 FIG = PROGETTO / 'reports/figures/aincp'
 SOGLIA_MM3 = 1.0
@@ -48,11 +53,21 @@ NOME = {'ROI_1': 'gliosi', 'ROI_2': 'cistica', 'ROI_4': 'encefalomalacia'}
 INK, INK2 = '#0b0b0b', '#52514e'
 
 
+def maschera_flair(d: Path, fl: Path) -> Path:
+    m = PROC / d.name / 'cervello_FLAIR_originale.nii.gz'
+    if not m.exists():
+        subprocess.run([sys.executable, str(PROGETTO / 'scripts/synthstrip/synthstrip.py'), '-i', str(fl),
+                        '-m', str(m), '--model', str(PROGETTO / 'synthstrip.1.pt')], check=True,
+                       capture_output=True)
+    return m
+
+
 def raccogli():
     righe = []
-    for d in sorted(LOTTO.glob('FSM_*_anon')):
+    for d in sorted(LOTTI.glob('*/FSM_*_anon')):
         co = d / 'COREGISTERED'
         fl = next(co.glob('*_FLAIR_original.nii.gz'))
+        maschera_flair(d, fl)
         img = nib.load(str(fl)); vol = np.asarray(img.dataobj, dtype=np.float32)
         mm3 = float(np.prod(img.header.get_zooms()[:3]))
         cervello = np.asarray(nib.load(str(PROC / d.name / 'cervello_FLAIR_originale.nii.gz')).dataobj) > 0.5

@@ -51,7 +51,7 @@ PROGETTO = Path(__file__).resolve().parent.parent
 LOTTI = PROGETTO / 'data/raw/AINCP'            # un sottocartella per lotto consegnato da AInCP
 PROC = PROGETTO / 'data/processed/AINCP'
 TEMPLATE = PROGETTO / 'data/templates/tpl-MNIPediatricAsym_cohort-1_res-1_T1w.nii.gz'
-EXCEL = PROGETTO / 'docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx'
+EXCEL = PROGETTO / 'docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx'   # v2 (1/10): include il secondo lotto
 SYNTHSTRIP = PROGETTO / 'scripts/synthstrip/synthstrip.py'
 PESI_SYNTHSTRIP = PROGETTO / 'synthstrip.1.pt'
 ROI_LESIONE = ('ROI_1', 'ROI_2', 'ROI_4')      # ROI_3, il ventricolo, resta fuori (relatore)
@@ -240,24 +240,44 @@ def prepara(p: str, c: dict, tpl, gpu: bool):
 def strato(m: dict) -> str:
     """Lo strato dello split. Centro e campo sono parametri di acquisizione diversi (incontro del
     23/9); con la composizione attesa (un solo centro a 3 T, Stella Maris anche a 1.5 T, gli altri
-    centri con uno o due pazienti ciascuno) tre strati sono il massimo che regge 27 pazienti."""
+    centri con uno o due pazienti ciascuno) tre strati sono il massimo che regge 17 pazienti."""
     if m.get('centro') == 'Stella Maris':
         return f"Stella Maris {m['campo_T']:g} T"
     return 'altri centri'
 
 
+def quote_test(per_strato: dict) -> dict:
+    """Quanti pazienti di test per strato: in tutto round(N x 0.30), divisi in proporzione con il
+    metodo dei resti maggiori. Arrotondare strato per strato darebbe 6 su 17 (3 + 2 + 1, perche' 1.5
+    e 0.6 salgono entrambi). Uno strato con almeno due pazienti ne da' almeno uno al test, perche'
+    le misure per centro richieste dal responsabile esistano."""
+    n = sum(len(v) for v in per_strato.values())
+    totale = round(n * QUOTA_TEST)
+    esatte = {s: len(v) * QUOTA_TEST for s, v in per_strato.items()}
+    q = {s: int(e) for s, e in esatte.items()}
+    for s in sorted(esatte, key=lambda s: -(esatte[s] - q[s]))[:totale - sum(q.values())]:
+        q[s] += 1
+    for s, v in per_strato.items():
+        if len(v) >= 2 and q[s] == 0:
+            donatore = max(q, key=lambda x: (q[x], esatte[x]))
+            q[donatore] -= 1
+            q[s] = 1
+    return q
+
+
 def dividi(pazienti: dict) -> tuple[list, list]:
-    """70/30 per strato, e dentro lo strato alternando per volume di lesione: il test riceve
+    """70/30 per strato, e dentro lo strato lungo la scala del volume di lesione: il test riceve
     lesioni grandi e piccole in proporzione, non per caso. Deterministico (seme fisso)."""
     rng = random.Random(SEME)
     test, train = [], []
     per_strato = {}
     for p, m in pazienti.items():
         per_strato.setdefault(strato(m), []).append(p)
+    quote = quote_test(per_strato)
     for s, ps in sorted(per_strato.items()):
         ps = sorted(ps, key=lambda x: pazienti[x]['lesione_ml_nativo'])
-        n_test = round(len(ps) * QUOTA_TEST)
-        # un paziente di test ogni ~1/QUOTA, con partenza casuale: copre tutta la scala dei volumi
+        n_test = quote[s]
+        # un paziente di test ogni len/n_test, con partenza casuale: copre tutta la scala dei volumi
         passo = len(ps) / n_test if n_test else 0
         off = rng.random() * passo if n_test else 0
         scelti = {ps[min(len(ps) - 1, int(off + i * passo))] for i in range(n_test)}

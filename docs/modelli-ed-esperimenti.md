@@ -918,35 +918,16 @@ Percentuale di cervello lesionato, predetta contro vera: Pearson 0.989, Spearman
 sul dataset finale si scelgono sui fuori-fold dei pazienti di addestramento e si provano sul test.
 Lesioni per fascia (D): 100% sopra 200 mm³, 86% fra 50 e 200, 29–38% sotto 50.
 
-### Varianti del congiunto (dal 24 settembre, in corso)
+### Varianti del congiunto (24 settembre): si sceglie quella da 1000 epoche
 
-`..._500ep_lr1e3_dropmod30_arresto50_wmhx4` (WMH campionato 4 volte più spesso, GPU 1) e
-`..._1000ep_lr1e3_dropmod30` (1000 epoche senza arresto, GPU 2), una variabile ciascuna rispetto a
-543. Si scelgono su ATLAS (≥ 0.610) e WMH (verso 0.735) dalla validazione del fold 0, prima dei pazienti.
+Fold 0 di 543, validazione separata per sorgente, appaiata contro il 543 del 23/9:
 
-**Prossimi esperimenti, in ordine, una variabile ciascuno:**
+| variante | ATLAS (502: 0.610) | WMH (542: 0.735) | note |
+| --- | --- | --- | --- |
+| 543, arresto (23/9) | 0.616 | 0.671 | fermato all'epoca 165 |
+| WMH campionato ×4 | 0.610 (−0.006, p = 0.0003) | 0.634 (−0.037) | **peggio su entrambi**: arresto all'epoca 65 (migliore alla 15), la perdita di validazione diventa rumorosa |
+| **1000 epoche, senza arresto** | 0.606 (−0.010, p = 0.20) | **0.723** (+0.053, p = 3·10⁻⁵) | tiene ATLAS e impara WMH quasi quanto la sequenza |
 
-1. **Concluso il 23 settembre**: il terzo giro, qui sopra. Ricetta scelta: passo differenziato
-   con il freno corretto.
-2. **Stadio 2 su WMH, il principale**: la rete espansa addestrata sui 79 casi a due canali di
-   Dataset512 (piano `nnUNetPlansDa502` da trasferire, con le stesse tre correzioni per canale) e poi
-   adattata su 504 con il passo differenziato corretto. ATLAS ha portato le cavità oltre quello che
-   otto pazienti insegnano; WMH, iperintensità della sostanza bianca in FLAIR, è il candidato per
-   fare lo stesso con la gliosi, oggi ferma al livello del modello da zero, e con le lesioni
-   piccole, che nessuna variante rileva. Criterio: copertura della gliosi sopra il modello da zero,
-   paziente per paziente, senza perdere le cavità.
-3. **Modality dropout**, per l'uso a un solo canale: dopo, come variabile a sé. Il responsabile
-   ha chiesto che il modello possa funzionare anche con una sola sequenza in ingresso. Riferimento
-   classico per le modalità mancanti: HeMIS (Havaei et al., MICCAI 2016); alternativa recente con un
-   canale «agnostico» addestrato su contrasti sintetici: Addison et al. 2025 (arXiv 2509.09290).
-
-| Modello | Domanda | Stato |
-| --- | --- | --- |
-| **D skull-stripped** | lo skull stripping aiuta anche sull'unione? | da costruire, per confronto diretto con `531` |
-| varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge | pianificate |
-| transfer DBB → ATLAS | i tessuti insegnano l'anatomia al task lesionale? | pianificato |
-| `2d` contro `3d_fullres` | quale configurazione, decisa in cross-validation | pianificato |
-| i 5 fold della configurazione scelta | il numero finale | alla fine |
-| fine-tuning su AInCP | l'obiettivo vero | in attesa dei dati |
-
-Il dettaglio del piano, con le motivazioni e l'ordine, è in [obiettivo-e-piano.md](obiettivo-e-piano.md).
+**Scelta (1/10): la variante da 1000 epoche** come pesi di partenza della ricetta D allo stadio 3 finale.
+Scelta fatta solo su ATLAS e WMH, prima di guardare i pazienti. L'arresto sulla perdita di
+validazione, utile sui dieci pazienti, era prematuro su un dataset da 635 casi.

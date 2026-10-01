@@ -815,6 +815,44 @@ dataset e in `reports/split_Dataset506_*.md`. Modello finale: insieme dei cinque
 come augmentation al test, probabilità riportate nel nativo, postprocessing congelato. Tempi stimati:
 preparazione mezza giornata, due ricette × cinque fold ~5 ore su tre GPU, test un'ora.
 
+### 1 ottobre: arrivato il secondo lotto, il piano finale
+
+**I pazienti sono 17 in tutto, non 27**: il secondo lotto AInCP (`data/raw/AINCP/dataset_FSM_v2`, zip
+da FileSender GARR) ne contiene 7, e il «17» dell'incontro era il totale. Correzione di quanto scritto
+il 23/9. Il foglio aggiornato è `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`.
+
+| strato | pazienti | test |
+| --- | --- | --- |
+| Stella Maris 3 T | 10 (primo lotto) | 3 |
+| Stella Maris 1.5 T | 5: FSM_028, 030, 033, 035, 036 | 1 |
+| altri centri, 1.5 T | 2: FSM_001 (Niguarda), FSM_049 (Burlo Garofolo) | 1 |
+
+Stesso formato del primo lotto (una ROI per fenotipo sulla FLAIR). FSM_028 arriva qui ufficialmente,
+con le ROI per fenotipo: si usa (la copia in `/data01` resta esclusa). Decisioni dell'utente (1/10):
+**test stratificato per centro** (5 pazienti, 12 di addestramento; limite dichiarato: i 3 a 3 T sono
+fra i dieci su cui si è scelta la ricetta); **tutti e 17 i pazienti**, anche i 4 sotto i 5 anni che il
+foglio segna fuori dal criterio d'età dello studio (FSM_032, 028, 035, 036); **GPU condivise** con il
+job di un altro utente (23 GB su 80 occupati). Da chiedere al clinico: FSM_030 ha due ROI_1 diverse
+(`ROI_1.nii` del 31/3 ore 16:05, 5151 voxel, e `FSM_030_FLAIR_original_ROI_1 - Copia.nii` delle 12:25,
+6460 voxel, Dice 0.72): si usa la più recente, `ROI_1.nii`.
+
+**Le fasi**, ognuna con il suo criterio, fissato prima di guardare i risultati:
+
+1. **Dati.** Preparazione dei 7 con `pipeline_aincp.py prepara`, controllo a vista nel template,
+   elenco dei residui ≤ 1 mm³ dei nuovi per il clinico.
+2. **Split** `Dataset506_AINCP_FINALE`: 12/5, fissato e scritto in `reports/split_*.md` prima di ogni training.
+3. **Pesi di partenza**: decisi (502 per A; 543 da 1000 epoche per D).
+4. **Training**: tre ricette × cinque fold sui 12, tutte con modality dropout e arresto sulla perdita
+   di validazione: A (da 502, passo differenziato), D (da 543, 1e-4 uniforme), Z (da zero, riferimento).
+5. **Scelta**, sui soli fuori-fold dei 12: postprocessing per ricetta (`postprocessing_aincp.py
+   scegli`), poi la ricetta con l'F1 per lesione più alto; a parità entro 0.02, meno falsi positivi.
+   La ricetta scelta è **il modello della tesi**, dichiarato prima del test.
+6. **Test, una volta**: insieme dei cinque fold di ciascuna ricetta sui 5 pazienti di test, con il
+   postprocessing congelato. Il modello della tesi è quello scelto al punto 5; le altre due ricette
+   si riportano accanto come confronto, non per scegliere.
+7. **Risultati**: Dice, lesioni per fascia di volume e per fenotipo, falsi positivi, percentuale di
+   cervello lesionato, per strato, con IC bootstrap; figure; documenti; artefatto.
+
 ## Cosa non conviene fare
 
 - **Training congiunto a testa condivisa** sui tre dataset: semantiche di label incompatibili.

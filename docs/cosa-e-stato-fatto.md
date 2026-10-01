@@ -679,6 +679,27 @@ di 1–5 voxel di arrotondamento. FSM_028, usato per provare il secondo formato,
 (provenienza ignota): la pipeline legge solo i lotti AInCP in `data/raw/AINCP/`. D su 505 finito; due varianti di 543
 lanciate. La procedura è in `obiettivo-e-piano.md`.
 
+## 31. Il secondo lotto AInCP e il dataset finale (1 ottobre)
+
+```bash
+curl -L "<link FileSender>/download.php?token=...&files_ids=1113201" -o data/raw/AINCP/dataset_FSM_v2.zip
+cd data/raw/AINCP && unzip -q dataset_FSM_v2.zip && cd -
+python scripts/pipeline_aincp.py prepara --casi FSM_001 FSM_028 FSM_030 FSM_033 FSM_035 FSM_036 FSM_049
+python scripts/elenco_residui_annotazione.py                    # ora su entrambi i lotti
+python scripts/pipeline_aincp.py dataset --id 506 && nnUNetv2_extract_fingerprint -d 506 -np 8
+python scripts/pipeline_aincp.py piano --id 506 && nnUNetv2_preprocess -d 506 -plans_name nnUNetPlansDa502 -c 3d_fullres -np 8
+# 15 run (A, D, Z x 5 fold) sulle 4 GPU condivise, SOGLIA_MEM=60000: vedi reports/logs/s3_506_gpu*.log
+```
+
+Arrivati 7 pazienti (totale 17, non 27), tutti a 1.5 T, nello stesso formato del primo lotto. Foglio
+aggiornato `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`, ora letto dalla pipeline. Controllo a vista
+dei 7 nel template: allineamento corretto. In FSM_030 e FSM_033 la lesione cresce nel template più
+del cervello (2.7 contro 1.9 e 1.5 volte): la registrazione non lineare deforma di più la zona
+periventricolare; le misure si fanno nel nativo. Split 12/5 per strato con quote a resti maggiori
+(arrotondare per strato dava 6 di test). Aggiunto il riferimento da zero con dropout
+(`nnUNetTrainerWandb_250ep_dropmod30_arresto50`). Elenco dei residui per il clinico: 46 componenti,
+12 fuori dal cervello.
+
 ---
 
 ## Dataset nnU-Net attualmente disponibili
@@ -698,6 +719,7 @@ lanciate. La procedura è in `obiettivo-e-piano.md`.
 | `Dataset504_AINCP` | FLAIR + T1, spazio T1 nativo | lesione | 10 (5 fold) | — (i lotti futuri) | `scripts/make_aincp_dataset.py` |
 | `Dataset505_AINCP_MNI` | FLAIR + T1, template pediatrico | lesione | 10 (split di 504) | — | `scripts/make_aincp_mni_dataset.py` |
 | `Dataset542_WMH_MNI` | FLAIR + T1, MNI adulto | lesione | 79 (split di 512) | — | `scripts/make_wmh_mni_dataset.py` |
+| `Dataset506_AINCP_FINALE` | FLAIR + T1, template pediatrico | lesione | 12 (5 fold) | **5** (`imagesTs`, mai guardati) | `scripts/pipeline_aincp.py` |
 | `Dataset543_ATLAS_WMH_MNI` | FLAIR (vuota per ATLAS) + T1, MNI adulto | lesione | 635 (unione dei fold) | — | `scripts/make_union_atlas_wmh_mni.py` |
 | `Dataset599_SMOKE_ATLAS` | T1 | lesione | 16 | — | `scripts/make_smoke_dataset.py` (usa e getta) |
 
