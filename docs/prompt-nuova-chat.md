@@ -41,7 +41,7 @@ niente. E' un repo git: usa `git log` e `git show` per la storia invece di rileg
 COM'E' FATTO IL PROBLEMA
 ============================================================
 Il bersaglio finale NON e' nessuno dei dataset pubblici: sono le lesioni in bambini con paralisi
-cerebrale, dal progetto AInCP / Stella Maris. Su una ventina di pazienti non si addestra da zero,
+cerebrale, dal progetto AInCP / Stella Maris. Su 17 pazienti non si addestra da zero,
 quindi tutto il lavoro sui dati pubblici serve a costruire i PESI DI PARTENZA migliori possibili.
 
 La pipeline prevista ha due stadi: (1) trovare la lesione; (2) inpainting per generare un "gemello
@@ -58,13 +58,13 @@ I DATI PUBBLICI, tutti gia' convertiti in formato nnU-Net sotto data/processed/n
 Verificato sui file: ATLAS e DBB la FLAIR non ce l'hanno proprio. "Aggiungere la FLAIR ai dataset
 che abbiamo" si puo' fare solo su WMH, ed e' gia' fatto (Dataset512).
 
-I DATI PRIVATI (AInCP), in arrivo:
-  - avranno T1 **e FLAIR** -> il modello finale sara' a due canali;
-  - contengono **anche acquisizioni a 1.5 T**, non solo 3 T;
-  - arrivano a scaglioni su redcap.unipi: 10 soggetti, poi altri 10. In tutto ~20.
-  - da chiarire con il relatore: se le maschere distinguono i due fenotipi (iperintensita' FLAIR e
-    cavita') o sono una classe sola; se T1 e FLAIR sono gia' co-registrati; come suddividere i 20
-    soggetti fra addestramento e valutazione (da decidere PRIMA di guardare i dati).
+I DATI PRIVATI (AInCP), tutti arrivati: 17 pazienti, e non ne arriveranno altri.
+  - lotto 1 (11/9): 10 pazienti Stella Maris a 3 T, data/raw/AINCP/dataset_FSM_v1;
+  - lotto 2 (1/10): 7 pazienti a 1.5 T (5 Stella Maris, FSM_001 Niguarda, FSM_049 Burlo Garofolo),
+    data/raw/AINCP/dataset_FSM_v2. Foglio con centro, campo ed eta': docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx;
+  - T1 e FLAIR originali, ROI per fenotipo disegnate sulla FLAIR: ROI_1 gliosi, ROI_2 cistica,
+    ROI_3 ventricolo (ESCLUSO dall'etichetta), ROI_4 encefalomalacia;
+  - si usano SOLO i lotti consegnati da AInCP (la copia di FSM_028 in /data01/fsm_mri_data no).
 
 ============================================================
 COSA ABBIAMO IMPARATO — I RISULTATI CHE CONTANO
@@ -100,9 +100,16 @@ Baseline: 501 WMH/FLAIR 0.774 | 502 ATLAS/T1 0.610 | 503 DBB/6 tessuti 0.971 (no
 7. L'OVERFITTING E' MASSICCIO SUI POCHI CASI. Divario fra dati visti e non visti: +0.534 da zero,
    poi +0.398, +0.275, +0.179 al ridursi del passo. Stessa progressione dei Dice.
 
-RICETTA DI FINE-TUNING PER AInCP, misurata e da usare sui pazienti veri:
-  passo di apprendimento 1e-4 (non il default) | poche epoche, il minimo cade fra la 69 e la 128 |
-  misurare sempre il modello non adattato come termine di paragone.
+SUI PAZIENTI (dettaglio e numeri in docs/modelli-ed-esperimenti.md, «Quarta parte»):
+8. L'ESPANSIONE DEL PRIMO STRATO DA 1 A 2 CANALI FUNZIONA, ma il canale FLAIR nuovo impara solo con
+   il passo differenziato (FLAIR 1e-2, resto 1e-4); a 1e-4 uniforme resta spento.
+9. IL PRETRAINING PORTA LE CAVITA' E TOGLIE I FALSI POSITIVI; il Dice medio non distingue le ricette
+   con dieci pazienti. Le misure che contano: copertura per fenotipo, lesioni rilevate, falsi positivi.
+10. I PRETRAINING IN SEQUENZA DIMENTICANO (WMH dopo ATLAS: ATLAS da 0.610 a 0.217); INSIEME NO
+    (Dataset543, ATLAS con FLAIR vuota + WMH, modality dropout).
+11. SPAZIO DI LAVORO: template pediatrico MNIPediatricAsym (stessa griglia di ATLAS), ritorno al nativo
+    per le metriche. Componenti delle annotazioni fino a 1 mm3 = residui, tolte.
+12. IL POSTPROCESSING (soglia e volume minimo scelti sui fuori-fold) toglie 3/4 dei falsi positivi.
 
 ============================================================
 FONTI IMPORTANTI DA CONOSCERE
@@ -163,40 +170,28 @@ ABITUDINI CHE FANNO RISPARMIARE PIU' DELLE SKILL:
   - non rileggere un file appena modificato: se Edit non ha dato errore, la modifica c'e'.
 
 ============================================================
-DA DOVE RIPARTIRE (aggiornato il 7 settembre 2026)
+DA DOVE RIPARTIRE (aggiornato il 1 ottobre 2026)
 ============================================================
-IN ESECUZIONE: rivalutazione dei 4 bracci di 541 con `checkpoint_best` invece dell'ultima epoca,
-su CPU perche' le GPU sono tutte al 100% per un lavoro di altri utenti
-(`scripts/run_val_best.sh`, ~2h30 per braccio). Il primo braccio ha gia' risposto: 0.4491 contro
-0.4507, cioe' non recupera nulla, per il motivo spiegato al punto 6 sopra. Gli altri tre servono
-solo a confermare. Non rilanciare: lo script salta i bracci gia' fatti.
+IN ESECUZIONE: il MODELLO FINALE su Dataset506_AINCP_FINALE (17 pazienti nel template; 12 di
+addestramento a 5 fold, 5 di TEST mai guardati). 15 run: ricette A (da 502, passo differenziato),
+D (da 543 a 1000 epoche), Z (da zero), x 5 fold, sulle 4 GPU condivise con un altro utente.
+Progresso in nnUNet/nnUNet_results/Dataset506_AINCP_FINALE/*/fold_*/training_log_*.txt; code in
+reports/logs/s3_506_gpu*.log. Le code saltano i fold gia' fatti: non rilanciare.
 
-TUTTE E QUATTRO LE GPU SONO OCCUPATE da altri utenti. Controllare prima di pianificare training.
-
-PROSSIMI PASSI, in ordine:
-1. `batch_dice: true` nel JSON del piano di 502 e riaddestrare. E' UNA RIGA, nessun codice, ed e'
-   pensato esattamente per annotazioni piccole e sparse; nei nostri 3d_fullres e' `false`. Miglior
-   rapporto fra costo e probabilita' di riuscita fra tutto cio' che resta.
-2. Ripetere l'estrazione dei 10 casi del test 541 due o tre volte con semi diversi. E' il limite
-   piu' serio di quel risultato: con dieci casi la varianza e' alta e ne abbiamo una sola.
-3. Proposta B, la preferita dal relatore: pre-addestrare a un canale sugli 842 casi e poi
-   ESPANDERE il primo strato a due canali per usare la FLAIR. Serve un trainer che sovrascriva il
-   caricamento dei pesi, perche' nnU-Net verifica con un assert che le forme combacino. Non serve
-   abbandonare nnU-Net: e' una funzione sola. Dettaglio in docs/obiettivo-e-piano.md.
-4. Un criterio di arresto vero sulla perdita di validation, nel nostro trainer.
-5. Loss per le lesioni piccole, dopo batch_dice: `nnUNetTrainerDiceTopK10Loss` (gia' in nnU-Net),
-   poi Focal Tversky (da implementare). Ogni confronto va guardato SIA in Dice SIA in tasso di
-   rilevamento per fascia di volume, altrimenti non si vede niente.
-6. Proposta C, accettata dal relatore come strada percorribile: lesioni sintetiche sui 207 cervelli
-   pediatrici sani di DBB, usando i rapporti di intensita' gia' misurati (0.62 cavitate, 1.07 non
-   cavitate) e la parcellazione DBB per collocarle dove stanno clinicamente. Da validare
-   addestrando sul sintetico e verificando su ATLAS e WMH reali.
-7. Alla fine: confronto 2d contro 3d_fullres, e i cinque fold sulla configurazione scelta.
-
-QUANDO ARRIVANO I PAZIENTI AInCP, e' la priorita' assoluta e cambia tutto. Applicare la ricetta di
-fine-tuning misurata (passo 1e-4, poche epoche, sempre il modello non adattato come paragone).
+PROSSIMI PASSI, in ordine (procedura in docs/obiettivo-e-piano.md, «1 ottobre»):
+1. Per ciascuna ricetta: python scripts/postprocessing_aincp.py scegli --run <run> e poi valuta.
+2. Scegliere la ricetta con la regola gia' fissata (F1 per lesione; a parita' entro 0.02, meno
+   falsi positivi). Scriverla nei documenti PRIMA del test.
+3. Test, una volta: scripts/predici_test.sh 506 <trainer> per ciascuna ricetta (la scelta e' gia'
+   fatta, le altre sono confronto).
+4. Ablazione dei canali in inferenza sul modello scelto; risultati per fenotipo, centro, dimensione.
+5. Figure, documenti, artefatto per i relatori.
+Da chiedere al clinico prima del test: quale delle due ROI_1 di FSM_030 e' giusta.
 
 ARTEFATTI ESISTENTI, da AGGIORNARE passando il loro url e non ricreare:
+  IL PRINCIPALE, pesi di partenza e risultati sui pazienti (versione 7, 23/9; da aggiornare con il
+  modello finale):
+    https://claude.ai/artifact/BhCwc5KKbwoQ5cVBiN25hA
   relazione tecnica per i relatori:
     https://claude.ai/code/artifact/272e1e84-49f2-42a0-b3ca-31ad222adab9
   risposte ai chiarimenti del relatore:

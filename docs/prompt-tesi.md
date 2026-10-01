@@ -41,8 +41,8 @@ T1 e FLAIR. **Stadio 2** (futuro): ricostruire il «gemello sano» del cervello 
 volumetrica, che senza una maschera di lesione affidabile non è possibile.
 
 Il vincolo che determina tutto: il dataset bersaglio, **AInCP / Fondazione Stella Maris**, ha
-**dieci pazienti** nel primo lotto (una ventina in totale, i lotti successivi arriveranno). Su dieci
-casi una rete non si addestra da zero. Il lavoro sui dataset pubblici serve quindi a costruire
+**17 pazienti** in tutto (10 nel primo lotto, 7 nel secondo, arrivato il 1 ottobre 2026). Su così
+pochi casi una rete non si addestra da zero. Il lavoro sui dataset pubblici serve quindi a costruire
 **pesi di partenza**, non a produrre il modello finale. Il lavoro più vicino in letteratura
 (Simarro et al. 2025) ha addestrato da zero su 35 bambini e non riporta il Dice del modello di
 lesione: è lo spazio in cui la tesi si colloca.
@@ -56,7 +56,8 @@ lesione: è lo spazio in cui la tesi si colloca.
 | **WMH 2017** (MICCAI challenge) | FLAIR + T1, coregistrate all'origine | 99 casi in totale, 79 in training; quattro scanner in tre siti (Amsterdam GE 1.5 T e 3 T, Utrecht, Singapore) | iperintensità della sostanza bianca, adulti | baseline FLAIR; unico dataset pubblico con entrambe le sequenze appaiate |
 | **ATLAS v2.0** | T1 | 655 (556 train) | lesioni da ictus, adulti, già in spazio MNI152NLin2009aSym a 1 mm | il dataset grande da cui vengono i pesi di partenza |
 | **DBB** (Distorted Brain Benchmark, brainlife, CC-BY 4.0) | T1 | 207 | sei tessuti (parcellazione), cervelli **pediatrici** con anatomia distorta | pretraining anatomico; **non contiene maschere di lesione** (verificato) |
-| **AInCP v1** (Stella Maris) | T1 + FLAIR originali, non allineate | 10 pazienti, 10 sessioni | lesione tracciata a mano sulla FLAIR in 4 ROI | il bersaglio |
+| **AInCP v1** (Stella Maris, 3 T) | T1 + FLAIR originali, non allineate | 10 pazienti, 10 sessioni | lesione tracciata a mano sulla FLAIR in 4 ROI | il bersaglio |
+| **AInCP v2** (1.5 T: 5 Stella Maris, 1 Niguarda, 1 Burlo Garofolo) | come v1 | 7 pazienti | come v1 | il bersaglio; 17 in tutto |
 
 Proprietà misurate che contano per la tesi:
 
@@ -73,12 +74,14 @@ Proprietà misurate che contano per la tesi:
   123.5 (ATLAS 5.3, WMH 10.9). Delle **158 componenti connesse**, 93 (59%) sono sotto 1 mm³ e
   valgono lo 0.013% del volume; 16 sopra 100 mm³ ne contengono il 99.79%. Le componenti da un voxel
   (0.2 mm³) sono scorie del tracciato manuale → **soglia minima di dimensione**, dichiarata prima di
-  misurare; proposta 10 mm³ (scarta l'84% delle componenti e lo 0.06% del volume). Geometria: T1
+  misurare; proposta 10 mm³ (scarta l'84% delle componenti e lo 0.06% del volume). **Decisa poi la
+  soglia di 1 mm³** (incontro del 23/9: sotto sono residui del tracciato). Geometria: T1
   1.0×0.43×0.43 mm; FLAIR 0.8×0.5×0.5 mm in 7 pazienti, 1.0×0.47×0.47 in 3 (FSM_039, 054, 056).
 
 Regole di protocollo che la tesi deve dichiarare: split fissati una volta e mai rigenerati; test set
-mai guardato durante lo sviluppo; per AInCP **validazione incrociata a 5 fold per paziente** (8
-train / 2 val), nessun test set — i lotti futuri lo saranno; confronti sempre **appaiati caso per
+mai guardato durante lo sviluppo; per AInCP, sui primi dieci, **validazione incrociata a 5 fold per paziente** (8
+train / 2 val) senza test; per il modello finale (17 pazienti) **12 di addestramento a 5 fold e 5 di
+test** stratificati per centro e campo, fissati prima di ogni training e usati una volta; confronti sempre **appaiati caso per
 caso** (test di Wilcoxon), mai fra medie di campioni diversi.
 
 ---
@@ -343,4 +346,22 @@ usato una volta. Stadio 2 della Proposta B (WMH a due canali, in MNI) avviato, c
 dropout. **Correzione**: «100% delle lesioni sopra 50 mm³» vale per il modello da zero; la ricetta
 scelta ne trova 17 su 18.
 
-*(da completare alla fine: esperimenti successivi, decisione finale, eventuali lotti successivi)*
+**23–24 settembre 2026 — pretraining in sequenza contro congiunto, template, postprocessing.** Lo
+stadio 2 in sequenza (WMH dopo ATLAS) impara WMH (Dice 0.735) ma dimentica ATLAS (da 0.610 a 0.217
+con la FLAIR vuota), perché nnU-Net riaddestra da capo lo strato di segmentazione a ogni passaggio.
+Sostituito da un pretraining **congiunto** ATLAS + WMH (ATLAS con canale FLAIR vuoto, reso possibile
+dal modality dropout), che nella versione a 1000 epoche tiene ATLAS (0.606) e impara WMH (0.723). I
+dieci pazienti nel template pediatrico non si distinguono dallo spazio nativo (0.563 contro 0.615,
+p = 0.49). Un postprocessing scelto sui fuori-fold (soglia di probabilità, volume minimo) toglie tre
+quarti dei falsi positivi senza perdere lesioni; la percentuale di cervello lesionato predetta segue
+la vera (Spearman 0.90, scarto medio −0.12 punti).
+
+**1 ottobre 2026 — secondo lotto e modello finale.** Arrivati 7 pazienti, tutti a 1.5 T: **17 in
+tutto, non 27** (correzione di quanto scritto il 23/9). Strati: 10 Stella Maris 3 T, 5 Stella Maris
+1.5 T, 2 altri centri. Split fissato prima di ogni training: 12 di addestramento (5 fold), 5 di test
+stratificati per centro. Quattro pazienti hanno meno di 5 anni (fuori dal criterio d'età dello studio
+clinico): inclusi, da dichiarare. Modello finale in tre ricette, tutte con modality dropout: A (da
+ATLAS, primo strato espanso, passo differenziato), D (dal pretraining congiunto), Z (da zero, il
+riferimento). La ricetta si sceglie sui soli fuori-fold dei 12, poi il test una volta.
+
+*(da completare alla fine: scelta della ricetta, risultati sul test, ablazione dei canali)*

@@ -16,6 +16,13 @@ Prerequisito: i dataset devono essere già preparati. Stato atteso sotto `nnUNet
 Quali di questi conviene addestrare, in che ordine e quali possono condividere pesi è in
 [obiettivo-e-piano.md](obiettivo-e-piano.md).
 
+> **I modelli per i pazienti AInCP seguono una procedura diversa**, descritta qui sotto solo nei passi
+> comuni (GPU, ambiente, lettura del progresso). Dati, split, pesi di partenza e lancio:
+> `scripts/pipeline_aincp.py` → `scripts/run_stadio3.sh <ID> <A|D|Z> [fold]`; postprocessing e
+> valutazione: `scripts/postprocessing_aincp.py`; test: `scripts/predici_test.sh`. I comandi esatti
+> sono in [obiettivo-e-piano.md](obiettivo-e-piano.md) («Il giorno in cui arrivano i pazienti»), le
+> ricette nel registro. Le GPU si condividono con `SOGLIA_MEM=60000` solo se l'utente lo ha deciso.
+
 ## Step 0 - Scegliere la GPU
 
 La GPU è sbloccata: `torch 2.6.0+cu124`, allineato al driver della macchina, verificato su A100. La

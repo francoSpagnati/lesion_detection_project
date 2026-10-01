@@ -1,7 +1,7 @@
 # Progetto: rilevamento di lesioni cerebrali nella paralisi cerebrale infantile
 
 Tesi magistrale. Segmentazione automatica di lesioni con nnU-Net v2. Il bersaglio finale è un
-dataset privato di ~20 pazienti AInCP / Stella Maris: i dataset pubblici servono a costruire i
+dataset privato di 17 pazienti AInCP / Stella Maris (arrivati tutti, 1/10/2026): i dataset pubblici servono a costruire i
 **pesi di partenza**, non sono il compito.
 
 ## Vincoli operativi — non negoziabili

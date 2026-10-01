@@ -3,6 +3,12 @@
 Questo è il documento da leggere per primo: dice **a cosa serve il progetto**, quali dati abbiamo e
 perché, e **cosa va fatto adesso**. Lo stato aggiornato è in [README.md](README.md#stato).
 
+> **Al 1 ottobre 2026 il piano in vigore è la sezione «1 ottobre: arrivato il secondo lotto, il piano
+> finale»**, verso la fine. Le sezioni sono in ordine cronologico e restano come registro delle
+> decisioni: quelle prima del 22 settembre descrivono piani superati (l'ordine di lavoro del 28 agosto,
+> la variante D a sette classi, la Proposta C, lo spazio nativo, lo stadio 2 in sequenza). Il percorso
+> in breve è in [panoramica-progetto.md](panoramica-progetto.md).
+
 ## L'obiettivo vero
 
 Tesi: **rilevamento automatico di lesioni cerebrali in bambini con paralisi cerebrale**, su immagini di
@@ -24,11 +30,12 @@ La pipeline prevista ha **due stadi**:
 
 Modello di riferimento: **nnU-Net 3D con deep supervision**. Ingressi previsti a regime: **T1 e FLAIR**.
 
-## Il dato che decide tutto: il bersaglio finale ha ~10 casi
+## Il dato che decide tutto: il bersaglio finale ha pochi casi (17)
 
 Il compito finale non è nessuno dei dataset pubblici. È il dataset privato **AInCP / Stella Maris**,
 segmentato a mano dalla Dr.ssa Francy Cruz: circa **10 pazienti**, classificati con punteggio MRICS.
-Il primo lotto di 10 è arrivato l'11 settembre 2026 (vedi «Il primo lotto AInCP» più sotto).
+Il primo lotto di 10 è arrivato l'11 settembre 2026 (vedi «Il primo lotto AInCP» più sotto), il
+secondo di 7 il 1 ottobre: **17 pazienti in tutto**, e non ne arriveranno altri.
 
 Da qui segue la conseguenza più importante per il piano: **con dieci casi il pretraining non è un
 esperimento accessorio, è il meccanismo centrale del progetto.** Tutti i dataset pubblici servono a
@@ -92,7 +99,7 @@ finali che producono la mappa di segmentazione. Da qui due vincoli e una libert�
 - **il numero di classi può differire.** Le teste non vengono trasferite, quindi 7 classi (DBB) → 2
   classi (ATLAS) è ammesso.
 
-## Ordine di lavoro deciso il 28 agosto
+## Ordine di lavoro deciso il 28 agosto *(superato)*
 
 **La variante D — un solo modello su tutti e tre i dataset a 1 mm — è l'obiettivo prioritario.** A, B e C
 restano come alternative se questa strada non regge. I tre test che la precedono non sono esperimenti
@@ -224,7 +231,7 @@ trattando le due sequenze come intercambiabili, sfrutta subito la FLAIR ma da un
 | --- | --- | --- | --- | --- |
 | 1 | ATLAS + WMH in T1 | **635** | 1 | lesioni cavitate |
 | 2 | WMH con T1 e FLAIR | 79 | 2 | a usare la FLAIR |
-| 3 | AInCP | ~20 | 2 | il dominio pediatrico |
+| 3 | AInCP | 17 | 2 | il dominio pediatrico |
 
 **Correzione allo stadio 1: 635 casi, non 842.** I 207 pediatrici di DBB erano contati quando il
 piano prevedeva ancora il modello a 7 classi. Abbandonato il multiclasse (decisione del 7 settembre),
@@ -488,7 +495,7 @@ dominio dannosa per il modello nel complesso: una tesi legittima, che però si v
 senza quei casi** e confrontando sugli stessi fold. Come sempre nel progetto, la variante si costruisce
 come dataset separato con un nuovo ID, senza cancellare dati.
 
-## Piano di lavoro, in ordine
+## Piano di lavoro, in ordine *(del 7 settembre, superato)*
 
 **1. Baseline, un fold ciascuna — FATTO.** `3d_fullres`, fold 0: 501 `0.774`, 502 `0.610`, 503 `0.971`.
 Sono i numeri contro cui si misura ogni guadagno successivo.

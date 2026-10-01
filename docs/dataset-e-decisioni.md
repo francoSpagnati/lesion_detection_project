@@ -156,6 +156,46 @@ Due scelte conseguenti, scritte nel `dataset.json`:
 
 ---
 
+## AInCP — i pazienti (`Dataset504`, `505`, `506`)
+
+Il bersaglio. **17 pazienti** in due lotti consegnati da AInCP ed estratti in `data/raw/AINCP/`
+(primo lotto `dataset_FSM_v1`, 11/9, dall'archivio `.7z`; secondo `dataset_FSM_v2`, 1/10, da FileSender
+GARR). Centro, campo ed età nel foglio `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`, foglio
+`SITE & MRFIELD` (e `Sheet1` per il secondo lotto). **Si usano solo i lotti consegnati da AInCP**: la
+copia di FSM_028 trovata in `/data01/fsm_mri_data/`, di provenienza ignota, è esclusa (FSM_028 è poi
+arrivato regolarmente nel secondo lotto).
+
+| strato | pazienti | età |
+| --- | --- | --- |
+| Stella Maris, 3 T | FSM_032, 039, 040, 041, 045, 046, 052, 053, 054, 056 | 3–15 anni |
+| Stella Maris, 1.5 T | FSM_028, 030, 033, 035, 036 | 3–5 anni |
+| altri centri, 1.5 T | FSM_001 (Niguarda), FSM_049 (Burlo Garofolo) | 7 e 12 anni |
+
+**Formato.** Per ogni paziente `<sessione>/COREGISTERED/`: T1 e FLAIR originali, **non allineate**
+fra loro, e una ROI per fenotipo **disegnata sulla FLAIR** (`ROI_type_definition.txt`, versione del
+19 maggio 2026): `ROI_1` gliosi (iperintensità in FLAIR), `ROI_2` lesione cistica, `ROI_3` ventricolo
+dell'emisfero leso, `ROI_4` encefalomalacia (perdita di tessuto non cistica). **L'etichetta è
+`ROI_1 | ROI_2 | ROI_4`; il ventricolo resta fuori** per decisione del relatore. Non tutti i pazienti
+hanno tutte le ROI.
+
+**Problemi trovati e decisioni:**
+
+- **Componenti fino a 1 mm³** (spesso un singolo voxel del tracciato): residui, per indicazione
+  clinica (23/9); tolte dall'etichetta prima di ogni trasporto e ignorate nelle metriche. Elenco per il
+  clinico, con paziente, file, fetta e coordinate: `reports/residui_annotazione.md` (46 componenti,
+  12 fuori dal cervello).
+- **Nomi irregolari**: FSM_052 ha `ROI_1 - Copia.nii` come unica ROI_1 (la ricerca usa una regex);
+  FSM_030 ha **due ROI_1 diverse** (Dice 0.72 fra loro): si usa `ROI_1.nii`, la più recente, in attesa
+  del clinico. FSM_049 contiene anche file già elaborati da altri, ignorati.
+- **Età sotto i 5 anni** in 4 pazienti (FSM_032, 028, 035, 036), che il foglio segna fuori dal
+  criterio d'inclusione dello studio clinico: inclusi (decisione dell'utente, 1/10), da dichiarare.
+- **Spazio**: i pazienti si registrano sul template **MNIPediatricAsym cohort-1**, che ha la stessa
+  griglia di ATLAS; le misure si riportano nel nativo. La proporzione di cervello lesionato si conserva
+  (mediana −10%), ma localmente la registrazione può ingrandire una lesione più del cervello (FSM_030,
+  FSM_033: 2.7 volte contro 1.5–1.9, lesioni periventricolari).
+
+Pipeline e comandi: `scripts/pipeline_aincp.py` (procedura in `obiettivo-e-piano.md`).
+
 ## Target spacing: come nnU-Net decide
 
 Prende la **mediana** degli spacing per asse e applica un override anisotropico (10º percentile sull'asse

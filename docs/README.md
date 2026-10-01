@@ -5,7 +5,7 @@ I dati originali non vengono duplicati: sono referenziati da `data/raw/` tramite
 
 ## Da dove iniziare
 
-Leggi in quest'ordine. Sono sei documenti, nessuno ripete gli altri.
+Leggi in quest'ordine. Sono sei documenti, nessuno ripete gli altri. Per il percorso in breve, senza dettagli tecnici, parti dalla [panoramica](panoramica-progetto.md).
 
 1. **[Obiettivo e piano](obiettivo-e-piano.md)** — a cosa serve il progetto, i quattro dataset e il ruolo
    di ciascuno, cosa va fatto adesso e in che ordine. **Se leggi un solo file, leggi questo.**
@@ -29,13 +29,15 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 22 settembre 2026
+## Stato al 1 ottobre 2026
 
-**In una riga:** sui dieci pazienti AInCP **ogni sorgente porta il suo fenotipo** — il
-pre-addestramento su ATLAS porta le cavità (encefalomalacia da 0.40 a 0.78–0.81 di copertura), la FLAIR
-porta la gliosi — e il pre-addestramento taglia i falsi positivi (7.9 → 1.6 per paziente, 10 su 10, p = 0.002);
-il Dice medio invece non distingue nessuna variante con dieci pazienti. Prossimo esperimento
-principale: lo stadio intermedio su WMH, per la gliosi.
+**In una riga:** sono arrivati tutti i pazienti (**17**, non 27) e sono in corso i training del
+**modello finale** (`Dataset506`): una rete nnU-Net a due canali (FLAIR + T1) nel template pediatrico,
+in tre ricette — da ATLAS con il primo strato espanso (A), dal pretraining congiunto ATLAS + WMH (D), da
+zero (Z) — su 12 pazienti, con 5 pazienti di test messi da parte. Domani: scelta della ricetta e del
+postprocessing sui 12, poi il test una volta sola.
+
+Il percorso, spiegato per chi non conosce il progetto, è in [panoramica-progetto.md](panoramica-progetto.md).
 
 ### Risultati misurati
 
@@ -54,29 +56,36 @@ principale: lo stadio intermedio su WMH, per la gliosi.
 | `541` **test del pretraining** | **0.685** contro **0.451** da zero | il pretraining vale **+0.23**, ma solo con passo `1e-4`: col default (0.564) *danneggia* il modello, che senza adattamento farebbe 0.677 |
 | `504` **AInCP**, 10 pazienti, 5 fold | da zero **0.581**, Proposta B `zero` **0.555**, `duplica` **0.596**, passo differenziato **0.621** | nessuna differenza di Dice distinguibile dal rumore (miglior variante: IC 95% [−0.036, +0.110]); i pre-addestrati fanno un terzo dei falsi positivi (p = 0.033). Con il passo differenziato la FLAIR impara. Per fenotipo: ATLAS porta le cavità, la FLAIR la gliosi (`reports/analisi_rilevamento_504.md`) |
 
+Sui pazienti AInCP (cinque fold, dieci pazienti; dettaglio nel registro):
+
+| Esperimento | Dice | Cosa dice |
+| --- | --- | --- |
+| `504` nativo, sei ricette | **0.555–0.621** | Dice indistinguibile fra ricette; il pretraining porta le cavità e taglia i falsi positivi (10 pazienti su 10, p = 0.002); scelta la ricetta a passo differenziato |
+| `542` WMH dopo ATLAS, in sequenza | 0.735 su WMH | **dimentica ATLAS**: 0.610 → 0.217 con la FLAIR vuota. Abbandonato |
+| `543` ATLAS + WMH insieme, 1000 epoche | 0.606 ATLAS, 0.723 WMH | non dimentica e impara la FLAIR: i pesi della ricetta D |
+| `505` i dieci nel template pediatrico | 0.563–0.600 | il template non costa nulla di misurabile (p = 0.49 contro il nativo) |
+| postprocessing su `505` | F1 per lesione 0.61 → 0.68 | soglia e volume minimo: falsi positivi da 22 a 6 senza perdere lesioni |
+
 ### In corso
 
 | Cosa | Stato |
 | --- | --- |
-| Training su `504` AInCP | sei varianti concluse (23/9). Ricetta scelta: passo differenziato con il freno corretto. Con la soglia di 1 mm³ (47 lesioni): rilevate 21 contro 25 del modello da zero, falsi positivi 0.9 contro 3.9 per paziente |
-| **Stadio 2 su WMH in MNI** (`Dataset542`) | concluso il 23/9: impara WMH (0.735) ma **dimentica le cavità di ATLAS** (0.610 → 0.217 con FLAIR vuota), in entrambe le varianti. Sostituito dal congiunto |
-| **Stadi 1+2 congiunti** (`Dataset543`, ATLAS con FLAIR vuota + WMH) | in corso dal 23/9 sulla GPU 1 |
-| **Stadio 3 nel template pediatrico** (`Dataset505`, i dieci pazienti) | esperimenti A (pesi 502) e B (pesi 542) in corso sulle GPU 2 e 3; D dai pesi di 543 dopo. Metriche nel nativo con `scripts/porta_505_nativo.py` |
-| Incontro del 23/9 | standardizzazione in MNI (template pediatrico proposto), soglia 1 mm³, 17 pazienti a 1.5 T in arrivo, split 70/30 per centro. Dettaglio in [obiettivo-e-piano.md](obiettivo-e-piano.md) |
-| Domande aperte | al clinico: le lesioni sotto 1 mm³ (20 su 24 spariscono comunque a 1 mm), 3 componenti fuori dal cervello, encefalomalacia a intensità marginale (FSM_040, FSM_045). Al responsabile: il secondo lotto (17 pazienti a 1.5 T). `FSM_028` escluso il 24/9: si usano solo i dati consegnati da AInCP |
+| **Modello finale** `Dataset506_AINCP_FINALE` | 15 run (A, D, Z × 5 fold) dal 1/10 sulle 4 GPU condivise con un altro utente; fine prevista il 2/10 |
+| Split | 12 di addestramento, **5 di test** (FSM_030, 046, 049, 052, 054), per strato di acquisizione: `reports/split_Dataset506_AINCP_FINALE.md` |
+| Domande aperte al clinico | FSM_030 ha due ROI_1 diverse (si usa la più recente); 46 componenti residue da correggere, 12 fuori dal cervello (`reports/residui_annotazione.md`); encefalomalacia a intensità marginale (FSM_040, FSM_045) |
 
-### Da fare dopo
+### Dopo il modello finale
 
 | Voce | Stato |
 | --- | --- |
-| **Variante D skull-stripped** — la stessa D sui volumi senza cranio | da costruire, per confrontarla direttamente con `531` |
-| **Proposta C** — lesioni sintetiche sui 207 cervelli pediatrici sani di DBB | proposta ai relatori; unica che non richiede dati esterni |
-| Varianti A (WMH+ATLAS), B (A+AInCP), C (tutti con `ignore`) | alternative se D non regge |
-| Transfer DBB → ATLAS | pianificato |
-| Confronto `2d` contro `3d_fullres` in cross-validation | pianificato |
-| Modality dropout (uso del modello con un solo canale) | variabile a sé, dopo la prima catena |
-| Dataset privato AInCP | **primo lotto arrivato l'11/9**: 10 pazienti, analizzati e preprocessati (`notebooks/aincp_primo_lotto.ipynb`) |
-| Stadio 2 — inpainting e gemello sano | dopo la segmentazione |
+| Scelta di ricetta e postprocessing sui fuori-fold dei 12, poi il test | procedura pronta (`postprocessing_aincp.py`, `predici_test.sh`) |
+| Ablazione dei canali in inferenza sul modello scelto | da fare: prova definitiva che usa entrambe le sequenze |
+| Stadio 2 della tesi — inpainting e gemello sano | dopo la segmentazione |
+
+**Abbandonati o superati**, con il motivo nel registro: variante D a sette classi (531), catena DBB →
+ATLAS, stadio 2 in sequenza (542), lavoro nello spazio nativo (sostituito dal template, incontro del 23/9),
+Proposta C (lesioni sintetiche su DBB: proposta ai relatori, non avviata; con i pazienti arrivati non è più sul percorso critico), skull stripping
+nelle baseline (nessun effetto).
 
 ### Verifiche introdotte dopo i chiarimenti del relatore (7 settembre)
 

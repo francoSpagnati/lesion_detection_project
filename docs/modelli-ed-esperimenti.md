@@ -84,6 +84,24 @@ run elencati:
 E una regola sui dati: **il test set non è stato ancora guardato**, in nessun dataset. Tutti i numeri qui
 sono di validation.
 
+### Cosa cambia nei modelli per i pazienti (504, 505, 506) e negli stadi di pretraining (542, 543)
+
+La rete resta la stessa `PlainConvUNet` a 6 stadi, ma con **il piano di 502** (`nnUNetPlansDa502`: 1 mm
+isotropo, patch 128³, batch 2) trasferito sui dataset dei pazienti, perché i pesi passano da una rete
+all'altra solo fra architetture identiche. Le differenze, tutte nei trainer di
+`scripts/nnunet_trainers/`:
+
+| | dataset pubblici (501–541) | pazienti e pretraining a due canali |
+| --- | --- | --- |
+| ingresso | 1 canale | **2 canali, 0 = FLAIR, 1 = T1** |
+| pesi iniziali | casuali | da 502 (primo strato **espanso** da 1 a 2 canali: il filtro T1 copiato, quello FLAIR a zero) o da 543 (già a 2 canali) |
+| passo | 0.01 | **1e-4** (oltre fa dimenticare i pesi, test 541); con pesi da 502 il primo strato va a **1e-2 sulla sola FLAIR** («passo differenziato», un hook frena la fetta T1) |
+| epoche | 1000 | **250** sui pazienti, 500–1000 negli stadi di pretraining |
+| arresto | nessuno (nnU-Net non lo fa) | dopo **50 epoche** senza miglioramento della perdita di validazione; `checkpoint_final` riceve i pesi dell'epoca migliore |
+| augmentation | default | default **più modality dropout**: in un esempio su tre una delle due sequenze, a caso, è azzerata |
+| fold | solo il fold 0 | **5 fold** per paziente (pochi casi: un fold solo sarebbe aneddotico) |
+| spazio | quello del dataset | **template MNI** (ATLAS e WMH nell'adulto, i pazienti nel pediatrico, stessa griglia); metriche riportate nel nativo |
+
 ---
 
 ## Seconda parte: i modelli, uno per uno
@@ -102,8 +120,13 @@ sono di validation.
 | **523** | ATLAS skull-stripped | T1 | lesione | 556 | 112 | **0.6067** | ablazione: skull stripping, -0.0037 con p=0.58 |
 | **531** | **tutti e tre**, a 1 mm | T1 | lesione + 6 tessuti | 842 | 151 | **0.603** lesione | variante D: perde poco su tutto, non guadagna nulla |
 | **541** | 45 casi ATLAS a 1.5 T | T1 | lesione | 10 | 35 | **0.685** al meglio, **0.451** da zero | **il test del pretraining**: vale +0.23, ma solo con il passo di apprendimento giusto |
+| **504** | 10 pazienti AInCP, nativo | FLAIR + T1 | lesione | 10 | 5 fold | **0.581** da zero – **0.621** | sei ricette; scelta il passo differenziato (0.615 con il freno corretto) |
+| **542** | WMH in MNI, da 502 | FLAIR + T1 | lesione | 79 | 16 | **0.735** WMH | stadio 2 in sequenza: **dimentica ATLAS** (0.610 → 0.217), abbandonato |
+| **543** | ATLAS + WMH in MNI, da 502 | FLAIR (vuota su ATLAS) + T1 | lesione | 635 | 128 | **0.606** ATLAS, **0.723** WMH | stadio 1+2 congiunto, 1000 epoche: **i pesi di partenza della ricetta D** |
+| **505** | 10 pazienti nel template | FLAIR + T1 | lesione | 10 | 5 fold | **0.563–0.600** | prova della strategia in MNI: nessuna differenza dal nativo |
+| **506** | **17 pazienti nel template** | FLAIR + T1 | lesione | 12 + **5 di test** | 5 fold | in corso | **il modello finale**: ricette A, D, Z |
 
-Tutti `3d_fullres`, fold 0, 1000 epoche. `599` è un dataset usa e getta da 16 casi per gli smoke test da
+Fino a 541: `3d_fullres`, fold 0, 1000 epoche. Da 504 in poi: vedi la tabella «Cosa cambia» qui sopra. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
 
 ---
@@ -584,7 +607,25 @@ La progressione è monotona e coincide esattamente con quella dell'overfitting m
 6. **Confrontare medie di validation diverse è un errore facile.** Da qui la scelta di fare tutti i
    confronti appaiati, caso per caso.
 
-## Quarta parte: cosa non è ancora stato addestrato
+E dai pazienti (504–506):
+
+7. **L'espansione da uno a due canali funziona, ma solo se il canale nuovo può imparare.** Con il
+   filtro FLAIR inizializzato a zero e passo 1e-4 la FLAIR resta spenta (norma 0.05 di quella del
+   T1); con il passo differenziato entra nel regime di un modello da zero (0.65–2.72) e la copertura
+   della gliosi sale in 7 pazienti su 10 (p = 0.084). Sul compito a due canali per eccellenza, WMH, la
+   rete espansa del congiunto arriva a 0.723 contro 0.753 di un modello nato a due canali.
+8. **Il pretraining porta le cavità e toglie i falsi positivi**, non il Dice medio: encefalomalacia
+   coperta 0.70–0.81 contro 0.40 da zero (4 pazienti su 4), falsi positivi meno del modello da zero in
+   10 pazienti su 10 (p = 0.002). Il Dice medio non distingue nessuna variante con dieci pazienti.
+9. **I pretraining in sequenza dimenticano**, perché nnU-Net riaddestra da capo lo strato finale a ogni
+   passaggio: WMH dopo ATLAS fa crollare ATLAS da 0.610 a 0.217. Addestrati insieme no.
+10. **Il postprocessing vale più di ogni variante di ricetta**: soglia e volume minimo scelti sui
+    fuori-fold tolgono tre quarti dei falsi positivi senza perdere lesioni né Dice.
+11. **Il template non costa nulla di misurabile**: la stessa ricetta in MNI e nel nativo non si
+    distingue (0.563 contro 0.615, p = 0.49); il ritorno al nativo pone un tetto di Dice 0.87 in media,
+    contro 0.89 del solo ricampionamento a 1 mm.
+
+## Quarta parte: i pazienti AInCP
 
 ### 504 — i dieci pazienti AInCP: T0, T1, T1' (conclusi il 15 settembre)
 
@@ -840,7 +881,7 @@ della rete non serve: le due varianti dimenticano uguale. La causa più probabil
 riaddestrato da capo sui soli WMH, e il criterio di decisione della rete diventa quello di WMH. È il
 motivo già scritto contro la catena DBB → ATLAS → WMH in `obiettivo-e-piano.md`.
 
-### Stadio 1+2 congiunto: `Dataset543_ATLAS_WMH_MNI` (dal 23 settembre, in corso)
+### Stadio 1+2 congiunto: `Dataset543_ATLAS_WMH_MNI` (23 settembre)
 
 La risposta all'oblio: ATLAS e WMH **nello stesso training**, così la rete li rivede entrambi a ogni
 epoca. 635 casi in MNI adulto (556 ATLAS con la FLAIR tutta zero, 79 WMH), una classe `lesione`,
@@ -851,7 +892,7 @@ quando il dropout spegne la FLAIR. Trainer `..._zero_500ep_lr1e3_dropmod30_arres
 502, lo stesso della variante migliore di 542: una variabile rispetto a 542, i dati. Criteri: Dice su
 ATLAS vicino a 0.610 **e** Dice su WMH vicino a 0.735, dalla validazione di nnU-Net separata per sorgente.
 
-### Stadio 3 nel template pediatrico: `Dataset505_AINCP_MNI` (dal 23 settembre, in corso)
+### Stadio 3 nel template pediatrico: `Dataset505_AINCP_MNI` (23–24 settembre)
 
 I dieci pazienti in MNIPediatricAsym cohort-1, che ha **la stessa griglia di ATLAS** (197×233×189 a
 1 mm, stessa origine). `scripts/make_aincp_mni_dataset.py`: FLAIR ed etichetta portate dalla griglia
@@ -931,3 +972,25 @@ Fold 0 di 543, validazione separata per sorgente, appaiata contro il 543 del 23/
 **Scelta (1/10): la variante da 1000 epoche** come pesi di partenza della ricetta D allo stadio 3 finale.
 Scelta fatta solo su ATLAS e WMH, prima di guardare i pazienti. L'arresto sulla perdita di
 validazione, utile sui dieci pazienti, era prematuro su un dataset da 635 casi.
+
+### 506 — il modello finale sui 17 pazienti (dal 1 ottobre, in corso)
+
+`Dataset506_AINCP_FINALE` (`scripts/pipeline_aincp.py`): 17 pazienti nel template MNIPediatricAsym,
+due canali, etichetta ROI_1+ROI_2+ROI_4 senza le componenti ≤ 1 mm³. **12 di addestramento** (5 fold,
+`splits_final.json`) e **5 di test** in `imagesTs`/`labelsTs`, mai guardati: FSM_030, 046, 049, 052,
+054 (`reports/split_Dataset506_AINCP_FINALE.md`). Tre ricette, 5 fold ciascuna, sulle 4 GPU condivise
+con un altro utente (`scripts/run_stadio3.sh`, log in `reports/logs/s3_506_gpu*.log`):
+
+| ricetta | trainer | pesi di partenza | passo | domanda |
+| --- | --- | --- | --- | --- |
+| **A** | `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50` | 502 (ATLAS, 1 canale → 2) | differenziato: FLAIR 1e-2, resto 1e-4 | la ricetta scelta sui dieci |
+| **D** | `nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c` | 543 da 1000 epoche (ATLAS + WMH, 2 canali) | 1e-4 uniforme | il pretraining completo |
+| **Z** | `nnUNetTrainerWandb_250ep_dropmod30_arresto50` | nessuno | 0.01 | il riferimento senza pretraining |
+
+Tutte con modality dropout 0.3, 250 epoche al massimo, arresto a 50. Regola fissata prima: il
+postprocessing si sceglie per ricetta sui fuori-fold dei 12; la ricetta con l'F1 per lesione più alto
+(a parità entro 0.02, meno falsi positivi) è il modello della tesi; poi il test, una volta, con
+l'insieme dei cinque fold di ciascuna ricetta. Sul modello scelto, prova finale dell'uso dei due
+canali: predizione dei fuori-fold con la FLAIR azzerata e con il T1 azzerato (ablazione in
+inferenza), letta per fenotipo.
+
