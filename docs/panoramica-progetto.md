@@ -113,8 +113,8 @@ del paziente, per centro, per fenotipo e per dimensione.
 
 1. Scelta della ricetta e del postprocessing; test; ablazione dei canali.
 2. Risultati e figure per la tesi.
-3. Correzioni delle annotazioni da parte del clinico (46 piccole componenti spurie elencate, e una ROI
-   duplicata in FSM_030).
+3. Correzioni delle annotazioni da parte del clinico (46 piccole componenti spurie elencate). Per
+   FSM_030, che aveva due ROI_1, si usa `ROI_1.nii`.
 4. Il secondo stadio della tesi — l'inpainting per il «gemello sano» — dopo la segmentazione.
 
 **Limiti da dichiarare**: 17 pazienti, 5 di test; i 3 pazienti di test a 3 T erano fra i dieci su cui
