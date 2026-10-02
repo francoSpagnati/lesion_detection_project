@@ -1073,3 +1073,29 @@ Le medie si spostano per due pazienti in direzioni opposte:
 Percentuale di cervello lesionato per Z: Pearson 0.996, Spearman 0.60 (su 5 pazienti, rovinata da
 FSM_046), differenza media −0.02 punti. Per strato: altri centri Dice 0.862 (1 paziente), Stella
 Maris 3 T 0.559 (3), 1.5 T 0.573 (1). Sotto 10 mm³ rilevate 12 su 23, sopra 200 mm³ 6 su 8.
+
+**Dice per singola lesione, per dimensione** (2/10; `scripts/dice_per_dimensione_506.py` →
+`reports/dice_per_dimensione_506.md`, figura `dice_per_dimensione_506.png`). CC-Dice: il Dice di ogni
+lesione annotata dentro la sua regione di Voronoi (ogni voxel va alla lesione più vicina), 0 se
+mancata, così una lesione grande non paga per i frammenti vicini. Dice medio per lesione:
+
+| fascia | CV: lesioni | CV: Z / A / D | test: lesioni | test: Z / A / D |
+| --- | --- | --- | --- | --- |
+| 1–10 mm³ | 34 | 0.04 / 0.03 / 0.03 | 23 | 0.09 / 0.08 / 0.08 |
+| 10–50 mm³ | 12 | 0.09 / 0.11 / 0.09 | 3 | 0.08 / 0.12 / 0.38 |
+| 50–200 mm³ | 9 | 0.32 / 0.23 / 0.28 | 6 | 0.02 / 0.15 / 0.36 |
+| 0.2–1 ml | 3 | 0.21 / 0.37 / 0.20 | 4 | 0.16 / 0.24 / 0.51 |
+| 1–10 ml | 4 | 0.44 / 0.38 / 0.40 | 2 | 0.75 / 0.66 / 0.69 |
+| > 10 ml | 6 | 0.83 / 0.83 / 0.83 | 2 | 0.84 / 0.74 / 0.75 |
+
+Sopra 10 ml tutte e tre segmentano bene (0.83 in CV); sotto 50 mm³ le lesioni sono quasi tutte
+mancate, e quando trovate hanno Dice 0.16–0.57. Fra 50 mm³ e 1 ml, sul test, D trova più lesioni di Z
+(8/10 contro 4/10, metà in FSM_030), ma in cross-validation non succede: con 3–9 lesioni per
+fascia, raggruppate in pochi pazienti, le fasce intermedie non distinguono le ricette.
+
+**Esportazione per 3D Slicer** (`scripts/esporta_slicer_506.py` → `esportazioni/506_test/`, esclusa da
+git perché contiene immagini di pazienti; `--cv` per i 12 di addestramento). Per paziente: T1 e FLAIR
+nel nativo, segmentazioni `confronto_<Z|A|D>.seg.nrrd` con tre segmenti (trovata, mancata, falso
+positivo), cervello, maschere e probabilità in NIfTI. `apri_in_slicer.py` carica un paziente e imposta
+le viste; istruzioni in `LEGGIMI.txt`. Ogni `.seg.nrrd` è riletto con SimpleITK e confrontato con la T1
+(geometria e contenuto) prima di finire nella cartella.

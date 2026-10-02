@@ -1,0 +1,48 @@
+SEGMENTAZIONI DEL MODELLO FINALE (Dataset506) PER 3D SLICER
+============================================================
+
+Generato da scripts/esporta_slicer_506.py. Contiene immagini di pazienti: non va condiviso fuori
+dal gruppo di ricerca e non va messo su git.
+
+UNA CARTELLA PER PAZIENTE, tutto nello spazio della T1 originale del paziente:
+
+  T1.nii.gz, FLAIR.nii.gz      le due sequenze (FLAIR allineata alla T1)
+  confronto_Z.seg.nrrd         il modello della tesi contro l'annotazione del clinico
+  confronto_A.seg.nrrd         stessa cosa per la ricetta A (da ATLAS)
+  confronto_D.seg.nrrd         stessa cosa per la ricetta D (da ATLAS + WMH)
+  cervello.seg.nrrd            il cervello, per orientarsi in 3D
+  annotazione.nii.gz           la maschera del clinico (0/1)
+  predizione_Z.nii.gz ...      le maschere predette dopo il postprocessing (0/1)
+  probabilita_Z.nii.gz ...     la probabilita' di lesione voxel per voxel (0-1), prima della soglia
+  riepilogo.json               Dice, lesioni trovate e falsi positivi di ogni ricetta
+
+COLORI DEI SEGMENTI nei file confronto_*.seg.nrrd
+  verde acqua   lesione trovata   (annotata dal clinico e predetta dal modello)
+  blu           lesione mancata   (annotata, non predetta)
+  arancio       falso positivo    (predetta, non annotata)
+
+COME APRIRE
+  0. Scaricare la cartella sul proprio computer (in VS Code: tasto destro sulla cartella > Download).
+
+  A. Il modo piu' semplice: trascinare in Slicer T1.nii.gz, FLAIR.nii.gz, confronto_Z.seg.nrrd e
+     cervello.seg.nrrd, confermare con OK. Nel modulo Segmentations premere "Show 3D" per le
+     superfici.
+
+  B. Con lo script, che imposta tutto da solo (viste a quattro riquadri, superfici 3D, cervello
+     trasparente, fette centrate sulla lesione): in Slicer, menu View > Python Console, poi
+        exec(open(r"C:/percorso/506_test/apri_in_slicer.py").read())
+        apri(r"C:/percorso/506_test/FSM_046")
+     Per confrontare le ricette: apri(r".../FSM_046", "D"), oppure accendere "confronto A" e
+     "confronto D" dal modulo Data.
+
+  C. Da terminale: Slicer --python-script apri_in_slicer.py FSM_046
+
+COSA GUARDARE
+  FSM_046   Z segna come lesione circa 9 ml dentro il ventricolo laterale (arancio): il liquido del
+            ventricolo ha lo stesso aspetto di una cavita'. A e D non lo fanno.
+  FSM_049   l'unico paziente di un altro centro, lesione di 197 ml: Z la segue quasi tutta.
+  FSM_030   Z trova la lesione principale (3.4 ml) ma manca le altre 10, da 1.5 mm3 a 0.9 ml (blu);
+            D ne trova 7 su 11.
+
+Per vedere la probabilita' invece della maschera: caricare probabilita_Z.nii.gz, metterla in primo
+piano nella vista a fette (foreground) e scegliere una tabella colori, per esempio "Inferno".

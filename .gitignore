@@ -65,3 +65,7 @@ data/processed/AINCP/*/*
 !data/processed/AINCP/*/
 !data/processed/AINCP/*/manifesto.json
 !data/processed/AINCP/manifesti.json
+
+# --- Esportazioni per 3D Slicer ----------------------------------------------
+# Immagini e segmentazioni di pazienti, rigenerabili con scripts/esporta_slicer_506.py.
+esportazioni/
