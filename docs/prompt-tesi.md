@@ -70,8 +70,8 @@ Proprietà misurate che contano per la tesi:
   `ROI_3` **ventricolo** dell'emisfero colpito, annotato perché la dilatazione è segno del danno ma
   **escluso dal bersaglio**. Maschera = `ROI_1 ∪ ROI_2 ∪ ROI_4`. Il file di legenda ha tre versioni;
   i rapporti d'intensità sulla FLAIR (gliosi 2.5–4.4, cistica 0.10–0.41, encefalomalacia 0.46–1.08)
-  confermano che tutti e dieci seguono l'ultima. Volume di lesione: **mediana 7.2 ml**, da 0.5 a
-  123.5 (ATLAS 5.3, WMH 10.9). Delle **158 componenti connesse**, 93 (59%) sono sotto 1 mm³ e
+  confermano che tutti e dieci seguono l'ultima. Volume di lesione: **mediana 7 200 mm³**, da 500 a
+  123 500 (ATLAS 5 300, WMH 10 900). Delle **158 componenti connesse**, 93 (59%) sono sotto 1 mm³ e
   valgono lo 0.013% del volume; 16 sopra 100 mm³ ne contengono il 99.79%. Le componenti da un voxel
   (0.2 mm³) sono scorie del tracciato manuale → **soglia minima di dimensione**, dichiarata prima di
   misurare; proposta 10 mm³ (scarta l'84% delle componenti e lo 0.06% del volume). **Decisa poi la
@@ -269,7 +269,7 @@ perdita di validazione (pazienza 50):
 Nessuna differenza appaiata in Dice (5 pazienti migliorano e 5 peggiorano in ogni confronto). Le
 lesioni sopra 10 mm³ vengono trovate quasi tutte da tutte (22, 17, 18 su 25); quelle sotto quasi
 mai (5, 8, 2 su 46). Il Dice per paziente dipende dalla forma della lesione: 0.04 su una gliosi
-sottile ad anello (FSM_041), 0.92 su una cavità da 56 ml (FSM_040). **Diagnosi sui pesi**: con passo
+sottile ad anello (FSM_041), 0.92 su una cavità da 56 000 mm³ (FSM_040). **Diagnosi sui pesi**: con passo
 1e-4 il canale FLAIR dell'espansione «zero» è rimasto a norma 0.05 di quella del T1 — la rete è
 ancora il modello ATLAS a un canale, la FLAIR non ha imparato. La ricetta misurata sulla simulazione
 (stesso dominio, stesso canale) non trasferisce a un canale e un dominio nuovi. Prossimo esperimento:

@@ -44,8 +44,8 @@ BLU, ARANCIO, ACQUA, GIALLO = '#2a78d6', '#eb6834', '#1baf7a', '#eda100'
 INCHIOSTRO, INCHIOSTRO_2, GRIGLIA = '#0b0b0b', '#52514e', '#e6e5e1'
 
 
-def ml(img):
-    return float(img.numpy().sum()) * float(np.prod(img.spacing)) / 1000.0
+def mm3(img):
+    return float(img.numpy().sum()) * float(np.prod(img.spacing))
 
 
 def misura_ingrandimento():
@@ -63,14 +63,14 @@ def misura_ingrandimento():
         lesione = ants.image_read(str(c / 'lesione_inT1.nii.gz'))
         solo_affine = ants.apply_transforms(template, lesione, [str(mat)],
                                             interpolator='nearestNeighbor')
-        nativo = d['stadi']['1_spazio_T1']['ml']
+        nativo = d['stadi']['1_spazio_T1']['mm3']
         righe.append({
             'soggetto': d['soggetto'],
             'fattore_volume_affine': round(fattore, 3),
             'previsto_%': round(100 * (fattore - 1), 1),
-            'misurato_solo_affine_%': round(100 * (ml(solo_affine) / nativo - 1), 1),
-            'misurato_syn_%': round(100 * (d['stadi']['2_spazio_MNI']['ml'] / nativo - 1), 1),
-            'nativo_ml': nativo,
+            'misurato_solo_affine_%': round(100 * (mm3(solo_affine) / nativo - 1), 1),
+            'misurato_syn_%': round(100 * (d['stadi']['2_spazio_MNI']['mm3'] / nativo - 1), 1),
+            'nativo_mm3': nativo,
         })
     return righe
 

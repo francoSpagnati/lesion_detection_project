@@ -9,7 +9,7 @@ sono una copia dell'altra: chi deve scegliere ha bisogno di vederle sulla FLAIR,
 
 COME. Tutto nella FLAIR originale, dove sono state disegnate. Si mostrano le fette in cui le due ROI
 differiscono di piu' (piu' voxel in una sola delle due), in tre orientamenti, ritagliate attorno alla
-lesione perche' e' piccola (~5 ml). Blu continuo = ROI_1.nii, arancio tratteggiato = la copia: lo
+lesione perche' e' piccola (~5 000 mm³). Blu continuo = ROI_1.nii, arancio tratteggiato = la copia: lo
 stile della linea distingue le due anche senza colore. Gli indici delle fette sono contati da 1, come
 li mostra MRIcron, cosi' si ritrovano nel visualizzatore.
 """
@@ -103,10 +103,11 @@ def main():
     entrambe = int((a & b).sum())
     fig.suptitle('FSM_030 — le due ROI_1 (gliosi) sulla FLAIR originale: quale è quella giusta?',
                  x=0.012, ha='left', fontsize=15, color=INK, fontweight='bold', y=0.995)
+    va, vb = (f'{x.sum() * vox:,.0f}'.replace(',', '\u202f') for x in (a, b))
     fig.text(0.012, 0.962,
-             f'Blu continuo: ROI_1.nii (31/3 ore 16:05) — {int(a.sum())} voxel, {a.sum() * vox / 1000:.2f} ml.   '
+             f'Blu continuo: ROI_1.nii (31/3 ore 16:05) — {int(a.sum())} voxel, {va} mm³.   '
              f'Arancio tratteggiato: FSM_030_FLAIR_original_ROI_1 - Copia.nii (31/3 ore 12:25) — {int(b.sum())} voxel, '
-             f'{b.sum() * vox / 1000:.2f} ml.\nIn comune {entrambe} voxel (Dice {2 * entrambe / (a.sum() + b.sum()):.2f}). '
+             f'{vb} mm³.\nIn comune {entrambe} voxel (Dice {2 * entrambe / (a.sum() + b.sum()):.2f}). '
              'Fette scelte dove le due differiscono di più, ritagliate attorno alla lesione; numero di fetta contato da 1 '
              '(come in MRIcron). Righe: sagittale, assiale, coronale.',
              ha='left', va='top', fontsize=10.5, color=INK2)

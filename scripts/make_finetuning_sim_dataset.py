@@ -58,7 +58,7 @@ def volume_lesione(caso: str) -> float:
     lab = RAW / 'Dataset502_ATLAS' / 'labelsTr' / f'{caso}.nii.gz'
     img = nib.load(str(lab))
     n = int((np.asanyarray(img.dataobj) > 0).sum())
-    return n * float(np.prod(img.header.get_zooms())) / 1000.0   # ml
+    return n * float(np.prod(img.header.get_zooms()))   # mm³
 
 
 def scegli_train(casi, volumi):
@@ -106,10 +106,10 @@ def main():
 
     coorti = dict(Counter(re.match(r'sub-(r\d+)', c).group(1) for c in target))
     print(f'target: {len(target)} casi a 1.5 T   coorti: {coorti}')
-    print(f'train {len(train)}  lesione mediana {np.median([volumi[c] for c in train]):.1f} ml '
-          f'(da {min(volumi[c] for c in train):.1f} a {max(volumi[c] for c in train):.1f})')
-    print(f'val   {len(val)}  lesione mediana {np.median([volumi[c] for c in val]):.1f} ml '
-          f'(da {min(volumi[c] for c in val):.1f} a {max(volumi[c] for c in val):.1f})')
+    print(f'train {len(train)}  lesione mediana {np.median([volumi[c] for c in train]):.0f} mm³ '
+          f'(da {min(volumi[c] for c in train):.0f} a {max(volumi[c] for c in train):.0f})')
+    print(f'val   {len(val)}  lesione mediana {np.median([volumi[c] for c in val]):.0f} mm³ '
+          f'(da {min(volumi[c] for c in val):.0f} a {max(volumi[c] for c in val):.0f})')
     if a.verifica:
         return
 

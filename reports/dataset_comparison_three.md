@@ -25,7 +25,7 @@ Generato da `scripts/compare_datasets.py` dai manifest per caso. Read-only.
 | shape mediana | 132x256x83 | 197x233x189 | 182x218x182 |
 | anisotropia | 3.07 | 1.0 | 1.0 |
 | volume voxel (mm3) | 3.516 | 1.0 | 1.0 |
-| campo di vista (ml) | 9861 | 8675 | 7221 |
+| campo di vista (mm³) | 9 861 000 | 8 675 000 | 7 221 000 |
 
 ## Carico di foreground
 
@@ -35,6 +35,6 @@ di foreground e' la ragione per cui i tre compiti non sono lo stesso problema.
 
 | | WMH | ATLAS | DBB |
 | --- | --- | --- | --- |
-| foreground mediano (ml) | 10.93 | 5.29 | 1478.81 |
-| p10 - p90 (ml) | 1.61 - 40.12 | 0.38 - 106.09 | 1295.0 - 1689.0 |
+| foreground mediano (mm³) | 10 930 | 5 290 | 1 478 810 |
+| p10 - p90 (mm³) | 1 610 - 40 120 | 380 - 106 090 | 1 295 000 - 1 689 000 |
 | frazione del campo di vista | 0.0010 | 0.0006 | 0.2034 |

@@ -10,17 +10,17 @@
   "stadi": {
     "0_originale_spazio_FLAIR": {
       "voxel": 24668,
-      "ml": 4.934,
+      "mm3": 4934.0,
       "componenti": 10
     },
     "1_spazio_T1": {
       "voxel": 26199,
-      "ml": 4.837,
+      "mm3": 4837.0,
       "componenti": 22
     },
     "2_spazio_MNI": {
       "voxel": 8419,
-      "ml": 8.419,
+      "mm3": 8419.0,
       "componenti": 69
     }
   },

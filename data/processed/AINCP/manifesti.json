@@ -15,17 +15,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 617366,
-        "ml": 123.473,
+        "mm3": 123473.0,
         "componenti": 25
       },
       "1_spazio_T1": {
         "voxel": 668449,
-        "ml": 123.424,
+        "mm3": 123424.0,
         "componenti": 30
       },
       "2_spazio_MNI": {
         "voxel": 254312,
-        "ml": 254.312,
+        "mm3": 254312.0,
         "componenti": 83
       }
     },
@@ -77,17 +77,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 6506,
-        "ml": 1.43,
+        "mm3": 1430.0,
         "componenti": 20
       },
       "1_spazio_T1": {
         "voxel": 7680,
-        "ml": 1.418,
+        "mm3": 1418.0,
         "componenti": 19
       },
       "2_spazio_MNI": {
         "voxel": 2837,
-        "ml": 2.837,
+        "mm3": 2837.0,
         "componenti": 68
       }
     },
@@ -144,17 +144,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 278315,
-        "ml": 55.663,
+        "mm3": 55663.0,
         "componenti": 30
       },
       "1_spazio_T1": {
         "voxel": 301221,
-        "ml": 55.618,
+        "mm3": 55618.0,
         "componenti": 42
       },
       "2_spazio_MNI": {
         "voxel": 79403,
-        "ml": 79.403,
+        "mm3": 79403.0,
         "componenti": 88
       }
     },
@@ -207,17 +207,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 9790,
-        "ml": 1.958,
+        "mm3": 1958.0,
         "componenti": 10
       },
       "1_spazio_T1": {
         "voxel": 10543,
-        "ml": 1.947,
+        "mm3": 1947.0,
         "componenti": 18
       },
       "2_spazio_MNI": {
         "voxel": 2880,
-        "ml": 2.88,
+        "mm3": 2880.0,
         "componenti": 58
       }
     },
@@ -271,17 +271,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 47565,
-        "ml": 9.513,
+        "mm3": 9513.0,
         "componenti": 2
       },
       "1_spazio_T1": {
         "voxel": 51521,
-        "ml": 9.513,
+        "mm3": 9513.0,
         "componenti": 2
       },
       "2_spazio_MNI": {
         "voxel": 15966,
-        "ml": 15.966,
+        "mm3": 15966.0,
         "componenti": 17
       }
     },
@@ -334,17 +334,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 2356,
-        "ml": 0.471,
+        "mm3": 471.0,
         "componenti": 3
       },
       "1_spazio_T1": {
         "voxel": 2551,
-        "ml": 0.471,
+        "mm3": 471.0,
         "componenti": 7
       },
       "2_spazio_MNI": {
         "voxel": 530,
-        "ml": 0.53,
+        "mm3": 530.0,
         "componenti": 19
       }
     },
@@ -397,17 +397,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 24668,
-        "ml": 4.934,
+        "mm3": 4934.0,
         "componenti": 10
       },
       "1_spazio_T1": {
         "voxel": 26199,
-        "ml": 4.837,
+        "mm3": 4837.0,
         "componenti": 22
       },
       "2_spazio_MNI": {
         "voxel": 8419,
-        "ml": 8.419,
+        "mm3": 8419.0,
         "componenti": 69
       }
     },
@@ -460,17 +460,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 3012,
-        "ml": 0.602,
+        "mm3": 602.0,
         "componenti": 5
       },
       "1_spazio_T1": {
         "voxel": 3208,
-        "ml": 0.592,
+        "mm3": 592.0,
         "componenti": 8
       },
       "2_spazio_MNI": {
         "voxel": 783,
-        "ml": 0.783,
+        "mm3": 783.0,
         "componenti": 13
       }
     },
@@ -527,17 +527,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 153657,
-        "ml": 33.77,
+        "mm3": 33770.0,
         "componenti": 43
       },
       "1_spazio_T1": {
         "voxel": 182913,
-        "ml": 33.773,
+        "mm3": 33773.0,
         "componenti": 43
       },
       "2_spazio_MNI": {
         "voxel": 52538,
-        "ml": 52.538,
+        "mm3": 52538.0,
         "componenti": 106
       }
     },
@@ -591,17 +591,17 @@
     "stadi": {
       "0_originale_spazio_FLAIR": {
         "voxel": 56761,
-        "ml": 12.474,
+        "mm3": 12474.0,
         "componenti": 10
       },
       "1_spazio_T1": {
         "voxel": 67728,
-        "ml": 12.505,
+        "mm3": 12505.0,
         "componenti": 10
       },
       "2_spazio_MNI": {
         "voxel": 17776,
-        "ml": 17.776,
+        "mm3": 17776.0,
         "componenti": 68
       }
     },

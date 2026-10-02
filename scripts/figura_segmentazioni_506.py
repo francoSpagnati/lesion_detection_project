@@ -51,7 +51,7 @@ DETTAGLIO = {'FSM_028': 'lesione estesa: contorno quasi esatto; le 7 lesioni man
 # sul test: il caso in cui Z inventa una lesione (centrato sulla componente falsa piu' grande) e il
 # caso dell'altro centro, dove Z fa meglio delle ricette pre-addestrate
 DETTAGLIO_TEST = {'FSM_046': ('il falso positivo grande di Z sul test', 'fp'),
-                  'FSM_049': ('l\'unico paziente di un altro centro: lesione di 197 ml', 'ref')}
+                  'FSM_049': ('l\'unico paziente di un altro centro: lesione di 196 847 mm³', 'ref')}
 # cv (fuori-fold sui 12) oppure test (insieme dei 5 fold sui 5 di test): impostato in main()
 MODO = {'prob': RUN / 'prob_nativa', 'val': 'cv', 'prefisso': 'segmentazioni_506',
         'titolo': 'sui 12 pazienti di addestramento, predizioni fuori-fold'}
@@ -142,7 +142,7 @@ def panoramica(dati, val, par):
             x.set_facecolor(FONDO)
             pannello(x, v, chiave, 2, z, rq, finestra(v[chiave], v['cer'])[1])
             if k == 0:
-                x.set_title(f"{c} · {val[c]['strato']} · {q['ml_vero']:.1f} ml ({q['perc_vera']:.2f}% del cervello)\n"
+                x.set_title(f"{c} · {val[c]['strato']} · {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% del cervello)\n"
                             f"{descrizione(q)}", fontsize=10, color=INK, loc='left')
             x.text(0.02, 0.98 if k else 0.98, 'FLAIR' if k == 0 else 'T1', transform=x.transAxes, ha='left', va='top',
                    color='#ffd84d', fontsize=9, fontweight='bold')
@@ -183,8 +183,8 @@ def dettaglio(c, v, q, strato, nota, centro_su='ref'):
             x.set_title(f"{'FLAIR' if r == 0 else 'T1'} · {NOME_ASSE[asse]}, fetta {i + 1}", fontsize=10.5,
                         color=INK2, loc='left')
     fig.suptitle(f'{c} — {nota}', x=0.012, ha='left', fontsize=15, color=INK, fontweight='bold', y=0.995)
-    fig.text(0.012, 0.952, f"{strato} · lesione {q['ml_vero']:.2f} ml ({q['perc_vera']:.2f}% del cervello), predetta "
-             f"{q['ml_pred']:.2f} ml · {descrizione(q)}.\nFette passanti per "
+    fig.text(0.012, 0.952, f"{strato} · lesione {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% del cervello), predetta "
+             f"{pp.mm3(q['mm3_pred'])} · {descrizione(q)}.\nFette passanti per "
              f"{'la lesione' if centro_su == 'ref' else 'la componente predetta falsa più grande'}, ritagliate attorno. "
              'Convenzione radiologica: la destra del paziente è a sinistra.',
              ha='left', va='top', fontsize=10.5, color=INK2)

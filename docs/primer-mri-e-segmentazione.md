@@ -108,8 +108,8 @@ Da qui discendono due regole che nel progetto sono ovunque:
 
 1. **Un volume di lesione va calcolato in millimetri cubi, mai in voxel.** Contare 1000 voxel non
    significa niente finché non sai quanto è grande un voxel. In questo progetto un voxel WMH vale circa
-   3.5 mm3 e uno ATLAS 1.0 mm3: gli stessi 1000 voxel sono 3.5 ml in un dataset e 1.0 ml nell'altro. Per
-   questo il manifest registra `lesion_ml` e non solo il conteggio.
+   3.5 mm3 e uno ATLAS 1.0 mm3: gli stessi 1000 voxel sono 3 500 mm³ in un dataset e 1 000 mm³ nell'altro. Per
+   questo il manifest registra `lesion_mm3` e non solo il conteggio.
 2. **Per confrontare o unire volumi diversi bisogna prima portarli allo stesso spacing.** Questa
    operazione si chiama **resampling**.
 
@@ -240,7 +240,7 @@ conseguenze importanti:
 
 ## 7. Perché è un problema fortemente sbilanciato
 
-Un cervello adulto è circa 1200-1500 ml. Una lesione mediana in questi dataset è circa 5-11 ml. Vuol
+Un cervello adulto è circa 1 200 000-1 500 000 mm³. Una lesione mediana in questi dataset è circa 5 000-11 000 mm³. Vuol
 dire che **meno dell'1% dei voxel** è lesione.
 
 Un modello che predicesse "background" ovunque, sempre, avrebbe oltre il 99% di accuratezza per voxel.

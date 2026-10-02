@@ -55,7 +55,7 @@ def dadi_zeroshot(casi):
 def volume(caso: str) -> float:
     img = nib.load(str(RAW / 'labelsTr' / f'{caso}.nii.gz'))
     n = int((np.asanyarray(img.dataobj) > 0).sum())
-    return n * float(np.prod(img.header.get_zooms())) / 1000.0
+    return n * float(np.prod(img.header.get_zooms()))   # mm³
 
 
 def main():
@@ -105,7 +105,7 @@ def main():
     vol = {c: volume(c) for c in casi}
     mediana = float(np.median(list(vol.values())))
     righe += ['## Come si distribuisce il guadagno', '',
-              f'Mediana del volume di lesione nei 35 casi: {mediana:.1f} ml.', '',
+              f'Mediana del volume di lesione nei 35 casi: {mediana:,.0f} mm³.'.replace(',', '\u202f'), '',
               '| gruppo | casi | da zero | fine-tuning | differenza |', '| --- | --- | --- | --- | --- |']
     for etichetta, sel in (('lesioni sotto la mediana', [c for c in casi if vol[c] <= mediana]),
                            ('lesioni sopra la mediana', [c for c in casi if vol[c] > mediana])):
@@ -118,10 +118,10 @@ def main():
     delta = y - x
     ordine = np.argsort(delta)[::-1]
     righe += ['## I cinque casi in cui il pretraining cambia di piu\'', '',
-              '| caso | lesione (ml) | da zero | fine-tuning | delta |', '| --- | --- | --- | --- | --- |']
+              '| caso | lesione (mm³) | da zero | fine-tuning | delta |', '| --- | --- | --- | --- | --- |']
     for i in ordine[:5]:
         c = casi[i]
-        righe.append(f'| {c} | {vol[c]:.1f} | {x[i]:.4f} | {y[i]:.4f} | **{delta[i]:+.4f}** |')
+        righe.append(f'| {c} | {vol[c]:,.0f}'.replace(',', '\u202f') + f' | {x[i]:.4f} | {y[i]:.4f} | **{delta[i]:+.4f}** |')
     righe += ['', '## Limiti da dichiarare', '',
               '- Una sola estrazione dei 10 casi di training: con dieci casi la varianza e\' alta.',
               '- Una sola sorgente di pretraining. Quella fra compiti diversi (DBB) richiede prima di',

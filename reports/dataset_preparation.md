@@ -33,19 +33,19 @@ Report dei dati **appaiati** (immagine + label per caso), a differenza di `datas
 
 ### Carico lesionale
 
-- volume lesione (ml): min 0.786, p10 1.61, mediana 10.93, p90 40.12, max 74.99
+- volume lesione (mm³): min 786, p10 1 610, mediana 10 930, p90 40 120, max 74 990
 - casi con lesione vuota: 0
 - casi sotto 100 voxel alla risoluzione target: 0 / 99
 
 ### Label
 
 - valori osservati: `{'0/1': 65, '0/1/2': 34}`
-- label 2 ("altra patologia") presente in **34/99** casi, volume max 32.90 ml
+- label 2 ("altra patologia") presente in **34/99** casi, volume max 32 900 mm³
 - politica applicata: `exclude`
 
 ### Split
 
-- stratificazione: `group | terzile lesion_ml (bins=3)`
+- stratificazione: `group | terzile lesion_mm3 (bins=3)`
 - development (5-fold CV): **79**  |  test interno: **20**  |  test ufficiale senza label: **0**
 - fold (train/val): 63/16, 63/16, 63/16, 63/16, 64/15
 - output: `data/processed/nnUNet_raw/Dataset501_WMH`
@@ -78,7 +78,7 @@ Risoluzione **uniforme** su tutti i 33 gruppi: una sola riga riassuntiva.
 
 ### Carico lesionale
 
-- volume lesione (ml): min 0.013, p10 0.38, mediana 5.29, p90 106.09, max 496.66
+- volume lesione (mm³): min 13, p10 380, mediana 5 290, p90 106 090, max 496 660
 - casi con lesione vuota: 0
 - casi sotto 100 voxel alla risoluzione target: 19 / 655
 
@@ -90,7 +90,7 @@ Risoluzione **uniforme** su tutti i 33 gruppi: una sola riga riassuntiva.
 
 ### Split
 
-- stratificazione: `group | terzile lesion_ml (bins=3)`
+- stratificazione: `group | terzile lesion_mm3 (bins=3)`
 - development (5-fold CV): **556**  |  test interno: **99**  |  test ufficiale senza label: **300**
 - fold (train/val): 444/112, 445/111, 445/111, 445/111, 445/111
 - output: `data/processed/nnUNet_raw/Dataset502_ATLAS`

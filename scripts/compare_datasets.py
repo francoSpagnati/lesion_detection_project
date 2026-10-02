@@ -65,14 +65,14 @@ def riassumi(nome, casi_tutti):
     # Un manifest puo' contenere anche immagini senza label (per ATLAS sono i 300 casi
     # del test ufficiale). Il confronto va fatto sui casi appaiati: sono gli unici
     # utilizzabili per addestrare o valutare.
-    casi = [c for c in casi_tutti if str(c.get('lesion_ml', '')).strip() != '']
+    casi = [c for c in casi_tutti if str(c.get('lesion_mm3', '')).strip() != '']
     senza_label = len(casi_tutti) - len(casi)
     spac = np.array([[f(c['sx']), f(c['sy']), f(c['sz'])] for c in casi])
     shape = np.array([[f(c['nx']), f(c['ny']), f(c['nz'])] for c in casi])
     fov = shape * spac
-    fg = np.array([f(c['lesion_ml']) for c in casi])
+    fg = np.array([f(c['lesion_mm3']) for c in casi])
     fg = fg[~np.isnan(fg)]
-    vol_totale = np.prod(fov, axis=1) / 1000.0          # ml
+    vol_totale = np.prod(fov, axis=1)                   # mm³
     frazione = fg / vol_totale[: len(fg)] if len(fg) else np.array([])
 
     return {
@@ -89,11 +89,11 @@ def riassumi(nome, casi_tutti):
         'shape_mediana': [int(x) for x in np.median(shape, axis=0)],
         'anisotropia_mediana': round(float(np.median([f(c['anisotropy']) for c in casi])), 2),
         'voxel_mm3_mediano': round(float(np.median([f(c['voxel_vol_mm3']) for c in casi])), 3),
-        'fov_mediano_ml': round(float(np.median(vol_totale)), 0),
-        'foreground_ml': {
-            'p10': round(float(np.percentile(fg, 10)), 2),
-            'mediana': round(float(np.median(fg)), 2),
-            'p90': round(float(np.percentile(fg, 90)), 2),
+        'fov_mediano_mm3': round(float(np.median(vol_totale))),
+        'foreground_mm3': {
+            'p10': round(float(np.percentile(fg, 10))),
+            'mediana': round(float(np.median(fg))),
+            'p90': round(float(np.percentile(fg, 90))),
         } if len(fg) else None,
         'frazione_foreground_mediana': round(float(np.median(frazione)), 4) if len(frazione) else None,
         'casi_geometria_ko': sum(1 for c in casi if c.get('geom_ok') == 'False'),
@@ -139,7 +139,7 @@ def main():
          riga('shape mediana', 'shape_mediana', lambda v: 'x'.join(str(x) for x in v)),
          riga('anisotropia', 'anisotropia_mediana', str),
          riga('volume voxel (mm3)', 'voxel_mm3_mediano', str),
-         riga('campo di vista (ml)', 'fov_mediano_ml', lambda v: f'{v:.0f}'),
+         riga('campo di vista (mm³)', 'fov_mediano_mm3', lambda v: f'{v:,.0f}'.replace(',', '\u202f')),
          '',
          '## Carico di foreground', '',
          'Per WMH e ATLAS e\' il volume di lesione; per DBB e\' il volume complessivo dei 6 tessuti,',
@@ -147,8 +147,8 @@ def main():
          'di foreground e\' la ragione per cui i tre compiti non sono lo stesso problema.', '',
          '| | ' + ' | '.join(nomi) + ' |',
          '| --- |' + ' --- |' * len(nomi),
-         riga('foreground mediano (ml)', 'foreground_ml', lambda v: f"{v['mediana']}" if v else '-'),
-         riga('p10 - p90 (ml)', 'foreground_ml', lambda v: f"{v['p10']} - {v['p90']}" if v else '-'),
+         riga('foreground mediano (mm³)', 'foreground_mm3', lambda v: f"{v['mediana']:,}".replace(',', '\u202f') if v else '-'),
+         riga('p10 - p90 (mm³)', 'foreground_mm3', lambda v: f"{v['p10']:,} - {v['p90']:,}".replace(',', '\u202f') if v else '-'),
          riga('frazione del campo di vista', 'frazione_foreground_mediana',
               lambda v: f'{v:.4f}' if v is not None else '-'),
          '']

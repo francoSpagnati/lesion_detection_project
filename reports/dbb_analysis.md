@@ -34,25 +34,25 @@ Le loro label sono pubbliche ma le immagini no, quindi sono inutilizzabili.
 
 ## Split ufficiale del benchmark
 
-| Gruppo | n | split | spacing (mm) | shape | volume cervello mediano (ml) |
+| Gruppo | n | split | spacing (mm) | shape | volume cervello mediano (mm³) |
 | --- | --- | --- | --- | --- | --- |
-| EMEDEA-PED_ACC | 10 | test | 1 x 1 x 1 | 182x218x182 | 1298.2 |
-| EMEDEA-PED_HD | 6 | test | 1 x 1 x 1 | 182x218x182 | 1977.8 |
-| EMEDEA-PED_Healthy | 207 | train | 1 x 1 x 1 | 182x218x182 | 1483.3 |
-| EMEDEA-PED_MCDs | 10 | test | 1 x 1 x 1 | 182x218x182 | 1056.7 |
-| EMEDEA-PED_PFM | 11 | test | 1 x 1 x 1 | 182x218x182 | 1268.6 |
+| EMEDEA-PED_ACC | 10 | test | 1 x 1 x 1 | 182x218x182 | 1 298 200 |
+| EMEDEA-PED_HD | 6 | test | 1 x 1 x 1 | 182x218x182 | 1 977 800 |
+| EMEDEA-PED_Healthy | 207 | train | 1 x 1 x 1 | 182x218x182 | 1 483 300 |
+| EMEDEA-PED_MCDs | 10 | test | 1 x 1 x 1 | 182x218x182 | 1 056 700 |
+| EMEDEA-PED_PFM | 11 | test | 1 x 1 x 1 | 182x218x182 | 1 268 600 |
 
 ## Classi di tessuto
 
 Valori di label osservati: `{'0/1/2/3/4/5/6': 244}`
 
-| Valore | Classe | mediana (ml) | min | max | casi con classe vuota |
+| Valore | Classe | mediana (mm³) | min (mm³) | max (mm³) | casi con classe vuota |
 | --- | --- | --- | --- | --- | --- |
-| 1 | CSF | 232.4 | 59.9 | 1376.3 | 0 |
-| 2 | Gray Matter | 609.0 | 261.4 | 820.6 | 0 |
-| 3 | White Matter | 412.5 | 146.2 | 606.5 | 0 |
-| 4 | Deep Gray Matter | 43.5 | 14.2 | 58.7 | 0 |
-| 5 | Brain Stem | 20.7 | 6.3 | 30.9 | 0 |
-| 6 | Cerebellum | 159.9 | 31.9 | 232.4 | 0 |
+| 1 | CSF | 232 400 | 59 900 | 1 376 300 | 0 |
+| 2 | Gray Matter | 609 000 | 261 400 | 820 600 | 0 |
+| 3 | White Matter | 412 500 | 146 200 | 606 500 | 0 |
+| 4 | Deep Gray Matter | 43 500 | 14 200 | 58 700 | 0 |
+| 5 | Brain Stem | 20 700 | 6 300 | 30 900 | 0 |
+| 6 | Cerebellum | 159 900 | 31 900 | 232 400 | 0 |
 
-Volume cerebrale (maschera fornita): mediana **1478.6 ml**, da 647.4 a 2196.6 ml.
+Volume cerebrale (maschera fornita): mediana **1 478 600 mm³**, da 647 400 a 2 196 600 mm³.

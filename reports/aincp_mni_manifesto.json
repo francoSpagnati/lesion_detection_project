@@ -2,81 +2,81 @@
  "FSM_032": {
   "componenti": 11,
   "tolte_fino_a_1mm3": 8,
-  "ml_prima": 123.473,
-  "ml_dopo": 123.471,
+  "mm3_prima": 123473.0,
+  "mm3_dopo": 123471.0,
   "componenti_nel_template": 7,
-  "ml_nel_template": 194.241
+  "mm3_nel_template": 194241.0
  },
  "FSM_039": {
   "componenti": 2,
   "tolte_fino_a_1mm3": 0,
-  "ml_prima": 1.43,
-  "ml_dopo": 1.43,
+  "mm3_prima": 1430.0,
+  "mm3_dopo": 1430.0,
   "componenti_nel_template": 5,
-  "ml_nel_template": 2.59
+  "mm3_nel_template": 2590.0
  },
  "FSM_040": {
   "componenti": 11,
   "tolte_fino_a_1mm3": 2,
-  "ml_prima": 55.663,
-  "ml_dopo": 55.663,
+  "mm3_prima": 55663.0,
+  "mm3_dopo": 55663.0,
   "componenti_nel_template": 17,
-  "ml_nel_template": 77.75
+  "mm3_nel_template": 77750.0
  },
  "FSM_041": {
   "componenti": 6,
   "tolte_fino_a_1mm3": 1,
-  "ml_prima": 1.958,
-  "ml_dopo": 1.957,
+  "mm3_prima": 1958.0,
+  "mm3_dopo": 1957.0,
   "componenti_nel_template": 4,
-  "ml_nel_template": 2.179
+  "mm3_nel_template": 2179.0
  },
  "FSM_045": {
   "componenti": 2,
   "tolte_fino_a_1mm3": 1,
-  "ml_prima": 9.513,
-  "ml_dopo": 9.513,
+  "mm3_prima": 9513.0,
+  "mm3_dopo": 9513.0,
   "componenti_nel_template": 2,
-  "ml_nel_template": 13.627
+  "mm3_nel_template": 13627.0
  },
  "FSM_046": {
   "componenti": 2,
   "tolte_fino_a_1mm3": 0,
-  "ml_prima": 0.471,
-  "ml_dopo": 0.471,
+  "mm3_prima": 471.0,
+  "mm3_dopo": 471.0,
   "componenti_nel_template": 6,
-  "ml_nel_template": 0.428
+  "mm3_nel_template": 428.0
  },
  "FSM_052": {
   "componenti": 5,
   "tolte_fino_a_1mm3": 0,
-  "ml_prima": 4.934,
-  "ml_dopo": 4.934,
+  "mm3_prima": 4934.0,
+  "mm3_dopo": 4934.0,
   "componenti_nel_template": 13,
-  "ml_nel_template": 7.817
+  "mm3_nel_template": 7817.0
  },
  "FSM_053": {
   "componenti": 5,
   "tolte_fino_a_1mm3": 0,
-  "ml_prima": 0.602,
-  "ml_dopo": 0.602,
+  "mm3_prima": 602.0,
+  "mm3_dopo": 602.0,
   "componenti_nel_template": 5,
-  "ml_nel_template": 0.615
+  "mm3_nel_template": 615.0
  },
  "FSM_054": {
   "componenti": 14,
   "tolte_fino_a_1mm3": 8,
-  "ml_prima": 33.77,
-  "ml_dopo": 33.766,
+  "mm3_prima": 33770.0,
+  "mm3_dopo": 33766.0,
   "componenti_nel_template": 13,
-  "ml_nel_template": 53.007
+  "mm3_nel_template": 53007.0
  },
  "FSM_056": {
   "componenti": 7,
   "tolte_fino_a_1mm3": 2,
-  "ml_prima": 12.474,
-  "ml_dopo": 12.474,
+  "mm3_prima": 12474.0,
+  "mm3_dopo": 12474.0,
   "componenti_nel_template": 9,
-  "ml_nel_template": 17.183
+  "mm3_nel_template": 17183.0
  }
 }

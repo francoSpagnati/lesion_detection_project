@@ -97,7 +97,7 @@ FLAIR spenta e con il T1 spento, lette per fenotipo.
 Il **modello finale**, su `Dataset506`: 17 pazienti nel template, **12 per addestrare** (in 5 gruppi a
 rotazione, ognuno a turno usato per la validazione) e **5 per il test**, scelti per centro di
 acquisizione e messi da parte senza guardarli: tre Stella Maris a 3 T, uno a 1.5 T, uno di un altro
-centro, con lesioni da 0.5 a 197 ml. Tre ricette, che differiscono solo nei pesi di partenza:
+centro, con lesioni da 454 a 196 847 mm³. Tre ricette, che differiscono solo nei pesi di partenza:
 
 | | parte da | perché |
 | --- | --- | --- |

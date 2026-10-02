@@ -11,15 +11,15 @@ immagini o solo come canale/`ignore` label.
 
 ## I dieci casi che perderebbero di piu'
 
-| caso | dataset | lesione (ml) | fuori (ml) | frazione |
+| caso | dataset | lesione (mm³) | fuori (mm³) | frazione |
 | --- | --- | --- | --- | --- |
-| sub-r038s061 | Dataset502_ATLAS | 196.0 | 12.72 | 0.0649 |
-| sub-r028s014 | Dataset502_ATLAS | 8.6 | 0.47 | 0.0546 |
-| sub-r040s044 | Dataset502_ATLAS | 275.3 | 14.37 | 0.0522 |
-| sub-r042s018 | Dataset502_ATLAS | 224.1 | 10.36 | 0.0462 |
-| sub-r040s030 | Dataset502_ATLAS | 359.8 | 13.04 | 0.0362 |
-| sub-r001s020 | Dataset502_ATLAS | 78.4 | 2.74 | 0.0350 |
-| sub-r034s003 | Dataset502_ATLAS | 45.1 | 1.49 | 0.0331 |
-| sub-r040s067 | Dataset502_ATLAS | 221.0 | 4.56 | 0.0206 |
-| sub-r040s086 | Dataset502_ATLAS | 297.1 | 5.63 | 0.0190 |
-| sub-r040s059 | Dataset502_ATLAS | 80.6 | 1.50 | 0.0186 |
+| sub-r038s061 | Dataset502_ATLAS | 196 000 | 12 720 | 0.0649 |
+| sub-r028s014 | Dataset502_ATLAS | 8 600 | 470 | 0.0546 |
+| sub-r040s044 | Dataset502_ATLAS | 275 300 | 14 370 | 0.0522 |
+| sub-r042s018 | Dataset502_ATLAS | 224 100 | 10 360 | 0.0462 |
+| sub-r040s030 | Dataset502_ATLAS | 359 800 | 13 040 | 0.0362 |
+| sub-r001s020 | Dataset502_ATLAS | 78 400 | 2 740 | 0.0350 |
+| sub-r034s003 | Dataset502_ATLAS | 45 100 | 1 490 | 0.0331 |
+| sub-r040s067 | Dataset502_ATLAS | 221 000 | 4 560 | 0.0206 |
+| sub-r040s086 | Dataset502_ATLAS | 297 100 | 5 630 | 0.0190 |
+| sub-r040s059 | Dataset502_ATLAS | 80 600 | 1 500 | 0.0186 |

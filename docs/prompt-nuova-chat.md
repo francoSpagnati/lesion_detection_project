@@ -177,7 +177,7 @@ FATTO: il MODELLO FINALE su Dataset506_AINCP_FINALE (17 pazienti nel template; 1
 zero), x 5 fold, tutti fermati dall'arresto. Scelta prima del test, per regola: Z. TEST FATTO il 2/10
 (una volta, non si ripete): reports/valutazione_test_Dataset506_*.md. Le tre ricette sono
 indistinguibili in cross-validation e sul test; Z sul test: Dice 0.622, mediana 0.770, F1 0.605, con
-un falso positivo di 9 ml nel ventricolo di FSM_046 che A e D non fanno. Tutto in
+un falso positivo di circa 9 000 mm³ nel ventricolo di FSM_046 che A e D non fanno. Tutto in
 docs/modelli-ed-esperimenti.md, sezione 506. Relazione tecnica sul modello finale: artefatto MPQTHXQvdyoKf9JCE8NHak (vedi sotto).
 
 PROSSIMI PASSI, in ordine:

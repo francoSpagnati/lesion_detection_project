@@ -77,7 +77,7 @@ def etichetta_pulita(roi: dict, flair: ants.ANTsImage) -> tuple[ants.ANTsImage, 
     piccole = np.flatnonzero(vol <= SOGLIA_MM3) + 1
     m[np.isin(lab, piccole)] = False
     info = {'componenti': int(n), 'tolte_fino_a_1mm3': int(len(piccole)),
-            'ml_prima': round(float(vol.sum()) / 1000, 3), 'ml_dopo': round(float(m.sum()) * mm3 / 1000, 3)}
+            'mm3_prima': round(float(vol.sum()), 1), 'mm3_dopo': round(float(m.sum()) * mm3, 1)}
     return flair.new_image_like(m.astype('float32')), info
 
 
@@ -96,7 +96,7 @@ def elabora(s: Path, roi: dict, tpl: ants.ANTsImage) -> dict:
     ants.image_write(lez_t, str(RAW / 'labelsTr' / f'{c}.nii.gz'))
     # Quanto sopravvive al trasporto: componenti e volume nel template (1 mm3 per voxel)
     _, n_t = ndimage.label(lez_t.numpy() > 0, structure=STRUTTURA)
-    info.update({'componenti_nel_template': int(n_t), 'ml_nel_template': round(float(lez_t.numpy().sum()) / 1000, 3)})
+    info.update({'componenti_nel_template': int(n_t), 'mm3_nel_template': round(float(lez_t.numpy().sum()), 1)})
     return info
 
 

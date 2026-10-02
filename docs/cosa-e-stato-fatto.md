@@ -291,7 +291,7 @@ casi DBB e confronta con le maschere di riferimento. Dice medio **0.9657**. Per 
 ACC 0.9675, MCD 0.9605, PFM 0.9604, idrocefalo **0.9267** (minimo assoluto 0.8791). Sui cervelli
 malformati si perde **0.010** rispetto ai sani: e' la risposta che serviva, ed e' il contrario di cio'
 che farebbe BET. Nei casi con ventricoli dilatati il volume escluso e' pero' quasi tutto CSF (in
-`sub-0955`, 400 ml su 423). Report: `reports/synthstrip_dbb.md`, 244 figure di controllo in
+`sub-0955`, 400 000 mm³ su 423 000). Report: `reports/synthstrip_dbb.md`, 244 figure di controllo in
 `reports/figures/synthstrip/` col Dice come prefisso del nome.
 
 **b. Quante lesioni si perderebbero ritagliando?** `scripts/lesioni_fuori_maschera.py`. Su WMH la
@@ -300,7 +300,7 @@ massimo di **0.0649**: 18 casi oltre l'1% e tre oltre il 5%. Una prima misura su
 dava 0.0007 e nessun caso oltre il 5% — la coda si vede solo sul dataset intero, quindi la misura va
 sempre fatta su tutto. I casi peggiori sono infarti massivi che arrivano alla superficie corticale, e i voxel persi
 stanno a 1-2 mm mediani dal bordo della maschera: rifilatura di superficie, non asportazione. Dilatare
-la maschera di 2 mm dimezzerebbe la perdita ma rimetterebbe dentro ~160 ml di guscio non cerebrale per
+la maschera di 2 mm dimezzerebbe la perdita ma rimetterebbe dentro ~160 000 mm³ di guscio non cerebrale per
 caso, quindi **non si dilata**. Report: `reports/lesioni_fuori_maschera.md`.
 
 **c. Costruzione dei dataset.** `scripts/make_skullstripped_datasets.py` produce `Dataset522_WMH_SS` e
@@ -478,7 +478,7 @@ python scripts/make_aincp_dataset.py --solo-split
 
 **a. I dati.** Dieci pazienti, T1 e FLAIR originali non allineate, ROI sulla FLAIR; `COREGISTERED`
 e' un nome fuorviante. Bersaglio = ROI_1 ∪ ROI_2 ∪ ROI_4, ventricolo (ROI_3) escluso. Le misure
-stanno nel notebook e in [obiettivo-e-piano.md](obiettivo-e-piano.md): mediana 7.2 ml, 65 componenti
+stanno nel notebook e in [obiettivo-e-piano.md](obiettivo-e-piano.md): mediana 7 200 mm³, 65 componenti
 connesse (26 vicini) di cui 42 sotto i 10 mm³ per lo 0.03% del volume, legenda confermata dai
 rapporti d'intensita'.
 

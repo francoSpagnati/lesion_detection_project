@@ -225,11 +225,11 @@ def prepara(p: str, c: dict, tpl, gpu: bool):
             raise RuntimeError(f'SynthStrip fallito su {p}: {r.stderr[-300:]}')
     cer_a = ants.image_read(str(cer)).numpy() > 0.5
     vox = float(np.prod(t1n.spacing))
-    man.update({'residui_tolti': tolte, 'lesione_ml_nativo': round(float(lez_nat.numpy().sum()) * vox / 1000, 3),
-                'cervello_ml': round(float(cer_a.sum()) * vox / 1000, 1),
-                'lesione_ml_template': round(float(lez_t.numpy().sum()) / 1000, 3),
+    man.update({'residui_tolti': tolte, 'lesione_mm3_nativo': round(float(lez_nat.numpy().sum()) * vox, 1),
+                'cervello_mm3': round(float(cer_a.sum()) * vox),
+                'lesione_mm3_template': round(float(lez_t.numpy().sum()), 1),
                 'componenti_template': int(ndimage.label(lez_t.numpy() > 0, structure=STRUTTURA)[1])})
-    man['percentuale_cervello_lesionato'] = round(100 * man['lesione_ml_nativo'] / man['cervello_ml'], 3)
+    man['percentuale_cervello_lesionato'] = round(100 * man['lesione_mm3_nativo'] / man['cervello_mm3'], 3)
     man_f.write_text(json.dumps(man, indent=1))
     print(p, man, flush=True)
     return man
@@ -275,7 +275,7 @@ def dividi(pazienti: dict) -> tuple[list, list]:
         per_strato.setdefault(strato(m), []).append(p)
     quote = quote_test(per_strato)
     for s, ps in sorted(per_strato.items()):
-        ps = sorted(ps, key=lambda x: pazienti[x]['lesione_ml_nativo'])
+        ps = sorted(ps, key=lambda x: pazienti[x]['lesione_mm3_nativo'])
         n_test = quote[s]
         # un paziente di test ogni len/n_test, con partenza casuale: copre tutta la scala dei volumi
         passo = len(ps) / n_test if n_test else 0
@@ -289,7 +289,7 @@ def dividi(pazienti: dict) -> tuple[list, list]:
 def fold(train: list, pazienti: dict, k: int = 5) -> list:
     """Cinque fold sul 70%: ordinati per strato e volume e distribuiti a serpentina, cosi' ogni
     fold di validazione ha strati e volumi misti."""
-    ordine = sorted(train, key=lambda p: (strato(pazienti[p]), pazienti[p]['lesione_ml_nativo']))
+    ordine = sorted(train, key=lambda p: (strato(pazienti[p]), pazienti[p]['lesione_mm3_nativo']))
     gruppi = [[] for _ in range(k)]
     for i, p in enumerate(ordine):
         giro, pos = divmod(i, k)
@@ -314,7 +314,7 @@ def dataset(id_ds: int, prova: bool = False):
         # solo lo split, senza scrivere niente: per controllarlo prima di fissarlo
         train, test = dividi(pazienti)
         for p in sorted(pazienti):
-            print(f"{p} {'TEST' if p in test else 'train'} {strato(pazienti[p])} {pazienti[p]['lesione_ml_nativo']:.2f} ml")
+            print(f"{p} {'TEST' if p in test else 'train'} {strato(pazienti[p])} {pazienti[p]['lesione_mm3_nativo']:.0f} mm³")
         for i, f in enumerate(fold(train, pazienti)):
             print(f'fold {i}: val {f["val"]}')
         return
@@ -342,12 +342,13 @@ def dataset(id_ds: int, prova: bool = False):
     (raw / 'split_aincp.json').write_text(json.dumps(split, indent=1, default=str))
     righe = [f'# Split di `{nome}`', '', 'Prodotto da `scripts/pipeline_aincp.py dataset`, **non modificare a mano**. '
              'Fissato prima di qualunque training; il test si usa una volta sola.', '',
-             '| paziente | insieme | strato | centro | campo | FLAIR | fenotipi | lesione (ml) | % cervello |',
+             '| paziente | insieme | strato | centro | campo | FLAIR | fenotipi | lesione (mm³) | % cervello |',
              '| --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for p in sorted(pazienti):
         m = pazienti[p]
+        vol = f"{m['lesione_mm3_nativo']:,.0f}".replace(',', '\u202f')
         righe.append(f"| {p} | {'**test**' if p in test else 'addestr.'} | {strato(m)} | {m['centro']} | {m['campo_T']:g} T | "
-                     f"{'si' if m['FLAIR'] else 'no'} | {'si' if m['fenotipi'] else 'no'} | {m['lesione_ml_nativo']:.2f} | "
+                     f"{'si' if m['FLAIR'] else 'no'} | {'si' if m['fenotipi'] else 'no'} | {vol} | "
                      f"{m['percentuale_cervello_lesionato']:.2f} |")
     for i, f in enumerate(split['fold']):
         righe.append(f'\nFold {i}, validazione: {", ".join(f["val"])}')

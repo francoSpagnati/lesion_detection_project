@@ -6,7 +6,7 @@ Casi con Dice <= 0.05: **10** su 112.
 
 ## sub-r040s049
 
-Dice 0.0000 | riferimento 9586 voxel (9.59 ml), 5 componenti | predetto 217 voxel (0.22 ml), 5 componenti
+Dice 0.0000 | riferimento 9586 voxel (9 590 mm³), 5 componenti | predetto 217 voxel (220 mm³), 5 componenti
 
 - centroide vero `[-38.  -17.2 -28. ]` mm, predetto `[17.3  5.4  0.5]` mm
 - **distanza fra i centroidi: 66.2 mm**
@@ -19,7 +19,7 @@ Dice 0.0000 | riferimento 9586 voxel (9.59 ml), 5 componenti | predetto 217 voxe
 
 ## sub-r009s098
 
-Dice 0.0322 | riferimento 6196 voxel (6.20 ml), 4 componenti | predetto 141 voxel (0.14 ml), 3 componenti
+Dice 0.0322 | riferimento 6196 voxel (6 200 mm³), 4 componenti | predetto 141 voxel (140 mm³), 3 componenti
 
 - centroide vero `[ 32.  -42.8  30. ]` mm, predetto `[ 28.3 -49.2  14.7]` mm
 - **distanza fra i centroidi: 17.0 mm**
@@ -32,7 +32,7 @@ Dice 0.0322 | riferimento 6196 voxel (6.20 ml), 4 componenti | predetto 141 voxe
 
 ## sub-r034s012
 
-Dice 0.0000 | riferimento 2045 voxel (2.04 ml), 4 componenti | predetto 97 voxel (0.10 ml), 2 componenti
+Dice 0.0000 | riferimento 2045 voxel (2 040 mm³), 4 componenti | predetto 97 voxel (100 mm³), 2 componenti
 
 - centroide vero `[ 28.  -77.9 -37.9]` mm, predetto `[-14.2  33.5  -5.8]` mm
 - **distanza fra i centroidi: 123.4 mm**
@@ -45,7 +45,7 @@ Dice 0.0000 | riferimento 2045 voxel (2.04 ml), 4 componenti | predetto 97 voxel
 
 ## sub-r009s093
 
-Dice 0.0000 | riferimento 1426 voxel (1.43 ml), 5 componenti | predetto 420 voxel (0.42 ml), 4 componenti
+Dice 0.0000 | riferimento 1426 voxel (1 430 mm³), 5 componenti | predetto 420 voxel (420 mm³), 4 componenti
 
 - centroide vero `[ 31.8 -11.   20.3]` mm, predetto `[-29.6  10.4  24.7]` mm
 - **distanza fra i centroidi: 65.2 mm**
@@ -58,7 +58,7 @@ Dice 0.0000 | riferimento 1426 voxel (1.43 ml), 5 componenti | predetto 420 voxe
 
 ## sub-r048s011
 
-Dice 0.0062 | riferimento 1157 voxel (1.16 ml), 1 componenti | predetto 448 voxel (0.45 ml), 3 componenti
+Dice 0.0062 | riferimento 1157 voxel (1 160 mm³), 1 componenti | predetto 448 voxel (450 mm³), 3 componenti
 
 - centroide vero `[-20.2  21.   -6.3]` mm, predetto `[ 21.9 -10.8   7. ]` mm
 - **distanza fra i centroidi: 54.4 mm**
@@ -71,7 +71,7 @@ Dice 0.0062 | riferimento 1157 voxel (1.16 ml), 1 componenti | predetto 448 voxe
 
 ## sub-r009s025
 
-Dice 0.0000 | riferimento 991 voxel (0.99 ml), 3 componenti | predetto 923 voxel (0.92 ml), 1 componenti
+Dice 0.0000 | riferimento 991 voxel (990 mm³), 3 componenti | predetto 923 voxel (920 mm³), 1 componenti
 
 - centroide vero `[ -0.3 -27.8 -32.8]` mm, predetto `[17.   3.5  0. ]` mm
 - **distanza fra i centroidi: 48.6 mm**
@@ -84,7 +84,7 @@ Dice 0.0000 | riferimento 991 voxel (0.99 ml), 3 componenti | predetto 923 voxel
 
 ## sub-r049s026
 
-Dice 0.0000 | riferimento 922 voxel (0.92 ml), 3 componenti | predetto 204 voxel (0.20 ml), 1 componenti
+Dice 0.0000 | riferimento 922 voxel (920 mm³), 3 componenti | predetto 204 voxel (200 mm³), 1 componenti
 
 - centroide vero `[-17.9 -58.  -20.5]` mm, predetto `[ -5.5 -22.3 -23. ]` mm
 - **distanza fra i centroidi: 37.9 mm**
@@ -97,7 +97,7 @@ Dice 0.0000 | riferimento 922 voxel (0.92 ml), 3 componenti | predetto 204 voxel
 
 ## sub-r038s026
 
-Dice 0.0000 | riferimento 523 voxel (0.52 ml), 3 componenti | predetto 152 voxel (0.15 ml), 4 componenti
+Dice 0.0000 | riferimento 523 voxel (520 mm³), 3 componenti | predetto 152 voxel (150 mm³), 4 componenti
 
 - centroide vero `[-29.9   4.5  22.5]` mm, predetto `[ 40.6 -70.3 -40. ]` mm
 - **distanza fra i centroidi: 120.3 mm**
@@ -110,7 +110,7 @@ Dice 0.0000 | riferimento 523 voxel (0.52 ml), 3 componenti | predetto 152 voxel
 
 ## sub-r019s001
 
-Dice 0.0000 | riferimento 237 voxel (0.24 ml), 5 componenti | predetto 647 voxel (0.65 ml), 7 componenti
+Dice 0.0000 | riferimento 237 voxel (240 mm³), 5 componenti | predetto 647 voxel (650 mm³), 7 componenti
 
 - centroide vero `[-27.6 -14.8  67.4]` mm, predetto `[-22.3  13.7   9.1]` mm
 - **distanza fra i centroidi: 65.1 mm**
@@ -123,7 +123,7 @@ Dice 0.0000 | riferimento 237 voxel (0.24 ml), 5 componenti | predetto 647 voxel
 
 ## sub-r009s035
 
-Dice 0.0000 | riferimento 35 voxel (0.04 ml), 2 componenti | predetto 111 voxel (0.11 ml), 4 componenti
+Dice 0.0000 | riferimento 35 voxel (40 mm³), 2 componenti | predetto 111 voxel (110 mm³), 4 componenti
 
 - centroide vero `[ -8.3 -19.6 -17.4]` mm, predetto `[ -3.9 -42.8  -4.2]` mm
 - **distanza fra i centroidi: 27.0 mm**
@@ -138,24 +138,24 @@ Dice 0.0000 | riferimento 35 voxel (0.04 ml), 2 componenti | predetto 111 voxel 
 
 Rapporto fra intensita' media dentro la lesione annotata e tessuto cerebrale attorno.
 
-| gruppo | caso | volume (ml) | lesione / cervello |
+| gruppo | caso | volume (mm³) | lesione / cervello |
 | --- | --- | --- | --- |
-| fallito | sub-r040s049 | 9.59 | 0.91 |
-| fallito | sub-r009s098 | 6.20 | 0.97 |
-| fallito | sub-r034s012 | 2.04 | 0.70 |
-| fallito | sub-r009s093 | 1.43 | 1.05 |
-| fallito | sub-r048s011 | 1.16 | 0.68 |
-| fallito | sub-r009s025 | 0.99 | 1.15 |
-| fallito | sub-r049s026 | 0.92 | 1.28 |
-| fallito | sub-r038s026 | 0.52 | 1.46 |
-| fallito | sub-r019s001 | 0.24 | 1.08 |
-| fallito | sub-r009s035 | 0.04 | 1.27 |
-| riuscito | sub-r003s005 | 230.75 | 0.62 |
-| riuscito | sub-r003s003 | 171.93 | 0.66 |
-| riuscito | sub-r002s010 | 152.15 | 0.62 |
-| riuscito | sub-r048s037 | 95.22 | 0.34 |
-| riuscito | sub-r004s009 | 97.18 | 0.64 |
-| riuscito | sub-r015s016 | 85.15 | 0.62 |
+| fallito | sub-r040s049 | 9 590 | 0.91 |
+| fallito | sub-r009s098 | 6 200 | 0.97 |
+| fallito | sub-r034s012 | 2 040 | 0.70 |
+| fallito | sub-r009s093 | 1 430 | 1.05 |
+| fallito | sub-r048s011 | 1 160 | 0.68 |
+| fallito | sub-r009s025 | 990 | 1.15 |
+| fallito | sub-r049s026 | 920 | 1.28 |
+| fallito | sub-r038s026 | 520 | 1.46 |
+| fallito | sub-r019s001 | 240 | 1.08 |
+| fallito | sub-r009s035 | 40 | 1.27 |
+| riuscito | sub-r003s005 | 230 750 | 0.62 |
+| riuscito | sub-r003s003 | 171 930 | 0.66 |
+| riuscito | sub-r002s010 | 152 150 | 0.62 |
+| riuscito | sub-r048s037 | 95 220 | 0.34 |
+| riuscito | sub-r004s009 | 97 180 | 0.64 |
+| riuscito | sub-r015s016 | 85 150 | 0.62 |
 
 **Rapporto mediano: 1.07 nei casi falliti, 0.62 nei riusciti.**
 

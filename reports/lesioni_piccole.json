@@ -4,28 +4,28 @@
   {
    "fascia": "< 1 mm³",
    "componenti": 22,
-   "volume_ml": 0.008,
+   "volume_mm3": 8.0,
    "intensita_mediana": 0.689,
    "quota_sopra_1": 0.455
   },
   {
    "fascia": "1 – 10 mm³",
    "componenti": 20,
-   "volume_ml": 0.0711,
+   "volume_mm3": 71.1,
    "intensita_mediana": 3.138,
    "quota_sopra_1": 0.95
   },
   {
    "fascia": "10 – 100 mm³",
    "componenti": 8,
-   "volume_ml": 0.3209,
+   "volume_mm3": 320.9,
    "intensita_mediana": 3.462,
    "quota_sopra_1": 1.0
   },
   {
    "fascia": "> 100 mm³",
    "componenti": 15,
-   "volume_ml": 243.8885,
+   "volume_mm3": 243888.5,
    "intensita_mediana": 3.106,
    "quota_sopra_1": 0.733
   }

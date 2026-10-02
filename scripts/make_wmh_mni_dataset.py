@@ -53,8 +53,8 @@ def registra(caso):
     ants.image_write(reg['warpedmovout'], str(DST / 'imagesTr' / f'{caso}_0001.nii.gz'))
     lt = ants.apply_transforms(fixed=tpl, moving=lab, transformlist=tr, interpolator='nearestNeighbor')
     ants.image_write(lt.new_image_like(lt.numpy().round().astype('float32')), str(out_l))
-    vn, vt = np.prod(lab.spacing) / 1000, np.prod(tpl.spacing) / 1000
-    return caso, {'ml_nativo': float((lab.numpy() > 0).sum() * vn), 'ml_mni': float((lt.numpy() > .5).sum() * vt)}
+    vn, vt = np.prod(lab.spacing), np.prod(tpl.spacing)
+    return caso, {'mm3_nativo': float((lab.numpy() > 0).sum() * vn), 'mm3_mni': float((lt.numpy() > .5).sum() * vt)}
 
 
 def costruisci(processi):
@@ -66,7 +66,7 @@ def costruisci(processi):
         for caso, m in ex.map(registra, casi):
             if m:
                 manif[caso] = m
-                print(caso, f"{m['ml_nativo']:.2f} -> {m['ml_mni']:.2f} ml", flush=True)
+                print(caso, f"{m['mm3_nativo']:.0f} -> {m['mm3_mni']:.0f} mm³", flush=True)
     dj = json.load(open(SRC / 'dataset.json'))
     dj['name'] = 'WMH_MNI'
     dj['description'] = 'WMH a due canali (0 FLAIR, 1 T1) registrato su MNI152NLin2009aSym (lo spazio di ATLAS).'

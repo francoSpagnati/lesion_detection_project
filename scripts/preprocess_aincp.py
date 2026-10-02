@@ -122,8 +122,8 @@ def statistiche_maschera(img: ants.ANTsImage) -> dict:
     costa ogni resampling, invece di assumere che sia gratis."""
     a = img.numpy() > 0.5
     _, n = ndimage.label(a)
-    ml = float(np.prod(img.spacing)) / 1000.0
-    return {'voxel': int(a.sum()), 'ml': round(float(a.sum()) * ml, 3), 'componenti': int(n)}
+    mm3 = float(np.prod(img.spacing))
+    return {'voxel': int(a.sum()), 'mm3': round(float(a.sum()) * mm3, 1), 'componenti': int(n)}
 
 
 def unione_lesione(roi: dict, riferimento: ants.ANTsImage) -> ants.ANTsImage:
@@ -235,14 +235,14 @@ def elabora(nome: str, info: dict, template: ants.ANTsImage, forza: bool) -> dic
 
     a, b = man['stadi']['0_originale_spazio_FLAIR'], man['stadi']['2_spazio_MNI']
     man['perdita'] = {
-        'variazione_volume_%': round(100 * (b['ml'] - a['ml']) / a['ml'], 2) if a['ml'] else None,
+        'variazione_volume_%': round(100 * (b['mm3'] - a['mm3']) / a['mm3'], 2) if a['mm3'] else None,
         'componenti_perse': a['componenti'] - b['componenti'],
     }
     man['secondi'] = round(time.time() - avvio, 1)
     (dest / 'manifesto.json').write_text(json.dumps(man, indent=2, ensure_ascii=False))
 
     p = man['perdita']
-    print(f"{nome}: {a['ml']:.1f} ml / {a['componenti']} comp. -> MNI {b['ml']:.1f} ml / "
+    print(f"{nome}: {a['mm3']:.0f} mm³ / {a['componenti']} comp. -> MNI {b['mm3']:.0f} mm³ / "
           f"{b['componenti']} comp.  (volume {p['variazione_volume_%']:+.1f}%, "
           f"componenti {-p['componenti_perse']:+d})  [{man['secondi']:.0f}s]")
     return man

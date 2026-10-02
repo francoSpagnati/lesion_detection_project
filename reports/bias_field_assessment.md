@@ -36,9 +36,9 @@ confrontare i numeri a profondita' bassa:
 
 | Dataset | Maschera | Volume mediano |
 | --- | --- | --- |
-| WMH | testa (soglia di intensita) | 1573 ml |
-| ATLAS | testa (soglia di intensita) | 2770 ml |
-| DBB | cervello (fornita dal dataset) | 1487 ml |
+| WMH | testa (soglia di intensita) | 1 573 000 mm³ |
+| ATLAS | testa (soglia di intensita) | 2 770 000 mm³ |
+| DBB | cervello (fornita dal dataset) | 1 487 000 mm³ |
 
 Dove la maschera e' la **testa** (WMH, ATLAS) i primi millimetri di erosione cadono ancora
 su cranio, scalpo e grasso sottocutaneo, dove N4 estrapola male: il rapporto misurato li'

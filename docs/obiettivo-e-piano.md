@@ -63,7 +63,7 @@ pediatrici sani e si valuta su 37 malformati (11 PFM, 10 MCD, 10 ACC, 6 HD), cio
 
 | | WMH | ATLAS | DBB |
 | --- | --- | --- | --- |
-| foreground mediano | 10.9 ml | 5.3 ml | 1479 ml |
+| foreground mediano | 10 900 mm³ | 5 300 mm³ | 1 479 000 mm³ |
 | frazione del campo di vista | 0.0010 | 0.0006 | **0.2034** |
 
 In WMH e ATLAS il bersaglio è **un voxel su mille**: individuazione di anomalie rare. In DBB è **un voxel
@@ -556,7 +556,7 @@ La maschera è `ROI_1 ∪ ROI_2 ∪ ROI_4`. La legenda ha tre versioni; i rappor
 (gliosi 2.5–4.4, cistica 0.10–0.41, encefalomalacia 0.46–1.08) dicono che tutti e dieci seguono
 l'ultima. Sovrapposizioni fra ROI trascurabili (max 35 voxel lesione∩ventricolo).
 
-**Dimensioni.** Volume di lesione mediana 7.2 ml (0.5–123.5), fra ATLAS 5.3 e WMH 10.9. Le componenti
+**Dimensioni.** Volume di lesione mediana 7 200 mm³ (500–123 500), fra ATLAS 5 300 e WMH 10 900. Le componenti
 connesse sono **65** con la connettività a 26 vicini, quella di `metriche_per_lesione.py` (con quella a
 6, il default di scipy, sarebbero 158: una lesione sottile e obliqua si spezza). Di queste, 42 (65%)
 stanno sotto 10 mm³ e valgono lo 0.03% del volume.
@@ -702,7 +702,7 @@ del paziente portata nel template con la stessa trasformazione della lesione):
 | MNIPediatricAsym cohort-1 (4.5–18.5 anni) | 1.49–2.19, mediana 1.62 | mediana −11% (−38 … +40%) | **0.95–0.98** |
 
 Il responsabile ha ragione sulla proporzione: il volume assoluto cresce fino a 2 volte, la
-percentuale lesionata cambia di poco, e le variazioni grandi sono sulle lesioni sotto 1.5 ml, dove
+percentuale lesionata cambia di poco, e le variazioni grandi sono sulle lesioni sotto 1 500 mm³, dove
 pochi voxel pesano molto. Il template pediatrico **non** toglie l'ingrandimento (è anch'esso in
 spazio MNI, con cervello da ~2 l) ma allinea molto meglio l'anatomia dei bambini, che è lo scopo
 della standardizzazione. **Proposta, da confermare: MNIPediatricAsym per AInCP**; ATLAS e WMH

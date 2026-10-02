@@ -40,7 +40,7 @@ di un addestramento completo, e con dieci casi cancella le feature pre-addestrat
 
 ## Come si distribuisce il guadagno
 
-Mediana del volume di lesione nei 35 casi: 13.2 ml.
+Mediana del volume di lesione nei 35 casi: 13 200 mm³.
 
 | gruppo | casi | da zero | fine-tuning | differenza |
 | --- | --- | --- | --- | --- |
@@ -49,13 +49,13 @@ Mediana del volume di lesione nei 35 casi: 13.2 ml.
 
 ## I cinque casi in cui il pretraining cambia di piu'
 
-| caso | lesione (ml) | da zero | fine-tuning | delta |
+| caso | lesione (mm³) | da zero | fine-tuning | delta |
 | --- | --- | --- | --- | --- |
-| sub-r040s002 | 1.0 | 0.0000 | 0.7813 | **+0.7813** |
-| sub-r040s008 | 9.3 | 0.0030 | 0.5799 | **+0.5769** |
-| sub-r029s004 | 22.7 | 0.2883 | 0.7751 | **+0.4867** |
-| sub-r040s039 | 29.3 | 0.3471 | 0.7695 | **+0.4224** |
-| sub-r040s032 | 130.7 | 0.1029 | 0.5132 | **+0.4103** |
+| sub-r040s002 | 1 000 | 0.0000 | 0.7813 | **+0.7813** |
+| sub-r040s008 | 9 300 | 0.0030 | 0.5799 | **+0.5769** |
+| sub-r029s004 | 22 700 | 0.2883 | 0.7751 | **+0.4867** |
+| sub-r040s039 | 29 300 | 0.3471 | 0.7695 | **+0.4224** |
+| sub-r040s032 | 130 700 | 0.1029 | 0.5132 | **+0.4103** |
 
 ## Limiti da dichiarare
 

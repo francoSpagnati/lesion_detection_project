@@ -217,7 +217,7 @@ def riepilogo(righe):
         rap = [r['intensita_rapporto'] for r in sel if np.isfinite(r['intensita_rapporto'])]
         out['fasce'].append({
             'fascia': etichetta, 'componenti': len(sel),
-            'volume_ml': round(sum(r['mm3'] for r in sel) / 1000, 4),
+            'volume_mm3': round(sum(r['mm3'] for r in sel), 1),
             'intensita_mediana': round(float(np.median(rap)), 3) if rap else None,
             'quota_sopra_1': round(float(np.mean([x > 1 for x in rap])), 3) if rap else None,
         })
@@ -243,5 +243,5 @@ if __name__ == '__main__':
     print(f"{ris['totale_componenti']} componenti")
     print(f"{'fascia':14s} {'n':>4s} {'volume':>9s} {'intensità mediana':>18s} {'quota > 1':>10s}")
     for f in ris['fasce']:
-        print(f"{f['fascia']:14s} {f['componenti']:4d} {f['volume_ml']:8.3f} ml "
+        print(f"{f['fascia']:14s} {f['componenti']:4d} {f['volume_mm3']:9.1f} mm³ "
               f"{f['intensita_mediana']:18.2f} {f['quota_sopra_1']:10.0%}")

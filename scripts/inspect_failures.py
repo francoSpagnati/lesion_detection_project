@@ -36,12 +36,12 @@ def descrivi(mask, affine, img=None):
     """Volume, componenti connesse, centroide fisico e intensita' media."""
     n = int(mask.sum())
     if n == 0:
-        return dict(voxel=0, ml=0.0, componenti=0, centroide=None, intensita=None)
+        return dict(voxel=0, mm3=0.0, componenti=0, centroide=None, intensita=None)
     _, ncomp = ndimage.label(mask)
     cen_vox = np.array(ndimage.center_of_mass(mask))
     cen_mm = nib.affines.apply_affine(affine, cen_vox)
-    vox_ml = abs(np.linalg.det(affine[:3, :3])) / 1000.0
-    return dict(voxel=n, ml=n * vox_ml, componenti=int(ncomp),
+    vox_mm3 = abs(np.linalg.det(affine[:3, :3]))
+    return dict(voxel=n, mm3=n * vox_mm3, componenti=int(ncomp),
                 centroide=cen_mm,
                 intensita=float(img[mask].mean()) if img is not None else None)
 
@@ -112,8 +112,8 @@ def main():
         dg = descrivi(gt, aff, img)
         dp = descrivi(pr, aff, img)
         righe.append(f'## {caso}\n')
-        righe.append(f"Dice {m['Dice']:.4f} | riferimento {dg['voxel']} voxel ({dg['ml']:.2f} ml), "
-                     f"{dg['componenti']} componenti | predetto {dp['voxel']} voxel ({dp['ml']:.2f} ml), "
+        righe.append(f"Dice {m['Dice']:.4f} | riferimento {dg['voxel']} voxel ({dg['mm3']:.0f} mm³), "
+                     f"{dg['componenti']} componenti | predetto {dp['voxel']} voxel ({dp['mm3']:.0f} mm³), "
                      f"{dp['componenti']} componenti\n")
         if dg['centroide'] is None or dp['centroide'] is None:
             righe.append('Una delle due maschere e\' vuota: niente da confrontare geometricamente.\n')
@@ -149,7 +149,7 @@ def main():
              for c in sorted(s['metric_per_case'], key=lambda c: -c['metrics'][classe]['Dice'])[:6]]
     righe.append('## Contrasto della lesione: falliti contro riusciti\n')
     righe.append('Rapporto fra intensita\' media dentro la lesione annotata e tessuto cerebrale attorno.\n')
-    righe.append('| gruppo | caso | volume (ml) | lesione / cervello |')
+    righe.append('| gruppo | caso | volume (mm³) | lesione / cervello |')
     righe.append('| --- | --- | --- | --- |')
     riass = {}
     for etichetta, casi in (('fallito', [c for c, _ in falliti]), ('riuscito', buoni)):
@@ -159,7 +159,7 @@ def main():
             if not co:
                 continue
             rapporti.append(co[2])
-            righe.append(f'| {etichetta} | {c} | {co[3] / 1000:.2f} | {co[2]:.2f} |')
+            righe.append(f'| {etichetta} | {c} | {co[3]:,.0f} | {co[2]:.2f} |'.replace(',', '\u202f'))
         riass[etichetta] = float(np.median(rapporti)) if rapporti else float('nan')
     righe.append('')
     righe.append(f"**Rapporto mediano: {riass.get('fallito', float('nan')):.2f} nei casi falliti, "

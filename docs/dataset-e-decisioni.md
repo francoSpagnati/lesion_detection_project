@@ -43,7 +43,7 @@ usati**. Solo `_T1w_BiasCorr_2FLAIR_Aligned` condivide la griglia della FLAIR: v
 ### La label 2 non è una lesione WMH
 
 I valori sono `0` background, `1` iperintensità, `2` **altra patologia** (tipicamente infarti), presente in
-**34/99** casi con volumi fino a 32.9 ml. Nella challenge ufficiale quei voxel sono **esclusi dalla
+**34/99** casi con volumi fino a 32 900 mm³. Nella challenge ufficiale quei voxel sono **esclusi dalla
 valutazione**.
 
 La documentazione iniziale del progetto diceva di fondere 1 e 2 in una lesione binaria. Sarebbe stato un
@@ -215,7 +215,7 @@ gli esperimenti restano riproducibili.
 ## Carico lesionale e split
 
 Il volume va calcolato in mm³, non in voxel, altrimenti dataset con spacing diverso non sono confrontabili.
-ATLAS va da 0.013 a 496 ml (mediana 5.29), WMH da 0.79 a 75 ml (mediana 10.93). Alla risoluzione target
+ATLAS va da 13 a 496 000 mm³ (mediana 5 290), WMH da 790 a 75 000 mm³ (mediana 10 930). Alla risoluzione target
 **19 casi ATLAS su 655** scendono sotto i 100 voxel di lesione.
 
 Su lesioni così piccole il Dice è quasi rumore: sbagliare 10 voxel su 20 fa crollare il punteggio, sulla
@@ -313,8 +313,8 @@ non "segmenta nel posto sbagliato".
 
 | | volume delle lesioni | rapporto lesione / cervello |
 | --- | --- | --- |
-| 10 casi falliti | 0.04 – 9.6 ml | **1.07** (mediana) |
-| 6 casi migliori | 85 – 231 ml | **0.62** (mediana) |
+| 10 casi falliti | 40 – 9 600 mm³ | **1.07** (mediana) |
+| 6 casi migliori | 85 000 – 231 000 mm³ | **0.62** (mediana) |
 
 Le due popolazioni sono separate su entrambe le dimensioni. Dove il modello riesce, la lesione è una
 **cavità**: perdita di tessuto sostituita da liquido, quindi molto ipointensa su T1 e inequivocabile.
@@ -422,13 +422,13 @@ l'errore ha una direzione precisa: SynthStrip **esclude** volume che il riferime
 
 | caso | escluso da SynthStrip | di cui CSF |
 | --- | --- | --- |
-| `sub-0955` (HD) | 423 ml | **400 ml** |
-| `sub-0924` (HD) | 353 ml | 209 ml |
-| `sub-0958` (HD) | 251 ml | 132 ml |
-| `sub-0922` (MCD) | 182 ml | 85 ml |
+| `sub-0955` (HD) | 423 000 mm³ | **400 000 mm³** |
+| `sub-0924` (HD) | 353 000 mm³ | 209 000 mm³ |
+| `sub-0958` (HD) | 251 000 mm³ | 132 000 mm³ |
+| `sub-0922` (MCD) | 182 000 mm³ | 85 000 mm³ |
 
 Nei cervelli normali il comportamento si inverte: SynthStrip è leggermente più generoso e include
-100–160 ml di tessuto fuori dal cervello (dura madre e spazi subaracnoidei).
+100 000–160 000 mm³ di tessuto fuori dal cervello (dura madre e spazi subaracnoidei).
 
 **Perché è un rischio per il bersaglio finale.** Nella paralisi cerebrale la dilatazione ventricolare è
 frequente — esiti di emorragia intraventricolare, dilatazione *ex vacuo* nella leucomalacia
@@ -456,10 +456,10 @@ campionati, e misura la frazione di voxel di lesione annotata che cade fuori dal
 Su WMH la perdita è **esattamente zero in tutti e 79 i casi**. Su ATLAS la media è lo 0.12%, ma la coda
 non è vuota: 18 casi su 556 perdono oltre l'1% e **tre superano il 5%**, con un massimo del 6.5%.
 
-Sono quasi tutti infarti massivi (196–360 ml) che arrivano alla superficie corticale, dove il confine
+Sono quasi tutti infarti massivi (196 000–360 000 mm³) che arrivano alla superficie corticale, dove il confine
 stesso di "cervello" è ambiguo: i voxel persi stanno a **1–2 mm mediani dal bordo della maschera**,
 cioè sono rifilatura di superficie, non asportazione. L'unica eccezione è `sub-r028s014`, una lesione
-da 8.6 ml che ne perde il 5.5% — cioè 0.47 ml.
+da 8 600 mm³ che ne perde il 5.5% — cioè 470 mm³.
 
 Una misura su 100 casi campionati dava media 0.0007 e nessun caso oltre il 5%: la coda esiste solo nel
 campione completo, ed è il motivo per cui la misura è stata rifatta su tutti e 556.

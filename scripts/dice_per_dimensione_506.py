@@ -4,7 +4,7 @@
     python scripts/dice_per_dimensione_506.py    # -> reports/dice_per_dimensione_506.{md,json}
                                                  #    reports/figures/aincp/dice_per_dimensione_506.png
 
-PERCHE'. Il Dice per paziente mescola tutto: un paziente con una cavita' da 150 ml e venti frammenti
+PERCHE'. Il Dice per paziente mescola tutto: un paziente con una cavita' da 150 000 mm³ e venti frammenti
 da 3 voxel ha Dice 0.89 anche se i frammenti sono tutti mancati. Il rilevamento per fascia
 (postprocessing_aincp.py valuta) dice se una lesione e' stata *toccata*, non *quanto bene* e' stata
 segmentata. Qui si misura la seconda cosa, lesione per lesione.
@@ -40,9 +40,9 @@ RICETTE = {'Z': 'nnUNetTrainerWandb_250ep_dropmod30_arresto50',
            'A': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50',
            'D': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c'}
 NOMI = {'Z': 'Z, da zero', 'A': 'A, da ATLAS', 'D': 'D, da ATLAS + WMH'}
-# piu' fini di pp.FASCE sopra 200 mm³: le lesioni grandi vanno da 0.2 a 197 ml
-FASCE = [(1, 10, '1–10 mm³'), (10, 50, '10–50 mm³'), (50, 200, '50–200 mm³'), (200, 1000, '0.2–1 ml'),
-         (1000, 10000, '1–10 ml'), (10000, np.inf, '> 10 ml')]
+# piu' fini di pp.FASCE sopra 200 mm³: le lesioni grandi arrivano a 196 847 mm³
+FASCE = [(1, 10, '1–10 mm³'), (10, 50, '10–50 mm³'), (50, 200, '50–200 mm³'), (200, 1000, '200–1 000 mm³'),
+         (1000, 10000, '1 000–10 000 mm³'), (10000, np.inf, '> 10 000 mm³')]
 COLORI = {'Z': '#2a78d6', 'A': '#eb6834', 'D': '#1baf7a'}      # validati: CVD ΔE >= 9.2, etichette dirette
 INK, INK2, GRIGIO, FONDO = '#0b0b0b', '#52514e', '#c9c8c3', '#fcfcfb'
 OUT = PROGETTO / 'reports/dice_per_dimensione_506'
@@ -116,7 +116,10 @@ def figura(tab):
             x.text(pos[-1] + 0.3, yy, k, color=COLORI[k], fontsize=11, fontweight='bold', va='center')
             ultimo = yy
         x.set_xticks(pos)
-        x.set_xticklabels([f"{e}\n{r['n']} lesioni" for e, r in zip(etichette, tab[insieme]['Z'])], fontsize=9, color=INK2)
+        # l'unita' una volta sola nel titolo dell'asse: ripetuta su ogni fascia le etichette si toccano
+        x.set_xticklabels([f"{e.replace(' mm³', '')}\n{r['n']} lesioni" for e, r in zip(etichette, tab[insieme]['Z'])],
+                          fontsize=9, color=INK2)
+        x.set_xlabel('volume della lesione (mm³)', fontsize=10, color=INK2)
         x.set_ylim(-0.02, 1.0)
         x.set_xlim(-0.5, len(pos) - 0.1)
         x.grid(axis='y', color=GRIGIO, lw=0.6, alpha=0.6)

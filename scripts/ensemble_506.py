@@ -17,7 +17,7 @@ postprocessing migliore. Confronto appaiato del Dice per paziente con Wilcoxon.
 
 Oltre al Dice medio per paziente si riportano la mediana e il Dice **globale** (tutti i voxel dei
 12 pazienti insieme): il medio pesa allo stesso modo un paziente con 3 voxel di lesione e uno con
-200 ml, il globale pesa i voxel. Sono le tre forme in cui la letteratura riporta il Dice.
+200 000 mm³, il globale pesa i voxel. Sono le tre forme in cui la letteratura riporta il Dice.
 """
 import json
 import sys
@@ -58,8 +58,8 @@ def valuta_combo(nome):
             key=lambda g: (round(g['dice'], 3), -abs(g['t'] - 0.5), -g['vmin'], not g['cervello']))
     ris = g['ris']
     # Dice globale: 2|A∩B| / (|A|+|B|) sommando i volumi di tutti i pazienti
-    inter = sum(r['dice'] * (r['ml_vero'] + r['ml_pred']) for r in ris)
-    tot = sum(r['ml_vero'] + r['ml_pred'] for r in ris)
+    inter = sum(r['dice'] * (r['mm3_vero'] + r['mm3_pred']) for r in ris)
+    tot = sum(r['mm3_vero'] + r['mm3_pred'] for r in ris)
     les = [l for r in ris for l in r['lesioni']]
     return nome, {'t': g['t'], 'vmin': g['vmin'], 'cervello': g['cervello'], 'f1': g['f1'], 'dice': g['dice'],
                   'mediana': float(np.median([r['dice'] for r in ris])), 'globale': inter / tot,

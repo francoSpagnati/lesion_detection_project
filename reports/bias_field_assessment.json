@@ -16,7 +16,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1736.5,
+          "volume_maschera_mm3": 1736500.0,
           "profilo": {
             "0": {
               "voxel": 578830,
@@ -59,7 +59,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1585.5,
+          "volume_maschera_mm3": 1585500.0,
           "profilo": {
             "0": {
               "voxel": 528490,
@@ -102,7 +102,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1989.4,
+          "volume_maschera_mm3": 1989400.0,
           "profilo": {
             "0": {
               "voxel": 421237,
@@ -145,7 +145,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1362.6,
+          "volume_maschera_mm3": 1362600.0,
           "profilo": {
             "0": {
               "voxel": 387562,
@@ -188,7 +188,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1618.8,
+          "volume_maschera_mm3": 1618800.0,
           "profilo": {
             "0": {
               "voxel": 587553,
@@ -224,7 +224,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1762.1,
+          "volume_maschera_mm3": 1762100.0,
           "profilo": {
             "0": {
               "voxel": 639569,
@@ -260,7 +260,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1392.6,
+          "volume_maschera_mm3": 1392600.0,
           "profilo": {
             "0": {
               "voxel": 464216,
@@ -303,7 +303,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1421.9,
+          "volume_maschera_mm3": 1421900.0,
           "profilo": {
             "0": {
               "voxel": 404425,
@@ -346,7 +346,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1561.4,
+          "volume_maschera_mm3": 1561400.0,
           "profilo": {
             "0": {
               "voxel": 520478,
@@ -389,7 +389,7 @@
             3.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 1307.0,
+          "volume_maschera_mm3": 1307000.0,
           "profilo": {
             "0": {
               "voxel": 371768,
@@ -457,7 +457,7 @@
       "giudizio": "moderato",
       "azione": "N4 opzionale, solo come variante misurata contro la baseline",
       "maschera": "testa (soglia di intensita)",
-      "volume_maschera_ml_mediano": 1573.45
+      "volume_maschera_mm3_mediano": 1573450.0
     },
     "ATLAS": {
       "nota": "T1w in spazio MNI, preprocessing degli autori non documentato come N4",
@@ -471,7 +471,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2945.9,
+          "volume_maschera_mm3": 2945900.0,
           "profilo": {
             "0": {
               "voxel": 2945949,
@@ -514,7 +514,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2427.5,
+          "volume_maschera_mm3": 2427500.0,
           "profilo": {
             "0": {
               "voxel": 2427510,
@@ -550,7 +550,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2900.1,
+          "volume_maschera_mm3": 2900100.0,
           "profilo": {
             "0": {
               "voxel": 2900124,
@@ -586,7 +586,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2626.4,
+          "volume_maschera_mm3": 2626400.0,
           "profilo": {
             "0": {
               "voxel": 2626435,
@@ -629,7 +629,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2795.1,
+          "volume_maschera_mm3": 2795100.0,
           "profilo": {
             "0": {
               "voxel": 2795123,
@@ -665,7 +665,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2752.6,
+          "volume_maschera_mm3": 2752600.0,
           "profilo": {
             "0": {
               "voxel": 2752625,
@@ -708,7 +708,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2777.6,
+          "volume_maschera_mm3": 2777600.0,
           "profilo": {
             "0": {
               "voxel": 2777594,
@@ -751,7 +751,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2762.2,
+          "volume_maschera_mm3": 2762200.0,
           "profilo": {
             "0": {
               "voxel": 2762156,
@@ -794,7 +794,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2972.1,
+          "volume_maschera_mm3": 2972100.0,
           "profilo": {
             "0": {
               "voxel": 2972086,
@@ -837,7 +837,7 @@
             1.0
           ],
           "maschera": "testa (soglia di intensita)",
-          "volume_maschera_ml": 2211.9,
+          "volume_maschera_mm3": 2211900.0,
           "profilo": {
             "0": {
               "voxel": 2211856,
@@ -905,7 +905,7 @@
       "giudizio": "moderato",
       "azione": "N4 opzionale, solo come variante misurata contro la baseline",
       "maschera": "testa (soglia di intensita)",
-      "volume_maschera_ml_mediano": 2769.8999999999996
+      "volume_maschera_mm3_mediano": 2769900.0
     },
     "DBB": {
       "nota": "T1 pediatrici in spazio MNI, maschera cerebrale fornita dal dataset",
@@ -919,7 +919,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1486.1,
+          "volume_maschera_mm3": 1486100.0,
           "profilo": {
             "0": {
               "voxel": 1486116,
@@ -962,7 +962,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1487.3,
+          "volume_maschera_mm3": 1487300.0,
           "profilo": {
             "0": {
               "voxel": 1487344,
@@ -1005,7 +1005,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1404.5,
+          "volume_maschera_mm3": 1404500.0,
           "profilo": {
             "0": {
               "voxel": 1404467,
@@ -1048,7 +1048,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1194.8,
+          "volume_maschera_mm3": 1194800.0,
           "profilo": {
             "0": {
               "voxel": 1194796,
@@ -1091,7 +1091,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 888.9,
+          "volume_maschera_mm3": 888900.0,
           "profilo": {
             "0": {
               "voxel": 888920,
@@ -1134,7 +1134,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1538.4,
+          "volume_maschera_mm3": 1538400.0,
           "profilo": {
             "0": {
               "voxel": 1538365,
@@ -1177,7 +1177,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1607.7,
+          "volume_maschera_mm3": 1607700.0,
           "profilo": {
             "0": {
               "voxel": 1607686,
@@ -1220,7 +1220,7 @@
             0.9583
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1744.6,
+          "volume_maschera_mm3": 1744600.0,
           "profilo": {
             "0": {
               "voxel": 1899577,
@@ -1263,7 +1263,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1397.0,
+          "volume_maschera_mm3": 1397000.0,
           "profilo": {
             "0": {
               "voxel": 1396966,
@@ -1306,7 +1306,7 @@
             1.0
           ],
           "maschera": "cervello (fornita dal dataset)",
-          "volume_maschera_ml": 1564.2,
+          "volume_maschera_mm3": 1564200.0,
           "profilo": {
             "0": {
               "voxel": 1564191,
@@ -1381,7 +1381,7 @@
       "giudizio": "trascurabile",
       "azione": "nessuna correzione N4: campo piatto all'interno",
       "maschera": "cervello (fornita dal dataset)",
-      "volume_maschera_ml_mediano": 1486.6999999999998
+      "volume_maschera_mm3_mediano": 1486700.0
     }
   }
 }

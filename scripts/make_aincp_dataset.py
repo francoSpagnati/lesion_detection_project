@@ -38,8 +38,8 @@ NOME = 'Dataset504_AINCP'
 RAW = Path(os.environ['nnUNet_raw']) / NOME
 PRE = Path(os.environ['nnUNet_preprocessed']) / NOME
 
-# (validazione) per fold. Volumi di lesione in ml dal notebook, per giustificare l'accoppiamento:
-# 032 123.5 | 040 55.7 | 054 33.8 | 056 12.5 | 045 9.5 || 052 4.9 | 041 2.0 | 039 1.4 | 053 0.6 | 046 0.5
+# (validazione) per fold. Volumi di lesione in mm³ dal notebook, per giustificare l'accoppiamento:
+# 032 123 500 | 040 55 700 | 054 33 800 | 056 12 500 | 045 9 500 || 052 4 900 | 041 2 000 | 039 1 400 | 053 600 | 046 500
 FOLD = [
     ['FSM_032_MR_1_anon', 'FSM_039_MR_2_anon'],   # 039: fette da 1.0 mm
     ['FSM_054_MR_1_anon', 'FSM_046_MR_1_anon'],   # 054: fette da 1.0 mm

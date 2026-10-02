@@ -122,12 +122,12 @@ def main():
         pred = np.asarray(nib.load(out_mask).dataobj) > 0
         rif = nib.load(c['mask'])
         vero = np.asarray(rif.dataobj) > 0
-        vox = abs(np.linalg.det(rif.affine[:3, :3])) / 1000
+        vox = abs(np.linalg.det(rif.affine[:3, :3]))
         dice = 2 * (pred & vero).sum() / (pred.sum() + vero.sum())
         righe.append(dict(soggetto=c['soggetto'], gruppo=c['gruppo'], dice=dice,
-                          ml_synthstrip=pred.sum() * vox, ml_riferimento=vero.sum() * vox,
-                          ml_solo_synthstrip=(pred & ~vero).sum() * vox,
-                          ml_solo_riferimento=(~pred & vero).sum() * vox))
+                          mm3_synthstrip=pred.sum() * vox, mm3_riferimento=vero.sum() * vox,
+                          mm3_solo_synthstrip=(pred & ~vero).sum() * vox,
+                          mm3_solo_riferimento=(~pred & vero).sum() * vox))
         # il Dice come prefisso: ordinando per nome, i peggiori vengono per primi
         figura(c, c['img'], pred, vero, dice, FIGURE / f'{dice:.3f}_{c["soggetto"]}_{c["gruppo"]}.png')
         if i % 20 == 0 or i == len(casi):
@@ -152,11 +152,11 @@ def main():
                    f'(differenza {patologici.dice.mean()-d[d.gruppo=="Healthy"].dice.mean():+.4f})', '']
     peggiori = d.nsmallest(10, 'dice')
     md += ['## I dieci casi peggiori', '',
-           '| soggetto | gruppo | Dice | ml SynthStrip | ml riferimento | solo SynthStrip | solo riferimento |',
+           '| soggetto | gruppo | Dice | mm³ SynthStrip | mm³ riferimento | mm³ solo SynthStrip | mm³ solo riferimento |',
            '| --- | --- | --- | --- | --- | --- | --- |']
     for _, r in peggiori.iterrows():
-        md.append(f'| {r.soggetto} | {r.gruppo} | {r.dice:.4f} | {r.ml_synthstrip:.0f} | '
-                  f'{r.ml_riferimento:.0f} | {r.ml_solo_synthstrip:.1f} | {r.ml_solo_riferimento:.1f} |')
+        md.append((f'| {r.soggetto} | {r.gruppo} | {r.dice:.4f} | {r.mm3_synthstrip:,.0f} | '
+                   f'{r.mm3_riferimento:,.0f} | {r.mm3_solo_synthstrip:,.0f} | {r.mm3_solo_riferimento:,.0f} |').replace(',', '\u202f'))
     md += ['', f'Immagini di controllo in `reports/figures/synthstrip/`, **una per caso, con il Dice come',
            'prefisso del nome**: ordinando la cartella per nome si guardano prima i casi peggiori.',
            f'Maschere in `data/processed/synthstrip/DBB/`.', '']

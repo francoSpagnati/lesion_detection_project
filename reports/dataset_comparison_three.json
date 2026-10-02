@@ -26,11 +26,11 @@
     ],
     "anisotropia_mediana": 3.07,
     "voxel_mm3_mediano": 3.516,
-    "fov_mediano_ml": 9861.0,
-    "foreground_ml": {
-      "p10": 1.61,
-      "mediana": 10.93,
-      "p90": 40.12
+    "fov_mediano_mm3": 9861000.0,
+    "foreground_mm3": {
+      "p10": 1610.0,
+      "mediana": 10930.0,
+      "p90": 40120.0
     },
     "frazione_foreground_mediana": 0.001,
     "casi_geometria_ko": 0
@@ -62,11 +62,11 @@
     ],
     "anisotropia_mediana": 1.0,
     "voxel_mm3_mediano": 1.0,
-    "fov_mediano_ml": 8675.0,
-    "foreground_ml": {
-      "p10": 0.38,
-      "mediana": 5.29,
-      "p90": 106.09
+    "fov_mediano_mm3": 8675000.0,
+    "foreground_mm3": {
+      "p10": 380.0,
+      "mediana": 5290.0,
+      "p90": 106090.0
     },
     "frazione_foreground_mediana": 0.0006,
     "casi_geometria_ko": 0
@@ -99,11 +99,11 @@
     ],
     "anisotropia_mediana": 1.0,
     "voxel_mm3_mediano": 1.0,
-    "fov_mediano_ml": 7221.0,
-    "foreground_ml": {
-      "p10": 1295.0,
-      "mediana": 1478.81,
-      "p90": 1689.0
+    "fov_mediano_mm3": 7221000.0,
+    "foreground_mm3": {
+      "p10": 1295000.0,
+      "mediana": 1478810.0,
+      "p90": 1689000.0
     },
     "frazione_foreground_mediana": 0.2034,
     "casi_geometria_ko": 0

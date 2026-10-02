@@ -55,6 +55,14 @@ DEFAULT = {'t': 0.5, 'vmin': 0, 'cervello': False}
 FASCE = [(1, 10, '1–10 mm³'), (10, 50, '10–50'), (50, 200, '50–200'), (200, np.inf, '> 200')]
 
 
+def mm3(v: float) -> str:
+    """Un volume in mm³ da leggere: cifre a gruppi di tre con uno spazio sottile, nessun decimale
+    sopra 10 mm³. Nel progetto i volumi si scrivono sempre e solo in mm³."""
+    if v >= 10:
+        return f'{v:,.0f}'.replace(',', '\u202f') + ' mm³'
+    return f'{v:.1f} mm³'
+
+
 def sessione(caso: str) -> Path:
     return next(d for d in PROC.iterdir() if d.is_dir() and '_'.join(d.name.split('_')[:2]) == caso)
 
@@ -119,10 +127,10 @@ def misure(pred, ref, cer, vox):
     fp = sum(1 for j in range(np_) if vp[j] >= SOGLIA_LESIONE_MM3 and (j + 1) not in colpite)
     comp = int((vp >= SOGLIA_LESIONE_MM3).sum())
     s = ref.sum() + pred.sum()
-    cer_ml = cer.sum() * vox / 1000
+    cer_mm3 = cer.sum() * vox
     return {'dice': 2 * float((ref & pred).sum()) / s if s else 1.0, 'lesioni': lesioni, 'fp': int(fp),
-            'componenti': comp, 'ml_vero': float(ref.sum() * vox / 1000), 'ml_pred': float(pred.sum() * vox / 1000),
-            'perc_vera': float(100 * ref.sum() * vox / 1000 / cer_ml), 'perc_pred': float(100 * pred.sum() * vox / 1000 / cer_ml)}
+            'componenti': comp, 'mm3_vero': float(ref.sum() * vox), 'mm3_pred': float(pred.sum() * vox),
+            'perc_vera': float(100 * ref.sum() * vox / cer_mm3), 'perc_pred': float(100 * pred.sum() * vox / cer_mm3)}
 
 
 def f1(ris):

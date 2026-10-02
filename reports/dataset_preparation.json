@@ -31,10 +31,10 @@
         "override_applicato": false
       },
       "do_separate_z": true,
-      "lesion_ml": {
-        "min": 0.786,
-        "median": 10.930498177206426,
-        "max": 74.99138842215429
+      "lesion_mm3": {
+        "min": 786.0,
+        "median": 10930.498,
+        "max": 74991.388
       },
       "n_under_100_voxels": 0,
       "label_values": {
@@ -43,7 +43,7 @@
       },
       "wmh_label2_policy": "exclude",
       "split": {
-        "stratified_on": "group | terzile lesion_ml (bins=3)",
+        "stratified_on": "group | terzile lesion_mm3 (bins=3)",
         "development": 79,
         "internal_test": 20,
         "official_test_unlabeled": 0,
@@ -100,10 +100,10 @@
         "override_applicato": false
       },
       "do_separate_z": false,
-      "lesion_ml": {
-        "min": 0.013,
-        "median": 5.29,
-        "max": 496.656
+      "lesion_mm3": {
+        "min": 13.0,
+        "median": 5290.0,
+        "max": 496656.0
       },
       "n_under_100_voxels": 19,
       "label_values": {
@@ -112,7 +112,7 @@
       },
       "wmh_label2_policy": null,
       "split": {
-        "stratified_on": "group | terzile lesion_ml (bins=3)",
+        "stratified_on": "group | terzile lesion_mm3 (bins=3)",
         "development": 556,
         "internal_test": 99,
         "official_test_unlabeled": 300,

@@ -124,12 +124,12 @@ def measure(image_path, mask_path=None, margins=MARGINS):
     if not profile:
         return None
     deepest = max(profile)
-    voxel_ml = float(np.prod(spacing)) / 1000.0
+    voxel_mm3 = float(np.prod(spacing))
     return {
         'file': str(image_path.relative_to(ROOT)),
         'spacing_mm': [round(float(s), 4) for s in spacing],
         'maschera': mask_kind,
-        'volume_maschera_ml': round(float(base.sum()) * voxel_ml, 1),
+        'volume_maschera_mm3': round(float(base.sum()) * voxel_mm3),
         'profilo': profile,
         'margine_piu_profondo_mm': deepest,
         'rapporto_bordo': profile[min(profile)]['rapporto_p99_p1'],
@@ -228,9 +228,9 @@ def main():
             entry['giudizio'], entry['azione'] = verdict(
                 entry['interno_mediano'], entry['bordo_mediano'])
             entry['maschera'] = appaiati[0].get('maschera')
-            entry['volume_maschera_ml_mediano'] = float(np.median(
-                [c['volume_maschera_ml'] for c in entry['casi']
-                 if 'volume_maschera_ml' in c]))
+            entry['volume_maschera_mm3_mediano'] = float(np.median(
+                [c['volume_maschera_mm3'] for c in entry['casi']
+                 if 'volume_maschera_mm3' in c]))
         report['datasets'][name] = entry
 
     out = ROOT / 'reports'
@@ -278,8 +278,8 @@ def main():
     ]
     for name, e in report['datasets'].items():
         if 'maschera' in e:
-            lines.append('| %s | %s | %.0f ml |' % (
-                name, e['maschera'], e['volume_maschera_ml_mediano']))
+            lines.append('| %s | %s | %s mm³ |' % (
+                name, e['maschera'], f"{e['volume_maschera_mm3_mediano']:,.0f}".replace(',', '\u202f')))
     lines += [
         '',
         'Dove la maschera e\' la **testa** (WMH, ATLAS) i primi millimetri di erosione cadono ancora',

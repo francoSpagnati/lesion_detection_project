@@ -3,7 +3,7 @@
   "seed": 42,
   "n_folds": 5,
   "test_fraction": 0.15,
-  "stratified_on": "group | terzile lesion_ml (bins=3)",
+  "stratified_on": "group | terzile lesion_mm3 (bins=3)",
   "development": [
     "sub-r001s002",
     "sub-r001s003",

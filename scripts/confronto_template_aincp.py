@@ -75,13 +75,13 @@ def misura(sogg, fisso, maschera_fissa, trasf, det):
     t1 = ants.image_read(str(sogg / 'T1_N4.nii.gz'))
     lez = ants.image_read(str(sogg / 'lesione_inT1.nii.gz'))
     cer = ants.image_read(str(sogg / 'cervello_inT1.nii.gz'))
-    vn = np.prod(t1.spacing) / 1000
+    vn = np.prod(t1.spacing)
     Ln, Bn = lez.numpy().astype(bool).sum() * vn, (cer.numpy() > .5).sum() * vn
     lt = ants.apply_transforms(fixed=fisso, moving=lez, transformlist=trasf, interpolator='nearestNeighbor').numpy() > .5
     bt = ants.apply_transforms(fixed=fisso, moving=cer, transformlist=trasf, interpolator='linear').numpy() > .5
-    vt = np.prod(fisso.spacing) / 1000
+    vt = np.prod(fisso.spacing)
     mf = maschera_fissa.numpy() > .5
-    return {'scala_affine': det, 'lesione_ml_nativo': Ln, 'lesione_ml_template': lt.sum() * vt,
+    return {'scala_affine': det, 'lesione_mm3_nativo': Ln, 'lesione_mm3_template': lt.sum() * vt,
             'perc_nativo': 100 * Ln / Bn, 'perc_template': 100 * lt.sum() / bt.sum(),
             'lesione_fuori_cervello_%': 100 * (lt & ~bt).sum() / max(lt.sum(), 1),
             'dice_cervello_template': 2 * (bt & mf).sum() / (bt.sum() + mf.sum())}
@@ -115,8 +115,8 @@ def main():
          '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |']
     for p, v in ris.items():
         a, q = v['adulto'], v['pediatrico']
-        r.append(f"| {p} | {a['scala_affine']:.2f} | {q['scala_affine']:.2f} | {a['lesione_ml_template']/a['lesione_ml_nativo']:.2f} | "
-                 f"{q['lesione_ml_template']/q['lesione_ml_nativo']:.2f} | {a['perc_nativo']:.2f} | {a['perc_template']:.2f} | "
+        r.append(f"| {p} | {a['scala_affine']:.2f} | {q['scala_affine']:.2f} | {a['lesione_mm3_template']/a['lesione_mm3_nativo']:.2f} | "
+                 f"{q['lesione_mm3_template']/q['lesione_mm3_nativo']:.2f} | {a['perc_nativo']:.2f} | {a['perc_template']:.2f} | "
                  f"{q['perc_template']:.2f} | {a['dice_cervello_template']:.3f} | {q['dice_cervello_template']:.3f} |")
     for nome in ('adulto', 'pediatrico'):
         rel = [100 * (v[nome]['perc_template'] - v[nome]['perc_nativo']) / v[nome]['perc_nativo'] for v in ris.values()]

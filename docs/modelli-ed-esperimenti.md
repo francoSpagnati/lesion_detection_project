@@ -299,9 +299,9 @@ paralisi cerebrale.
 
 **Il rischio misurato prima di procedere.** Ritagliare può tagliare via lesione. Misurato sull'**intero**
 dataset (556 casi ATLAS + 79 WMH, non su un campione): WMH perde **0.0000**, ATLAS perde in media
-**0.0012**, con 18 casi sopra l'1% e **3 sopra il 5%**. I casi peggiori sono infarti massivi (196–360 ml)
+**0.0012**, con 18 casi sopra l'1% e **3 sopra il 5%**. I casi peggiori sono infarti massivi (196 000–360 000 mm³)
 che arrivano alla superficie corticale. Accettabile, e nessuna dilatazione della maschera: 2 mm
-dimezzerebbero la perdita ma riaggiungerebbero circa 160 ml di guscio non cerebrale per caso.
+dimezzerebbero la perdita ma riaggiungerebbero circa 160 000 mm³ di guscio non cerebrale per caso.
 
 **Cosa cambia nel piano — e perché il confronto non sarà pulito.** Riducendo i volumi, nnU-Net ha
 **ricalcolato patch e batch**:
@@ -472,7 +472,7 @@ qualsiasi fold di 521 o di 503. Non si tocca alcun test set: vengono dal pool di
 | --- | --- |
 | dataset | `Dataset541_SIM_AINCP`, 45 casi, costruito da `scripts/make_finetuning_sim_dataset.py` |
 | fold 0 | **10 casi di training** (quanti saranno i pazienti AInCP), **35 di validation** |
-| scelta dei 10 | stratificata per volume di lesione — mediana 13.7 ml contro 13.2 del gruppo di valutazione, con lo spettro coperto da 0.9 a 238 ml. Su questo compito il Dice dipende quasi solo dal volume, e dieci casi tutti piccoli o tutti grandi renderebbero il risultato illeggibile |
+| scelta dei 10 | stratificata per volume di lesione — mediana 13 700 mm³ contro 13 200 del gruppo di valutazione, con lo spettro coperto da 900 a 238 000 mm³. Su questo compito il Dice dipende quasi solo dal volume, e dieci casi tutti piccoli o tutti grandi renderebbero il risultato illeggibile |
 | piano | **copiato da 502** con `nnUNetv2_move_plans_between_datasets`, non ricalcolato: il trasferimento dei pesi funziona solo fra architetture identiche |
 | budget | 250 epoche per entrambi i bracci, `nnUNetTrainerWandb_250epochs` |
 
@@ -690,11 +690,11 @@ nuovo, e quel passo non basta a impararli. `duplica` parte con la FLAIR già att
 
 Questo **corregge l'aspettativa** scritta prima del training (che il pretraining valesse +23 punti
 come su 541): su AInCP il modello da zero arriva a 0.58 perché le lesioni sono grandi (mediana
-7.2 ml) e il Dice le premia; il vantaggio del pretraining, se c'è, va cercato nel rilevamento delle
+7 200 mm³) e il Dice le premia; il vantaggio del pretraining, se c'è, va cercato nel rilevamento delle
 piccole e nei falsi positivi, non nella media.
 
 Il Dice per paziente dipende dalla forma della lesione più che dal modello: FSM_041 (gliosi
-sottile ad anello attorno a una cavità) sta a 0.04–0.06 con tutte e tre; FSM_040 (cavità da 56 ml)
+sottile ad anello attorno a una cavità) sta a 0.04–0.06 con tutte e tre; FSM_040 (cavità da 56 000 mm³)
 a 0.83–0.92.
 
 ### Il passo differenziato: la diagnosi era giusta (16 settembre)
@@ -875,7 +875,7 @@ esempi con un canale azzerato, metà FLAIR e metà T1, segmentazione intatta).
 
 Su WMH la variante a 1e-3 è a −0.02 da 512 (p = 0.14; 512 è misurato nello spazio nativo, quindi il
 confronto è solo indicativo). **Ma entrambe hanno dimenticato ATLAS**: il Dice sulle cavità crolla
-da 0.61 a 0.22, e sulle lesioni piccole (terzile sotto 1.5 ml) da 0.49 a 0.04. Tenere lento il resto
+da 0.61 a 0.22, e sulle lesioni piccole (terzile sotto 1 500 mm³) da 0.49 a 0.04. Tenere lento il resto
 della rete non serve: le due varianti dimenticano uguale. La causa più probabile è che nnU-Net
 **non trasferisce lo strato di segmentazione finale** (`seg_layers`): allo stadio 2 viene
 riaddestrato da capo sui soli WMH, e il criterio di decisione della rete diventa quello di WMH. È il
@@ -1008,7 +1008,7 @@ postprocessing, scelto sugli stessi fuori-fold (quindi ottimista allo stesso mod
 (p = 0.46), D−Z −0.007 (p = 0.83), D−A +0.014 (p = 0.37); lesioni rilevate per paziente p ≥ 0.75.
 Lo scarto di F1 viene da 1–2 lesioni piccole e da 1–4 falsi positivi in tutto. Tutte e tre: 100% o
 quasi delle lesioni sopra 200 mm³ (11–12 su 13), 15–21% sotto 10 mm³; FSM_033 (una lesione da
-0.67 ml, 1.5 T) mancato da tutte; percentuale di cervello lesionato con Spearman 0.90–0.92.
+670 mm³, 1.5 T) mancato da tutte; percentuale di cervello lesionato con Spearman 0.90–0.92.
 
 **Questo contraddice il vantaggio del pretraining visto sui primi dieci.** Là il pretraining
 toglieva i falsi positivi (10 pazienti su 10); qui, prima del postprocessing, è ancora così (Z ne ha
@@ -1061,14 +1061,14 @@ Appaiati sui 5: D−Z +0.049 (p = 1.0), A−Z +0.033 (p = 0.81), D−A +0.017 (p
 restano indistinguibili, come in cross-validation**; il modello della tesi resta Z, scelto prima.
 Le medie si spostano per due pazienti in direzioni opposte:
 
-- **FSM_046** (3 T, 0.45 ml di lesione): Z predice **9.46 ml**, Dice 0.09. La componente falsa grande
+- **FSM_046** (3 T, 454 mm³ di lesione): Z predice **9 458 mm³**, Dice 0.09. La componente falsa grande
   sta **dentro il ventricolo laterale dilatato** (figura `segmentazioni_506_test_dettaglio_FSM_046.png`):
-  Z scambia il liquor del ventricolo per una cavità. A e D no (0.51 e 0.96 ml). È il vantaggio del
+  Z scambia il liquor del ventricolo per una cavità. A e D no (512 e 965 mm³). È il vantaggio del
   pretraining sui falsi positivi visto sui primi dieci, che in cross-validation il postprocessing
-  aveva nascosto: il filtro per volume non può togliere una componente da 9 ml. Una maschera dei
+  aveva nascosto: il filtro per volume non può togliere una componente di circa 9 000 mm³. Una maschera dei
   ventricoli (SynthSeg) nel postprocessing lo toglierebbe, ma va scelta sui fuori-fold, non qui.
-- **FSM_049** (altro centro, 197 ml, 16% del cervello): Z 0.862, D 0.661, A 0.644. Le ricette
-  pre-addestrate sottostimano la lesione (115 ml contro 197).
+- **FSM_049** (altro centro, 196 847 mm³, 16% del cervello): Z 0.862, D 0.661, A 0.644. Le ricette
+  pre-addestrate sottostimano la lesione (115 268 e 115 399 mm³ contro 196 847).
 
 Percentuale di cervello lesionato per Z: Pearson 0.996, Spearman 0.60 (su 5 pazienti, rovinata da
 FSM_046), differenza media −0.02 punti. Per strato: altri centri Dice 0.862 (1 paziente), Stella
@@ -1084,12 +1084,12 @@ mancata, così una lesione grande non paga per i frammenti vicini. Dice medio pe
 | 1–10 mm³ | 34 | 0.04 / 0.03 / 0.03 | 23 | 0.09 / 0.08 / 0.08 |
 | 10–50 mm³ | 12 | 0.09 / 0.11 / 0.09 | 3 | 0.08 / 0.12 / 0.38 |
 | 50–200 mm³ | 9 | 0.32 / 0.23 / 0.28 | 6 | 0.02 / 0.15 / 0.36 |
-| 0.2–1 ml | 3 | 0.21 / 0.37 / 0.20 | 4 | 0.16 / 0.24 / 0.51 |
-| 1–10 ml | 4 | 0.44 / 0.38 / 0.40 | 2 | 0.75 / 0.66 / 0.69 |
-| > 10 ml | 6 | 0.83 / 0.83 / 0.83 | 2 | 0.84 / 0.74 / 0.75 |
+| 200–1 000 mm³ | 3 | 0.21 / 0.37 / 0.20 | 4 | 0.16 / 0.24 / 0.51 |
+| 1 000–10 000 mm³ | 4 | 0.44 / 0.38 / 0.40 | 2 | 0.75 / 0.66 / 0.69 |
+| > 10 000 mm³ | 6 | 0.83 / 0.83 / 0.83 | 2 | 0.84 / 0.74 / 0.75 |
 
-Sopra 10 ml tutte e tre segmentano bene (0.83 in CV); sotto 50 mm³ le lesioni sono quasi tutte
-mancate, e quando trovate hanno Dice 0.16–0.57. Fra 50 mm³ e 1 ml, sul test, D trova più lesioni di Z
+Sopra 10 000 mm³ tutte e tre segmentano bene (0.83 in CV); sotto 50 mm³ le lesioni sono quasi tutte
+mancate, e quando trovate hanno Dice 0.16–0.57. Fra 50 mm³ e 1 000 mm³, sul test, D trova più lesioni di Z
 (8/10 contro 4/10, metà in FSM_030), ma in cross-validation non succede: con 3–9 lesioni per
 fascia, raggruppate in pochi pazienti, le fasce intermedie non distinguono le ricette.
 

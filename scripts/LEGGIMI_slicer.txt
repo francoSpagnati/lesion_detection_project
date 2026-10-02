@@ -38,10 +38,10 @@ COME APRIRE
   C. Da terminale: Slicer --python-script apri_in_slicer.py FSM_046
 
 COSA GUARDARE
-  FSM_046   Z segna come lesione circa 9 ml dentro il ventricolo laterale (arancio): il liquido del
+  FSM_046   Z segna come lesione circa 9 000 mm³ dentro il ventricolo laterale (arancio): il liquido del
             ventricolo ha lo stesso aspetto di una cavita'. A e D non lo fanno.
-  FSM_049   l'unico paziente di un altro centro, lesione di 197 ml: Z la segue quasi tutta.
-  FSM_030   Z trova la lesione principale (3.4 ml) ma manca le altre 10, da 1.5 mm3 a 0.9 ml (blu);
+  FSM_049   l'unico paziente di un altro centro, lesione di 196 847 mm³: Z la segue quasi tutta.
+  FSM_030   Z trova la lesione principale (3 434 mm³) ma manca le altre 10, da 1.5 a 912 mm³ (blu);
             D ne trova 7 su 11.
 
 Per vedere la probabilita' invece della maschera: caricare probabilita_Z.nii.gz, metterla in primo

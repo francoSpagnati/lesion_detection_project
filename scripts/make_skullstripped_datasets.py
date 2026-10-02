@@ -14,7 +14,7 @@ distribuzione che include grasso sottocutaneo, diploe e aria.
 
 **La maschera non viene dilatata.** La misura in `reports/lesioni_fuori_maschera.md`
 dice che si perde lo 0.00% delle lesioni su WMH e lo 0.07% su ATLAS. Dilatare di
-2 mm porterebbe il caso peggiore da 1.9% a 0.8%, ma rimetterebbe dentro ~160 ml di
+2 mm porterebbe il caso peggiore da 1.9% a 0.8%, ma rimetterebbe dentro ~160 000 mm³ di
 guscio non cerebrale per ogni caso: si pagherebbe l'intero beneficio per recuperare
 tre casi su cento.
 

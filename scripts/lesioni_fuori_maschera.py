@@ -66,13 +66,13 @@ def misura(dataset, n, uscita):
                 continue
         gt = nib.load(c['lab']).get_fdata() > 0.5
         mb = nib.load(str(maschera)).get_fdata() > 0.5
-        vox = np.prod(nib.load(c['lab']).header.get_zooms()[:3]) / 1000.0  # ml
+        vox = np.prod(nib.load(c['lab']).header.get_zooms()[:3])  # mm³
         n_les = int(gt.sum())
         if n_les == 0:
             continue
         fuori = int((gt & ~mb).sum())
         righe.append({'caso': c['caso'], 'dataset': dataset,
-                      'lesione_ml': n_les * vox, 'fuori_ml': fuori * vox,
+                      'lesione_mm3': n_les * vox, 'fuori_mm3': fuori * vox,
                       'frazione_fuori': fuori / n_les})
         if k % 20 == 0:
             print(f'  {k}/{len(lista)} ({time.time()-t0:.0f}s)', flush=True)
@@ -103,11 +103,11 @@ def main():
                  f'{g.frazione_fuori.median():.4f} | {g.frazione_fuori.max():.4f} | '
                  f'{(g.frazione_fuori > 0.01).sum()} | {(g.frazione_fuori > 0.05).sum()} |')
     r += ['', '## I dieci casi che perderebbero di piu' + "'", '',
-          '| caso | dataset | lesione (ml) | fuori (ml) | frazione |',
+          '| caso | dataset | lesione (mm³) | fuori (mm³) | frazione |',
           '| --- | --- | --- | --- | --- |']
     for _, x in d.nlargest(10, 'frazione_fuori').iterrows():
-        r.append(f'| {x.caso} | {x.dataset} | {x.lesione_ml:.1f} | {x.fuori_ml:.2f} | '
-                 f'{x.frazione_fuori:.4f} |')
+        les, fuori = (f'{v:,.0f}'.replace(',', '\u202f') for v in (x.lesione_mm3, x.fuori_mm3))
+        r.append(f'| {x.caso} | {x.dataset} | {les} | {fuori} | {x.frazione_fuori:.4f} |')
     (PROGETTO / 'reports' / 'lesioni_fuori_maschera.md').write_text('\n'.join(r) + '\n')
     print('\n'.join(r[5:12]))
 

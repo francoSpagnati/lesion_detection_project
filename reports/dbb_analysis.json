@@ -82,7 +82,7 @@
         218,
         182
       ],
-      "brain_ml_mediana": 1298.2
+      "brain_mm3_mediana": 1298200.0
     },
     {
       "gruppo": "EMEDEA-PED_HD",
@@ -98,7 +98,7 @@
         218,
         182
       ],
-      "brain_ml_mediana": 1977.8
+      "brain_mm3_mediana": 1977800.0
     },
     {
       "gruppo": "EMEDEA-PED_Healthy",
@@ -114,7 +114,7 @@
         218,
         182
       ],
-      "brain_ml_mediana": 1483.3
+      "brain_mm3_mediana": 1483300.0
     },
     {
       "gruppo": "EMEDEA-PED_MCDs",
@@ -130,7 +130,7 @@
         218,
         182
       ],
-      "brain_ml_mediana": 1056.7
+      "brain_mm3_mediana": 1056700.0
     },
     {
       "gruppo": "EMEDEA-PED_PFM",
@@ -146,50 +146,50 @@
         218,
         182
       ],
-      "brain_ml_mediana": 1268.6
+      "brain_mm3_mediana": 1268600.0
     }
   ],
   "volumi_per_classe": {
     "CSF": {
       "valore_voxel": 1,
-      "mediana_ml": 232.4,
-      "min_ml": 59.9,
-      "max_ml": 1376.3,
+      "mediana_mm3": 232400.0,
+      "min_mm3": 59900.0,
+      "max_mm3": 1376300.0,
       "casi_con_classe_vuota": 0
     },
     "Gray Matter": {
       "valore_voxel": 2,
-      "mediana_ml": 609.0,
-      "min_ml": 261.4,
-      "max_ml": 820.6,
+      "mediana_mm3": 609000.0,
+      "min_mm3": 261400.0,
+      "max_mm3": 820600.0,
       "casi_con_classe_vuota": 0
     },
     "White Matter": {
       "valore_voxel": 3,
-      "mediana_ml": 412.5,
-      "min_ml": 146.2,
-      "max_ml": 606.5,
+      "mediana_mm3": 412500.0,
+      "min_mm3": 146200.0,
+      "max_mm3": 606500.0,
       "casi_con_classe_vuota": 0
     },
     "Deep Gray Matter": {
       "valore_voxel": 4,
-      "mediana_ml": 43.5,
-      "min_ml": 14.2,
-      "max_ml": 58.7,
+      "mediana_mm3": 43500.0,
+      "min_mm3": 14200.0,
+      "max_mm3": 58700.0,
       "casi_con_classe_vuota": 0
     },
     "Brain Stem": {
       "valore_voxel": 5,
-      "mediana_ml": 20.7,
-      "min_ml": 6.3,
-      "max_ml": 30.9,
+      "mediana_mm3": 20700.0,
+      "min_mm3": 6300.0,
+      "max_mm3": 30900.0,
       "casi_con_classe_vuota": 0
     },
     "Cerebellum": {
       "valore_voxel": 6,
-      "mediana_ml": 159.9,
-      "min_ml": 31.9,
-      "max_ml": 232.4,
+      "mediana_mm3": 159900.0,
+      "min_mm3": 31900.0,
+      "max_mm3": 232400.0,
       "casi_con_classe_vuota": 0
     }
   },
@@ -199,9 +199,9 @@
     "test": 37
   },
   "frazione_nonzero_mediana": 0.6074,
-  "brain_ml": {
-    "mediana": 1478.6,
-    "min": 647.4,
-    "max": 2196.6
+  "brain_mm3": {
+    "mediana": 1478600.0,
+    "min": 647400.0,
+    "max": 2196600.0
   }
 }

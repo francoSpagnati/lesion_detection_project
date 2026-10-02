@@ -213,30 +213,30 @@ def carica_mask(p):
 dati = {}
 for k, s in soggetti.items():
     im = nib.load(str(s['FLAIR']))
-    ml_per_voxel = float(np.prod(im.header.get_zooms()[:3])) / 1000.0
-    rec = {'ml_voxel': ml_per_voxel, 'vol': {}, 'mask': {}}
+    mm3_per_voxel = float(np.prod(im.header.get_zooms()[:3]))
+    rec = {'mm3_voxel': mm3_per_voxel, 'vol': {}, 'mask': {}}
     for r, f in s['roi'].items():
         m = carica_mask(f)
         rec['mask'][r] = m
-        rec['vol'][r] = float(m.sum()) * ml_per_voxel
+        rec['vol'][r] = float(m.sum()) * mm3_per_voxel
     lez = np.zeros_like(next(iter(rec['mask'].values())), dtype=bool)
     for r in LESIONE:
         if r in rec['mask']:
             lez |= rec['mask'][r]
     rec['lesione'] = lez
-    rec['vol_lesione'] = float(lez.sum()) * ml_per_voxel
+    rec['vol_lesione'] = float(lez.sum()) * mm3_per_voxel
     dati[k] = rec
 
 print(f"{'soggetto':22s} {'ROI_1':>9s} {'ROI_2':>9s} {'ROI_4':>9s} {'LESIONE':>10s} {'ROI_3':>9s}")
 print('-' * 72)
 for k in soggetti:
     v = dati[k]['vol']
-    f = lambda r: f"{v[r]:9.2f}" if r in v else f"{'--':>9s}"
-    print(f"{k:22s} {f('ROI_1')} {f('ROI_2')} {f('ROI_4')} {dati[k]['vol_lesione']:10.2f} {f('ROI_3')}")
+    f = lambda r: f"{v[r]:9.0f}" if r in v else f"{'--':>9s}"
+    print(f"{k:22s} {f('ROI_1')} {f('ROI_2')} {f('ROI_4')} {dati[k]['vol_lesione']:10.0f} {f('ROI_3')}")
 
 vols = np.array([dati[k]['vol_lesione'] for k in soggetti])
-print('\nvolume di lesione (ml):  mediana %.1f   min %.1f   max %.1f' % (np.median(vols), vols.min(), vols.max()))
-print('per confronto, mediana del foreground:  WMH 10.9 ml   ATLAS 5.3 ml')
+print('\nvolume di lesione (mm³):  mediana %.0f   min %.0f   max %.0f' % (np.median(vols), vols.min(), vols.max()))
+print('per confronto, mediana del foreground:  WMH 10 930 mm³   ATLAS 5 290 mm³')
 """)
 
 co(r"""
@@ -251,12 +251,12 @@ for r in LESIONE:
             edgecolor='white', linewidth=1.4)          # 2px di distacco fra i segmenti
     sinistra += w
 for i, k in enumerate(ordine):
-    ax.text(sinistra[i] + max(sinistra) * .012, i, f'{sinistra[i]:.0f} ml',
+    ax.text(sinistra[i] + max(sinistra) * .012, i, f'{sinistra[i]:,.0f} mm³'.replace(',', '\u202f'),
             va='center', ha='left', fontsize=8, color=INK2)
-ax.axvline(10.9, color=INK2, lw=1, ls=(0, (4, 3)), zorder=0)
-ax.text(10.9, len(ordine) - .35, ' mediana WMH', fontsize=7.5, color=INK2, va='top')
+ax.axvline(10930, color=INK2, lw=1, ls=(0, (4, 3)), zorder=0)
+ax.text(10930, len(ordine) - .35, ' mediana WMH', fontsize=7.5, color=INK2, va='top')
 ax.set_yticks(y, [k.replace('_MR_1_anon', '').replace('_MR_2_anon', ' (MR_2)') for k in ordine])
-ax.set_xlabel('volume (ml)')
+ax.set_xlabel('volume (mm³)')
 ax.set_xlim(0, max(sinistra) * 1.16)
 ax.invert_yaxis()
 ax.grid(axis='x', color=GRIGLIA, lw=.8)
@@ -413,7 +413,7 @@ conteggi = {}
 for k in soggetti:
     et, n = ndimage.label(dati[k]['lesione'], structure=STRUTTURA)
     # dimensione di ogni componente in mm cubi, non in voxel
-    dim = (np.bincount(et.ravel())[1:] * dati[k]['ml_voxel'] * 1000.0) if n else np.array([])
+    dim = (np.bincount(et.ravel())[1:] * dati[k]['mm3_voxel']) if n else np.array([])
     conteggi[k] = {'n': int(n), 'dim': dim,
                    'fasce': [int(((dim >= lo) & (dim < hi)).sum()) for _, lo, hi in FASCE]}
 
@@ -421,21 +421,21 @@ print(f"{'soggetto':22s} {'lesioni':>8s} {'<1mm³':>7s}  {'volume':>9s} {'quota 
 print('-' * 68)
 for k in soggetti:
     d = conteggi[k]['dim']; pic = d[d < 1.0]
-    print(f"{k:22s} {conteggi[k]['n']:8d} {len(pic):7d}  {d.sum()/1000:8.2f}ml "
+    print(f"{k:22s} {conteggi[k]['n']:8d} {len(pic):7d}  {d.sum():9.0f} mm³"
           f"{100 * pic.sum() / max(1e-9, d.sum()):15.3f}%")
 
 tutte = np.concatenate([conteggi[k]['dim'] for k in soggetti if len(conteggi[k]['dim'])])
 print('-' * 68)
-print(f"{'TOTALE':22s} {len(tutte):8d} {int((tutte < 1).sum()):7d}  {tutte.sum()/1000:8.2f}ml "
+print(f"{'TOTALE':22s} {len(tutte):8d} {int((tutte < 1).sum()):7d}  {tutte.sum():9.0f} mm³"
       f"{100 * tutte[tutte < 1].sum() / tutte.sum():15.3f}%")
 
 print(f"\n{'fascia':14s} {'lesioni':>9s} {'quota':>8s} {'volume':>11s} {'quota volume':>14s}")
 for nome, lo, hi in FASCE:
     sel = (tutte >= lo) & (tutte < hi)
-    print(f'{nome:14s} {int(sel.sum()):9d} {100*sel.mean():7.1f}% {tutte[sel].sum()/1000:10.2f}ml '
+    print(f'{nome:14s} {int(sel.sum()):9d} {100*sel.mean():7.1f}% {tutte[sel].sum():10.0f} mm³'
           f'{100*tutte[sel].sum()/tutte.sum():13.2f}%')
 print(f'\nmediana della singola componente: {np.median(tutte):.2f} mm³  '
-      f'(la piu\' piccola {tutte.min():.2f}, la piu\' grande {tutte.max()/1000:.0f} ml)')
+      f'(la piu\' piccola {tutte.min():.2f}, la piu\' grande {tutte.max():.0f} mm³)')
 """)
 
 co(r"""
@@ -471,7 +471,7 @@ md(r"""
 
 Le due colonne vanno lette insieme, perché dicono cose opposte. **Per numero** due terzi delle
 componenti stanno sotto i dieci millimetri cubi; **per volume** quelle stesse componenti non
-valgono quasi nulla (0.08 ml su 244), mentre quindici lesioni grandi contengono tutto il resto.
+valgono quasi nulla (80 mm³ su 244 000), mentre quindici lesioni grandi contengono tutto il resto.
 
 Verrebbe da concludere che le componenti minuscole siano imprecisioni del disegno a mano, e che
 convenga scartarle. **La misura dice il contrario**, ed è il motivo per cui questa conclusione è
@@ -530,7 +530,7 @@ for k, s in soggetti.items():
     n_pre = conteggi[k]['n']
     n_post = int(ndimage.label(rip, structure=STRUTTURA)[1])
     v_pre = dati[k]['vol_lesione']
-    v_post = float(rip.sum()) * float(np.prod(t1.header.get_zooms()[:3])) / 1000.0
+    v_post = float(rip.sum()) * float(np.prod(t1.header.get_zooms()[:3]))
     dv = 100.0 * (v_post - v_pre) / v_pre if v_pre else 0.0
     # spessore di fetta delle due sequenze: e' li' che si rompono le lesioni sottili
     dz_f, dz_t = fl.header.get_zooms()[0], t1.header.get_zooms()[0]
@@ -619,7 +619,7 @@ for ax, (k, s) in zip(np.ravel(axes), soggetti.items()):
         rgba[..., :3] = np.array([int(COL[r][i:i+2], 16) / 255 for i in (1, 3, 5)])
         rgba[..., 3] = m * 0.62
         ax.imshow(rgba, interpolation='nearest')
-    ax.set_title(f"{k.replace('_anon','')}\nfetta {z}  ·  {dati[k]['vol_lesione']:.1f} ml",
+    ax.set_title(f"{k.replace('_anon','')}\nfetta {z}  ·  {dati[k]['vol_lesione']:,.0f} mm³".replace(',', '\u202f'),
                  fontsize=9, loc='left', pad=5, linespacing=1.4)
     ax.axis('off')
 for ax in np.ravel(axes)[n:]:

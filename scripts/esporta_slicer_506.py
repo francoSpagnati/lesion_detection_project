@@ -129,7 +129,7 @@ def esporta(caso: str, dest: Path, insieme: str):
         scrivi_seg_nrrd(dest / f'confronto_{k}.seg.nrrd', lab, aff, SEGMENTI)
         controlla(dest / f'confronto_{k}.seg.nrrd', dest / 'T1.nii.gz', lab)
         m = pp.misure(pred, ref, cer, vox)
-        riepilogo[k] = {'dice': round(m['dice'], 3), 'ml_vero': round(m['ml_vero'], 2), 'ml_predetto': round(m['ml_pred'], 2),
+        riepilogo[k] = {'dice': round(m['dice'], 3), 'mm3_vero': round(m['mm3_vero']), 'mm3_predetto': round(m['mm3_pred']),
                         'lesioni_rilevate': f"{sum(l['rilevata'] for l in m['lesioni'])}/{len(m['lesioni'])}",
                         'falsi_positivi': m['fp'], 'soglia': par['t'], 'volume_minimo_mm3': par['vmin']}
     (dest / 'riepilogo.json').write_text(json.dumps(riepilogo, indent=1))

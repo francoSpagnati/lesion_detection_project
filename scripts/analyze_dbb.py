@@ -111,26 +111,26 @@ def analizza_caso(subject, files):
         for k, nome in CLASSI.items():
             n = conteggi.get(k, 0)
             riga[f'vox_{k}'] = n
-            riga[f'ml_{k}'] = n * voxel_vol / 1000.0
+            riga[f'mm3_{k}'] = n * voxel_vol
         totale = sum(conteggi.values())
         riga['n_lesion_vox'] = totale          # colonna comune: qui e' il tessuto etichettato
-        riga['lesion_ml'] = totale * voxel_vol / 1000.0
+        riga['lesion_mm3'] = totale * voxel_vol
         riga['frazione_etichettata'] = totale / float(np.prod(shape))
     else:
         riga['parc_geom_ok'] = ''
         riga['label_values'] = ''
         riga['n_lesion_vox'] = ''
-        riga['lesion_ml'] = ''
+        riga['lesion_mm3'] = ''
 
     if mask_path is not None:
         mask_img = nib.load(str(mask_path), mmap=True)
         riga['mask_geom_ok'] = stessa_geometria(t1, mask_img)
         geom_ok &= riga['mask_geom_ok']
         mask = np.asanyarray(mask_img.dataobj) > 0
-        riga['brain_ml'] = float(mask.sum()) * voxel_vol / 1000.0
+        riga['brain_mm3'] = float(mask.sum()) * voxel_vol
     else:
         riga['mask_geom_ok'] = ''
-        riga['brain_ml'] = ''
+        riga['brain_mm3'] = ''
 
     riga['geom_ok'] = geom_ok
 
@@ -227,17 +227,17 @@ def main():
             'split': rs[0]['source_split'],
             'spacing': [round(float(x), 4) for x in sp],
             'shape': [int(x) for x in sh],
-            'brain_ml_mediana': round(float(np.median([r['brain_ml'] for r in rs if r['brain_ml'] != ''])), 1),
+            'brain_mm3_mediana': round(float(np.median([r['brain_mm3'] for r in rs if r['brain_mm3'] != '']))),
         })
 
     volumi_classe = {}
     for k, nome in CLASSI.items():
-        vals = [r[f'ml_{k}'] for r in manifest if f'ml_{k}' in r]
+        vals = [r[f'mm3_{k}'] for r in manifest if f'mm3_{k}' in r]
         volumi_classe[nome] = {
             'valore_voxel': k,
-            'mediana_ml': round(float(np.median(vals)), 1),
-            'min_ml': round(float(np.min(vals)), 1),
-            'max_ml': round(float(np.max(vals)), 1),
+            'mediana_mm3': round(float(np.median(vals))),
+            'min_mm3': round(float(np.min(vals))),
+            'max_mm3': round(float(np.max(vals))),
             'casi_con_classe_vuota': int(sum(1 for v in vals if v == 0)),
         }
 
@@ -262,10 +262,10 @@ def main():
         'volumi_per_classe': volumi_classe,
         'split_ufficiale': dict(Counter(r['source_split'] for r in manifest)),
         'frazione_nonzero_mediana': round(float(np.median([r['frazione_nonzero'] for r in manifest])), 4),
-        'brain_ml': {
-            'mediana': round(float(np.median([r['brain_ml'] for r in manifest])), 1),
-            'min': round(float(np.min([r['brain_ml'] for r in manifest])), 1),
-            'max': round(float(np.max([r['brain_ml'] for r in manifest])), 1),
+        'brain_mm3': {
+            'mediana': round(float(np.median([r['brain_mm3'] for r in manifest]))),
+            'min': round(float(np.min([r['brain_mm3'] for r in manifest]))),
+            'max': round(float(np.max([r['brain_mm3'] for r in manifest]))),
         },
     }
 
@@ -304,23 +304,23 @@ def main():
          f"- **target spacing: `{ts['target_spacing']}` mm**",
          '',
          '## Split ufficiale del benchmark', '',
-         '| Gruppo | n | split | spacing (mm) | shape | volume cervello mediano (ml) |',
+         '| Gruppo | n | split | spacing (mm) | shape | volume cervello mediano (mm³) |',
          '| --- | --- | --- | --- | --- | --- |']
     for g in gruppi:
         L.append(f"| {g['gruppo']} | {g['n']} | {g['split']} | "
                  f"{g['spacing'][0]:g} x {g['spacing'][1]:g} x {g['spacing'][2]:g} | "
-                 f"{g['shape'][0]}x{g['shape'][1]}x{g['shape'][2]} | {g['brain_ml_mediana']} |")
+                 f"{g['shape'][0]}x{g['shape'][1]}x{g['shape'][2]} | {g['brain_mm3_mediana']:,} |".replace(',', '\u202f'))
     L += ['',
           '## Classi di tessuto', '',
           f"Valori di label osservati: `{dict(etichette_distinte)}`", '',
-          '| Valore | Classe | mediana (ml) | min | max | casi con classe vuota |',
+          '| Valore | Classe | mediana (mm³) | min (mm³) | max (mm³) | casi con classe vuota |',
           '| --- | --- | --- | --- | --- | --- |']
     for nome, v in volumi_classe.items():
-        L.append(f"| {v['valore_voxel']} | {nome} | {v['mediana_ml']} | {v['min_ml']} | "
-                 f"{v['max_ml']} | {v['casi_con_classe_vuota']} |")
+        L.append((f"| {v['valore_voxel']} | {nome} | {v['mediana_mm3']:,} | {v['min_mm3']:,} | "
+                  f"{v['max_mm3']:,} | {v['casi_con_classe_vuota']} |").replace(',', '\u202f'))
     L += ['',
-          f"Volume cerebrale (maschera fornita): mediana **{report['brain_ml']['mediana']} ml**, "
-          f"da {report['brain_ml']['min']} a {report['brain_ml']['max']} ml.",
+          (f"Volume cerebrale (maschera fornita): mediana **{report['brain_mm3']['mediana']:,} mm³**, "
+           f"da {report['brain_mm3']['min']:,} a {report['brain_mm3']['max']:,} mm³.").replace(',', '\u202f'),
           '']
     (out / 'dbb_analysis.md').write_text('\n'.join(L))
     print('\n'.join(L))

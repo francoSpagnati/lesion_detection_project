@@ -21,18 +21,18 @@ misura: **lo skull stripping regge sulle anatomie alterate?** — il caso in cui
 
 ## I dieci casi peggiori
 
-| soggetto | gruppo | Dice | ml SynthStrip | ml riferimento | solo SynthStrip | solo riferimento |
+| soggetto | gruppo | Dice | mm³ SynthStrip | mm³ riferimento | mm³ solo SynthStrip | mm³ solo riferimento |
 | --- | --- | --- | --- | --- | --- | --- |
-| sub-0955 | HD | 0.8791 | 1684 | 2076 | 31.5 | 423.0 |
-| sub-0924 | HD | 0.9089 | 1860 | 2197 | 16.2 | 353.3 |
-| sub-0922 | MCDs | 0.9284 | 1490 | 1630 | 41.6 | 181.8 |
-| sub-0958 | HD | 0.9290 | 1989 | 2194 | 46.0 | 251.1 |
-| sub-0932 | PFM | 0.9365 | 1005 | 889 | 118.0 | 2.3 |
-| sub-0929 | MCDs | 0.9421 | 1003 | 899 | 107.1 | 3.1 |
-| sub-0956 | HD | 0.9442 | 1430 | 1499 | 47.0 | 116.3 |
-| sub-0942 | PFM | 0.9459 | 778 | 735 | 62.5 | 19.3 |
-| sub-0417 | Healthy | 0.9476 | 1634 | 1480 | 158.6 | 4.6 |
-| sub-0926 | PFM | 0.9484 | 702 | 647 | 62.1 | 7.5 |
+| sub-0955 | HD | 0.8791 | 1 684 000 | 2 076 000 | 31 500 | 423 000 |
+| sub-0924 | HD | 0.9089 | 1 860 000 | 2 197 000 | 16 200 | 353 300 |
+| sub-0922 | MCDs | 0.9284 | 1 490 000 | 1 630 000 | 41 600 | 181 800 |
+| sub-0958 | HD | 0.9290 | 1 989 000 | 2 194 000 | 46 000 | 251 100 |
+| sub-0932 | PFM | 0.9365 | 1 005 000 | 889 000 | 118 000 | 2 300 |
+| sub-0929 | MCDs | 0.9421 | 1 003 000 | 899 000 | 107 100 | 3 100 |
+| sub-0956 | HD | 0.9442 | 1 430 000 | 1 499 000 | 47 000 | 116 300 |
+| sub-0942 | PFM | 0.9459 | 778 000 | 735 000 | 62 500 | 19 300 |
+| sub-0417 | Healthy | 0.9476 | 1 634 000 | 1 480 000 | 158 600 | 4 600 |
+| sub-0926 | PFM | 0.9484 | 702 000 | 647 000 | 62 100 | 7 500 |
 
 Immagini di controllo in `reports/figures/synthstrip/`, **una per caso, con il Dice come
 prefisso del nome**: ordinando la cartella per nome si guardano prima i casi peggiori.
