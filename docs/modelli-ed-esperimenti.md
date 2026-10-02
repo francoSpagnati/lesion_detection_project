@@ -1036,3 +1036,40 @@ il modello: i 5 pazienti con più del 3% di cervello lesionato hanno Dice 0.85�
 dell'1% fra 0 e 0.61, e il Dice globale (tutti i voxel insieme) è 0.86. Per la tesi si riportano
 tutte e tre le forme.
 
+
+**Curve di addestramento** (`scripts/figura_curve_506.py` → `reports/curve_506.md`, figura
+`reports/figures/aincp/curve_506.png`). Tutti i 15 run si sono fermati per l'arresto, fra l'epoca 76
+e la 198 su 250: nessuno ha esaurito le epoche. Epoca migliore fra 25 e 147. In ogni run la perdita
+di addestramento continua a scendere mentre quella di validazione è piatta da 25–50 epoche in poi e
+poi risale di 0.01–0.25: **overfitting, contenuto dall'arresto**. Al minimo la forbice
+addestramento−validazione è 0.05–0.23. La validazione è rumorosa (2–3 pazienti per fold): l'epoca
+«migliore» cade spesso su un picco verso il basso, quindi la perdita di validazione al minimo è
+ottimista e la scelta dell'epoca in parte casuale. Non è underfitting: la perdita di addestramento
+non si ferma.
+
+**Test, 2/10, una volta sola** (`scripts/predici_test.sh`, insieme dei 5 fold con ribaltamento a
+specchio; `reports/valutazione_test_Dataset506_*.md`). 5 pazienti, 40 lesioni sopra 1 mm³, postprocessing
+congelato di ciascuna ricetta.
+
+| ricetta | Dice medio (IC 95%) | mediana | globale | rilevate | FP / paziente | F1 lesioni | senza postprocessing: FP / paziente |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| **Z, il modello della tesi** | **0.622** (0.34–0.83) | **0.770** | **0.832** | 21/40 | 0.8 | 0.605 | 8.2 |
+| D, da ATLAS + WMH | 0.672 (0.59–0.76) | 0.661 | 0.692 | 24/40 | 1.0 | 0.683 | 4.2 |
+| A, da ATLAS espanso | 0.655 (0.55–0.76) | 0.644 | 0.678 | 18/40 | 1.2 | 0.523 | 2.2 |
+
+Appaiati sui 5: D−Z +0.049 (p = 1.0), A−Z +0.033 (p = 0.81), D−A +0.017 (p = 0.63). **Le tre ricette
+restano indistinguibili, come in cross-validation**; il modello della tesi resta Z, scelto prima.
+Le medie si spostano per due pazienti in direzioni opposte:
+
+- **FSM_046** (3 T, 0.45 ml di lesione): Z predice **9.46 ml**, Dice 0.09. La componente falsa grande
+  sta **dentro il ventricolo laterale dilatato** (figura `segmentazioni_506_test_dettaglio_FSM_046.png`):
+  Z scambia il liquor del ventricolo per una cavità. A e D no (0.51 e 0.96 ml). È il vantaggio del
+  pretraining sui falsi positivi visto sui primi dieci, che in cross-validation il postprocessing
+  aveva nascosto: il filtro per volume non può togliere una componente da 9 ml. Una maschera dei
+  ventricoli (SynthSeg) nel postprocessing lo toglierebbe, ma va scelta sui fuori-fold, non qui.
+- **FSM_049** (altro centro, 197 ml, 16% del cervello): Z 0.862, D 0.661, A 0.644. Le ricette
+  pre-addestrate sottostimano la lesione (115 ml contro 197).
+
+Percentuale di cervello lesionato per Z: Pearson 0.996, Spearman 0.60 (su 5 pazienti, rovinata da
+FSM_046), differenza media −0.02 punti. Per strato: altri centri Dice 0.862 (1 paziente), Stella
+Maris 3 T 0.559 (3), 1.5 T 0.573 (1). Sotto 10 mm³ rilevate 12 su 23, sopra 200 mm³ 6 su 8.

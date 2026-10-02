@@ -170,22 +170,22 @@ ABITUDINI CHE FANNO RISPARMIARE PIU' DELLE SKILL:
   - non rileggere un file appena modificato: se Edit non ha dato errore, la modifica c'e'.
 
 ============================================================
-DA DOVE RIPARTIRE (aggiornato il 1 ottobre 2026)
+DA DOVE RIPARTIRE (aggiornato il 2 ottobre 2026)
 ============================================================
-IN ESECUZIONE: il MODELLO FINALE su Dataset506_AINCP_FINALE (17 pazienti nel template; 12 di
-addestramento a 5 fold, 5 di TEST mai guardati). 15 run: ricette A (da 502, passo differenziato),
-D (da 543 a 1000 epoche), Z (da zero), x 5 fold, sulle 4 GPU condivise con un altro utente.
-Progresso in nnUNet/nnUNet_results/Dataset506_AINCP_FINALE/*/fold_*/training_log_*.txt; code in
-reports/logs/s3_506_gpu*.log. Le code saltano i fold gia' fatti: non rilanciare.
+FATTO: il MODELLO FINALE su Dataset506_AINCP_FINALE (17 pazienti nel template; 12 di addestramento a
+5 fold, 5 di test). 15 run: ricette A (da 502, passo differenziato), D (da 543 a 1000 epoche), Z (da
+zero), x 5 fold, tutti fermati dall'arresto. Scelta prima del test, per regola: Z. TEST FATTO il 2/10
+(una volta, non si ripete): reports/valutazione_test_Dataset506_*.md. Le tre ricette sono
+indistinguibili in cross-validation e sul test; Z sul test: Dice 0.622, mediana 0.770, F1 0.605, con
+un falso positivo di 9 ml nel ventricolo di FSM_046 che A e D non fanno. Tutto in
+docs/modelli-ed-esperimenti.md, sezione 506. Relazione tecnica sul modello: artefatto (vedi sotto).
 
-PROSSIMI PASSI, in ordine (procedura in docs/obiettivo-e-piano.md, «1 ottobre»):
-1. Per ciascuna ricetta: python scripts/postprocessing_aincp.py scegli --run <run> e poi valuta.
-2. Scegliere la ricetta con la regola gia' fissata (F1 per lesione; a parita' entro 0.02, meno
-   falsi positivi). Scriverla nei documenti PRIMA del test.
-3. Test, una volta: scripts/predici_test.sh 506 <trainer> per ciascuna ricetta (la scelta e' gia'
-   fatta, le altre sono confronto).
-4. Ablazione dei canali in inferenza sul modello scelto; risultati per fenotipo, centro, dimensione.
-5. Figure, documenti, artefatto per i relatori.
+PROSSIMI PASSI, in ordine:
+1. Ablazione dei canali in inferenza sul modello scelto (FLAIR a zero, T1 a zero), per fenotipo.
+2. Eventuale maschera dei ventricoli (SynthSeg) nel postprocessing: va scelta sui FUORI-FOLD dei 12,
+   mai sul test, e riportata come analisi successiva al test.
+3. Correzioni delle annotazioni dal clinico (reports/residui_annotazione.md); FSM_033 da far vedere.
+4. Aggiornare l'artefatto principale con il modello finale; stadio 2 della tesi (inpainting).
 FSM_030: si usa ROI_1.nii, non la copia (decisione dell'utente, 1/10).
 
 ARTEFATTI ESISTENTI, da AGGIORNARE passando il loro url e non ricreare:

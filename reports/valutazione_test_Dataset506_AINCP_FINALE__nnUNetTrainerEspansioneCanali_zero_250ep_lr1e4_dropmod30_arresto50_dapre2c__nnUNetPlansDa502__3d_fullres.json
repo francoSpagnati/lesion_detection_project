@@ -1,0 +1,454 @@
+{
+ "parametri": {
+  "t": 0.4,
+  "vmin": 20,
+  "cervello": false
+ },
+ "casi": {
+  "FSM_030": {
+   "post": {
+    "dice": 0.5897130543268686,
+    "lesioni": [
+     {
+      "mm3": 123.5,
+      "rilevata": true
+     },
+     {
+      "mm3": 204.75,
+      "rilevata": true
+     },
+     {
+      "mm3": 129.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 3434.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.75,
+      "rilevata": true
+     },
+     {
+      "mm3": 7.5,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.5,
+      "rilevata": false
+     },
+     {
+      "mm3": 50.25,
+      "rilevata": false
+     },
+     {
+      "mm3": 912.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 9.5,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 7,
+    "ml_vero": 4.88075,
+    "ml_pred": 3.93625,
+    "perc_vera": 0.4505297642028337,
+    "perc_pred": 0.3633453433065419
+   },
+   "default": {
+    "dice": 0.5840025887682758,
+    "lesioni": [
+     {
+      "mm3": 123.5,
+      "rilevata": true
+     },
+     {
+      "mm3": 204.75,
+      "rilevata": true
+     },
+     {
+      "mm3": 129.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 3434.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.75,
+      "rilevata": false
+     },
+     {
+      "mm3": 7.5,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.5,
+      "rilevata": false
+     },
+     {
+      "mm3": 50.25,
+      "rilevata": false
+     },
+     {
+      "mm3": 912.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.25,
+      "rilevata": true
+     },
+     {
+      "mm3": 9.5,
+      "rilevata": false
+     }
+    ],
+    "fp": 3,
+    "componenti": 13,
+    "ml_vero": 4.88075,
+    "ml_pred": 3.6175,
+    "perc_vera": 0.4505297642028337,
+    "perc_pred": 0.3339223320194132
+   },
+   "strato": "Stella Maris 1.5 T"
+  },
+  "FSM_046": {
+   "post": {
+    "dice": 0.5534738485558157,
+    "lesioni": [
+     {
+      "mm3": 298.5662376880646,
+      "rilevata": true
+     },
+     {
+      "mm3": 84.56607103347778,
+      "rilevata": true
+     },
+     {
+      "mm3": 71.08719944953918,
+      "rilevata": true
+     }
+    ],
+    "fp": 4,
+    "componenti": 8,
+    "ml_vero": 0.45421950817108153,
+    "ml_pred": 0.9649394917488098,
+    "perc_vera": 0.03346991143398843,
+    "perc_pred": 0.0711031533146437
+   },
+   "default": {
+    "dice": 0.5787418655097614,
+    "lesioni": [
+     {
+      "mm3": 298.5662376880646,
+      "rilevata": true
+     },
+     {
+      "mm3": 84.56607103347778,
+      "rilevata": true
+     },
+     {
+      "mm3": 71.08719944953918,
+      "rilevata": true
+     }
+    ],
+    "fp": 10,
+    "componenti": 14,
+    "ml_vero": 0.45421950817108153,
+    "ml_pred": 0.8225804507732392,
+    "perc_vera": 0.03346991143398843,
+    "perc_pred": 0.060613193267649766
+   },
+   "strato": "Stella Maris 3 T"
+  },
+  "FSM_049": {
+   "post": {
+    "dice": 0.6612548462334533,
+    "lesioni": [
+     {
+      "mm3": 196817.3907661438,
+      "rilevata": true
+     },
+     {
+      "mm3": 11.092922925949097,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.6526554822921753,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.929203987121582,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6880534887313843,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.2057524919509888,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.6880534887313843,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.4469029903411865,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.3761069774627686,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.893805980682373,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "ml_vero": 196.84729342794418,
+    "ml_pred": 115.39919489765167,
+    "perc_vera": 16.210691083865704,
+    "perc_pred": 9.503309226333922
+   },
+   "default": {
+    "dice": 0.631660542624369,
+    "lesioni": [
+     {
+      "mm3": 196817.3907661438,
+      "rilevata": true
+     },
+     {
+      "mm3": 11.092922925949097,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.6526554822921753,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.929203987121582,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6880534887313843,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.2057524919509888,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.6880534887313843,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.4469029903411865,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.3761069774627686,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.893805980682373,
+      "rilevata": true
+     }
+    ],
+    "fp": 3,
+    "componenti": 6,
+    "ml_vero": 196.84729342794418,
+    "ml_pred": 106.16385426080227,
+    "perc_vera": 16.210691083865704,
+    "perc_pred": 8.742764077294122
+   },
+   "strato": "altri centri"
+  },
+  "FSM_052": {
+   "post": {
+    "dice": 0.722737402055927,
+    "lesioni": [
+     {
+      "mm3": 419.50578212738037,
+      "rilevata": true
+     },
+     {
+      "mm3": 26.58839464187622,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.215699553489685,
+      "rilevata": false
+     },
+     {
+      "mm3": 4302.519249618053,
+      "rilevata": true
+     },
+     {
+      "mm3": 21.233787387609482,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.47713303565979,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.1078497767448425,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.246757477521896,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 6,
+    "ml_vero": 4.780187145024538,
+    "ml_pred": 5.494011684507131,
+    "perc_vera": 0.3653824766578053,
+    "perc_pred": 0.41994498022144533
+   },
+   "default": {
+    "dice": 0.7255048044778115,
+    "lesioni": [
+     {
+      "mm3": 419.50578212738037,
+      "rilevata": true
+     },
+     {
+      "mm3": 26.58839464187622,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.215699553489685,
+      "rilevata": false
+     },
+     {
+      "mm3": 4302.519249618053,
+      "rilevata": true
+     },
+     {
+      "mm3": 21.233787387609482,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.47713303565979,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.1078497767448425,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.246757477521896,
+      "rilevata": true
+     }
+    ],
+    "fp": 2,
+    "componenti": 8,
+    "ml_vero": 4.780187145024538,
+    "ml_pred": 4.885248232185841,
+    "perc_vera": 0.3653824766578053,
+    "perc_pred": 0.37341301585276426
+   },
+   "strato": "Stella Maris 3 T"
+  },
+  "FSM_054": {
+   "post": {
+    "dice": 0.8315368216329431,
+    "lesioni": [
+     {
+      "mm3": 147.7131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 33498.023962050676,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.616036638617516,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.477131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.8464146554470062,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078487932682037,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.477131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.8464146554470062,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "ml_vero": 33.66217022491991,
+    "ml_pred": 40.38921273910999,
+    "perc_vera": 2.5229661870967544,
+    "perc_pred": 3.0271553314407385
+   },
+   "default": {
+    "dice": 0.8339192121727433,
+    "lesioni": [
+     {
+      "mm3": 147.7131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 33498.023962050676,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.616036638617516,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.477131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.8464146554470062,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078487932682037,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.477131724357605,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.8464146554470062,
+      "rilevata": false
+     }
+    ],
+    "fp": 3,
+    "componenti": 5,
+    "ml_vero": 33.66217022491991,
+    "ml_pred": 39.0856439923644,
+    "perc_vera": 2.5229661870967544,
+    "perc_pred": 2.929453375547221
+   },
+   "strato": "Stella Maris 3 T"
+  }
+ }
+}

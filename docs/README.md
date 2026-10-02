@@ -29,13 +29,14 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 1 ottobre 2026
+## Stato al 2 ottobre 2026
 
-**In una riga:** sono arrivati tutti i pazienti (**17**, non 27) e sono in corso i training del
-**modello finale** (`Dataset506`): una rete nnU-Net a due canali (FLAIR + T1) nel template pediatrico,
-in tre ricette — da ATLAS con il primo strato espanso (A), dal pretraining congiunto ATLAS + WMH (D), da
-zero (Z) — su 12 pazienti, con 5 pazienti di test messi da parte. Domani: scelta della ricetta e del
-postprocessing sui 12, poi il test una volta sola.
+**In una riga:** il **modello finale** (`Dataset506`) è addestrato e **testato**: una rete nnU-Net a
+due canali (FLAIR + T1) nel template pediatrico, in tre ricette — da ATLAS con il primo strato espanso
+(A), dal pretraining congiunto ATLAS + WMH (D), da zero (Z) — su 12 pazienti. Le tre sono
+indistinguibili in cross-validation e sul test; per la regola fissata prima, il modello della tesi è
+**Z**: sul test (5 pazienti) Dice medio 0.622, mediana 0.770, globale 0.832, F1 per lesione 0.605.
+Dettaglio e limiti in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md), sezione 506.
 
 Il percorso, spiegato per chi non conosce il progetto, è in [panoramica-progetto.md](panoramica-progetto.md).
 
@@ -66,11 +67,11 @@ Sui pazienti AInCP (cinque fold, dieci pazienti; dettaglio nel registro):
 | `505` i dieci nel template pediatrico | 0.563–0.600 | il template non costa nulla di misurabile (p = 0.49 contro il nativo) |
 | postprocessing su `505` | F1 per lesione 0.61 → 0.68 | soglia e volume minimo: falsi positivi da 22 a 6 senza perdere lesioni |
 
-### In corso
+### Stato dei lavori
 
 | Cosa | Stato |
 | --- | --- |
-| **Modello finale** `Dataset506_AINCP_FINALE` | 15 run (A, D, Z × 5 fold) dal 1/10 sulle 4 GPU condivise con un altro utente; fine prevista il 2/10 |
+| **Modello finale** `Dataset506_AINCP_FINALE` | **concluso e testato il 2/10**: 15 run (A, D, Z × 5 fold), tutti fermati dall'arresto; modello della tesi Z |
 | Split | 12 di addestramento, **5 di test** (FSM_030, 046, 049, 052, 054), per strato di acquisizione: `reports/split_Dataset506_AINCP_FINALE.md` |
 | Domande aperte al clinico | 46 componenti residue da correggere, 12 fuori dal cervello (`reports/residui_annotazione.md`); encefalomalacia a intensità marginale (FSM_040, FSM_045) |
 
@@ -78,7 +79,7 @@ Sui pazienti AInCP (cinque fold, dieci pazienti; dettaglio nel registro):
 
 | Voce | Stato |
 | --- | --- |
-| Scelta di ricetta e postprocessing sui fuori-fold dei 12, poi il test | procedura pronta (`postprocessing_aincp.py`, `predici_test.sh`) |
+| Scelta di ricetta e postprocessing sui fuori-fold dei 12, poi il test | **fatto il 2/10** (`reports/valutazione_test_Dataset506_*.md`) |
 | Ablazione dei canali in inferenza sul modello scelto | da fare: prova definitiva che usa entrambe le sequenze |
 | Stadio 2 della tesi — inpainting e gemello sano | dopo la segmentazione |
 
