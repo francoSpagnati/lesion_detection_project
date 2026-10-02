@@ -178,7 +178,7 @@ zero), x 5 fold, tutti fermati dall'arresto. Scelta prima del test, per regola: 
 (una volta, non si ripete): reports/valutazione_test_Dataset506_*.md. Le tre ricette sono
 indistinguibili in cross-validation e sul test; Z sul test: Dice 0.622, mediana 0.770, F1 0.605, con
 un falso positivo di 9 ml nel ventricolo di FSM_046 che A e D non fanno. Tutto in
-docs/modelli-ed-esperimenti.md, sezione 506. Relazione tecnica sul modello: artefatto (vedi sotto).
+docs/modelli-ed-esperimenti.md, sezione 506. Relazione tecnica sul modello finale: artefatto MPQTHXQvdyoKf9JCE8NHak (vedi sotto).
 
 PROSSIMI PASSI, in ordine:
 1. Ablazione dei canali in inferenza sul modello scelto (FLAIR a zero, T1 a zero), per fenotipo.
@@ -198,6 +198,9 @@ ARTEFATTI ESISTENTI, da AGGIORNARE passando il loro url e non ricreare:
     https://claude.ai/code/artifact/2ab3bbc3-27b4-41d6-8b11-0380446c3e86
   guida personale su cosa mostrare all'incontro:
     https://claude.ai/code/artifact/9e2b7510-9851-4142-b1e2-bc11aeb0ac3c
+  relazione tecnica sul MODELLO FINALE (506, 2/10: architettura, addestramento, overfitting,
+  postprocessing, cross-validation e test):
+    https://claude.ai/artifact/MPQTHXQvdyoKf9JCE8NHak
 Le figure stanno in reports/figures/ e si rigenerano tutte da script: la tabella e' in
 docs/README.md. I relatori hanno chiesto esplicitamente di poter vedere le immagini.
 ```
