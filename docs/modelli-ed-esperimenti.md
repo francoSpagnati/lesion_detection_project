@@ -973,7 +973,7 @@ Fold 0 di 543, validazione separata per sorgente, appaiata contro il 543 del 23/
 Scelta fatta solo su ATLAS e WMH, prima di guardare i pazienti. L'arresto sulla perdita di
 validazione, utile sui dieci pazienti, era prematuro su un dataset da 635 casi.
 
-### 506 — il modello finale sui 17 pazienti (dal 1 ottobre, in corso)
+### 506 — il modello finale sui 17 pazienti (1–2 ottobre)
 
 `Dataset506_AINCP_FINALE` (`scripts/pipeline_aincp.py`): 17 pazienti nel template MNIPediatricAsym,
 due canali, etichetta ROI_1+ROI_2+ROI_4 senza le componenti ≤ 1 mm³. **12 di addestramento** (5 fold,
@@ -993,4 +993,29 @@ postprocessing si sceglie per ricetta sui fuori-fold dei 12; la ricetta con l'F1
 l'insieme dei cinque fold di ciascuna ricetta. Sul modello scelto, prova finale dell'uso dei due
 canali: predizione dei fuori-fold con la FLAIR azzerata e con il T1 azzerato (ablazione in
 inferenza), letta per fenotipo.
+
+**Risultati sui fuori-fold dei 12** (2/10; `reports/postprocessing_Dataset506_*.md`,
+`reports/valutazione_cv_Dataset506_*.md`). 68 lesioni sopra 1 mm³; ogni ricetta con il suo
+postprocessing, scelto sugli stessi fuori-fold (quindi ottimista allo stesso modo per tutte e tre):
+
+| ricetta | postprocessing | Dice | lesioni rilevate | falsi positivi | F1 per lesione | senza postprocessing: FP |
+| --- | --- | --- | --- | --- | --- | --- |
+| A, da ATLAS espanso | soglia 0.6, ≥ 5 mm³ | 0.563 | 26/68 | 5 | 0.520 | 10 |
+| D, da ATLAS + WMH | soglia 0.4, ≥ 20 mm³ | 0.577 | 25/68 | 2 | 0.522 | 16 |
+| **Z, da zero** | soglia 0.3, ≥ 50 mm³ | **0.584** | **27/68** | **1** | **0.560** | 20 |
+
+**Nessuna differenza misurabile fra le tre**: appaiati paziente per paziente, Dice A−Z −0.021
+(p = 0.46), D−Z −0.007 (p = 0.83), D−A +0.014 (p = 0.37); lesioni rilevate per paziente p ≥ 0.75.
+Lo scarto di F1 viene da 1–2 lesioni piccole e da 1–4 falsi positivi in tutto. Tutte e tre: 100% o
+quasi delle lesioni sopra 200 mm³ (11–12 su 13), 15–21% sotto 10 mm³; FSM_033 (una lesione da
+0.67 ml, 1.5 T) mancato da tutte; percentuale di cervello lesionato con Spearman 0.90–0.92.
+
+**Questo contraddice il vantaggio del pretraining visto sui primi dieci.** Là il pretraining
+toglieva i falsi positivi (10 pazienti su 10); qui, prima del postprocessing, è ancora così (Z ne ha
+20, D 16, A 10), ma il postprocessing scelto sui dati toglie le macchie piccole a tutte e tre e il
+vantaggio scompare. Sul Dice e sulle lesioni rilevate il pretraining non si è mai distinto dal rumore.
+
+**Scelta, per la regola fissata il 1/10 (F1 più alto; parità solo entro 0.02): il modello della tesi
+è Z**, 0.560 contro 0.522 e 0.520. Dichiarata qui il 2/10, prima del test. A e D si riportano sul test
+accanto, come confronto: la conclusione onesta è che su 12 pazienti le tre ricette sono equivalenti.
 
