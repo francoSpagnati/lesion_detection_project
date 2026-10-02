@@ -1019,3 +1019,20 @@ vantaggio scompare. Sul Dice e sulle lesioni rilevate il pretraining non si è m
 è Z**, 0.560 contro 0.522 e 0.520. Dichiarata qui il 2/10, prima del test. A e D si riportano sul test
 accanto, come confronto: la conclusione onesta è che su 12 pazienti le tre ricette sono equivalenti.
 
+**Ensemble delle ricette, 2/10** (`scripts/ensemble_506.py` → `reports/ensemble_506.md`). Ultima prova
+gratuita prima del test: mediare le probabilità fuori-fold di A, D e Z, ognuna combinazione col suo
+postprocessing scelto con la stessa regola.
+
+| | F1 lesioni | Dice medio | mediana | globale | rilevate | FP | Δ Dice vs Z (p) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Z | 0.560 | 0.584 | 0.565 | 0.859 | 27/68 | 1 | — |
+| A+D+Z | 0.566 | 0.584 | 0.621 | 0.874 | 29/68 | 4 | +0.000 (0.70) |
+| D+Z | 0.565 | 0.588 | 0.621 | 0.871 | 28/68 | 2 | +0.004 (0.37) |
+| A+D | 0.547 | 0.576 | 0.609 | 0.870 | 27/68 | 3 | −0.008 (0.83) |
+
+Nessun guadagno misurabile: l'F1 cresce di 0.006 (entro la soglia di parità di 0.02), il Dice è
+identico. **La scelta di Z resta.** Il Dice medio (0.58) è basso per come è fatta la casistica, non per
+il modello: i 5 pazienti con più del 3% di cervello lesionato hanno Dice 0.85–0.89, i 7 con meno
+dell'1% fra 0 e 0.61, e il Dice globale (tutti i voxel insieme) è 0.86. Per la tesi si riportano
+tutte e tre le forme.
+
