@@ -125,6 +125,7 @@ all'altra solo fra architetture identiche. Le differenze, tutte nei trainer di
 | **543** | ATLAS + WMH in MNI, da 502 | FLAIR (vuota su ATLAS) + T1 | lesione | 635 | 128 | **0.606** ATLAS, **0.723** WMH | stadio 1+2 congiunto, 1000 epoche: **i pesi di partenza della ricetta D** |
 | **505** | 10 pazienti nel template | FLAIR + T1 | lesione | 10 | 5 fold | **0.563–0.600** | prova della strategia in MNI: nessuna differenza dal nativo |
 | **506** | **17 pazienti nel template** | FLAIR + T1 | lesione | 12 + **5 di test** | 5 fold | in corso | **il modello finale**: ricette A, D, Z |
+| **532** | 12 pazienti di 506 + ATLAS + WMH | FLAIR (vuota su ATLAS) + T1 | lesione | 647 | 5 fold di 506 | preparato, non lanciato | training misto (ricetta M): i dati pubblici durante l'addestramento invece che prima |
 
 Fino a 541: `3d_fullres`, fold 0, 1000 epoche. Da 504 in poi: vedi la tabella «Cosa cambia» qui sopra. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -892,6 +893,11 @@ quando il dropout spegne la FLAIR. Trainer `..._zero_500ep_lr1e3_dropmod30_arres
 502, lo stesso della variante migliore di 542: una variabile rispetto a 542, i dati. Criteri: Dice su
 ATLAS vicino a 0.610 **e** Dice su WMH vicino a 0.735, dalla validazione di nnU-Net separata per sorgente.
 
+**Difetto trovato il 5/10** (vedi «Dopo il test» in fondo): in tutti i training di 543 il modality
+dropout poteva azzerare la T1 di un caso ATLAS, che ha già la FLAIR vuota. Circa il 15% degli esempi
+ATLAS era un'immagine tutta nera con la lesione nell'etichetta. Riguarda i pesi di partenza della
+ricetta D; non riguarda Z né A.
+
 ### Stadio 3 nel template pediatrico: `Dataset505_AINCP_MNI` (23–24 settembre)
 
 I dieci pazienti in MNIPediatricAsym cohort-1, che ha **la stessa griglia di ATLAS** (197×233×189 a
@@ -1099,3 +1105,64 @@ nel nativo, segmentazioni `confronto_<Z|A|D>.seg.nrrd` con tre segmenti (trovata
 positivo), cervello, maschere e probabilità in NIfTI. `apri_in_slicer.py` carica un paziente e imposta
 le viste; istruzioni in `LEGGIMI.txt`. Ogni `.seg.nrrd` è riletto con SimpleITK e confrontato con la T1
 (geometria e contenuto) prima di finire nella cartella.
+
+### Dopo il test (5 ottobre): correzione del dropout, ablazione dei canali, training misto
+
+**Correzione del modality dropout** (`nnUNetTrainerWandb.DropoutModalita`). Il dropout sceglieva a
+caso quale canale azzerare senza guardare se era già vuoto: su un caso ATLAS (FLAIR tutta zero)
+metà delle volte azzerava la T1, e l'esempio diventava un'immagine nera con la lesione
+nell'etichetta. È successo nei training di 543, quindi nei pesi di partenza di D; Z e A non sono
+toccati, perché i pazienti hanno sempre entrambe le sequenze. Ora una trasformazione in testa alla
+catena (`SegnaCanaliPresenti`) annota quali canali l'esempio ha davvero, prima che il rumore
+gaussiano dell'augmentation sporchi anche quello vuoto, e il dropout sceglie solo fra quelli e solo
+se sono almeno due. Verificato sulla catena vera, 300 esempi per caso: ATLAS 0% T1 azzerata e 0%
+immagini nere (prima circa il 15%); WMH e AInCP circa 30% di dropout, metà per canale. Su un esempio
+con due canali la sequenza casuale è identica a prima (2000 estrazioni), quindi rilanciare Z o A
+darebbe lo stesso addestramento.
+
+**Ablazione dei canali in inferenza su Z** (`scripts/ablazione_canali_506.py` →
+`reports/ablazione_canali_506.md`). I 12 pazienti fuori-fold, ognuno col modello del fold che non l'ha
+visto, con una sequenza azzerata in ingresso; postprocessing congelato di Z, metriche nel nativo, test
+non toccato. «Entrambe» sono le predizioni fuori-fold esistenti: ripredetto a CPU con la stessa strada,
+FSM_001 differisce di al massimo 0.003 di probabilità e di nessun voxel alla soglia. Le 24 predizioni
+nuove a CPU (GPU tutte occupate), circa 30 minuti con 6 processi.
+
+| ingresso | Dice medio | globale | Δ vs entrambe (p) | lesioni trovate (p McNemar) | FP | F1 | gliosi coperta | cistica | encefalomalacia |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| FLAIR + T1 | 0.584 | 0.859 | — | 27/68 | 1 | 0.560 | 75% | 91% | 77% |
+| solo T1 | 0.418 | 0.820 | −0.167, peggio in 11 su 11 (p < 0.001) | 14/68 (p < 0.001) | 2 | 0.331 | **44%** | 95% | 81% |
+| solo FLAIR | 0.507 | 0.734 | −0.077, peggio in 9, meglio in 2 (p = 0.042) | 28/68 (p = 1.0) | 3 | 0.558 | 62% | 88% | **58%** |
+
+**Il modello usa entrambe le sequenze, ciascuna per ciò che vede.** Senza FLAIR perde metà delle lesioni
+(13 trovate solo con entrambe, nessuna solo senza), quasi tutte gliosi, l'iperintensità che in T1 non si
+vede; le cavità restano coperte come prima. Senza T1 trova le stesse lesioni, ma disegna peggio il
+contorno delle cavità grandi: FSM_036 passa da 0.870 a 0.138, ed è da lì che viene il calo del Dice
+globale. Quindi il modello funziona anche con la sola FLAIR per trovare lesioni (stesso F1), non con la
+sola T1. Controllo: l'unione dei fenotipi ricostruiti coincide con l'etichetta pulita (Dice ≥ 0.987).
+
+**Training misto, `Dataset532_MISTO_AINCP` e ricetta M** (preparati, non ancora lanciati:
+`scripts/make_misto_dataset.py`, `nnUNetTrainerMisto.py`, `run_stadio3.sh 532 M`).
+
+| | Z (506) | M (532) |
+| --- | --- | --- |
+| casi in addestramento per fold | 9–10 pazienti | gli stessi 9–10 pazienti + 556 ATLAS + 79 WMH |
+| validazione | 2–3 pazienti per fold | **gli stessi** pazienti, fold per fold |
+| da quale caso viene una patch | uniforme fra i pazienti | 1/2 pazienti, 1/4 WMH, 1/4 ATLAS, poi uniforme nella sorgente |
+| pesi di partenza, passo, epoche, arresto, dropout | da zero, 1e-2, 250, pazienza 50, 0.3 | identici (dropout corretto) |
+| piano, augmentation, loss, inferenza | nnUNetPlansDa502 e default | identici |
+
+I file preprocessati di 506 e 543 sono **collegati**, non rifatti: i due piani coincidono in ogni
+configurazione (le statistiche d'intensità diverse servono solo per la TC), e il preprocessing di un
+caso dipende solo dal caso e dal piano. WMH e ATLAS hanno la stessa quota anche se ATLAS ha sette
+volte i casi: WMH è l'unica sorgente con la FLAIR e con lesioni piccole della bianca, la fascia in cui
+Z sbaglia. 250 epoche come Z e non di più, perché il passo di nnU-Net scende con un polinomio legato
+al numero massimo di epoche e allungarle cambierebbe una seconda variabile. Prova a CPU in una
+cartella risultati temporanea: su 300 patch 46% pazienti, 28% ATLAS, 26% WMH; tutti i 9 pazienti
+del fold 0 estratti (10–19 volte); un passo di addestramento completo.
+
+**Criterio del confronto, fissato prima di lanciare** (`scripts/confronto_misto_532.py`): misura
+principale le lesioni sotto 50 mm³ trovate (Z: 10 su 46), appaiate lesione per lesione con il test
+esatto di McNemar; vincolo i falsi positivi e l'F1 per lesione; secondarie Dice per paziente
+(Wilcoxon), fasce di volume, copertura per fenotipo. Ognuno col suo postprocessing scelto sui
+fuori-fold. Lo script è collaudato mettendo D al posto di M: riproduce i numeri di Z (0.584, F1
+0.560, 27/68, 1 falso positivo).

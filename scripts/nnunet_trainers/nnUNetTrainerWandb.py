@@ -33,8 +33,24 @@ import torch
 from batchgenerators.utilities.file_and_folder_operations import isfile, join
 
 import numpy as np
-from batchgeneratorsv2.transforms.base.basic_transform import ImageOnlyTransform
+from batchgeneratorsv2.transforms.base.basic_transform import BasicTransform, ImageOnlyTransform
 from nnunetv2.training.nnUNetTrainer.nnUNetTrainer import nnUNetTrainer
+
+
+class SegnaCanaliPresenti(BasicTransform):
+    """Annota quali sequenze ha davvero un esempio, prima di qualunque augmentation.
+
+    Va in testa alla catena. Una sequenza assente (la FLAIR dei casi ATLAS) e' esattamente 0 dopo
+    la normalizzazione z-score, mentre una presente non ha voxel esattamente nulli (verificato su
+    ATLAS, WMH e AInCP); dopo l'augmentation non si potrebbe piu' dirlo, perche' il rumore gaussiano
+    sporca anche il canale vuoto. L'annotazione viaggia nel dizionario dell'esempio fino a
+    DropoutModalita, in coda; il data loader di nnU-Net legge solo 'image' e 'segmentation' e la
+    ignora."""
+
+    def apply(self, data_dict, **params):
+        img = data_dict['image']
+        data_dict['canali_presenti'] = [c for c in range(img.shape[0]) if bool(img[c].any())]
+        return data_dict
 
 
 class DropoutModalita(ImageOnlyTransform):
@@ -45,6 +61,14 @@ class DropoutModalita(ImageOnlyTransform):
     canale vale 0, che e' esattamente cio' che la rete riceve in inferenza quando la sequenza manca
     (un'immagine nulla resta nulla dopo la normalizzazione z-score di nnU-Net).
 
+    Il canale si sceglie solo fra quelli presenti (SegnaCanaliPresenti), e solo se ce ne sono
+    almeno due. Fino al 5/10/2026 si sceglieva fra tutti: su un caso ATLAS, che ha la FLAIR vuota,
+    meta' delle volte si azzerava la T1 e l'esempio diventava un'immagine nera con la lesione
+    ancora nell'etichetta (circa il 15% degli esempi ATLAS). E' successo nei training di 543, cioe'
+    nei pesi di partenza della ricetta D; non tocca Z e A, perche' i pazienti AInCP hanno sempre
+    entrambe le sequenze. Su un esempio con entrambe le sequenze la correzione consuma gli stessi
+    numeri casuali di prima, quindi i training su AInCP restano riproducibili.
+
     Eredita da ImageOnlyTransform e non da BasicTransform: la seconda, se la trasformazione non
     gestisce la segmentazione, la sostituisce con None."""
 
@@ -54,9 +78,10 @@ class DropoutModalita(ImageOnlyTransform):
 
     def get_parameters(self, **data_dict) -> dict:
         c = data_dict['image'].shape[0]
-        if c < 2 or np.random.rand() >= self.p:
+        presenti = data_dict.get('canali_presenti', list(range(c)))
+        if len(presenti) < 2 or np.random.rand() >= self.p:
             return {'canale': None}
-        return {'canale': int(np.random.randint(c))}
+        return {'canale': int(presenti[np.random.randint(len(presenti))])}
 
     def _apply_to_image(self, img: torch.Tensor, canale=None, **params) -> torch.Tensor:
         if canale is None:
@@ -228,6 +253,7 @@ class nnUNetTrainerWandb(nnUNetTrainer):
         # coda, dopo le trasformazioni d'intensita', cosi' il canale azzerato resta esattamente 0.
         t = nnUNetTrainer.get_training_transforms(*args, **kwargs)
         if self.p_dropout_modalita:
+            t.transforms.insert(0, SegnaCanaliPresenti())
             t.transforms.append(DropoutModalita(self.p_dropout_modalita))
         return t
 

@@ -10,6 +10,9 @@
 #      di 543, scelta il 1/10 guardando solo ATLAS (0.606, contro 0.610 di 502) e WMH (0.723);
 #      PESI_2C la cambia.
 #   Z  da zero, stesso piano, stesso dropout e stesso arresto: il riferimento senza pretraining.
+#   M  Z sul dataset misto 532 (pazienti + ATLAS + WMH, patch 1/2 pazienti, 1/4 WMH, 1/4 ATLAS):
+#      i dati pubblici durante l'addestramento invece che prima (scripts/make_misto_dataset.py).
+#        CUDA_VISIBLE_DEVICES=1 setsid nohup bash scripts/run_stadio3.sh 532 M > reports/logs/s3_532_M_g1.log 2>&1 < /dev/null &
 # Il secondo argomento facoltativo divide i fold fra piu' GPU.
 set -u
 cd /home/ccantini/lesion_detection_project || exit 1
@@ -23,6 +26,8 @@ case "$GRUPPO" in
     D) TR=nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c
        W="${PESI_2C:-$nnUNet_results/Dataset543_ATLAS_WMH_MNI/nnUNetTrainerEspansioneCanali_zero_1000ep_lr1e3_dropmod30__nnUNetPlansDa502__3d_fullres/fold_0/checkpoint_final.pth}" ;;
     Z) TR=nnUNetTrainerWandb_250ep_dropmod30_arresto50; W="" ;;
+    M) TR=nnUNetTrainerMisto_250ep_dropmod30_arresto50; W=""
+       [ "$ID" = 532 ] || { echo "la ricetta M va sul dataset misto 532"; exit 1; } ;;
     *) echo "gruppo sconosciuto: $GRUPPO"; exit 1 ;;
 esac
 [ -z "$W" ] || [ -f "$W" ] || { echo "pesi non trovati: $W"; exit 1; }

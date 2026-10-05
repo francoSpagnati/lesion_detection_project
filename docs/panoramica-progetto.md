@@ -89,8 +89,11 @@ che sapeva di ATLAS e impara la FLAIR. Ma **solo se il canale nuovo ha un passo 
 | copertura della gliosi (la lesione visibile in FLAIR), FLAIR spenta contro attiva | migliora in 7 pazienti su 10 (p = 0.084: tendenza, non prova) |
 | rete espansa nel pretraining congiunto, su WMH (compito di sola FLAIR) | **0.723**, contro 0.753 di una rete nata a due canali |
 
-La prova definitiva sul modello finale sarà l'**ablazione in inferenza**: le stesse predizioni con la
-FLAIR spenta e con il T1 spento, lette per fenotipo.
+La prova definitiva sul modello finale è l'**ablazione in inferenza** (5/10,
+`reports/ablazione_canali_506.md`): le stesse predizioni fuori-fold di Z con una sequenza azzerata.
+Senza FLAIR il modello trova 14 lesioni su 68 invece di 27 e copre il 44% della gliosi invece del
+75%; senza T1 trova le stesse lesioni ma ne disegna peggio il contorno delle cavità (encefalomalacia
+coperta al 58% invece del 77%). **Le due sequenze servono entrambe, ciascuna per ciò che vede.**
 
 ## Che cosa stiamo addestrando adesso (dal 1 ottobre)
 
