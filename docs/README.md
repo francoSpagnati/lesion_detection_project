@@ -111,6 +111,8 @@ Le figure stanno in `reports/figures/` e si rigenerano tutte da script.
 | `aincp/curve_506.png` | curve di addestramento dei 15 run del modello finale | `figura_curve_506.py` |
 | `aincp/segmentazioni_506_*.png` | predizioni di Z contro l'annotazione, fuori-fold e test (`--test`) | `figura_segmentazioni_506.py` |
 | `aincp/dice_per_dimensione_506.png` | Dice per singola lesione per fascia di volume, tre ricette | `dice_per_dimensione_506.py` |
+| `aincp/ablazione_canali_506.png` | ablazione dei canali su Z: copertura per fenotipo e lesioni trovate | `figura_ablazione_canali_506.py` |
+| `aincp/3d_506_<paziente>.png` | viste 3D di Z sul test: lesioni trovate, mancate, falsi positivi (FSM_049, 030, 046) | `figura_3d_506.py` |
 | `esportazioni/506_test/` (non figure) | **file per 3D Slicer**: T1, FLAIR, segmentazioni di confronto, script di apertura | `esporta_slicer_506.py` |
 | `synthstrip/` | 244 figure di validazione su DBB, il nome inizia con il Dice | `run_synthstrip.py` |
 
