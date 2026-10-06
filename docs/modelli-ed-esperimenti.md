@@ -125,7 +125,7 @@ all'altra solo fra architetture identiche. Le differenze, tutte nei trainer di
 | **543** | ATLAS + WMH in MNI, da 502 | FLAIR (vuota su ATLAS) + T1 | lesione | 635 | 128 | **0.606** ATLAS, **0.723** WMH | stadio 1+2 congiunto, 1000 epoche: **i pesi di partenza della ricetta D** |
 | **505** | 10 pazienti nel template | FLAIR + T1 | lesione | 10 | 5 fold | **0.563–0.600** | prova della strategia in MNI: nessuna differenza dal nativo |
 | **506** | **17 pazienti nel template** | FLAIR + T1 | lesione | 12 + **5 di test** | 5 fold | in corso | **il modello finale**: ricette A, D, Z |
-| **532** | 12 pazienti di 506 + ATLAS + WMH | FLAIR (vuota su ATLAS) + T1 | lesione | 647 | 5 fold di 506 | preparato, non lanciato | training misto (ricetta M): i dati pubblici durante l'addestramento invece che prima |
+| **532** | 12 pazienti di 506 + ATLAS + WMH | FLAIR (vuota su ATLAS) + T1 | lesione | 647 | 5 fold di 506 | **0.596** fuori-fold (Z 0.584) | training misto (ricetta M): **pari a Z** sulle lesioni piccole (11/46 contro 10/46, p = 1.0), più falsi positivi (6 contro 1); non adottato |
 
 Fino a 541: `3d_fullres`, fold 0, 1000 epoche. Da 504 in poi: vedi la tabella «Cosa cambia» qui sopra. `599` è un dataset usa e getta da 16 casi per gli smoke test da
 5 epoche: verifica che la catena giri, e il suo Dice (0.37) non significa nulla.
@@ -1166,3 +1166,22 @@ esatto di McNemar; vincolo i falsi positivi e l'F1 per lesione; secondarie Dice 
 (Wilcoxon), fasce di volume, copertura per fenotipo. Ognuno col suo postprocessing scelto sui
 fuori-fold. Lo script è collaudato mettendo D al posto di M: riproduce i numeri di Z (0.584, F1
 0.560, 27/68, 1 falso positivo).
+
+**Training misto, risultato (5–6 ottobre)** (`reports/confronto_misto_532.md`). Lanciato il 5/10 alle
+14:11 su due A100 condivise (circa 7 GB a scheda, 53–70 s per epoca), finito il 6/10 alle 00:37.
+Fold fermati dall'arresto all'epoca 138, 160, 189 e 215; il fold 0 è arrivato a 250 senza arresto
+(epoca migliore 208). Postprocessing di M scelto sui fuori-fold: soglia 0.4, volume minimo 50 mm³.
+
+| | lesioni < 50 mm³ trovate | tutte le lesioni | falsi positivi | F1 lesioni | Dice medio | mediana | globale |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Z | 10/46 | 27/68 | 1 | 0.560 | 0.584 | 0.565 | 0.859 |
+| M | 11/46 | 28/68 | 6 | 0.542 | 0.596 | 0.604 | 0.853 |
+
+**Secondo il criterio fissato prima, M non vince**: le lesioni piccole trovate sono 11 contro 10 (3
+trovate solo da M, 2 solo da Z, McNemar p = 1.0), e l'F1 per lesione scende per i falsi positivi (6
+contro 1). Dice per paziente +0.011, meglio in 6 e peggio in 5 (p = 0.47); copertura per fenotipo
+invariata (gliosi 74% contro 75%). Prima del postprocessing M inventa quasi il doppio delle componenti
+di Z (38 falsi positivi contro 20). **Conclusione: con i dati pubblici durante l'addestramento il
+modello non trova più lesioni piccole; Z resta il modello della tesi.** È il terzo modo di usare i dati
+pubblici (pretraining A, pretraining congiunto D, misto M) e il terzo pareggio: con 12 pazienti il
+limite è il dominio, non la quantità di dati adulti.

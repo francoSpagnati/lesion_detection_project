@@ -81,7 +81,7 @@ Sui pazienti AInCP (cinque fold, dieci pazienti; dettaglio nel registro):
 | --- | --- |
 | Scelta di ricetta e postprocessing sui fuori-fold dei 12, poi il test | **fatto il 2/10** (`reports/valutazione_test_Dataset506_*.md`) |
 | Ablazione dei canali in inferenza sul modello scelto | **fatto il 5/10** (`reports/ablazione_canali_506.md`): servono entrambe, la FLAIR per la gliosi e le lesioni piccole, la T1 per il contorno delle cavità |
-| Training misto 532 (pazienti + ATLAS + WMH insieme, ricetta M) | preparato il 5/10, criterio di confronto fissato; da lanciare quando una GPU è libera |
+| Training misto 532 (pazienti + ATLAS + WMH insieme, ricetta M) | **fatto il 6/10** (`reports/confronto_misto_532.md`): pari a Z sulle lesioni piccole (11/46 contro 10/46, p = 1.0), più falsi positivi; non adottato |
 | Stadio 2 della tesi — inpainting e gemello sano | dopo la segmentazione |
 
 **Abbandonati o superati**, con il motivo nel registro: variante D a sette classi (531), catena DBB →
