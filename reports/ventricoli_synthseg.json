@@ -1,0 +1,1774 @@
+{
+ "FSM_001": {
+  "ventricoli_mm3": 16978.12937423587,
+  "lesione_mm3": 165.51184058189392,
+  "lesione_nei_ventricoli_mm3": 29.528817012906075,
+  "roi3_mm3": 6398.913454860449,
+  "roi3_coperta": 0.84621715360649,
+  "grezza": {
+   "prima": {
+    "dice": 0.40771349862258954,
+    "lesioni": [
+     {
+      "mm3": 92.53616541624069,
+      "rilevata": false
+     },
+     {
+      "mm3": 72.97567516565323,
+      "rilevata": true
+     }
+    ],
+    "fp": 3,
+    "componenti": 4,
+    "mm3_vero": 165.51184058189392,
+    "mm3_pred": 107.58269637823105,
+    "perc_vera": 0.010952053279747924,
+    "perc_pred": 0.00711883463183615
+   },
+   "dopo": {
+    "dice": 0.40771349862258954,
+    "lesioni": [
+     {
+      "mm3": 92.53616541624069,
+      "rilevata": false
+     },
+     {
+      "mm3": 72.97567516565323,
+      "rilevata": true
+     }
+    ],
+    "fp": 3,
+    "componenti": 4,
+    "mm3_vero": 165.51184058189392,
+    "mm3_pred": 107.58269637823105,
+    "perc_vera": 0.010952053279747924,
+    "perc_pred": 0.00711883463183615
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.45763842561707807,
+    "lesioni": [
+     {
+      "mm3": 92.53616541624069,
+      "rilevata": false
+     },
+     {
+      "mm3": 72.97567516565323,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 165.51184058189392,
+    "mm3_pred": 116.42253331840038,
+    "perc_vera": 0.010952053279747924,
+    "perc_pred": 0.007703773841095414
+   },
+   "dopo": {
+    "dice": 0.45763842561707807,
+    "lesioni": [
+     {
+      "mm3": 92.53616541624069,
+      "rilevata": false
+     },
+     {
+      "mm3": 72.97567516565323,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 165.51184058189392,
+    "mm3_pred": 116.42253331840038,
+    "perc_vera": 0.010952053279747924,
+    "perc_pred": 0.007703773841095414
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_028": {
+  "ventricoli_mm3": 12422.961050748825,
+  "lesione_mm3": 157108.15401935577,
+  "lesione_nei_ventricoli_mm3": 5.000386834144592,
+  "roi3_mm3": 13308.029520392418,
+  "roi3_coperta": 0.43262944315022167,
+  "grezza": {
+   "prima": {
+    "dice": 0.8811996172014154,
+    "lesioni": [
+     {
+      "mm3": 5.000386834144592,
+      "rilevata": false
+     },
+     {
+      "mm3": 8.000618934631348,
+      "rilevata": false
+     },
+     {
+      "mm3": 13.00100576877594,
+      "rilevata": false
+     },
+     {
+      "mm3": 23.001779437065125,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": true
+     },
+     {
+      "mm3": 157044.14906787872,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.0002321004867554,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.000154733657837,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": false
+     }
+    ],
+    "fp": 6,
+    "componenti": 16,
+    "mm3_vero": 157108.15401935577,
+    "mm3_pred": 136541.56297051907,
+    "perc_vera": 12.11516408329214,
+    "perc_pred": 10.529201682130411
+   },
+   "dopo": {
+    "dice": 0.8811996172014154,
+    "lesioni": [
+     {
+      "mm3": 5.000386834144592,
+      "rilevata": false
+     },
+     {
+      "mm3": 8.000618934631348,
+      "rilevata": false
+     },
+     {
+      "mm3": 13.00100576877594,
+      "rilevata": false
+     },
+     {
+      "mm3": 23.001779437065125,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": true
+     },
+     {
+      "mm3": 157044.14906787872,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.0002321004867554,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.000154733657837,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": false
+     }
+    ],
+    "fp": 6,
+    "componenti": 16,
+    "mm3_vero": 157108.15401935577,
+    "mm3_pred": 136541.56297051907,
+    "perc_vera": 12.11516408329214,
+    "perc_pred": 10.529201682130411
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.8915284640562894,
+    "lesioni": [
+     {
+      "mm3": 5.000386834144592,
+      "rilevata": false
+     },
+     {
+      "mm3": 8.000618934631348,
+      "rilevata": false
+     },
+     {
+      "mm3": 13.00100576877594,
+      "rilevata": false
+     },
+     {
+      "mm3": 23.001779437065125,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": true
+     },
+     {
+      "mm3": 157044.14906787872,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.0002321004867554,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.000154733657837,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 157108.15401935577,
+    "mm3_pred": 145068.22260010242,
+    "perc_vera": 12.11516408329214,
+    "perc_pred": 11.186722490897973
+   },
+   "dopo": {
+    "dice": 0.8915284640562894,
+    "lesioni": [
+     {
+      "mm3": 5.000386834144592,
+      "rilevata": false
+     },
+     {
+      "mm3": 8.000618934631348,
+      "rilevata": false
+     },
+     {
+      "mm3": 13.00100576877594,
+      "rilevata": false
+     },
+     {
+      "mm3": 23.001779437065125,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": true
+     },
+     {
+      "mm3": 157044.14906787872,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.0002321004867554,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.000154733657837,
+      "rilevata": false
+     },
+     {
+      "mm3": 4.000309467315674,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 157108.15401935577,
+    "mm3_pred": 145068.22260010242,
+    "perc_vera": 12.11516408329214,
+    "perc_pred": 11.186722490897973
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_032": {
+  "ventricoli_mm3": 32330.089025497437,
+  "lesione_mm3": 123642.42760777473,
+  "lesione_nei_ventricoli_mm3": 242.9889726638794,
+  "roi3_mm3": 20205.382430553436,
+  "roi3_coperta": 0.8896372110024673,
+  "grezza": {
+   "prima": {
+    "dice": 0.8559179371238276,
+    "lesioni": [
+     {
+      "mm3": 123635.04192471504,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.3235573768615723,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.6928415298461914,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 123642.42760777473,
+    "mm3_pred": 118098.36461901665,
+    "perc_vera": 9.169039257738769,
+    "perc_pred": 8.757904243853753
+   },
+   "dopo": {
+    "dice": 0.8559179371238276,
+    "lesioni": [
+     {
+      "mm3": 123635.04192471504,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.3235573768615723,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.6928415298461914,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 123642.42760777473,
+    "mm3_pred": 118098.36461901665,
+    "perc_vera": 9.169039257738769,
+    "perc_pred": 8.757904243853753
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.8585991874056065,
+    "lesioni": [
+     {
+      "mm3": 123635.04192471504,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.3235573768615723,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.6928415298461914,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 123642.42760777473,
+    "mm3_pred": 124169.58073616028,
+    "perc_vera": 9.169039257738769,
+    "perc_pred": 9.208131726420635
+   },
+   "dopo": {
+    "dice": 0.8585991874056065,
+    "lesioni": [
+     {
+      "mm3": 123635.04192471504,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.3235573768615723,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.6928415298461914,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 123642.42760777473,
+    "mm3_pred": 124169.58073616028,
+    "perc_vera": 9.169039257738769,
+    "perc_pred": 9.208131726420635
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_033": {
+  "ventricoli_mm3": 9125.484375,
+  "lesione_mm3": 667.2421875,
+  "lesione_nei_ventricoli_mm3": 0.3828125,
+  "roi3_mm3": null,
+  "roi3_coperta": null,
+  "grezza": {
+   "prima": {
+    "dice": 0.0,
+    "lesioni": [
+     {
+      "mm3": 667.2421875,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 0,
+    "mm3_vero": 667.2421875,
+    "mm3_pred": 0.0,
+    "perc_vera": 0.049574379914952775,
+    "perc_pred": 0.0
+   },
+   "dopo": {
+    "dice": 0.0,
+    "lesioni": [
+     {
+      "mm3": 667.2421875,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 0,
+    "mm3_vero": 667.2421875,
+    "mm3_pred": 0.0,
+    "perc_vera": 0.049574379914952775,
+    "perc_pred": 0.0
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.0,
+    "lesioni": [
+     {
+      "mm3": 667.2421875,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 0,
+    "mm3_vero": 667.2421875,
+    "mm3_pred": 0.0,
+    "perc_vera": 0.049574379914952775,
+    "perc_pred": 0.0
+   },
+   "dopo": {
+    "dice": 0.0,
+    "lesioni": [
+     {
+      "mm3": 667.2421875,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 0,
+    "mm3_vero": 667.2421875,
+    "mm3_pred": 0.0,
+    "perc_vera": 0.049574379914952775,
+    "perc_pred": 0.0
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_035": {
+  "ventricoli_mm3": 12191.372131347656,
+  "lesione_mm3": 40742.40172290802,
+  "lesione_nei_ventricoli_mm3": 18.49904727935791,
+  "roi3_mm3": 7414.368152141571,
+  "roi3_coperta": 0.5678546141137597,
+  "grezza": {
+   "prima": {
+    "dice": 0.8613381534724772,
+    "lesioni": [
+     {
+      "mm3": 1071.6948065757751,
+      "rilevata": true
+     },
+     {
+      "mm3": 51.99732208251953,
+      "rilevata": false
+     },
+     {
+      "mm3": 39572.961950302124,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.499819755554199,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.9997940063476562,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.498480796813965,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.499665260314941,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 3,
+    "mm3_vero": 40742.40172290802,
+    "mm3_pred": 47770.539766311646,
+    "perc_vera": 3.97434712536661,
+    "perc_pred": 4.659929198300115
+   },
+   "dopo": {
+    "dice": 0.8613381534724772,
+    "lesioni": [
+     {
+      "mm3": 1071.6948065757751,
+      "rilevata": true
+     },
+     {
+      "mm3": 51.99732208251953,
+      "rilevata": false
+     },
+     {
+      "mm3": 39572.961950302124,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.499819755554199,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.9997940063476562,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.498480796813965,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.499665260314941,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 3,
+    "mm3_vero": 40742.40172290802,
+    "mm3_pred": 47770.539766311646,
+    "perc_vera": 3.97434712536661,
+    "perc_pred": 4.659929198300115
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.8538264815069435,
+    "lesioni": [
+     {
+      "mm3": 1071.6948065757751,
+      "rilevata": true
+     },
+     {
+      "mm3": 51.99732208251953,
+      "rilevata": false
+     },
+     {
+      "mm3": 39572.961950302124,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.499819755554199,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.9997940063476562,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.498480796813965,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.499665260314941,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 40742.40172290802,
+    "mm3_pred": 50165.416427612305,
+    "perc_vera": 3.97434712536661,
+    "perc_pred": 4.893545057256613
+   },
+   "dopo": {
+    "dice": 0.8538264815069435,
+    "lesioni": [
+     {
+      "mm3": 1071.6948065757751,
+      "rilevata": true
+     },
+     {
+      "mm3": 51.99732208251953,
+      "rilevata": false
+     },
+     {
+      "mm3": 39572.961950302124,
+      "rilevata": true
+     },
+     {
+      "mm3": 3.499819755554199,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.9997940063476562,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.498480796813965,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.499665260314941,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 40742.40172290802,
+    "mm3_pred": 50165.416427612305,
+    "perc_vera": 3.97434712536661,
+    "perc_pred": 4.893545057256613
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_036": {
+  "ventricoli_mm3": 8792.834907352924,
+  "lesione_mm3": 108964.95409411192,
+  "lesione_nei_ventricoli_mm3": 60.99885469675064,
+  "roi3_mm3": 1044.980379641056,
+  "roi3_coperta": 0.9904306220095693,
+  "grezza": {
+   "prima": {
+    "dice": 0.8548469841269841,
+    "lesioni": [
+     {
+      "mm3": 108545.96196103096,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.999906122684479,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 12.999755918979645,
+      "rilevata": false
+     },
+     {
+      "mm3": 24.999530613422394,
+      "rilevata": false
+     },
+     {
+      "mm3": 10.999793469905853,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 155.99707102775574,
+      "rilevata": false
+     },
+     {
+      "mm3": 16.999680817127228,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": true
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": false
+     },
+     {
+      "mm3": 142.9973151087761,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 5,
+    "mm3_vero": 108964.95409411192,
+    "mm3_pred": 87906.34948658943,
+    "perc_vera": 9.381252475162285,
+    "perc_pred": 7.568228386452469
+   },
+   "dopo": {
+    "dice": 0.8548469841269841,
+    "lesioni": [
+     {
+      "mm3": 108545.96196103096,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.999906122684479,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 12.999755918979645,
+      "rilevata": false
+     },
+     {
+      "mm3": 24.999530613422394,
+      "rilevata": false
+     },
+     {
+      "mm3": 10.999793469905853,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 155.99707102775574,
+      "rilevata": false
+     },
+     {
+      "mm3": 16.999680817127228,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": true
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": false
+     },
+     {
+      "mm3": 142.9973151087761,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 5,
+    "mm3_vero": 108964.95409411192,
+    "mm3_pred": 87906.34948658943,
+    "perc_vera": 9.381252475162285,
+    "perc_pred": 7.568228386452469
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.8699484944532488,
+    "lesioni": [
+     {
+      "mm3": 108545.96196103096,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.999906122684479,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 12.999755918979645,
+      "rilevata": false
+     },
+     {
+      "mm3": 24.999530613422394,
+      "rilevata": false
+     },
+     {
+      "mm3": 10.999793469905853,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 155.99707102775574,
+      "rilevata": false
+     },
+     {
+      "mm3": 16.999680817127228,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": true
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": false
+     },
+     {
+      "mm3": 142.9973151087761,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 108964.95409411192,
+    "mm3_pred": 92951.25476437807,
+    "perc_vera": 9.381252475162285,
+    "perc_pred": 8.002565559515816
+   },
+   "dopo": {
+    "dice": 0.8699484944532488,
+    "lesioni": [
+     {
+      "mm3": 108545.96196103096,
+      "rilevata": true
+     },
+     {
+      "mm3": 4.999906122684479,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 12.999755918979645,
+      "rilevata": false
+     },
+     {
+      "mm3": 24.999530613422394,
+      "rilevata": false
+     },
+     {
+      "mm3": 10.999793469905853,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 155.99707102775574,
+      "rilevata": false
+     },
+     {
+      "mm3": 16.999680817127228,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.9999624490737915,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.999924898147583,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": true
+     },
+     {
+      "mm3": 5.9998873472213745,
+      "rilevata": false
+     },
+     {
+      "mm3": 142.9973151087761,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": true
+     },
+     {
+      "mm3": 2.9999436736106873,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 108964.95409411192,
+    "mm3_pred": 92951.25476437807,
+    "perc_vera": 9.381252475162285,
+    "perc_pred": 8.002565559515816
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_039": {
+  "ventricoli_mm3": 13169.606734067202,
+  "lesione_mm3": 1394.0488025546074,
+  "lesione_nei_ventricoli_mm3": 0.0,
+  "roi3_mm3": null,
+  "roi3_coperta": null,
+  "grezza": {
+   "prima": {
+    "dice": 0.49112534309240624,
+    "lesioni": [
+     {
+      "mm3": 1392.571664750576,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.2924955785274506,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 1394.0488025546074,
+    "mm3_pred": 624.0907222032547,
+    "perc_vera": 0.08612396855140511,
+    "perc_pred": 0.03855616075546348
+   },
+   "dopo": {
+    "dice": 0.49112534309240624,
+    "lesioni": [
+     {
+      "mm3": 1392.571664750576,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.2924955785274506,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 1394.0488025546074,
+    "mm3_pred": 624.0907222032547,
+    "perc_vera": 0.08612396855140511,
+    "perc_pred": 0.03855616075546348
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.5172384145817213,
+    "lesioni": [
+     {
+      "mm3": 1392.571664750576,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.2924955785274506,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 1394.0488025546074,
+    "mm3_pred": 753.5249222815037,
+    "perc_vera": 0.08612396855140511,
+    "perc_pred": 0.04655257161036878
+   },
+   "dopo": {
+    "dice": 0.5172384145817213,
+    "lesioni": [
+     {
+      "mm3": 1392.571664750576,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.2924955785274506,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 1394.0488025546074,
+    "mm3_pred": 753.5249222815037,
+    "perc_vera": 0.08612396855140511,
+    "perc_pred": 0.04655257161036878
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_040": {
+  "ventricoli_mm3": 16394.73925590515,
+  "lesione_mm3": 55592.774958610535,
+  "lesione_nei_ventricoli_mm3": 0.0,
+  "roi3_mm3": 11872.485518455505,
+  "roi3_coperta": 0.47850699844479005,
+  "grezza": {
+   "prima": {
+    "dice": 0.8974967727092626,
+    "lesioni": [
+     {
+      "mm3": 55550.12263894081,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6617786884307861,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.462472677230835,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078524589538574,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.173448085784912,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 55592.774958610535,
+    "mm3_pred": 59976.91642284393,
+    "perc_vera": 4.0374620219037585,
+    "perc_pred": 4.35586319316521
+   },
+   "dopo": {
+    "dice": 0.8974967727092626,
+    "lesioni": [
+     {
+      "mm3": 55550.12263894081,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6617786884307861,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.462472677230835,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078524589538574,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.173448085784912,
+      "rilevata": false
+     }
+    ],
+    "fp": 1,
+    "componenti": 2,
+    "mm3_vero": 55592.774958610535,
+    "mm3_pred": 59976.91642284393,
+    "perc_vera": 4.0374620219037585,
+    "perc_pred": 4.35586319316521
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.8910446882542673,
+    "lesioni": [
+     {
+      "mm3": 55550.12263894081,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6617786884307861,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.462472677230835,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078524589538574,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.173448085784912,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 55592.774958610535,
+    "mm3_pred": 63592.57756471634,
+    "perc_vera": 4.0374620219037585,
+    "perc_pred": 4.618452973136645
+   },
+   "dopo": {
+    "dice": 0.8910446882542673,
+    "lesioni": [
+     {
+      "mm3": 55550.12263894081,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 1.6617786884307861,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.462472677230835,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.1078524589538574,
+      "rilevata": false
+     },
+     {
+      "mm3": 29.173448085784912,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 55592.774958610535,
+    "mm3_pred": 63592.57756471634,
+    "perc_vera": 4.0374620219037585,
+    "perc_pred": 4.618452973136645
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_041": {
+  "ventricoli_mm3": 20497.670837640762,
+  "lesione_mm3": 1901.0748195648193,
+  "lesione_nei_ventricoli_mm3": 26.03453278541565,
+  "roi3_mm3": 14299.23632979393,
+  "roi3_coperta": 0.5419986312513719,
+  "grezza": {
+   "prima": {
+    "dice": 0.18155070958809277,
+    "lesioni": [
+     {
+      "mm3": 1699.4456720352173,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.495270490646362,
+      "rilevata": false
+     },
+     {
+      "mm3": 175.7792568206787,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.0310628414154053,
+      "rilevata": false
+     }
+    ],
+    "fp": 2,
+    "componenti": 10,
+    "mm3_vero": 1901.0748195648193,
+    "mm3_pred": 232.64901638031006,
+    "perc_vera": 0.13699519612027902,
+    "perc_pred": 0.016765146378355824
+   },
+   "dopo": {
+    "dice": 0.18155070958809277,
+    "lesioni": [
+     {
+      "mm3": 1699.4456720352173,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.495270490646362,
+      "rilevata": false
+     },
+     {
+      "mm3": 175.7792568206787,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.0310628414154053,
+      "rilevata": false
+     }
+    ],
+    "fp": 2,
+    "componenti": 10,
+    "mm3_vero": 1901.0748195648193,
+    "mm3_pred": 232.64901638031006,
+    "perc_vera": 0.13699519612027902,
+    "perc_pred": 0.016765146378355824
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.15980245171531882,
+    "lesioni": [
+     {
+      "mm3": 1699.4456720352173,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.495270490646362,
+      "rilevata": false
+     },
+     {
+      "mm3": 175.7792568206787,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.0310628414154053,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 3,
+    "mm3_vero": 1901.0748195648193,
+    "mm3_pred": 192.58168578147888,
+    "perc_vera": 0.13699519612027902,
+    "perc_pred": 0.013877815613194542
+   },
+   "dopo": {
+    "dice": 0.15980245171531882,
+    "lesioni": [
+     {
+      "mm3": 1699.4456720352173,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.495270490646362,
+      "rilevata": false
+     },
+     {
+      "mm3": 175.7792568206787,
+      "rilevata": true
+     },
+     {
+      "mm3": 1.8464207649230957,
+      "rilevata": false
+     },
+     {
+      "mm3": 2.0310628414154053,
+      "rilevata": false
+     }
+    ],
+    "fp": 0,
+    "componenti": 3,
+    "mm3_vero": 1901.0748195648193,
+    "mm3_pred": 192.58168578147888,
+    "perc_vera": 0.13699519612027902,
+    "perc_pred": 0.013877815613194542
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_045": {
+  "ventricoli_mm3": 7927.0536279678345,
+  "lesione_mm3": 9525.315442085266,
+  "lesione_nei_ventricoli_mm3": 0.0,
+  "roi3_mm3": null,
+  "roi3_coperta": null,
+  "grezza": {
+   "prima": {
+    "dice": 0.40261993061370976,
+    "lesioni": [
+     {
+      "mm3": 9525.315442085266,
+      "rilevata": true
+     }
+    ],
+    "fp": 1,
+    "componenti": 4,
+    "mm3_vero": 9525.315442085266,
+    "mm3_pred": 2822.0694971084595,
+    "perc_vera": 0.8595258112662061,
+    "perc_pred": 0.2546520993136523
+   },
+   "dopo": {
+    "dice": 0.40261993061370976,
+    "lesioni": [
+     {
+      "mm3": 9525.315442085266,
+      "rilevata": true
+     }
+    ],
+    "fp": 1,
+    "componenti": 4,
+    "mm3_vero": 9525.315442085266,
+    "mm3_pred": 2822.0694971084595,
+    "perc_vera": 0.8595258112662061,
+    "perc_pred": 0.2546520993136523
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.43851063220858016,
+    "lesioni": [
+     {
+      "mm3": 9525.315442085266,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 9525.315442085266,
+    "mm3_pred": 3377.8421473503113,
+    "perc_vera": 0.8595258112662061,
+    "perc_pred": 0.3048027679170345
+   },
+   "dopo": {
+    "dice": 0.43851063220858016,
+    "lesioni": [
+     {
+      "mm3": 9525.315442085266,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 2,
+    "mm3_vero": 9525.315442085266,
+    "mm3_pred": 3377.8421473503113,
+    "perc_vera": 0.8595258112662061,
+    "perc_pred": 0.3048027679170345
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_053": {
+  "ventricoli_mm3": 37472.08322238922,
+  "lesione_mm3": 581.6238082945347,
+  "lesione_nei_ventricoli_mm3": 24.003522247076035,
+  "roi3_mm3": 16178.0047095716,
+  "roi3_coperta": 0.9129745029560136,
+  "grezza": {
+   "prima": {
+    "dice": 0.5183031584511696,
+    "lesioni": [
+     {
+      "mm3": 58.16238082945347,
+      "rilevata": true
+     },
+     {
+      "mm3": 395.8734745979309,
+      "rilevata": true
+     },
+     {
+      "mm3": 61.67058792710304,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.49531514942646,
+      "rilevata": true
+     },
+     {
+      "mm3": 38.59027807414532,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.831771716475487,
+      "rilevata": true
+     }
+    ],
+    "fp": 3,
+    "componenti": 6,
+    "mm3_vero": 581.6238082945347,
+    "mm3_pred": 815.5658289641142,
+    "perc_vera": 0.04215772046379917,
+    "perc_pred": 0.059114492472571716
+   },
+   "dopo": {
+    "dice": 0.5183031584511696,
+    "lesioni": [
+     {
+      "mm3": 58.16238082945347,
+      "rilevata": true
+     },
+     {
+      "mm3": 395.8734745979309,
+      "rilevata": true
+     },
+     {
+      "mm3": 61.67058792710304,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.49531514942646,
+      "rilevata": true
+     },
+     {
+      "mm3": 38.59027807414532,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.831771716475487,
+      "rilevata": true
+     }
+    ],
+    "fp": 3,
+    "componenti": 6,
+    "mm3_vero": 581.6238082945347,
+    "mm3_pred": 815.5658289641142,
+    "perc_vera": 0.04215772046379917,
+    "perc_pred": 0.059114492472571716
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.46038042925439937,
+    "lesioni": [
+     {
+      "mm3": 58.16238082945347,
+      "rilevata": true
+     },
+     {
+      "mm3": 395.8734745979309,
+      "rilevata": true
+     },
+     {
+      "mm3": 61.67058792710304,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.49531514942646,
+      "rilevata": true
+     },
+     {
+      "mm3": 38.59027807414532,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.831771716475487,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 3,
+    "mm3_vero": 581.6238082945347,
+    "mm3_pred": 1233.5964010208845,
+    "perc_vera": 0.04215772046379917,
+    "perc_pred": 0.08941451759321975
+   },
+   "dopo": {
+    "dice": 0.46038042925439937,
+    "lesioni": [
+     {
+      "mm3": 58.16238082945347,
+      "rilevata": true
+     },
+     {
+      "mm3": 395.8734745979309,
+      "rilevata": true
+     },
+     {
+      "mm3": 61.67058792710304,
+      "rilevata": true
+     },
+     {
+      "mm3": 20.49531514942646,
+      "rilevata": true
+     },
+     {
+      "mm3": 38.59027807414532,
+      "rilevata": true
+     },
+     {
+      "mm3": 6.831771716475487,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 3,
+    "mm3_vero": 581.6238082945347,
+    "mm3_pred": 1233.5964010208845,
+    "perc_vera": 0.04215772046379917,
+    "perc_pred": 0.08941451759321975
+   },
+   "componenti_tolte": 0
+  }
+ },
+ "FSM_056": {
+  "ventricoli_mm3": 16371.326706111431,
+  "lesione_mm3": 12441.765154659748,
+  "lesione_nei_ventricoli_mm3": 0.553927481174469,
+  "roi3_mm3": null,
+  "roi3_coperta": null,
+  "grezza": {
+   "prima": {
+    "dice": 0.6068395172105499,
+    "lesioni": [
+     {
+      "mm3": 346.0200332403183,
+      "rilevata": true
+     },
+     {
+      "mm3": 26.773161590099335,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.508207380771637,
+      "rilevata": false
+     },
+     {
+      "mm3": 12001.762092113495,
+      "rilevata": true
+     },
+     {
+      "mm3": 63.701660335063934,
+      "rilevata": true
+     }
+    ],
+    "fp": 1,
+    "componenti": 3,
+    "mm3_vero": 12441.765154659748,
+    "mm3_pred": 13993.13138693571,
+    "perc_vera": 0.8785567381832339,
+    "perc_pred": 0.9881041568825428
+   },
+   "dopo": {
+    "dice": 0.6068395172105499,
+    "lesioni": [
+     {
+      "mm3": 346.0200332403183,
+      "rilevata": true
+     },
+     {
+      "mm3": 26.773161590099335,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.508207380771637,
+      "rilevata": false
+     },
+     {
+      "mm3": 12001.762092113495,
+      "rilevata": true
+     },
+     {
+      "mm3": 63.701660335063934,
+      "rilevata": true
+     }
+    ],
+    "fp": 1,
+    "componenti": 3,
+    "mm3_vero": 12441.765154659748,
+    "mm3_pred": 13993.13138693571,
+    "perc_vera": 0.8785567381832339,
+    "perc_pred": 0.9881041568825428
+   },
+   "componenti_tolte": 0
+  },
+  "postprocessing": {
+   "prima": {
+    "dice": 0.6134842473432287,
+    "lesioni": [
+     {
+      "mm3": 346.0200332403183,
+      "rilevata": false
+     },
+     {
+      "mm3": 26.773161590099335,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.508207380771637,
+      "rilevata": false
+     },
+     {
+      "mm3": 12001.762092113495,
+      "rilevata": true
+     },
+     {
+      "mm3": 63.701660335063934,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 12441.765154659748,
+    "mm3_pred": 15062.39606809616,
+    "perc_vera": 0.8785567381832339,
+    "perc_pred": 1.063608691718022
+   },
+   "dopo": {
+    "dice": 0.6134842473432287,
+    "lesioni": [
+     {
+      "mm3": 346.0200332403183,
+      "rilevata": false
+     },
+     {
+      "mm3": 26.773161590099335,
+      "rilevata": false
+     },
+     {
+      "mm3": 3.508207380771637,
+      "rilevata": false
+     },
+     {
+      "mm3": 12001.762092113495,
+      "rilevata": true
+     },
+     {
+      "mm3": 63.701660335063934,
+      "rilevata": true
+     }
+    ],
+    "fp": 0,
+    "componenti": 1,
+    "mm3_vero": 12441.765154659748,
+    "mm3_pred": 15062.39606809616,
+    "perc_vera": 0.8785567381832339,
+    "perc_pred": 1.063608691718022
+   },
+   "componenti_tolte": 0
+  }
+ }
+}

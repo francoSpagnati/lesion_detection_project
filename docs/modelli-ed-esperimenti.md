@@ -1185,3 +1185,21 @@ di Z (38 falsi positivi contro 20). **Conclusione: con i dati pubblici durante l
 modello non trova più lesioni piccole; Z resta il modello della tesi.** È il terzo modo di usare i dati
 pubblici (pretraining A, pretraining congiunto D, misto M) e il terzo pareggio: con 12 pazienti il
 limite è il dominio, non la quantità di dati adulti.
+
+**Ventricoli di SynthSeg come postprocessing (6 ottobre)** (`scripts/synthseg_aincp.py` →
+`reports/ventricoli_synthseg.md`). Per il falso positivo nel ventricolo di FSM_046 sul test serve una
+maschera **automatica** dei ventricoli: la ROI_3 è un'annotazione del clinico e su un paziente nuovo non
+ci sarebbe. SynthSeg 1.0 (Billot et al. 2023) sulla T1 di tutti i 17 pazienti, circa 35 s ciascuno, in
+un ambiente a parte (`~/.venv_synthseg`, TensorFlow 2.10 CPU; sorgente `~/strumenti/SynthSeg`): i pesi
+della 2.0, la versione robusta, stanno su un archivio che richiede il browser. Ventricoli = etichette
+4, 43, 5, 44, 14, 15, riportati sulla griglia T1 nativa. Regola fissata prima, senza griglia: si toglie
+una componente predetta con almeno metà dei voxel nei ventricoli.
+
+Sui 12 di sviluppo, fuori-fold: **la regola non toglie nulla** (0 componenti, né con il postprocessing
+né sulle predizioni grezze, dove i falsi positivi sono 20) e **nessuna lesione vera persa**. La lesione
+annotata dentro i ventricoli è al massimo 243 mm³ per paziente (FSM_032, 0.2%); in proporzione il caso
+peggiore è FSM_001 (30 mm³ su 166). Quindi in cross-validation si può dire solo che la regola è sicura:
+i falsi positivi nel ventricolo non compaiono nei 12, e l'unico visto è quello del test. Controllo con la
+ROI_3 (8 pazienti): SynthSeg copre fra il 43% e il 99% del ventricolo annotato; sotto il 60% in FSM_028,
+FSM_035, FSM_040 e FSM_041, cioè **sottostima i ventricoli più deformati**, il caso che interessa. È il
+limite atteso della versione 1.0 sulle anatomie patologiche.
