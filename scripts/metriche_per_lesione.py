@@ -53,6 +53,7 @@ from scipy import ndimage
 PROGETTO = Path(__file__).resolve().parent.parent
 RES = Path(os.environ.get('nnUNet_results', PROGETTO / 'nnUNet' / 'nnUNet_results'))
 PREP = Path(os.environ.get('nnUNet_preprocessed', PROGETTO / 'nnUNet' / 'nnUNet_preprocessed'))
+RAW = Path(os.environ.get('nnUNet_raw', PROGETTO / 'nnUNet' / 'nnUNet_raw'))
 PER_CASO = PROGETTO / 'reports' / 'lesioni_per_caso'
 
 FASCE = [(0, 10, 'minuscole (<=10 mm3)'), (10, 50, 'piccole (<=50)'),
@@ -108,6 +109,9 @@ def per_dataset(dataset: str, trainer: str | None, fold: list[int] | None,
                 classe: int, soglia_mm3: float):
     nome, run = cartella_risultati(dataset, trainer)
     gt = PREP / nome / 'gt_segmentations'
+    if not any(gt.glob('*.nii.gz')):
+        # cartella cancellata per spazio: nnU-Net la crea copiando labelsTr cosi' com'e'
+        gt = RAW / nome / 'labelsTr'
     if fold is None:
         folds = sorted(int(d.name.split('_')[1]) for d in run.glob('fold_*')
                        if (d / 'validation').is_dir())

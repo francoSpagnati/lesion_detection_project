@@ -4,7 +4,7 @@
  "fold": [
   0
  ],
- "soglia_mm3": 10.0,
+ "soglia_mm3": 0.0,
  "classe": 1,
  "casi": [
   {
@@ -40,7 +40,7 @@
     }
    ],
    "falsi_positivi": 0,
-   "componenti_predette": 2,
+   "componenti_predette": 3,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -103,8 +103,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 0,
-   "componenti_predette": 2,
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -170,8 +170,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 2,
-   "componenti_predette": 5,
+   "falsi_positivi": 4,
+   "componenti_predette": 7,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -237,6 +237,10 @@
     {
      "mm3": 2192.0,
      "rilevata": true
+    },
+    {
+     "mm3": 4.0,
+     "rilevata": false
     }
    ],
    "falsi_positivi": 1,
@@ -292,7 +296,7 @@
     }
    ],
    "falsi_positivi": 0,
-   "componenti_predette": 1,
+   "componenti_predette": 2,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -338,8 +342,8 @@
      "rilevata": true
     }
    ],
-   "falsi_positivi": 0,
-   "componenti_predette": 1,
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -381,8 +385,8 @@
      "rilevata": false
     }
    ],
-   "falsi_positivi": 4,
-   "componenti_predette": 4,
+   "falsi_positivi": 5,
+   "componenti_predette": 5,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -445,8 +449,8 @@
      "rilevata": false
     }
    ],
-   "falsi_positivi": 2,
-   "componenti_predette": 5,
+   "falsi_positivi": 3,
+   "componenti_predette": 6,
    "voxel_mm3": 1.0,
    "fold": 0
   },
@@ -472,7 +476,7 @@
     }
    ],
    "falsi_positivi": 0,
-   "componenti_predette": 1,
+   "componenti_predette": 2,
    "voxel_mm3": 1.0,
    "fold": 0
   },

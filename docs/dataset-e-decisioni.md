@@ -191,8 +191,11 @@ hanno tutte le ROI.
   criterio d'inclusione dello studio clinico: inclusi (decisione dell'utente, 1/10), da dichiarare.
 - **Spazio**: i pazienti si registrano sul template **MNIPediatricAsym cohort-1**, che ha la stessa
   griglia di ATLAS; le misure si riportano nel nativo. La proporzione di cervello lesionato si conserva
-  (mediana −10%), ma localmente la registrazione può ingrandire una lesione più del cervello (FSM_030,
-  FSM_033: 2.7 volte contro 1.5–1.9, lesioni periventricolari).
+  (mediana −10%), ma localmente la registrazione può ingrandire una lesione più del cervello: nel template
+  pediatrico la lesione di FSM_030 cresce 2.66 volte e quella di FSM_033 2.84, contro un cervello
+  ingrandito dall'affine 2.15 e 1.77 volte (lesioni periventricolari); negli altri pazienti la lesione
+  cresce 0.94–1.89 volte (`pipeline.json`, `det` delle affini in `transforms_ped/`). Le metriche si
+  calcolano comunque nel nativo.
 
 Pipeline e comandi: `scripts/pipeline_aincp.py` (procedura in `obiettivo-e-piano.md`).
 
@@ -241,7 +244,7 @@ sito per WMH, coorte per ATLAS), con unione in `RARE` delle classi troppo piccol
 Un quarto rischio, procedurale: nnU-Net rigenera `splits_final.json` **se il file non esiste**. Cancellarlo
 fra due esperimenti invaliderebbe i confronti, senza alcun errore visibile. Il file è scritto da noi e
 **non va rigenerato**; all'avvio nnU-Net stampa le dimensioni, che vanno controllate (`63/16` WMH,
-`445/111` ATLAS, `184/23` DBB fold 0).
+`444/112` ATLAS, `184/23` DBB fold 0).
 
 Nessuna di queste vie richiede un errore di programmazione: sono tutte conseguenze di scorciatoie
 ragionevoli.

@@ -1,0 +1,1995 @@
+{
+ "dataset": "Dataset523_ATLAS_SS",
+ "run": "nnUNetTrainerWandb__nnUNetPlans__3d_fullres",
+ "fold": [
+  0
+ ],
+ "soglia_mm3": 0.0,
+ "classe": 1,
+ "casi": [
+  {
+   "caso": "sub-r001s006",
+   "lesioni": [
+    {
+     "mm3": 11.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 233.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2734.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 31.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r001s008",
+   "lesioni": [
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 516.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 695.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 787.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 80.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r001s024",
+   "lesioni": [
+    {
+     "mm3": 1040.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r001s027",
+   "lesioni": [
+    {
+     "mm3": 1103.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 81.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r001s029",
+   "lesioni": [
+    {
+     "mm3": 2676.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r001s031",
+   "lesioni": [
+    {
+     "mm3": 38266.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r002s001",
+   "lesioni": [
+    {
+     "mm3": 11072.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r002s009",
+   "lesioni": [
+    {
+     "mm3": 55548.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r002s010",
+   "lesioni": [
+    {
+     "mm3": 152153.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r003s003",
+   "lesioni": [
+    {
+     "mm3": 171930.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r003s005",
+   "lesioni": [
+    {
+     "mm3": 230745.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s009",
+   "lesioni": [
+    {
+     "mm3": 97176.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s012",
+   "lesioni": [
+    {
+     "mm3": 113.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 214.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 15329.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s015",
+   "lesioni": [
+    {
+     "mm3": 66519.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s016",
+   "lesioni": [
+    {
+     "mm3": 18.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 115.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 7286.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s023",
+   "lesioni": [
+    {
+     "mm3": 38728.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s025",
+   "lesioni": [
+    {
+     "mm3": 18.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 21209.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 760.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 30.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 4,
+   "componenti_predette": 8,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r004s030",
+   "lesioni": [
+    {
+     "mm3": 152493.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r005s068",
+   "lesioni": [
+    {
+     "mm3": 70418.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r005s073",
+   "lesioni": [
+    {
+     "mm3": 449.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r005s075",
+   "lesioni": [
+    {
+     "mm3": 24708.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s008",
+   "lesioni": [
+    {
+     "mm3": 2686.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 198.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 227.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1816.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 11.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 693.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 519.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 7,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s011",
+   "lesioni": [
+    {
+     "mm3": 2567.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 276.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1889.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 6,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s021",
+   "lesioni": [
+    {
+     "mm3": 311.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 4795.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 126.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s025",
+   "lesioni": [
+    {
+     "mm3": 991.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s035",
+   "lesioni": [
+    {
+     "mm3": 35.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s039",
+   "lesioni": [
+    {
+     "mm3": 23.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s049",
+   "lesioni": [
+    {
+     "mm3": 24629.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 355.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1648.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 102.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 656.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s061",
+   "lesioni": [
+    {
+     "mm3": 225.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 368.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s076",
+   "lesioni": [
+    {
+     "mm3": 72.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s079",
+   "lesioni": [
+    {
+     "mm3": 82.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s087",
+   "lesioni": [
+    {
+     "mm3": 437.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 887.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s088",
+   "lesioni": [
+    {
+     "mm3": 546.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 60.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 122.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 14902.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 816.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 434.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 8,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s093",
+   "lesioni": [
+    {
+     "mm3": 1012.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 414.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s096",
+   "lesioni": [
+    {
+     "mm3": 416.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 204.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 867.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 116.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 368.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 460.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2946.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 7,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s098",
+   "lesioni": [
+    {
+     "mm3": 6189.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 7.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s100",
+   "lesioni": [
+    {
+     "mm3": 87.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 118.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s105",
+   "lesioni": [
+    {
+     "mm3": 5258.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 70.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 192.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 3351.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 182.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s118",
+   "lesioni": [
+    {
+     "mm3": 1265.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r009s124",
+   "lesioni": [
+    {
+     "mm3": 140.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 685.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 74.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 331.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 168.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r010s003",
+   "lesioni": [
+    {
+     "mm3": 8654.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 8.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r010s004",
+   "lesioni": [
+    {
+     "mm3": 556.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r010s008",
+   "lesioni": [
+    {
+     "mm3": 945.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r010s023",
+   "lesioni": [
+    {
+     "mm3": 92.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 60.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r011s003",
+   "lesioni": [
+    {
+     "mm3": 307.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r011s018",
+   "lesioni": [
+    {
+     "mm3": 966.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 973.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 96.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r011s019",
+   "lesioni": [
+    {
+     "mm3": 915.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r011s025",
+   "lesioni": [
+    {
+     "mm3": 2492.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r011s028",
+   "lesioni": [
+    {
+     "mm3": 8.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 215.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r015s006",
+   "lesioni": [
+    {
+     "mm3": 1469.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 3,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r015s016",
+   "lesioni": [
+    {
+     "mm3": 85140.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 9.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r017s116",
+   "lesioni": [
+    {
+     "mm3": 49074.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 53.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 347.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2910.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r017s117",
+   "lesioni": [
+    {
+     "mm3": 509.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r018s001",
+   "lesioni": [
+    {
+     "mm3": 30117.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r019s001",
+   "lesioni": [
+    {
+     "mm3": 237.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 6,
+   "componenti_predette": 6,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r019s008",
+   "lesioni": [
+    {
+     "mm3": 2631.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r019s010",
+   "lesioni": [
+    {
+     "mm3": 1227.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r024s018",
+   "lesioni": [
+    {
+     "mm3": 1376.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 293.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 193.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 14.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 17252.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 5.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 5.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 7,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r027s032",
+   "lesioni": [
+    {
+     "mm3": 1425.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r027s047",
+   "lesioni": [
+    {
+     "mm3": 12541.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r027s048",
+   "lesioni": [
+    {
+     "mm3": 146575.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r028s005",
+   "lesioni": [
+    {
+     "mm3": 4920.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s002",
+   "lesioni": [
+    {
+     "mm3": 31373.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s012",
+   "lesioni": [
+    {
+     "mm3": 8364.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 4,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s014",
+   "lesioni": [
+    {
+     "mm3": 798.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 969.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s019",
+   "lesioni": [
+    {
+     "mm3": 3144.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 8454.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 24.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s025",
+   "lesioni": [
+    {
+     "mm3": 33603.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 30.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 3.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 45.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 15.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 148.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 3399.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1874.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s030",
+   "lesioni": [
+    {
+     "mm3": 34754.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r031s036",
+   "lesioni": [
+    {
+     "mm3": 1849.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1380.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 515.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1249.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 141.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2570.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 6,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r034s003",
+   "lesioni": [
+    {
+     "mm3": 38664.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 984.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 2697.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2725.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 4,
+   "componenti_predette": 7,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r034s012",
+   "lesioni": [
+    {
+     "mm3": 1922.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 123.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 0,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r034s014",
+   "lesioni": [
+    {
+     "mm3": 22883.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 5,
+   "componenti_predette": 6,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r034s032",
+   "lesioni": [
+    {
+     "mm3": 310.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 91.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r034s033",
+   "lesioni": [
+    {
+     "mm3": 698.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r035s003",
+   "lesioni": [
+    {
+     "mm3": 271.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r035s005",
+   "lesioni": [
+    {
+     "mm3": 984.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 175.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s016",
+   "lesioni": [
+    {
+     "mm3": 6257.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s018",
+   "lesioni": [
+    {
+     "mm3": 96.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1428.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 265.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s020",
+   "lesioni": [
+    {
+     "mm3": 1373.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 741.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 582.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 41.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 20.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1180.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 6,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s026",
+   "lesioni": [
+    {
+     "mm3": 310.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 213.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s056",
+   "lesioni": [
+    {
+     "mm3": 708.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 204968.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s071",
+   "lesioni": [
+    {
+     "mm3": 113294.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s085",
+   "lesioni": [
+    {
+     "mm3": 27027.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r038s089",
+   "lesioni": [
+    {
+     "mm3": 75.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 4262.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s030",
+   "lesioni": [
+    {
+     "mm3": 359826.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s031",
+   "lesioni": [
+    {
+     "mm3": 238162.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s045",
+   "lesioni": [
+    {
+     "mm3": 3183.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s046",
+   "lesioni": [
+    {
+     "mm3": 170.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 217.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s049",
+   "lesioni": [
+    {
+     "mm3": 9586.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 4,
+   "componenti_predette": 4,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s054",
+   "lesioni": [
+    {
+     "mm3": 7053.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s059",
+   "lesioni": [
+    {
+     "mm3": 3838.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 76716.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s063",
+   "lesioni": [
+    {
+     "mm3": 284.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 214.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 1047.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r040s075",
+   "lesioni": [
+    {
+     "mm3": 30419.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 30649.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r042s028",
+   "lesioni": [
+    {
+     "mm3": 219586.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r042s030",
+   "lesioni": [
+    {
+     "mm3": 6373.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r044s003",
+   "lesioni": [
+    {
+     "mm3": 43264.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 3.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 1.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r045s002",
+   "lesioni": [
+    {
+     "mm3": 5290.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r046s007",
+   "lesioni": [
+    {
+     "mm3": 1380.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 47.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r046s008",
+   "lesioni": [
+    {
+     "mm3": 691.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 444.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r047s007",
+   "lesioni": [
+    {
+     "mm3": 15267.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 379.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r047s014",
+   "lesioni": [
+    {
+     "mm3": 28795.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 2.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r047s018",
+   "lesioni": [
+    {
+     "mm3": 65836.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 221.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r047s046",
+   "lesioni": [
+    {
+     "mm3": 1009.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r048s011",
+   "lesioni": [
+    {
+     "mm3": 1157.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r048s032",
+   "lesioni": [
+    {
+     "mm3": 7469.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r048s037",
+   "lesioni": [
+    {
+     "mm3": 95223.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 3,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r049s007",
+   "lesioni": [
+    {
+     "mm3": 1779.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 350.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 251.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 255.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 5,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r049s026",
+   "lesioni": [
+    {
+     "mm3": 675.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 97.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 150.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 1,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r050s002",
+   "lesioni": [
+    {
+     "mm3": 742.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 142.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r050s005",
+   "lesioni": [
+    {
+     "mm3": 5372.0,
+     "rilevata": false
+    },
+    {
+     "mm3": 386.0,
+     "rilevata": false
+    }
+   ],
+   "falsi_positivi": 2,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r052s002",
+   "lesioni": [
+    {
+     "mm3": 1701.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 1,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  },
+  {
+   "caso": "sub-r052s032",
+   "lesioni": [
+    {
+     "mm3": 10522.0,
+     "rilevata": true
+    },
+    {
+     "mm3": 8303.0,
+     "rilevata": true
+    }
+   ],
+   "falsi_positivi": 0,
+   "componenti_predette": 2,
+   "voxel_mm3": 1.0,
+   "fold": 0
+  }
+ ]
+}

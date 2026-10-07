@@ -87,8 +87,7 @@ manuale e per fenotipo, e l'endpoint è il rilevamento, scomposto per dimensione
    il dominio pediatrico, non la quantità di dati (sez. 6–8);
 4. una valutazione che va oltre il Dice: rilevamento per lesione e per fascia di volume, CC-Dice,
    percentuale di cervello lesionato, test usato una volta sola, confronti appaiati;
-5. risultati negativi documentati: template adulto che ingrandisce le lesioni pediatriche,
-   fine-tuning che dimentica, skull stripping senza effetto, N4 inutile sui dati pubblici (ma non sui
+5. risultati negativi documentati: fine-tuning che dimentica, skull stripping senza effetto, N4 inutile sui dati pubblici (ma non sui
    pazienti, sez. 3.2), ensemble senza guadagno.
 
 ---
@@ -99,14 +98,15 @@ manuale e per fenotipo, e l'endpoint è il rilevamento, scomposto per dimensione
 | --- | --- | --- | --- | --- |
 | **WMH 2017** (MICCAI) | FLAIR + T1 | 79 di sviluppo (63 / 16 nel fold 0) + 20 di test tenuti fuori; quattro scanner in tre siti | iperintensità della sostanza bianca, adulti | baseline FLAIR; unica sorgente pubblica con le due sequenze appaiate |
 | **ATLAS v2.0** | T1 | 556 di sviluppo (444 / 112) + 99 di test tenuti fuori; già in MNI152NLin2009aSym a 1 mm | ictus cronico, adulti | sorgente grande dei pesi di partenza |
-| **DBB** (Distorted Brain Benchmark) | T1 | 207 | 6 tessuti, cervelli pediatrici sani e malformati; **nessuna maschera di lesione** | banco di prova di SynthStrip; modello a 7 classi (strada chiusa) |
+| **DBB** (Distorted Brain Benchmark) | T1 | 244 con immagine (coorte EMEDEA-PED): 207 sani (184 / 23 per 503) e 37 malformati; SynthStrip validato su tutti i 244 | 6 tessuti, cervelli pediatrici sani e malformati; **nessuna maschera di lesione** | banco di prova di SynthStrip; modello a 7 classi (strada chiusa) |
 | **AInCP** | T1 + FLAIR 3D, non coregistrate all'origine | **17 pazienti** | lesione tracciata a mano sulla FLAIR, in ROI per fenotipo | il bersaglio |
 
 **AInCP nel dettaglio.** Due lotti (10 + 7). Strati di acquisizione: 10 Stella Maris 3 T, 5 Stella
 Maris 1.5 T, 2 altri centri a 1.5 T (Niguarda, Burlo Garofolo). Età all'esame da 3 a 15 anni
 (mediana 7); 8 maschi, 5 femmine, 4 non riportati. Geometria e sequenze per strato nella tabella
 sotto. Lesione da
-**454 mm³** (FSM_046, 0.03% del cervello) a **196 847 mm³** (FSM_049, 16%). Etichetta = ROI_1 ∪ ROI_2 ∪
+**166 mm³** (FSM_001, 0.01% del cervello) a **196 847 mm³** (FSM_049, 16%); nel test la più piccola è
+FSM_046 (454 mm³, 0.03%). Etichetta = ROI_1 ∪ ROI_2 ∪
 ROI_4; tolte le componenti ≤ 1 mm³, residui del tracciato (decisione del 23/9; 46 componenti residue
 segnalate al clinico, 12 fuori dal cervello). Quattro pazienti hanno meno di 5 anni, fuori dal
 criterio d'età dello studio clinico: inclusi, da dichiarare. Solo pazienti consegnati ufficialmente
@@ -171,7 +171,8 @@ Dalla predizione alla maschera: finestra scorrevole (patch 128³, sovrapposizion
 specchiamento sui 3 assi); sul test media dei 5 modelli dei fold; **le probabilità** tornano nello
 spazio nativo con la trasformazione inversa (lineare); **soglia 0.3**; componenti sotto **50 mm³**
 tolte (connettività a 26). Soglia e volume minimo scelti sulla cross-validation (griglia di 60
-combinazioni, obiettivo F1 per lesione) e congelati prima del test: falsi positivi da 20 a 1, F1 da
+combinazioni: soglia 0.3, 0.4, 0.5, 0.6, 0.7 × volume minimo 0, 5, 10, 20, 50, 100 mm³ × con o senza
+maschera del cervello; obiettivo F1 per lesione) e congelati prima del test: falsi positivi da 20 a 1, F1 da
 0.491 a 0.560, Dice invariato (0.580 → 0.584).
 
 ### 3.2 Che cosa è stato valutato e scartato (con numeri)
@@ -195,10 +196,13 @@ variabile sola. SynthStrip validato prima su DBB: Dice 0.966 (0.957 sui cervelli
 - T1 e FLAIR non sono coregistrate all'origine. La rigida FLAIR → T1 conserva il volume (max −5.9%)
   ma, con il vicino più prossimo, **frammenta** le lesioni sottili (fette FLAIR da 0.8 mm contro 1.0):
   da qui la scelta di un'unica interpolazione lineare fino al template.
-- **Il template adulto ingrandisce le lesioni pediatriche**: +51% mediano, fino a +106%. Non è la
-  risoluzione né la deformazione non lineare: è il determinante dell'affine (fattore di volume
-  1.6–2.5), che prevede l'aumento entro 4 punti. Da qui volumi e metriche nel nativo e il template
-  pediatrico. La percentuale di cervello lesionato si conserva (variazione mediana −10%).
+- La registrazione sul template porta ogni cervello alla stessa taglia, quindi lesione e cervello
+  crescono insieme e **la percentuale di cervello lesionato si conserva** (variazione mediana −11% sul
+  template pediatrico, primi 10 pazienti).
+  Non è un problema per la valutazione: volumi e metriche si calcolano nel nativo. Il template
+  pediatrico è stato preferito perché allinea meglio il cervello (Dice 0.95–0.98 contro 0.82–0.93).
+  **Da trattare come un controllo di qualità in una o due frasi, non come un risultato negativo**:
+  niente paragrafi dedicati all'ingrandimento delle lesioni.
 - Il piano a 1 mm, necessario per trasferire i pesi di ATLAS, cancella dal bersaglio di
   addestramento le lesioni più piccole: compromesso fra trasferimento e risoluzione, da dichiarare.
 
@@ -212,8 +216,9 @@ nnU-Net v2.8.1 (Isensee et al. 2021), configurazione 3d_fullres. Architettura sc
 `PlainConvUNet`, 6 livelli (32 → 320 filtri), due blocchi conv–InstanceNorm–LeakyReLU per livello,
 supervisione profonda, ~31 M parametri. Ricetta di default, identica in tutti gli esperimenti sui
 dati pubblici: da zero, **1000 epoche** × 250 iterazioni, SGD Nesterov 0.99, passo 0.01 con
-decadimento polinomiale (0.9), weight decay 3e-5, loss Dice + entropia incrociata, un terzo delle
-patch centrato su lesione, augmentation di default; nessun arresto anticipato. Piani: ATLAS 1 mm
+decadimento polinomiale (0.9), weight decay 3e-5, loss Dice + entropia incrociata, campionamento delle
+patch con `oversample_foreground_percent` = 0.33 (con batch 2 il codice di nnU-Net forza 1 patch su 2
+sulla lesione, con batch 3, solo 522, 1 su 3), augmentation di default; nessun arresto anticipato. Piani: ATLAS 1 mm
 isotropo, patch 128³; WMH 3.0 × 0.98 × 1.2 mm, patch 64 × 224 × 128. **Seme casuale non fissato**
 (nnU-Net non lo fissa): differenze dell'ordine di 0.004 rientrano nella variabilità fra ripetizioni.
 
@@ -235,10 +240,14 @@ isotropo, patch 128³; WMH 3.0 × 0.98 × 1.2 mm, patch 64 × 224 × 128. **Seme
 
 - **Espansione dei canali** (`nnUNetTrainerEspansioneCanali`): nnU-Net non carica pesi a un canale in
   una rete a due. Il trainer espande il primo strato da `[32,1,3,3,3]` a `[32,2,3,3,3]` abbinando i
-  canali **per nome** e gestendo i quattro alias del tensore. Inizializzazione `zero` (uscita
+  canali **per nome** e gestendo i quattro alias del tensore (lo stesso filtro compare sotto quattro chiavi dello
+  state dict: `encoder.stages.0.0.convs.0.conv.weight`, `encoder.stages.0.0.convs.0.all_modules.0.weight`
+  e le stesse due con il prefisso `decoder.encoder.`, perché il decoder tiene un riferimento
+  all'encoder). Come `load_pretrained_weights` di nnU-Net, salta i `seg_layers`. Inizializzazione `zero` (uscita
   identica bit per bit al modello a un canale) o `duplica`; 14 controlli su 14. **Passo
   differenziato**: primo strato 1e-2, resto 1e-4, perché a 1e-4 uniforme il filtro FLAIR restava al
-  5% della norma del T1 (la FLAIR non imparava); con il passo differenziato sale al 65–272%.
+  5% della norma del T1 (la FLAIR non imparava); con il passo differenziato e il freno corretto sale al 63–175% (65–272% era
+  il primo giro, con il freno difettoso).
 - **Modality dropout**: in un esempio su tre una delle due sequenze, a caso, è azzerata; un canale
   nullo resta nullo dopo lo z-score ed è ciò che la rete vede in inferenza quando la sequenza manca.
   Requisito del relatore: un modello a due canali utilizzabile con una sola sequenza (cfr. HeMIS,
@@ -257,7 +266,8 @@ isotropo, patch 128³; WMH 3.0 × 0.98 × 1.2 mm, patch 64 × 224 × 128. **Seme
 - **Copertura per fenotipo**: voxel di ogni ROI coperti dalla predizione.
 - **Percentuale di cervello lesionato**, predetta contro vera (la grandezza indicata dal relatore).
 - Statistica: Wilcoxon appaiato sul Dice per caso; **test esatto di McNemar** appaiato lesione per
-  lesione sul rilevamento; intervalli di confidenza bootstrap sui pazienti.
+  lesione sul rilevamento; intervalli di confidenza bootstrap sui pazienti (2000 ricampionamenti,
+  percentili 2.5–97.5, seme 0; `postprocessing_aincp.py`, funzione `bootstrap`).
 
 ---
 
@@ -274,6 +284,14 @@ isotropo, patch 128³; WMH 3.0 × 0.98 × 1.2 mm, patch 64 × 224 × 128. **Seme
 | 522 / 523 | WMH / ATLAS senza cranio | FLAIR / T1 | 0.779 / 0.607 | nessun effetto (p = 0.86 / 0.58) |
 | 531 | WMH + ATLAS + DBB, 7 classi | T1 | 0.603 (lesione) | il modello unico non guadagna |
 | 541 | 10 casi ATLAS a 1.5 T | T1 | 0.685 pre-addestrato, 0.451 da zero | il pretraining con pochi casi |
+
+Rilevamento per lesione (ricalcolato il 7/10 sulle predizioni salvate, nessun riaddestramento):
+502 trova 157/244 lesioni ATLAS con 119 falsi positivi; 523 (senza cranio) 155/244 e 98; 531 (classe
+lesione, casi ATLAS) 162/244 e 127; 521 147/230 contro 145/230 di 502 sugli stessi 103 casi. Su WMH 501 trova 630/865
+(92 FP), 522 654/865 (101), 511 con la sola T1 330/865 (90). Nel test di pretraining (541, 61 lesioni
+su 35 casi, ultima epoca): da zero 30/61, fine-tuning 1e-2 37/61, 1e-3 39/61, 1e-4 45/61, il modello
+non adattato 44/61. Fonti: `metriche_per_lesione.md`, `metriche_per_lesione_ablazioni.md`,
+`metriche_per_lesione_541.md`.
 
 Conclusioni: (1) la sequenza in ingresso è la variabile che sposta il risultato; (2) il
 preprocessing no; (3) due canali non peggiorano il rilevamento; (4) il modello unico a sette classi
@@ -323,7 +341,9 @@ verificata: **non usarlo**.
 | A | 0.563 | 0.520 | 0.815 | 26/68 | 5 | 0.46 |
 | D | 0.577 | 0.522 | 0.900 | 25/68 | 2 | 0.83 |
 
-Indistinguibili; regola fissata prima: a parità, la più semplice → **Z è il modello della tesi**.
+Regola fissata il 1/10, prima dei risultati: F1 per lesione più alto; a parità entro 0.02, meno falsi
+positivi. Z ha l'F1 più alto con margine (0.560 contro 0.522 e 0.520) → **Z è il modello della tesi**.
+Le differenze di Dice non sono significative.
 Ensemble delle ricette (A+D+Z, D+Z, A+D): nessun guadagno (F1 0.566 contro 0.560, p ≥ 0.37).
 
 ### 7.3 Curve di addestramento
@@ -409,7 +429,9 @@ Lesioni piccole: 3 trovate solo da M, 2 solo da Z, p = 1.0; Dice per paziente +0
 Nei training di 543 il dropout poteva azzerare anche la T1 dei casi ATLAS, che hanno già la FLAIR
 vuota: circa il 15% degli esempi ATLAS era un'immagine nera con la lesione nell'etichetta. Riguarda
 solo i pesi di partenza di D (non Z, non A: i pazienti hanno sempre entrambe le sequenze); effetto
-trascurabile (543 su ATLAS 0.606 contro 0.610 del modello pulito). Corretto prima del training misto.
+non misurato direttamente: un 543 riaddestrato con il dropout corretto non esiste. Indizio indiretto:
+543 su ATLAS fa 0.606 contro 0.610 di 502, il modello a sola T1 senza dropout (p = 0.20). Corretto
+prima del training misto.
 
 ### 8.3 Maschera dei ventricoli con SynthSeg
 

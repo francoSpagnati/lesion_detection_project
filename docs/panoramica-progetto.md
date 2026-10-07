@@ -85,7 +85,7 @@ che sapeva di ATLAS e impara la FLAIR. Ma **solo se il canale nuovo ha un passo 
 | prova | risultato |
 | --- | --- |
 | filtro FLAIR a zero, passo piccolo ovunque | la FLAIR **resta spenta**: il suo filtro arriva al 5% della forza di quello del T1 |
-| filtro FLAIR a zero, **passo differenziato** | la FLAIR impara: il filtro arriva al 65–272% di quello del T1, come in un modello nato a due canali |
+| filtro FLAIR a zero, **passo differenziato** | la FLAIR impara: il filtro arriva al 63–175% di quello del T1 (freno corretto), come in un modello nato a due canali |
 | copertura della gliosi (la lesione visibile in FLAIR), FLAIR spenta contro attiva | migliora in 7 pazienti su 10 (p = 0.084: tendenza, non prova) |
 | rete espansa nel pretraining congiunto, su WMH (compito di sola FLAIR) | **0.723**, contro 0.753 di una rete nata a due canali |
 

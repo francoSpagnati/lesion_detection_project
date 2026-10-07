@@ -112,7 +112,7 @@ all'altra solo fra architetture identiche. Le differenze, tutte nei trainer di
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | **501** | WMH | FLAIR | lesione | 79 | 16 | **0.7739** | baseline |
 | **502** | ATLAS | T1 | lesione | 556 | 112 | **0.6103** | baseline |
-| **503** | dHCP/DBB | T1 | 6 tessuti | 207 | 23 | **0.9712** | baseline |
+| **503** | DBB (EMEDEA-PED) | T1 | 6 tessuti | 207 | 23 | **0.9712** | baseline |
 | **511** | WMH | T1 | lesione | 79 | 16 | **0.6257** | ablazione: quanto vale la FLAIR |
 | **512** | WMH | FLAIR + T1 | lesione | 79 | 16 | **0.7535** | ablazione: due canali aiutano? |
 | **521** | ATLAS senza 1.5 T | T1 | lesione | 511 | 103 | **0.6160** | ablazione: escludere i 1.5 T? |
@@ -182,13 +182,13 @@ più il resto del progetto.
 
 ---
 
-### 503 — dHCP/DBB, sei tessuti: un compito diverso
+### 503 — DBB, sei tessuti: un compito diverso
 
-**Perché.** Non è lesion detection: è la partizione del cervello in sei tessuti su neonati. Serve a due
+**Perché.** Non è lesion detection: è la partizione del cervello in sei tessuti su bambini (coorte EMEDEA-PED, pediatrica, non neonatale). Serve a due
 cose — avere un dataset pediatrico con anatomie patologiche, e produrre pesi da trasferire, perché label
 dense di tessuto insegnano all'encoder il contrasto tissutale del T1 e l'anatomia.
 
-**Cosa vede.** 207 casi di sviluppo, T1 neonatale, sei classi: CSF, sostanza grigia, sostanza bianca,
+**Cosa vede.** 207 casi di sviluppo (i sani), T1 pediatrica, sei classi: CSF, sostanza grigia, sostanza bianca,
 grigia profonda, tronco encefalico, cervelletto.
 
 **Il piano.** Spacing `1 × 1 × 1` mm, patch `128 × 160 × 112`, batch 2, 30.8 M parametri. L'ultimo stadio
@@ -450,12 +450,30 @@ cambiare comportamento di conseguenza. È di fatto un modello con due modalità,
 
 Questo spiega perché D non è crollata — non ha dovuto conciliare niente — ma **smonta l'argomento del
 "modello unico che serve a entrambi gli stadi"**: su un paziente con paralisi cerebrale, che non
-somiglia esattamente né a un adulto con ictus né a un neonato sano, non sappiamo quale delle due
+somiglia esattamente né a un adulto con ictus né a un bambino sano di DBB, non sappiamo quale delle due
 modalità verrebbe scelta. È un rischio da dichiarare, non un vantaggio.
 
 È anche la migliore motivazione empirica per la variante C: marcando `ignore` il tessuto non annotato di
 WMH e ATLAS si toglie alla rete proprio l'informazione con cui costruisce questa scorciatoia. Figura:
 `reports/figures/modello_unico_7_classi.png`.
+
+### Rilevamento per lesione delle ablazioni sui dati pubblici (aggiunto il 7/10)
+
+Con lo stesso criterio di `metriche_per_lesione.py` (rilevata = almeno un voxel predetto dentro; nessuna
+soglia minima), sulle predizioni di validazione già salvate, senza riaddestrare
+(`reports/metriche_per_lesione_ablazioni.md`; `gt_segmentations` cancellate per spazio, si legge
+`labelsTr`, che nnU-Net copia così com'è):
+
+| modello | casi | lesioni trovate | falsi positivi | riferimento sugli stessi casi |
+| --- | --- | --- | --- | --- |
+| 521 ATLAS senza 1.5 T | 103 | 147/230 (63.9%) | 119 (1.2 per caso) | 502: 145/230, 112 FP |
+| 522 WMH senza cranio | 16 | 654/865 (75.6%) | 101 (6.3) | 501: 630/865, 92 FP |
+| 523 ATLAS senza cranio | 112 | 155/244 (63.5%) | 98 (0.9) | 502: 157/244, 119 FP |
+| 531 tre dataset, classe lesione, solo ATLAS | 112 | 162/244 (66.4%) | 127 (1.1) | 502: 157/244, 119 FP |
+| 531, solo WMH (T1 sola) | 16 | 258/865 (29.8%) | 77 (4.8) | 511 (WMH, T1): 330/865, 90 FP |
+| 531, DBB | 23 | nessuna lesione | 0 | — |
+
+Anche a livello di lesione le ablazioni non spostano nulla di rilevante, coerente con il Dice.
 
 ### 541 — il test del pretraining: serve davvero, con dieci casi?
 
@@ -542,6 +560,19 @@ necessario. Il risultato non dice "non fare fine-tuning": dice **"non farlo con 
 default, e misura sempre il punto di partenza"**.
 
 Report: `reports/test_pretraining.md`.
+
+**Rilevamento per lesione dei bracci** (aggiunto il 7/10, `scripts/metriche_per_lesione_541.py` →
+`reports/metriche_per_lesione_541.md`, 61 lesioni sui 35 casi):
+
+| braccio | ultima epoca | `checkpoint_best` |
+| --- | --- | --- |
+| `521` senza adattamento | 44/61, 28 FP | — |
+| da zero | 30/61, 19 FP | 29/61, 24 FP |
+| fine-tuning, passo 1e-2 | 37/61, 13 FP | 47/61, 32 FP |
+| fine-tuning, passo 1e-3 | 39/61, 18 FP | 43/61, 31 FP |
+| fine-tuning, passo 1e-4 | 45/61, 39 FP | 46/61, 36 FP |
+
+Lo stesso ordine del Dice: da zero se ne trova la metà, con il pretraining e il passo giusto tre quarti.
 
 **Il seguito, e la risposta.** Lo stesso fine-tuning con passo di apprendimento ridotto, due bracci a
 `1e-3` e `1e-4` (`scripts/run_test_finetuning_lr.sh`, conclusi il 2 settembre). Il quadro completo, sugli
@@ -871,7 +902,7 @@ esempi con un canale azzerato, metà FLAIR e metà T1, segmentazione intatta).
 | --- | --- | --- |
 | 512, riferimento (spazio nativo) | 0.753 | — |
 | 502, riferimento | — | **0.610** |
-| 1e-3 uniforme | **0.735** (meglio in 16 casi su 16, p = 3·10⁻⁵) | 0.217 (peggio in 96 su 112, p = 10⁻¹⁶) |
+| 1e-3 uniforme | **0.735** (meglio del passo differenziato in 16 casi su 16, p = 3·10⁻⁵) | 0.217 (peggio in 96 su 112, p = 10⁻¹⁶) |
 | passo differenziato | 0.708 | 0.220 |
 
 Su WMH la variante a 1e-3 è a −0.02 da 512 (p = 0.14; 512 è misurato nello spazio nativo, quindi il
