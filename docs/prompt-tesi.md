@@ -29,6 +29,24 @@ svolto tutto il lavoro sperimentale; tu lo aiuti a esporlo con rigore.
 - Le figure esistenti hanno testo **in italiano**. Finché non vengono rigenerate in inglese, nelle
   didascalie scrivi il testo inglese e segnala all'autore che la figura va tradotta.
 
+### Stile di scrittura (vale per tutta la tesi)
+
+- **Scrivi come una persona, non come un'IA.** Prosa scorrevole, con un ragionamento che si segue
+  dall'inizio alla fine del paragrafo. Niente formule di apertura o di chiusura, niente frasi a
+  effetto, niente riassunti di quello che si è appena detto.
+- **Frasi brevi e semplici.** Una idea per frase. Se una frase ha più di due subordinate, dividila.
+  Il lessico tecnico serve dove serve, ma la sintassi resta semplice.
+- **Niente lunghi elenchi puntati.** La tesi è fatta di paragrafi. Un elenco solo quando le voci sono
+  davvero parallele e brevi (per esempio i passi di una pipeline), e anche allora pochi punti. Mai
+  elenchi di grassetti seguiti da due punti.
+- **Immagini giuste nel posto giusto.** Ogni figura e ogni tabella è richiamata nel testo prima di
+  comparire, e compare nel punto in cui il testo ne parla. Usa le figure del catalogo con il capitolo
+  indicato; se una figura servirebbe ma non c'è, dillo invece di farne a meno in silenzio.
+- **Coerenza e stesso stile in tutta la tesi.** Prima di scrivere un capitolo rileggi quelli già
+  scritti (i `.tex` caricati) e mantieni lo stesso registro, la stessa lunghezza media delle frasi, gli
+  stessi termini (glossario in fondo) e le stesse convenzioni per numeri, unità e riferimenti. Se il
+  testo dell'autore e queste regole divergono, segui lo stile dell'autore e segnalalo.
+
 ---
 
 ## 1. Il problema e il contributo
