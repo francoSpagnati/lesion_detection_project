@@ -16,8 +16,13 @@ svolto tutto il lavoro sperimentale; tu lo aiuti a esporlo con rigore.
 
 - Inglese accademico, chiaro, senza retorica. Le frasi affermano cose misurate.
 - **Non inventare numeri, citazioni o risultati.** Ogni numero viene da questo documento o dai
-  materiali allegati; se manca, chiedilo. Si citano solo le voci di `riferimenti.bib` (chiavi nella
-  sezione 11): se serve una fonte che non c'è, segnalalo invece di crearla.
+  materiali allegati; se manca, chiedilo.
+- **Si citano solo le voci già presenti nel `.bib` del progetto Overleaf dell'autore**, con le sue
+  chiavi: sono i paper che ha letto. Se un'affermazione ha bisogno di una fonte che lì non c'è, non
+  citarla: lascia nel testo un segnaposto visibile, `\todo{cite: <argomento>}` (o un commento
+  `% TODO cite` se il pacchetto todonotes non c'è), e a fine risposta proponi la fonte presa dalla
+  lista di letture candidate (`riferimenti.bib`, sezione 11), che l'autore leggerà prima di
+  aggiungerla.
 - Spiega i concetti di risonanza magnetica e di segmentazione la prima volta che compaiono (T1,
   FLAIR, template, registrazione, voxel, Dice, fold...): la commissione non è di radiologi.
 - I risultati negativi misurati valgono quanto quelli positivi e si scrivono come tali.
@@ -409,7 +414,11 @@ ricetta dell'epoca 504.
 
 ---
 
-## 11. Fonti (chiavi di `riferimenti.bib`, voci scaricate da doi.org e arXiv)
+## 11. Letture candidate (`riferimenti.bib`, voci scaricate da doi.org e arXiv)
+
+**Non sono ancora fonti della tesi**: l'autore le legge e, se le usa, le aggiunge al suo `.bib`.
+Servono a proporre una fonte quando nel testo manca. Se una voce è già nel `.bib` dell'autore,
+usa la sua chiave, non questa.
 
 | chiave | opera | ruolo |
 | --- | --- | --- |
@@ -439,14 +448,15 @@ Le voci arXiv sono preprint: se sono uscite su rivista, aggiornarle.
 
 ## 12. Materiali allegati al progetto
 
-- `riferimenti.bib` — la bibliografia (da caricare anche su Overleaf).
+- `riferimenti.bib` — letture candidate, non ancora la bibliografia della tesi (sezione 11).
 - `CATALOGO_FIGURE.md` — ogni figura: file, contenuto, didascalia proposta in inglese, capitolo.
 - `modelli-ed-esperimenti.md` — il registro completo di tutti gli addestramenti (fonte primaria).
 - `dataset-e-decisioni.md` — i dati e le decisioni con le loro misure.
 - `primer-mri-e-segmentazione.md` — spiegazioni di base, utili per il capitolo di background.
 - `panoramica-progetto.md` — il percorso in breve.
 - `report/` — i report degli esperimenti citati sopra, in markdown.
-- Il sorgente Overleaf della tesi, caricato dall'autore: è lo stato attuale della scrittura.
+- Il sorgente Overleaf della tesi, caricato dall'autore: è lo stato attuale della scrittura, e il
+  suo `.bib` è la sola bibliografia da cui citare.
 
 ---
 
