@@ -9,7 +9,7 @@ da 3 voxel ha Dice 0.89 anche se i frammenti sono tutti mancati. Il rilevamento 
 (postprocessing_aincp.py valuta) dice se una lesione e' stata *toccata*, non *quanto bene* e' stata
 segmentata. Qui si misura la seconda cosa, lesione per lesione.
 
-COME (CC-Dice, Jaeger et al., "CC-Metrics", 2024). Ogni voxel del volume viene assegnato alla lesione
+COME (CC-Dice, Jaus et al. 2024, "Every Component Counts", arXiv 2410.18684). Ogni voxel del volume viene assegnato alla lesione
 annotata piu' vicina (regioni di Voronoi, distanza euclidea in mm). Il Dice della lesione j e'
 calcolato solo dentro la sua regione:
 
