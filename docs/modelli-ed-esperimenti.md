@@ -1004,7 +1004,7 @@ Fold 0 di 543, validazione separata per sorgente, appaiata contro il 543 del 23/
 | --- | --- | --- | --- |
 | 543, arresto (23/9) | 0.616 | 0.671 | fermato all'epoca 165 |
 | WMH campionato ×4 | 0.610 (−0.006, p = 0.0003) | 0.634 (−0.037) | **peggio su entrambi**: arresto all'epoca 65 (migliore alla 15), la perdita di validazione diventa rumorosa |
-| **1000 epoche, senza arresto** | 0.606 (−0.010, p = 0.20) | **0.723** (+0.053, p = 3·10⁻⁵) | tiene ATLAS e impara WMH quasi quanto la sequenza |
+| **1000 epoche, senza arresto** | 0.606 (−0.010 dal 543 del 23/9, p = 0.20; contro 502: p = 0.66) | **0.723** (+0.053, p = 3·10⁻⁵) | tiene ATLAS e impara WMH quasi quanto la sequenza |
 
 **Scelta (1/10): la variante da 1000 epoche** come pesi di partenza della ricetta D allo stadio 3 finale.
 Scelta fatta solo su ATLAS e WMH, prima di guardare i pazienti. L'arresto sulla perdita di

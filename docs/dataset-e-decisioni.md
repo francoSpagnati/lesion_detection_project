@@ -198,7 +198,9 @@ hanno tutte le ROI.
   calcolano comunque nel nativo.
 - **Bersaglio a 1 mm** (misura del 7/10, `reports/sopravvivenza_1mm_506.md`): delle 90 lesioni annotate dei 17
   pazienti (residui ≤ 1 mm³ esclusi) ne scompaiono nel template solo 4, tutte sotto 3 mm³. L'unione delle
-  componenti portate una per una riproduce esattamente `lesione_PED.nii.gz`.
+  componenti portate una per una riproduce esattamente `lesione_PED.nii.gz`. Le stesse lesioni nella griglia
+  T1 nativa, dove si valuta, sono 108: 15 si spezzano nel passaggio FLAIR → T1 (+33 pezzi), 13 piccole
+  restano sotto 1 mm³ (−13), 2 coppie si fondono (−2) (`reports/conta_lesioni_griglie.md`).
 
 Pipeline e comandi: `scripts/pipeline_aincp.py` (procedura in `obiettivo-e-piano.md`).
 

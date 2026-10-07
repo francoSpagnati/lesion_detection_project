@@ -208,6 +208,14 @@ variabile sola. SynthStrip validato prima su DBB: Dice 0.966 (0.957 sui cervelli
   nel template solo 4, tutte sotto 3 mm³ (`reports/sopravvivenza_1mm_506.md`, figura F4_04). Il
   template ingrandisce il cervello e con lui le lesioni, che quindi superano la griglia. Con il primo
   piano nello spazio nativo (504, 10 pazienti) ne scomparivano 7 su 22 fra 1 e 10 mm³.
+- **90 lesioni nella griglia FLAIR, 108 (68 + 40) nella griglia T1 nativa**: sono la stessa
+  annotazione contata in due griglie (`reports/conta_lesioni_griglie.md`). Il bersaglio si costruisce
+  dalla FLAIR, dove il clinico ha disegnato; le metriche si calcolano nella T1, dove l'etichetta arriva
+  con la rigida FLAIR → T1 (lineare, soglia 0.5) e si contano le componenti ≥ 1 mm³. Nel passaggio 15
+  lesioni (da 50 a 196 922 mm³) si spezzano in 48 pezzi (+33), perché ponti sottili fra parti della
+  stessa lesione non superano la soglia; 13 lesioni piccole (1–10 mm³) non lasciano nessun pezzo
+  ≥ 1 mm³ (−13); due coppie di pezzi di lesioni diverse si toccano e si fondono (−2). 90 − 13 + 33 − 2
+  = 108. Nel testo basta una frase: le lesioni si contano nella griglia in cui si valuta.
 
 ---
 
@@ -433,7 +441,8 @@ Nei training di 543 il dropout poteva azzerare anche la T1 dei casi ATLAS, che h
 vuota: circa il 15% degli esempi ATLAS era un'immagine nera con la lesione nell'etichetta. Riguarda
 solo i pesi di partenza di D (non Z, non A: i pazienti hanno sempre entrambe le sequenze); effetto
 non misurato direttamente: un 543 riaddestrato con il dropout corretto non esiste. Indizio indiretto:
-543 su ATLAS fa 0.606 contro 0.610 di 502, il modello a sola T1 senza dropout (p = 0.20). Corretto
+543 su ATLAS fa 0.606 contro 0.610 di 502, il modello a sola T1 senza dropout (Wilcoxon appaiato sui
+112 casi: p = 0.66, meglio in 55 e peggio in 50). Corretto
 prima del training misto.
 
 ### 8.3 Maschera dei ventricoli con SynthSeg
