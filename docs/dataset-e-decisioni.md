@@ -293,6 +293,12 @@ definitiva richiederebbe prima lo skull stripping.
 mantenere, nessun GB materializzato. La decisione si riapre solo se lo skull stripping renderà possibile
 una misura più pulita.
 
+**Sui pazienti AInCP invece N4 si applica** (passo 1 della pipeline), e la misura fatta dopo, il 7/10, dà
+ragione alla scelta ([`reports/bias_campo_aincp.md`](../reports/bias_campo_aincp.md)). Il campo tolto,
+misurato dentro la maschera del cervello di SynthStrip, ha p99/p1 = **1.38 sulla T1** e 1.18 sulla FLAIR a
+12 mm dal bordo, con la FLAIR di Stella Maris a 1.5 T intorno a **1.70**: tre volte e più lo scarto dei
+dati pubblici. Non c'è un modello addestrato senza N4, quindi l'effetto sulla segmentazione non è misurato.
+
 ## ATLAS: una parte dei casi non è risolvibile con il solo T1
 
 Scoperto esaminando i casi falliti del primo training invece di mediarli con gli altri

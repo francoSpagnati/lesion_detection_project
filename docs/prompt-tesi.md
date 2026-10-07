@@ -88,7 +88,8 @@ manuale e per fenotipo, e l'endpoint è il rilevamento, scomposto per dimensione
 4. una valutazione che va oltre il Dice: rilevamento per lesione e per fascia di volume, CC-Dice,
    percentuale di cervello lesionato, test usato una volta sola, confronti appaiati;
 5. risultati negativi documentati: template adulto che ingrandisce le lesioni pediatriche,
-   fine-tuning che dimentica, skull stripping e N4 senza effetto, ensemble senza guadagno.
+   fine-tuning che dimentica, skull stripping senza effetto, N4 inutile sui dati pubblici (ma non sui
+   pazienti, sez. 3.2), ensemble senza guadagno.
 
 ---
 
@@ -102,13 +103,40 @@ manuale e per fenotipo, e l'endpoint è il rilevamento, scomposto per dimensione
 | **AInCP** | T1 + FLAIR 3D, non coregistrate all'origine | **17 pazienti** | lesione tracciata a mano sulla FLAIR, in ROI per fenotipo | il bersaglio |
 
 **AInCP nel dettaglio.** Due lotti (10 + 7). Strati di acquisizione: 10 Stella Maris 3 T, 5 Stella
-Maris 1.5 T, 2 altri centri a 1.5 T (Niguarda, Burlo Garofolo). Geometria originale: T1
-1.0 × 0.43 × 0.43 mm; FLAIR 0.8 × 0.5 × 0.5 mm (in tre pazienti 1.0 × 0.47 × 0.47). Lesione da
+Maris 1.5 T, 2 altri centri a 1.5 T (Niguarda, Burlo Garofolo). Età all'esame da 3 a 15 anni
+(mediana 7); 8 maschi, 5 femmine, 4 non riportati. Geometria e sequenze per strato nella tabella
+sotto. Lesione da
 **454 mm³** (FSM_046, 0.03% del cervello) a **196 847 mm³** (FSM_049, 16%). Etichetta = ROI_1 ∪ ROI_2 ∪
 ROI_4; tolte le componenti ≤ 1 mm³, residui del tracciato (decisione del 23/9; 46 componenti residue
 segnalate al clinico, 12 fuori dal cervello). Quattro pazienti hanno meno di 5 anni, fuori dal
 criterio d'età dello studio clinico: inclusi, da dichiarare. Solo pazienti consegnati ufficialmente
 da AInCP.
+
+| strato | pazienti | T1 (nome della sequenza, voxel in mm) | FLAIR 3D (voxel in mm) |
+| --- | --- | --- | --- |
+| Stella Maris 3 T | 10 | 3D sagittale MPRAGE; 1.0 × 0.43 × 0.43; TE 3.8 ms | 0.8 × 0.5 × 0.5 (tre pazienti 1.0 × 0.47 × 0.47); TE 110 ms |
+| Stella Maris 1.5 T | 5 | 3D BRAVO o FSPGR (nomi GE); 1.0 × 0.44–1.0 × 0.44–1.0 | CUBE FS (nome GE); 1 mm isotropo (FSM_033 1.0 × 0.88 × 0.88) |
+| Niguarda 1.5 T | 1 (FSM_001) | Philips, 3D gradient echo; 0.9 × 0.46 × 0.46; TR 7.2, TE 3.2 ms, flip 8° | Philips VISTA; 0.7 × 0.63 × 0.63; TR 8000, TE 281, TI 2400 ms |
+| Burlo Garofolo 1.5 T | 1 (FSM_049) | 3D IR-TFE (nome Philips); 1.0 × 0.49 × 0.49 | 0.6 isotropo |
+
+Fonte: il foglio delle serie consegnato da AInCP e le intestazioni NIfTI. **TR, TE, TI e produttore
+non sono stati consegnati per gli altri pazienti**: non stimarli. Il voxel è quello delle immagini
+ricevute (può differire da quello di acquisizione). Comitato etico e consenso: **i materiali non ne
+parlano**. Nel testo lascia `\todo{ethics: approval number and consent, from AInCP / supervisors}`, non
+inventare una formula.
+
+**Contrasto per fenotipo su AInCP** (`reports/contrasto_fenotipi_aincp.md`, 17 pazienti). Intensità
+media dentro la ROI divisa per quella del cervello fuori dalla lesione (1 = come il tessuto attorno):
+
+| fenotipo | pazienti | T1 | FLAIR |
+| --- | --- | --- | --- |
+| gliosi | 17 | 0.96 (0.73–1.19) | 1.50 (1.22–1.79) |
+| lesione cistica | 8 | 0.35 (0.22–0.40) | 0.16 (0.08–0.41) |
+| encefalomalacia | 7 | 0.48 (0.41–0.56) | 0.72 (0.31–0.97) |
+
+In T1 la gliosi è quasi indistinguibile dal tessuto sano, come le lesioni non risolte di ATLAS (sotto);
+in FLAIR è chiara. Le cavità sono scure in tutte e due. È il numero dietro la figura introduttiva e
+dietro l'ablazione dei canali (sez. 7.6).
 
 **ATLAS con il solo T1**: il rapporto d'intensità lesione/tessuto separa i casi risolti (0.62,
 cavità) da quelli falliti (1.07, lesioni non cavitate, invisibili in T1): la stessa distinzione fra
@@ -151,6 +179,7 @@ combinazioni, obiettivo F1 per lesione) e congelati prima del test: falsi positi
 | prova | dove | risultato | decisione |
 | --- | --- | --- | --- |
 | N4 | WMH, ATLAS, DBB | campo già piatto dentro il cervello: p99/p1 = 1.12, 1.12, 1.10 a 12 mm dal bordo (1.00 = piatto) | non applicata ai dati pubblici |
+| N4 | 17 pazienti AInCP | campo tolto da N4, p99/p1 dentro il cervello a 12 mm: T1 1.38 (1.26–1.55), FLAIR 1.18 (1.14–1.75); FLAIR Stella Maris 1.5 T circa 1.70 | applicata (passo 1). Misurata dopo, non confrontata con un modello senza N4 |
 | skull stripping (SynthStrip) | WMH, 16 casi | +0.0045 di Dice, p = 0.86 | scartato |
 | skull stripping (SynthStrip) | ATLAS, 112 casi | −0.0037, p = 0.58; taglia il liquor dei ventricoli dilatati (idrocefalo 0.927 su DBB) | scartato |
 | escludere gli esami a 1.5 T | ATLAS, 103 casi | +0.0093, p = 0.67; i 45 casi a 1.5 T mai visti danno 0.672 | scartato |
@@ -251,8 +280,11 @@ preprocessing no; (3) due canali non peggiorano il rilevamento; (4) il modello u
 è una strada chiusa; (5) con 10 casi il pretraining vale +0.23, **ma solo con passo 1e-4**: con il
 default (0.564) peggiora il modello senza adattamento (0.677); l'overfitting sui pochi casi è forte
 (divario visti/non visti +0.534 da zero). Su ATLAS il modello trova 2 lesioni su 23 sotto 10 mm³.
-Letteratura: ATLAS, vincitore della challenge 0.667 (ensemble + postprocessing), lavori successivi
-0.71–0.73; WMH, i migliori fra 39 metodi 0.80–0.83. I nostri sono un fold, senza ensemble.
+Letteratura: ATLAS, il vincitore della challenge MICCAI 2022 ha Dice 0.6667 sul test nascosto della
+challenge (Huo et al. 2022, MAPPING, `huo2022mapping`: ensemble + postprocessing). WMH: classifica dei
+metodi in Kuijf et al. 2019 (`kuijf2019wmh`). Non sono confronti diretti: i nostri numeri sono un fold
+dei dati di sviluppo, senza ensemble. Il valore «0.71–0.73» delle versioni precedenti non ha una fonte
+verificata: **non usarlo**.
 
 ---
 
@@ -398,7 +430,8 @@ lesioni sotto 50 mm³ in gran parte mancate; un falso positivo nel ventricolo di
 2–3 pazienti per fold; esperimenti sui dati pubblici su un solo fold e senza seme fisso; il piano a 1
 mm cancella dal bersaglio le lesioni più piccole; quattro pazienti sotto i 5 anni; annotazioni con
 residui segnalati al clinico; i tre pazienti di test a 3 T erano fra i dieci su cui si è scelta la
-ricetta dell'epoca 504.
+ricetta dell'epoca 504; N4 applicata ai pazienti senza un confronto con un modello senza N4;
+parametri d'acquisizione completi solo per un paziente.
 
 ---
 
@@ -461,6 +494,9 @@ Le voci arXiv sono preprint: se sono uscite su rivista, aggiornarle.
 ---
 
 ## 13. Struttura suggerita dei capitoli
+
+L'abstract (e un eventuale sommario in italiano) si scrive per ultimo, quando i capitoli sono chiusi,
+seguendo le regole dell'ateneo che l'autore indicherà.
 
 1. **Introduction** — paralisi cerebrale e fenotipi, i due stadi, il vincolo dei 17 pazienti,
    contributi (sez. 1).
