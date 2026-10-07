@@ -42,12 +42,12 @@ ESP = PROGETTO / 'esportazioni/506_test'
 FIG = PROGETTO / 'reports/figures/aincp'
 # stessi colori dei segmenti per Slicer (esporta_slicer_506.py), palette validata con la skill dataviz
 COL = {'trovata': '#1baf7a', 'mancata': '#2a78d6', 'fp': '#eb6834'}
-NOME = {'trovata': 'lesione trovata', 'mancata': 'lesione mancata', 'fp': 'falso positivo'}
+NOME = {'trovata': 'detected lesion', 'mancata': 'missed lesion', 'fp': 'false positive'}
 INCHIOSTRO, GRIGIO = '#1f2328', '#59636e'
 PICCOLA_MM3 = 50
-CASI = {'FSM_049': 'lesione estesa, segmentata bene',
-        'FSM_030': 'la lesione principale trovata, le altre dieci mancate (da 1.5 a 912 mm³)',
-        'FSM_046': 'falso positivo nel ventricolo dilatato'}
+CASI = {'FSM_049': 'extensive lesion, well segmented',
+        'FSM_030': 'main lesion detected, the other ten missed (1.5 to 912 mm³)',
+        'FSM_046': 'false positive in the enlarged ventricle'}
 
 
 def superficie(maschera: np.ndarray, affine: np.ndarray, passo: int = 1, liscia: float = 0.0):
@@ -93,8 +93,8 @@ def figura(paz: str):
     cervello = superficie(cer, aff, passo=2, liscia=1.0)
     lo, hi = cervello.reshape(-1, 3).min(0), cervello.reshape(-1, 3).max(0)
     fig = plt.figure(figsize=(13, 5.0), dpi=150)
-    viste = [('vista laterale sinistra', 8, 180, 'APSI'), ('vista laterale destra', 8, 0, 'APSI'),
-             ('vista dall\'alto', 89, -90, 'APLR')]
+    viste = [('left lateral view', 8, 180, 'APSI'), ('right lateral view', 8, 0, 'APSI'),
+             ('top view', 89, -90, 'APLR')]
     centro = (lo + hi) / 2
     # lettere di orientamento poste fuori dal cervello lungo gli assi RAS: la proiezione le mette
     # nel punto giusto di ogni vista
@@ -127,13 +127,13 @@ def figura(paz: str):
         ax.set_axis_off()
         ax.set_title(titolo, fontsize=10, color=GRIGIO)
     n = {k: len(v) for k, v in cat.items()}
-    fig.suptitle(f'{paz} (test) — {CASI[paz]}\nmodello Z: Dice {riep["dice"]:.2f}, lesioni trovate '
-                 f'{riep["lesioni_rilevate"]}, falsi positivi {riep["falsi_positivi"]}; lesione annotata '
-                 f'{pp.mm3(riep["mm3_vero"])}, predetta {pp.mm3(riep["mm3_predetto"])}',
+    fig.suptitle(f'{paz} (test) — {CASI[paz]}\nmodel Z: Dice {riep["dice"]:.2f}, lesions detected '
+                 f'{riep["lesioni_rilevate"]}, false positives {riep["falsi_positivi"]}; annotated lesion '
+                 f'{pp.mm3(riep["mm3_vero"])}, predicted {pp.mm3(riep["mm3_predetto"])}',
                  fontsize=12, color=INCHIOSTRO, y=0.98)
     leg = [Line2D([], [], marker='s', ls='', markersize=10, color=COL[k], label=f'{NOME[k]} ({n[k]})') for k in COL]
     leg.append(Line2D([], [], marker='o', ls='', markersize=7, color=GRIGIO, markeredgecolor='white',
-                      label=f'sfera: componente sotto {PICCOLA_MM3} mm³, ingrandita'))
+                      label=f'sphere: component below {PICCOLA_MM3} mm³, enlarged'))
     fig.legend(handles=leg, loc='lower center', ncol=4, frameon=False, fontsize=10, labelcolor=INCHIOSTRO)
     fig.subplots_adjust(left=0, right=1, top=0.84, bottom=0.07, wspace=0)
     out = FIG / f'3d_506_{paz}.png'

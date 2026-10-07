@@ -36,9 +36,9 @@ FIG = PROGETTO / 'reports/figures/aincp'
 INK, INK2 = '#0b0b0b', '#52514e'
 
 VARIANTI = [
-    ('da zero\n(riferimento)', 'nnUNetTrainerWandb_250ep_arresto50'),
-    ('Proposta B\ncanale FLAIR a zero', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
-    ('Proposta B\nfiltro duplicato', 'nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50'),
+    ('from scratch\n(reference)', 'nnUNetTrainerWandb_250ep_arresto50'),
+    ('from ATLAS\nFLAIR channel initialised to zero', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
+    ('from ATLAS\nT1 filter duplicated', 'nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50'),
 ]
 
 
@@ -87,8 +87,8 @@ def main():
     for c, (etichetta, _) in enumerate(VARIANTI):
         fig.text((c + .5) / nc, .985, etichetta, ha='center', va='top', fontsize=10.5,
                  color=INK, fontweight='bold', linespacing=1.4)
-    fig.legend(handles=[Line2D([], [], color=VERDE, lw=2, label='riferimento (clinico)'),
-                        Line2D([], [], color=ROSSO, lw=2, label='predizione')],
+    fig.legend(handles=[Line2D([], [], color=VERDE, lw=2, label='reference (clinician)'),
+                        Line2D([], [], color=ROSSO, lw=2, label='prediction')],
                frameon=False, ncol=2, loc='lower center', fontsize=9.5, bbox_to_anchor=(.5, .0))
     FIG.mkdir(parents=True, exist_ok=True)
     fig.savefig(FIG / 'predizioni_504.png', dpi=110, facecolor='white')

@@ -41,13 +41,13 @@ D = 'Dataset531_UNION_D'
 TR = 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'
 
 CLASSI = [
-    (1, 'lesione',         '#e34948'),
-    (2, 'liquido (CSF)',   '#2a78d6'),
-    (3, 'sostanza grigia', '#1baf7a'),
-    (4, 'sostanza bianca', '#eda100'),
-    (5, 'grigia profonda', '#e87ba4'),
-    (6, 'tronco',          '#4a3aa7'),
-    (7, 'cervelletto',     '#eb6834'),
+    (1, 'lesion',           '#e34948'),
+    (2, 'CSF',              '#2a78d6'),
+    (3, 'grey matter',      '#1baf7a'),
+    (4, 'white matter',     '#eda100'),
+    (5, 'deep grey matter', '#e87ba4'),
+    (6, 'brainstem',        '#4a3aa7'),
+    (7, 'cerebellum',       '#eb6834'),
 ]
 CMAP = ListedColormap(['#00000000'] + [c for _, _, c in CLASSI])
 NORM = BoundaryNorm(np.arange(-0.5, 8.5), CMAP.N)
@@ -86,15 +86,15 @@ def main():
     fig, assi = plt.subplots(len(casi), 3, figsize=(11, 3.9 * len(casi)), facecolor='white')
     for r, caso in enumerate(casi):
         img = carica(RAW / D / 'imagesTr' / f'{caso}_0000.nii.gz').astype(np.float32)
-        gt = carica(PREP / D / 'gt_segmentations' / f'{caso}.nii.gz')
+        gt = carica(PROGETTO / 'nnUNet/nnUNet_raw' / D / 'labelsTr' / f'{caso}.nii.gz')   # = gt_segmentations, cancellate per spazio
         pred = carica(RES / D / TR / 'fold_0' / 'validation' / f'{caso}.nii.gz')
         # Per DBB si guarda al centro del cervello; per gli altri dove c'e' la lesione.
         z = (int(np.argmax((gt == 1).sum(axis=(0, 1)))) if (gt == 1).any()
              else int(np.argmax((gt > 0).sum(axis=(0, 1)))))
         lo, hi = finestra(img[:, :, z])
-        for c, (dati, titolo) in enumerate(((None, 'immagine T1'),
-                                            (gt, 'riferimento manuale'),
-                                            (pred, 'predizione del modello unico'))):
+        for c, (dati, titolo) in enumerate(((None, 'T1 image'),
+                                            (gt, 'reference'),
+                                            (pred, 'prediction of the single model'))):
             ax = assi[r, c]
             ax.imshow(np.rot90(img[:, :, z]), cmap='gray', vmin=lo, vmax=hi)
             if dati is not None:
@@ -103,9 +103,9 @@ def main():
                           alpha=.55, interpolation='nearest')
             ax.set_title(titolo, fontsize=10)
             ax.axis('off')
-        sorgente = {'dbb': 'DBB — pediatrico, riferimento a 6 tessuti',
-                    'atlas': 'ATLAS — riferimento: solo la lesione',
-                    'wmh': 'WMH — riferimento: solo la lesione'}[caso.split('_')[0]]
+        sorgente = {'dbb': 'DBB — paediatric, 6-tissue reference',
+                    'atlas': 'ATLAS — reference: lesion only',
+                    'wmh': 'WMH — reference: lesion only'}[caso.split('_')[0]]
         assi[r, 0].annotate(sorgente, xy=(0, 0.5), xycoords='axes fraction', xytext=(-13, 0),
                             textcoords='offset points', rotation=90, va='center', ha='center',
                             fontsize=9.5, fontweight='bold', color='#333')
@@ -113,9 +113,9 @@ def main():
     fig.legend(handles=[Patch(facecolor=c, label=n) for _, n, c in CLASSI],
                loc='lower center', ncol=4, frameon=False, fontsize=10,
                bbox_to_anchor=(0.5, 0.004))
-    fig.suptitle('Il modello unico ha imparato a riconoscere da quale dataset viene l\'immagine\n'
-                 'sui casi pediatrici predice i tessuti, su quelli adulti soltanto la lesione: '
-                 'mai entrambi',
+    fig.suptitle('The single model has learned to recognise which dataset an image comes from\n'
+                 'on paediatric cases it predicts the tissues, on adult cases only the lesion: '
+                 'never both',
                  fontsize=12.5)
     fig.tight_layout(rect=(0.012, 0.05, 1, 0.95), h_pad=1.3)
     out = PROGETTO / 'reports' / 'figures' / 'modello_unico_7_classi.png'

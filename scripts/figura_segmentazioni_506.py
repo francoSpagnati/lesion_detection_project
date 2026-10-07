@@ -44,20 +44,21 @@ RUN = (PROGETTO / 'nnUNet/nnUNet_results/Dataset506_AINCP_FINALE'
 OUT = PROGETTO / 'reports/figures/aincp'
 BLU, ARANCIO = '#2a78d6', '#eb6834'
 INK, INK2, FONDO = '#0b0b0b', '#52514e', '#fcfcfb'
-DETTAGLIO = {'FSM_028': 'lesione estesa: contorno quasi esatto; le 7 lesioni mancate sono frammenti da 2 a 23 mm³',
-             'FSM_056': 'lesione media, cavità più gliosi: il grosso c\'è, il disaccordo è sui bordi',
-             'FSM_041': 'gliosi sottile attorno al ventricolo: quasi tutta mancata',
-             'FSM_033': 'l\'unica lesione mancata del tutto'}
+DETTAGLIO = {'FSM_028': 'extensive lesion: nearly exact outline; the 7 missed lesions are fragments of 2 to 23 mm³',
+             'FSM_056': 'medium lesion, cavity plus gliosis: the bulk is found, the disagreement is at the borders',
+             'FSM_041': 'thin periventricular gliosis: almost entirely missed',
+             'FSM_033': 'the only lesion missed completely'}
 # sul test: il caso in cui Z inventa una lesione (centrato sulla componente falsa piu' grande) e il
 # caso dell'altro centro, dove Z fa meglio delle ricette pre-addestrate
-DETTAGLIO_TEST = {'FSM_046': ('il falso positivo grande di Z sul test', 'fp'),
-                  'FSM_049': ('l\'unico paziente di un altro centro: lesione di 196 847 mm³', 'ref')}
+DETTAGLIO_TEST = {'FSM_046': ('the large false positive of Z on the test set', 'fp'),
+                  'FSM_049': ('the only test patient from another centre: a 196,847 mm³ lesion', 'ref')}
 # cv (fuori-fold sui 12) oppure test (insieme dei 5 fold sui 5 di test): impostato in main()
 MODO = {'prob': RUN / 'prob_nativa', 'val': 'cv', 'prefisso': 'segmentazioni_506',
-        'titolo': 'sui 12 pazienti di addestramento, predizioni fuori-fold'}
+        'titolo': 'on the 12 development patients, out-of-fold predictions'}
 # asse della fetta -> etichette (sinistra, destra, basso, alto) dopo il riorientamento in LAS
 ETICHETTE = {0: ('P', 'A', 'I', 'S'), 1: ('R', 'L', 'I', 'S'), 2: ('R', 'L', 'P', 'A')}
-NOME_ASSE = {0: 'sagittale', 1: 'coronale', 2: 'assiale'}
+NOME_ASSE = {0: 'sagittal', 1: 'coronal', 2: 'axial'}
+STRATO_EN = {'altri centri': 'other centre'}
 
 
 def las(vol, aff):
@@ -114,14 +115,14 @@ def pannello(ax, v, chiave, asse, i, rq, vmax, etichette=True):
 
 
 def legenda(fig, y=0.995, x=0.995, loc='upper right', ncol=1):
-    fig.legend(handles=[Line2D([], [], color=BLU, lw=2.4, label='annotazione (verità)'),
-                        Line2D([], [], color=ARANCIO, lw=2.4, ls='--', label='predizione di Z, dopo il postprocessing')],
+    fig.legend(handles=[Line2D([], [], color=BLU, lw=2.4, label='annotation (reference)'),
+                        Line2D([], [], color=ARANCIO, lw=2.4, ls='--', label='prediction of Z, after post-processing')],
                loc=loc, bbox_to_anchor=(x, y), frameon=False, fontsize=11, labelcolor=INK, ncol=ncol)
 
 
 def descrizione(q):
     ril = sum(l['rilevata'] for l in q['lesioni'])
-    return f"Dice {q['dice']:.2f} · lesioni {ril}/{len(q['lesioni'])} · falsi positivi {q['fp']}"
+    return f"Dice {q['dice']:.2f} · lesions {ril}/{len(q['lesioni'])} · false positives {q['fp']}"
 
 
 def panoramica(dati, val, par):
@@ -142,19 +143,19 @@ def panoramica(dati, val, par):
             x.set_facecolor(FONDO)
             pannello(x, v, chiave, 2, z, rq, finestra(v[chiave], v['cer'])[1])
             if k == 0:
-                x.set_title(f"{c} · {val[c]['strato']} · {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% del cervello)\n"
+                x.set_title(f"{c} · {STRATO_EN.get(val[c]['strato'], val[c]['strato'])} · {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% of the brain)\n"
                             f"{descrizione(q)}", fontsize=10, color=INK, loc='left')
             x.text(0.02, 0.98 if k else 0.98, 'FLAIR' if k == 0 else 'T1', transform=x.transAxes, ha='left', va='top',
                    color='#ffd84d', fontsize=9, fontweight='bold')
             x.text(0.98, 0.02, f'{lato} mm', transform=x.transAxes, ha='right', va='bottom', color='white', fontsize=8)
     H = 4.3 * righe + 1.2                                   # altezza in pollici: margini fissi in pollici
     alto = 1 - 0.45 / H
-    fig.suptitle(f"Il modello della tesi (Z) {MODO['titolo']}",
+    fig.suptitle(f"The thesis model (Z) {MODO['titolo']}",
                  x=0.012, ha='left', fontsize=16, color=INK, fontweight='bold', y=0.997)
-    fig.text(0.012, alto, f"Fetta assiale con più lesione, ritagliata attorno a lesione e predizione (lato del riquadro in "
-             f"basso a destra: i casi piccoli sono ingranditi). Postprocessing: soglia {par['t']}, volume minimo "
-             f"{par['vmin']} mm³.\nOrdinati per percentuale di cervello lesionato. Convenzione radiologica: la destra del "
-             'paziente è a sinistra.', ha='left', va='top', fontsize=10.5, color=INK2)
+    fig.text(0.012, alto, f"Axial slice with the most lesion, cropped around lesion and prediction (crop side at the bottom "
+             f"right: small cases are enlarged). Post-processing: threshold {par['t']}, minimum volume "
+             f"{par['vmin']} mm³.\nSorted by percentage of lesioned brain. Radiological convention: the patient's "
+             'right is on the left.', ha='left', va='top', fontsize=10.5, color=INK2)
     legenda(fig, 1 - 0.65 / H)
     fig.tight_layout(rect=(0, 0, 1, 1 - 1.05 / H), h_pad=2.0, w_pad=0.8)
     f = OUT / f"{MODO['prefisso']}_panoramica.png"
@@ -180,13 +181,13 @@ def dettaglio(c, v, q, strato, nota, centro_su='ref'):
         for r, chiave in enumerate(('flair', 't1')):
             x = ax[r, col]
             pannello(x, v, chiave, asse, i, rq, finestra(v[chiave], v['cer'])[1])
-            x.set_title(f"{'FLAIR' if r == 0 else 'T1'} · {NOME_ASSE[asse]}, fetta {i + 1}", fontsize=10.5,
+            x.set_title(f"{'FLAIR' if r == 0 else 'T1'} · {NOME_ASSE[asse]}, slice {i + 1}", fontsize=10.5,
                         color=INK2, loc='left')
     fig.suptitle(f'{c} — {nota}', x=0.012, ha='left', fontsize=15, color=INK, fontweight='bold', y=0.995)
-    fig.text(0.012, 0.952, f"{strato} · lesione {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% del cervello), predetta "
-             f"{pp.mm3(q['mm3_pred'])} · {descrizione(q)}.\nFette passanti per "
-             f"{'la lesione' if centro_su == 'ref' else 'la componente predetta falsa più grande'}, ritagliate attorno. "
-             'Convenzione radiologica: la destra del paziente è a sinistra.',
+    fig.text(0.012, 0.952, f"{STRATO_EN.get(strato, strato)} · lesion {pp.mm3(q['mm3_vero'])} ({q['perc_vera']:.2f}% of the brain), predicted "
+             f"{pp.mm3(q['mm3_pred'])} · {descrizione(q)}.\nSlices through "
+             f"{'the lesion' if centro_su == 'ref' else 'the largest false-positive component'}, cropped around it. "
+             'Radiological convention: the patient\'s right is on the left.',
              ha='left', va='top', fontsize=10.5, color=INK2)
     legenda(fig, y=0.9, x=0.005, loc='upper left', ncol=2)
     fig.tight_layout(rect=(0, 0, 1, 0.86), h_pad=2.5, w_pad=1.0)
@@ -200,7 +201,7 @@ def main():
     global DETTAGLIO
     if '--test' in sys.argv:
         MODO.update(prob=RUN / 'test_insieme' / 'prob_nativa', val='test', prefisso='segmentazioni_506_test',
-                    titolo='sui 5 pazienti di test, insieme dei 5 modelli dei fold')
+                    titolo='on the 5 test patients, ensemble of the 5 fold models')
         DETTAGLIO = DETTAGLIO_TEST
     else:
         DETTAGLIO = {c: (n, 'ref') for c, n in DETTAGLIO.items()}

@@ -22,9 +22,9 @@ import torch
 
 PROGETTO = Path(__file__).resolve().parent.parent
 R = PROGETTO / 'nnUNet/nnUNet_results/Dataset506_AINCP_FINALE'
-RICETTE = [('Z, da zero (il modello della tesi)', 'nnUNetTrainerWandb_250ep_dropmod30_arresto50'),
-           ('A, da ATLAS con primo strato espanso', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50'),
-           ('D, dal pretraining congiunto ATLAS + WMH', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c')]
+RICETTE = [('Z, from scratch (the thesis model)', 'nnUNetTrainerWandb_250ep_dropmod30_arresto50'),
+           ('A, from ATLAS with expanded first layer', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50'),
+           ('D, from joint ATLAS + WMH pretraining', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c')]
 BLU, ARANCIO = '#2a78d6', '#eb6834'          # stessa coppia validata delle altre figure AInCP
 INK, INK2, GRIGIO, FONDO = '#0b0b0b', '#52514e', '#c9c8c3', '#fcfcfb'
 OUT = PROGETTO / 'reports/figures/aincp/curve_506.png'
@@ -56,7 +56,7 @@ def main():
             x.plot(ep, d['val'], color=ARANCIO, lw=1.6, ls='--')
             x.plot([b], [d['val'][b]], 'o', ms=7, color=ARANCIO, mec=FONDO, mew=2)
             x.axvline(b, color=ARANCIO, lw=0.8, alpha=0.6)
-            x.text(b + 3, 0.0, f'migliore: epoca {b}', ha='left', va='top', fontsize=8.5, color=INK2)
+            x.text(b + 3, 0.0, f'best: epoch {b}', ha='left', va='top', fontsize=8.5, color=INK2)
             x.set_xlim(0, 200)
             x.set_ylim(-0.9, 0.05)
             x.grid(axis='y', color=GRIGIO, lw=0.6, alpha=0.6)
@@ -68,24 +68,24 @@ def main():
             if r == 0:
                 x.set_title(f'fold {f}', fontsize=11, color=INK, loc='left')
             if f == 0:
-                x.set_ylabel(nome.split(',')[0] + '\nperdita (Dice + CE)', fontsize=10, color=INK)
+                x.set_ylabel(nome.split(',')[0] + '\nloss (Dice + CE)', fontsize=10, color=INK)
             if r == 2:
-                x.set_xlabel('epoca', fontsize=9.5, color=INK2)
+                x.set_xlabel('epoch', fontsize=9.5, color=INK2)
             righe.append(f"| {nome.split(',')[0]} | {f} | {len(ep)} | {b} | {d['train'][b]:.3f} | {d['val'][b]:.3f} | "
                          f"{d['val'][-1]:.3f} | {d['val'][-1] - d['val'][b]:+.3f} | {d['lr0']:.0e} | {d['sec']:.0f} |")
     # etichette dirette nel primo pannello, oltre alla legenda
-    ax[0, 0].text(30, -0.80, 'addestramento', color=BLU, fontsize=9, fontweight='bold')
-    ax[0, 0].text(30, -0.36, 'validazione', color=ARANCIO, fontsize=9, fontweight='bold')
+    ax[0, 0].text(30, -0.80, 'training', color=BLU, fontsize=9, fontweight='bold')
+    ax[0, 0].text(30, -0.36, 'validation', color=ARANCIO, fontsize=9, fontweight='bold')
     from matplotlib.lines import Line2D
     from matplotlib.patches import Patch
-    fig.legend(handles=[Line2D([], [], color=BLU, lw=2, label='perdita di addestramento'),
-                        Line2D([], [], color=ARANCIO, lw=2, ls='--', label='perdita di validazione (i 2–3 pazienti del fold)'),
-                        Patch(color='#efeeea', label='50 epoche di pazienza dopo il minimo: scartate')],
+    fig.legend(handles=[Line2D([], [], color=BLU, lw=2, label='training loss'),
+                        Line2D([], [], color=ARANCIO, lw=2, ls='--', label='validation loss (the 2–3 patients of the fold)'),
+                        Patch(color='#efeeea', label='50 patience epochs after the minimum: discarded')],
                loc='upper left', bbox_to_anchor=(0.005, 0.935), ncol=3, frameon=False, fontsize=10.5, labelcolor=INK)
-    fig.suptitle('Dataset506: curve di addestramento dei 15 run — l\'arresto anticipato ferma l\'overfitting',
+    fig.suptitle('Dataset506: training curves of the 15 runs — early stopping halts overfitting',
                  x=0.008, ha='left', fontsize=15, color=INK, fontweight='bold', y=0.995)
-    fig.text(0.008, 0.962, 'Righe: le tre ricette; colonne: i 5 fold. Il punto è l\'epoca con la perdita di validazione minima: '
-             'i suoi pesi sono il modello del fold. Dopo, l\'addestramento scende ancora e la validazione risale.',
+    fig.text(0.008, 0.962, 'Rows: the three recipes; columns: the 5 folds. The dot marks the epoch with the lowest validation loss: '
+             'its weights are the fold model. Afterwards the training loss keeps falling and the validation loss rises.',
              ha='left', va='top', fontsize=10.5, color=INK2)
     fig.tight_layout(rect=(0, 0, 1, 0.9), h_pad=1.2, w_pad=0.6)
     OUT.parent.mkdir(parents=True, exist_ok=True)

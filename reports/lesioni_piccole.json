@@ -1,33 +1,33 @@
 {
- "totale_componenti": 65,
+ "totale_componenti": 135,
  "fasce": [
   {
    "fascia": "< 1 mm³",
-   "componenti": 22,
-   "volume_mm3": 8.0,
-   "intensita_mediana": 0.689,
-   "quota_sopra_1": 0.455
+   "componenti": 45,
+   "volume_mm3": 21.6,
+   "intensita_mediana": 0.739,
+   "quota_sopra_1": 0.444
   },
   {
    "fascia": "1 – 10 mm³",
-   "componenti": 20,
-   "volume_mm3": 71.1,
-   "intensita_mediana": 3.138,
-   "quota_sopra_1": 0.95
+   "componenti": 45,
+   "volume_mm3": 163.5,
+   "intensita_mediana": 3.167,
+   "quota_sopra_1": 0.911
   },
   {
    "fascia": "10 – 100 mm³",
-   "componenti": 8,
-   "volume_mm3": 320.9,
+   "componenti": 18,
+   "volume_mm3": 782.5,
    "intensita_mediana": 3.462,
    "quota_sopra_1": 1.0
   },
   {
    "fascia": "> 100 mm³",
-   "componenti": 15,
-   "volume_mm3": 243888.5,
-   "intensita_mediana": 3.106,
-   "quota_sopra_1": 0.733
+   "componenti": 27,
+   "volume_mm3": 751707.1,
+   "intensita_mediana": 3.016,
+   "quota_sopra_1": 0.778
   }
  ],
  "per_paziente": {
@@ -46,6 +46,11 @@
    "sotto_1mm3": 1,
    "sotto_10mm3": 1
   },
+  "FSM_049": {
+   "componenti": 25,
+   "sotto_1mm3": 14,
+   "sotto_10mm3": 23
+  },
   "FSM_056": {
    "componenti": 7,
    "sotto_1mm3": 2,
@@ -61,10 +66,30 @@
    "sotto_1mm3": 1,
    "sotto_10mm3": 3
   },
+  "FSM_028": {
+   "componenti": 11,
+   "sotto_1mm3": 5,
+   "sotto_10mm3": 9
+  },
+  "FSM_036": {
+   "componenti": 17,
+   "sotto_1mm3": 4,
+   "sotto_10mm3": 13
+  },
+  "FSM_035": {
+   "componenti": 5,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 1
+  },
   "FSM_039": {
    "componenti": 2,
    "sotto_1mm3": 0,
    "sotto_10mm3": 1
+  },
+  "FSM_030": {
+   "componenti": 9,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 2
   },
   "FSM_052": {
    "componenti": 5,
@@ -76,8 +101,18 @@
    "sotto_1mm3": 0,
    "sotto_10mm3": 1
   },
+  "FSM_001": {
+   "componenti": 2,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 0
+  },
   "FSM_046": {
    "componenti": 2,
+   "sotto_1mm3": 0,
+   "sotto_10mm3": 0
+  },
+  "FSM_033": {
+   "componenti": 1,
    "sotto_1mm3": 0,
    "sotto_10mm3": 0
   }
@@ -154,74 +189,74 @@
    "intensita_rapporto": 0.003926878795027733
   },
   {
-   "paziente": "FSM_056",
-   "mm3": 0.2197723686695099,
+   "paziente": "FSM_049",
+   "mm3": 0.2160012423992157,
    "voxel": 1,
-   "fenotipo": "ROI_1",
-   "intensita_rapporto": 0.5247524976730347
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.9047619700431824
   },
   {
-   "paziente": "FSM_056",
-   "mm3": 0.4395447373390198,
-   "voxel": 2,
+   "paziente": "FSM_049",
+   "mm3": 0.2160012423992157,
+   "voxel": 1,
    "fenotipo": "ROI_2",
-   "intensita_rapporto": 3.504950523376465
+   "intensita_rapporto": 0.190476194024086
   },
   {
    "paziente": "FSM_054",
    "mm3": 0.4395470917224884,
    "voxel": 2,
    "fenotipo": "ROI_1",
-   "intensita_rapporto": 3.1157586574554443
+   "intensita_rapporto": 2.949416399002075
   },
   {
-   "paziente": "FSM_054",
-   "mm3": 0.6593206375837326,
+   "paziente": "FSM_049",
+   "mm3": 0.8640049695968628,
+   "voxel": 4,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 1.9484127759933472
+  },
+  {
+   "paziente": "FSM_036",
+   "mm3": 0.9999953508377075,
+   "voxel": 1,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 4.942857265472412
+  },
+  {
+   "paziente": "FSM_049",
+   "mm3": 1.5120086967945099,
+   "voxel": 7,
+   "fenotipo": "ROI_2",
+   "intensita_rapporto": 0.5555555820465088
+  },
+  {
+   "paziente": "FSM_030",
+   "mm3": 2.0,
+   "voxel": 2,
+   "fenotipo": "ROI_1",
+   "intensita_rapporto": 0.8978626132011414
+  },
+  {
+   "paziente": "FSM_028",
+   "mm3": 2.9997770190238953,
    "voxel": 3,
    "fenotipo": "ROI_1",
-   "intensita_rapporto": 2.5272374153137207
+   "intensita_rapporto": 4.81879186630249
   },
   {
-   "paziente": "FSM_054",
-   "mm3": 1.098867729306221,
-   "voxel": 5,
+   "paziente": "FSM_036",
+   "mm3": 3.99998140335083,
+   "voxel": 4,
    "fenotipo": "ROI_1",
-   "intensita_rapporto": 3.0
+   "intensita_rapporto": 6.657142639160156
   },
   {
-   "paziente": "FSM_039",
-   "mm3": 1.5384152382612228,
-   "voxel": 7,
+   "paziente": "FSM_028",
+   "mm3": 5.9995540380477905,
+   "voxel": 6,
    "fenotipo": "ROI_1",
-   "intensita_rapporto": 2.592219114303589
-  },
-  {
-   "paziente": "FSM_054",
-   "mm3": 2.197735458612442,
-   "voxel": 10,
-   "fenotipo": "ROI_1",
-   "intensita_rapporto": 2.8657586574554443
-  },
-  {
-   "paziente": "FSM_041",
-   "mm3": 2.2000000327825546,
-   "voxel": 11,
-   "fenotipo": "ROI_1",
-   "intensita_rapporto": 3.632183790206909
-  },
-  {
-   "paziente": "FSM_041",
-   "mm3": 4.000000059604645,
-   "voxel": 20,
-   "fenotipo": "ROI_1",
-   "intensita_rapporto": 3.1666667461395264
-  },
-  {
-   "paziente": "FSM_032",
-   "mm3": 5.200000077486038,
-   "voxel": 26,
-   "fenotipo": "ROI_1",
-   "intensita_rapporto": 2.5574917793273926
+   "intensita_rapporto": 5.53691291809082
   }
  ]
 }

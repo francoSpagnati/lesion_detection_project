@@ -77,9 +77,9 @@ def misura_ingrandimento():
 
 def figura_ingrandimento(righe):
     nomi = [r['soggetto'].split('_')[1] for r in righe]
-    serie = [('previsto dal determinante', 'previsto_%', BLU),
-             ('misurato, solo affine', 'misurato_solo_affine_%', ARANCIO),
-             ('misurato, affine + SyN (la pipeline)', 'misurato_syn_%', ACQUA)]
+    serie = [('predicted by the determinant', 'previsto_%', BLU),
+             ('measured, affine only', 'misurato_solo_affine_%', ARANCIO),
+             ('measured, affine + SyN', 'misurato_syn_%', ACQUA)]
     y = np.arange(len(righe))
     h = 0.26
     fig, ax = plt.subplots(figsize=(9, 5.6))
@@ -88,7 +88,7 @@ def figura_ingrandimento(righe):
         ax.barh(y + (i - 1) * h, v, height=h - 0.03, color=col, label=nome, zorder=3)
     ax.set_yticks(y, [f'FSM_{n}' for n in nomi])
     ax.invert_yaxis()
-    ax.set_xlabel('aumento del volume della lesione passando in MNI (%)', color=INCHIOSTRO_2)
+    ax.set_xlabel('lesion volume increase after registration to the adult template (%)', color=INCHIOSTRO_2)
     ax.xaxis.set_major_formatter(lambda v, _: f'+{v:.0f}%')
     ax.grid(axis='x', color=GRIGLIA, zorder=0)
     ax.axvline(0, color=INCHIOSTRO_2, lw=1)
@@ -101,7 +101,7 @@ def figura_ingrandimento(righe):
     for i, r in enumerate(righe):
         ax.text(r['misurato_solo_affine_%'] + 2, i, f"{r['misurato_solo_affine_%']:+.0f}%",
                 va='center', fontsize=8, color=INCHIOSTRO_2)
-    ax.set_title('Il passaggio a MNI ingrandisce le lesioni, e la matrice lo prevede',
+    ax.set_title('Registration to the adult MNI template scales lesions with the whole brain',
                  loc='left', fontsize=11, color=INCHIOSTRO)
     fig.tight_layout()
     fig.savefig(FIG / 'ingrandimento_mni.png', dpi=150)
@@ -150,8 +150,8 @@ def figura_registrazione():
                 ax.set_title(f.parent.name.replace('_anon', ''), fontsize=10, color=INCHIOSTRO)
     for ax in np.ravel(axes)[3 * len(casi):]:
         ax.set_axis_off()
-    fig.suptitle('T1 di ogni paziente portata in MNI; in giallo i contorni del template adulto '
-                 '(testa e sostanza bianca)', x=0.01, y=0.995, ha='left', fontsize=12,
+    fig.suptitle('T1 of each patient registered to MNI; in yellow the outlines of the adult template '
+                 '(head and white matter)', x=0.01, y=0.995, ha='left', fontsize=12,
                  color=INCHIOSTRO)
     fig.subplots_adjust(top=0.965, bottom=0.005, left=0.005, right=0.995)
     fig.savefig(FIG / 'registrazione_mni.png', dpi=110, bbox_inches='tight',

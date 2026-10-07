@@ -196,6 +196,9 @@ hanno tutte le ROI.
   ingrandito dall'affine 2.15 e 1.77 volte (lesioni periventricolari); negli altri pazienti la lesione
   cresce 0.94–1.89 volte (`pipeline.json`, `det` delle affini in `transforms_ped/`). Le metriche si
   calcolano comunque nel nativo.
+- **Bersaglio a 1 mm** (misura del 7/10, `reports/sopravvivenza_1mm_506.md`): delle 90 lesioni annotate dei 17
+  pazienti (residui ≤ 1 mm³ esclusi) ne scompaiono nel template solo 4, tutte sotto 3 mm³. L'unione delle
+  componenti portate una per una riproduce esattamente `lesione_PED.nii.gz`.
 
 Pipeline e comandi: `scripts/pipeline_aincp.py` (procedura in `obiettivo-e-piano.md`).
 

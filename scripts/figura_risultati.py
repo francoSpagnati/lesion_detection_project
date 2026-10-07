@@ -34,13 +34,13 @@ GRIGLIA, ASSE = '#e1e0d9', '#c3c2b7'
 BLU, ROSSO = '#2a78d6', '#d03b3b'
 
 CONFRONTI = [
-    ('confronto_512_due_canali.md',    'Aggiungere il T1 alla FLAIR\nWMH: 512 contro 501'),
-    ('test_esclusione_1_5T.md',        'Togliere i casi a 1.5 T\nATLAS: 521 contro 502'),
-    ('confronto_522_skullstrip.md',    'Skull stripping\nWMH: 522 contro 501'),
-    ('confronto_523_skullstrip.md',    'Skull stripping\nATLAS: 523 contro 502'),
+    ('confronto_512_due_canali.md',    'Adding T1 to FLAIR\nWMH: 512 vs 501'),
+    ('test_esclusione_1_5T.md',        'Removing the 1.5 T cases\nATLAS: 521 vs 502'),
+    ('confronto_522_skullstrip.md',    'Skull stripping\nWMH: 522 vs 501'),
+    ('confronto_523_skullstrip.md',    'Skull stripping\nATLAS: 523 vs 502'),
 ]
 
-CANALI = [('solo T1', 0.6257), ('FLAIR + T1', 0.7535), ('solo FLAIR', 0.7739)]
+CANALI = [('T1 only', 0.6257), ('FLAIR + T1', 0.7535), ('FLAIR only', 0.7739)]
 
 
 def leggi(nome: str):
@@ -63,9 +63,9 @@ def main():
         ax1.text(v + 0.012, y, f'{v:.3f}', va='center', fontsize=11, color=INK,
                  fontweight='bold')
     ax1.set_xlim(0, 0.92)
-    ax1.set_title('Quanto vale il canale, su WMH\nstessi 16 casi, stessa rete',
+    ax1.set_title('What each input sequence is worth on WMH\nsame 16 cases, same network',
                   fontsize=12, color=INK, loc='left', pad=12)
-    ax1.set_xlabel('Dice di validation', fontsize=9.5, color=INK2)
+    ax1.set_xlabel('validation Dice', fontsize=9.5, color=INK2)
     ax1.xaxis.grid(True, color=GRIGLIA, linewidth=0.8, zorder=0)
     ax1.set_axisbelow(True)
 
@@ -85,7 +85,7 @@ def main():
                  va='center', ha='left', fontsize=10.5,
                  color=INK if significativo else INK2,
                  fontweight='bold' if significativo else 'normal')
-        ax2.text(1.30, i, f'p = {p:.2g}' + ('  significativo' if significativo else ''),
+        ax2.text(1.30, i, f'p = {p:.2g}' + ('  significant' if significativo else ''),
                  transform=ax2.get_yaxis_transform(), va='center', ha='left', fontsize=9.5,
                  color=INK if significativo else MUTO,
                  fontweight='bold' if significativo else 'normal')
@@ -94,10 +94,10 @@ def main():
     ax2.set_yticklabels([et for et, _, _ in dati], fontsize=9.5, color=INK2)
     ax2.set_ylim(-0.6, len(dati) - 0.25)
     ax2.set_xlim(-0.026, 0.014)
-    ax2.set_title('Le quattro modifiche provate dopo le baseline\n'
-                  'differenza di Dice sugli stessi casi, rispetto alla propria baseline',
+    ax2.set_title('The four changes tested after the baselines\n'
+                  'paired Dice difference on the same cases, against each baseline',
                   fontsize=12, color=INK, loc='left', pad=12)
-    ax2.set_xlabel('← peggiora            invariato            migliora →',
+    ax2.set_xlabel('← worse            unchanged            better →',
                    fontsize=9.5, color=INK2)
     ax2.set_xticks([-0.02, -0.01, 0.0, 0.01])
     ax2.xaxis.grid(True, color=GRIGLIA, linewidth=0.8, zorder=0)

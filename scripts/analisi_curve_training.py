@@ -39,15 +39,15 @@ RES = PROGETTO / 'nnUNet' / 'nnUNet_results'
 MODELLI = {
     '501 WMH FLAIR':        ('Dataset501_WMH', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
     '502 ATLAS T1':         ('Dataset502_ATLAS', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
-    '503 DBB tessuti':      ('Dataset503_DBB', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
-    '531 unione D':         ('Dataset531_UNION_D', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
-    '541 da zero, 10 casi': ('Dataset541_SIM_AINCP',
+    '503 DBB tissues':      ('Dataset503_DBB', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
+    '531 union of the three':         ('Dataset531_UNION_D', 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'),
+    '541 from scratch, 10 cases': ('Dataset541_SIM_AINCP',
                              'nnUNetTrainerWandb_250epochs__nnUNetPlans__3d_fullres'),
-    '541 fine-tuning lr 1e-2': ('Dataset541_SIM_AINCP',
+    '541 fine-tuning, lr 1e-2': ('Dataset541_SIM_AINCP',
                                 'nnUNetTrainerWandb_250epochs__nnUNetPlansFT__3d_fullres'),
-    '541 fine-tuning lr 1e-3': ('Dataset541_SIM_AINCP',
+    '541 fine-tuning, lr 1e-3': ('Dataset541_SIM_AINCP',
                                 'nnUNetTrainerWandb_250epochs_lr1e3__nnUNetPlans__3d_fullres'),
-    '541 fine-tuning lr 1e-4': ('Dataset541_SIM_AINCP',
+    '541 fine-tuning, lr 1e-4': ('Dataset541_SIM_AINCP',
                                 'nnUNetTrainerWandb_250epochs_lr1e4__nnUNetPlans__3d_fullres'),
 }
 
@@ -119,28 +119,23 @@ def main():
     assi = np.atleast_1d(assi).ravel()
     for ax, (nome, (tr, va, ps)) in zip(assi, dati.items()):
         e = np.arange(len(tr))
-        ax.plot(e, tr, color=BLU, lw=1.4, label='perdita, training')
-        ax.plot(e, va, color=ARANCIO, lw=1.4, label='perdita, validation')
+        ax.plot(e, tr, color=BLU, lw=1.4, label='training loss')
+        ax.plot(e, va, color=ARANCIO, lw=1.4, label='validation loss')
         i_min = int(np.argmin(va))
         ax.axvline(i_min, color=MUTO, lw=1, ls=':')
-        ax.annotate(f'minimo\nepoca {i_min}', xy=(i_min, va[i_min]), xytext=(6, 14),
+        ax.annotate(f'minimum\nepoch {i_min}', xy=(i_min, va[i_min]), xytext=(6, 14),
                     textcoords='offset points', fontsize=8, color=MUTO)
-        if len(ps):
-            a2 = ax.twinx()
-            a2.plot(np.arange(len(ps)), ps, color=VERDE, lw=1.1, alpha=.75)
-            a2.set_ylabel('pseudo-dice', color=VERDE, fontsize=8.5)
-            a2.tick_params(axis='y', labelsize=8, colors=VERDE)
-            a2.set_ylim(0, 1)
+        # niente pseudo-Dice su un secondo asse y: due scale nello stesso pannello si leggono male
         ax.set_title(nome, fontsize=10.5)
-        ax.set_xlabel('epoca', fontsize=8.5)
-        ax.set_ylabel('perdita', fontsize=8.5)
+        ax.set_xlabel('epoch', fontsize=8.5)
+        ax.set_ylabel('loss (Dice + CE)', fontsize=8.5)
         ax.tick_params(labelsize=8)
         ax.grid(alpha=.25, lw=.7)
     for ax in assi[len(dati):]:
         ax.axis('off')
     assi[0].legend(fontsize=8.5, loc='upper right', frameon=False)
-    fig.suptitle('Curve di training: perdita su dati visti (blu) e non visti (arancio),\n'
-                 'con la pseudo-dice di validation in verde sull\'asse destro', fontsize=12.5)
+    fig.suptitle('Training curves: loss on seen (training) and unseen (validation) data;\n'
+                 'the dotted line marks the epoch with the lowest validation loss', fontsize=12.5)
     fig.tight_layout(rect=(0, 0, 1, 0.955), h_pad=1.6)
     out_fig = PROGETTO / 'reports' / 'figures' / 'curve_training.png'
     fig.savefig(out_fig, dpi=140, facecolor='white')

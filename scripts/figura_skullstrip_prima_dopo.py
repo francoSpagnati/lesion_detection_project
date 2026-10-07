@@ -35,13 +35,13 @@ VERDE, ROSSO, GIALLO = '#00d67d', '#ff4d4d', '#ffd93d'
 # quella sull'intero volume, misurata da lesioni_fuori_maschera.py; quella stampata sul pannello e'
 # della singola fetta mostrata, e le due non coincidono.
 CASI = [
-    ('ATLAS: il peggiore\ndi tutti i 556 — 6.5%', 'Dataset502_ATLAS',
+    ('ATLAS: worst case\nof all 556 — 6.5%', 'Dataset502_ATLAS',
      'Dataset523_ATLAS_SS', 'sub-r038s061'),
-    ('ATLAS: secondo\npeggiore — 5.2%', 'Dataset502_ATLAS', 'Dataset523_ATLAS_SS',
+    ('ATLAS: second\nworst — 5.2%', 'Dataset502_ATLAS', 'Dataset523_ATLAS_SS',
      'sub-r040s044'),
-    ('ATLAS: caso tipico\nperdita nulla', 'Dataset502_ATLAS', 'Dataset523_ATLAS_SS',
+    ('ATLAS: typical case\nno loss', 'Dataset502_ATLAS', 'Dataset523_ATLAS_SS',
      'sub-r001s002'),
-    ('WMH: perdita nulla\nsu tutti e 79', 'Dataset501_WMH', 'Dataset522_WMH_SS',
+    ('WMH: no loss\nin all 79 cases', 'Dataset501_WMH', 'Dataset522_WMH_SS',
      'Amsterdam_GE3T_100'),
 ]
 
@@ -89,9 +89,9 @@ def main():
         dentro, fuori = l & m, l & ~m
         persa = fuori.sum() / max(l.sum(), 1)
 
-        etichette = ('originale, con il confine della maschera',
-                     'dopo il ritaglio: cio\' che la rete vede',
-                     f'lesione annotata — in questa fetta ne perde {persa:.1%}')
+        etichette = ('original, with the mask boundary',
+                     'after stripping: what the network sees',
+                     f'annotated lesion — {persa:.1%} lost in this slice')
         for c, (dati, sotto) in enumerate(zip((a, b, a), etichette)):
             ax = assi[r, c]
             ax.imshow(np.rot90(dati), cmap='gray', vmin=0, vmax=1)
@@ -109,9 +109,9 @@ def main():
                             textcoords='offset points', rotation=90, va='center', ha='center',
                             fontsize=9.5, fontweight='bold', linespacing=1.5)
 
-    fig.suptitle('SynthStrip su WMH e ATLAS: cosa viene tolto, e cosa costa\n'
-                 'giallo = confine della maschera    verde = lesione conservata    '
-                 'rosso = lesione persa', fontsize=12.5)
+    fig.suptitle('SynthStrip on WMH and ATLAS: what is removed, and at what cost\n'
+                 'yellow = mask boundary    green = lesion kept    '
+                 'red = lesion lost', fontsize=12.5)
     fig.tight_layout(rect=(0.015, 0, 1, 0.955), h_pad=1.2)
     out = PROGETTO / 'reports' / 'figures' / 'skullstrip_prima_dopo.png'
     fig.savefig(out, dpi=140, facecolor='white')

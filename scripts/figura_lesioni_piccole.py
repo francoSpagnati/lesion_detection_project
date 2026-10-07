@@ -30,6 +30,7 @@ singola componente invece che all'intera ROI.
 """
 import json
 import re
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -47,7 +48,7 @@ FIGURE = PROGETTO / 'reports/figures/aincp'
 # colori che hanno in tutte le altre figure, cosi' un lettore che ha visto la panoramica li
 # riconosce; il grigio chiaro e' il ventricolo, che non entra nella maschera.
 COL = {'ROI_1': '#2a78d6', 'ROI_2': '#eb6834', 'ROI_4': '#1baf7a', 'ROI_3': '#c3c2b7'}
-NOME = {'ROI_1': 'gliosi', 'ROI_2': 'cistica', 'ROI_4': 'encefalomalacia'}
+NOME = {'ROI_1': 'gliosis', 'ROI_2': 'cystic lesion', 'ROI_4': 'encephalomalacia'}
 LESIONE = ['ROI_1', 'ROI_2', 'ROI_4']
 INK, INK2, GRIGLIA = '#0b0b0b', '#52514e', '#e6e5e1'
 STRUTTURA = np.ones((3, 3, 3), dtype=bool)
@@ -81,10 +82,13 @@ def riferimento_tessuto(vol, maschere):
 def raccogli():
     """Una riga per componente connessa, su tutti i soggetti."""
     righe, volumi = [], {}
-    for d in sorted(LOTTO.glob('FSM_*_anon')):
-        co = d / 'COREGISTERED'
-        fl_file = next(iter(co.glob('*_FLAIR_original.nii.gz')), None)
-        roi = trova_roi(co)
+    # tutti i 17 pazienti, con la stessa scelta dei file della pipeline (nomi irregolari, FSM_030)
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import pipeline_aincp as pa
+    for paz, c in sorted(pa.trova_casi().items()):
+        d = Path(c['FLAIR']).parent.parent
+        fl_file = Path(c['FLAIR'])
+        roi = {r: f for r, f in c['roi'].items()}
         if fl_file is None or not roi:
             continue
         img = nib.load(str(fl_file))
@@ -111,6 +115,7 @@ def raccogli():
                 'intensita_rapporto': float(np.median(flair[m]) / rif) if rif else float('nan'),
                 'centro': [float(c) for c in centri[i - 1]],
                 'file_flair': str(fl_file),
+                'spaziatura': [float(s) for s in img.header.get_zooms()[:3]],
             })
         volumi[d.name] = mm3
     righe.sort(key=lambda r: r['mm3'])
@@ -149,27 +154,30 @@ def figura_esempi(righe, n_col=5, n_riga=4, meta_lato=18):
         fetta = np.rot90(vol[z])
         # rot90 manda (y, x) in (X - 1 - x, y): il centro va convertito nello stesso sistema
         ry, rx = vol.shape[2] - 1 - x, y
-        y0, y1 = max(ry - meta_lato, 0), min(ry + meta_lato, fetta.shape[0])
-        x0, x1 = max(rx - meta_lato, 0), min(rx + meta_lato, fetta.shape[1])
+        # mezzo lato in mm, convertito per asse: il secondo lotto ha voxel fino a 1 mm
+        my = int(round(meta_lato / 2 / r['spaziatura'][2]))
+        mx = int(round(meta_lato / 2 / r['spaziatura'][1]))
+        y0, y1 = max(ry - my, 0), min(ry + my, fetta.shape[0])
+        x0, x1 = max(rx - mx, 0), min(rx + mx, fetta.shape[1])
         crop = fetta[y0:y1, x0:x1]
         lo, hi = np.percentile(crop[crop > 0], [2, 99]) if (crop > 0).any() else (0, 1)
         ax.imshow(crop, cmap='gray', vmin=lo, vmax=hi, interpolation='nearest')
         # la componente e' di pochi voxel: un contorno sarebbe invisibile, un cerchio la indica
         # senza coprirla, che e' il punto -- il clinico deve vedere il tessuto sotto
-        ax.add_patch(plt.Circle((rx - x0, ry - y0), 5.5, fill=False, lw=1.6,
+        ax.add_patch(plt.Circle((rx - x0, ry - y0), 2.75 / r['spaziatura'][1], fill=False, lw=1.6,
                                 color=COL[r['fenotipo']]))
         ax.set_title(f"{r['paziente']}  ·  {r['mm3']:.2f} mm³  ·  {r['voxel']} vox\n"
-                     f"{NOME[r['fenotipo']]}  ·  intensità {r['intensita_rapporto']:.2f}×",
+                     f"{NOME[r['fenotipo']]}  ·  intensity {r['intensita_rapporto']:.2f}×",
                      fontsize=8.5, color=INK, linespacing=1.5, pad=5)
         ax.set_axis_off()
     for ax in np.ravel(axes)[len(scelte):]:
         ax.set_axis_off()
-    fig.suptitle('Le componenti annotate più piccole, ingrandite  ·  ogni riquadro è circa '
-                 '18 × 18 mm di FLAIR', x=.008, y=.985, ha='left', fontsize=12.5,
+    fig.suptitle('The smallest annotated components, enlarged  ·  each crop is about '
+                 '18 × 18 mm of FLAIR', x=.008, y=.985, ha='left', fontsize=12.5,
                  fontweight='bold', color=INK)
-    fig.text(.008, .012, 'Il cerchio indica la componente senza coprirla. «intensità» è il '
-                         'rapporto fra il segnale della componente e quello del tessuto sano '
-                         'dello stesso paziente: la gliosi brilla, quindi dovrebbe stare sopra 1.',
+    fig.text(.008, .012, 'The circle marks the component without hiding it. "Intensity" is the '
+                         'ratio between the signal of the component and that of healthy tissue '
+                         'in the same patient: gliosis is bright, so it should lie above 1.',
              fontsize=9, color=INK2)
     fig.savefig(FIGURE / 'lesioni_piccole_esempi.png', dpi=140, facecolor='white')
     plt.close(fig)
@@ -187,13 +195,13 @@ def figura_intensita(righe):
                    s=46, color=COL[r], label=NOME[r], alpha=.85,
                    edgecolor='white', linewidth=1.2, zorder=3)   # anello di 2px sulle sovrapposizioni
     ax.axhline(1.0, color=INK2, lw=1.2, zorder=2)
-    ax.text(ax.get_xlim()[1], 1.02, 'come il tessuto sano', ha='right', va='bottom',
+    ax.text(1500, 0.94, 'same as healthy tissue', ha='center', va='top',
             fontsize=9, color=INK2)
     ax.axvline(10, color=INK2, lw=1, ls=(0, (4, 3)), zorder=2)
     ax.text(10, ax.get_ylim()[1], ' 10 mm³ ', ha='left', va='top', fontsize=9, color=INK2)
     ax.set_xscale('log')
-    ax.set_xlabel('volume della componente (mm³, scala logaritmica)', color=INK2)
-    ax.set_ylabel('intensità FLAIR rispetto al tessuto sano', color=INK2)
+    ax.set_xlabel('component volume (mm³, logarithmic scale)', color=INK2)
+    ax.set_ylabel('FLAIR intensity relative to healthy tissue', color=INK2)
     ax.grid(color=GRIGLIA, zorder=0)
     for s in ('top', 'right'):
         ax.spines[s].set_visible(False)
@@ -201,7 +209,7 @@ def figura_intensita(righe):
         ax.spines[s].set_color(GRIGLIA)
     ax.tick_params(colors=INK2, length=0)
     ax.legend(frameon=False, loc='upper left', fontsize=9.5)
-    ax.set_title('Le componenti piccole hanno il segnale di una lesione?',
+    ax.set_title('Do small components carry the signal of a lesion?',
                  loc='left', fontsize=12, fontweight='bold', color=INK, pad=10)
     fig.tight_layout()
     fig.savefig(FIGURE / 'lesioni_piccole_intensita.png', dpi=140, facecolor='white')

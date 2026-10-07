@@ -49,7 +49,7 @@ FIG = PROGETTO / 'reports/figures/aincp'
 SOGLIA_MM3 = 1.0
 STRUTTURA = np.ones((3, 3, 3), dtype=bool)
 LESIONE = ('ROI_1', 'ROI_2', 'ROI_4')
-NOME = {'ROI_1': 'gliosi', 'ROI_2': 'cistica', 'ROI_4': 'encefalomalacia'}
+NOME = {'ROI_1': 'gliosis', 'ROI_2': 'cystic lesion', 'ROI_4': 'encephalomalacia'}
 INK, INK2 = '#0b0b0b', '#52514e'
 
 
@@ -123,8 +123,8 @@ def figura(righe, n_col=6, lato_mm=24):
         a, b = j0 - max(j0 - hj, 0), k0 - max(k0 - hk, 0)
         col = '#d6452b' if r['fuori_dal_cervello'] else '#eda100'
         ax.add_patch(Circle((a, sl.shape[1] - 1 - b), radius=4 / zj, fill=False, lw=1.6, ec=col))
-        ax.set_title(f"{r['paziente']} · {r['fenotipo']}\nfetta sagittale {r['i1']} · ({r['j1']}, {r['k1']})"
-                     + ('\nFUORI DAL CERVELLO' if r['fuori_dal_cervello'] else f"\n{r['voxel']} voxel · {r['mm3']} mm³"),
+        ax.set_title(f"{r['paziente']} · {r['fenotipo']}\nsagittal slice {r['i1']} · ({r['j1']}, {r['k1']})"
+                     + ('\nOUTSIDE THE BRAIN' if r['fuori_dal_cervello'] else f"\n{r['voxel']} voxel{'s' if r['voxel'] > 1 else ''} · {r['mm3']} mm³"),
                      fontsize=7.8, color=INK, loc='left', linespacing=1.35, pad=3)
         ax.set_axis_off()
     for ax in axes.ravel()[n:]:

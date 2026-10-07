@@ -1,0 +1,627 @@
+{
+ "FSM_001": {
+  "lesioni": [
+   {
+    "paziente": "FSM_001",
+    "mm3": 103.35937323980033,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 120
+   },
+   {
+    "paziente": "FSM_001",
+    "mm3": 84.21874856576324,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 57
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_028": {
+  "lesioni": [
+   {
+    "paziente": "FSM_028",
+    "mm3": 86.99353355207808,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 150
+   },
+   {
+    "paziente": "FSM_028",
+    "mm3": 155608.43323418841,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 242473
+   },
+   {
+    "paziente": "FSM_028",
+    "mm3": 5.999554038074351,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 5
+   },
+   {
+    "paziente": "FSM_028",
+    "mm3": 2.9997770190371753,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 0
+   },
+   {
+    "paziente": "FSM_028",
+    "mm3": 3.999702692049567,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 4
+   },
+   {
+    "paziente": "FSM_028",
+    "mm3": 3.999702692049567,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 3
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_030": {
+  "lesioni": [
+   {
+    "paziente": "FSM_030",
+    "mm3": 381.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 896
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 145.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 279
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 3540.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 8678
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 7.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 12
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 2.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 65.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 145
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 10.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 13
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 990.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2920
+   },
+   {
+    "paziente": "FSM_030",
+    "mm3": 11.0,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 16
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_032": {
+  "lesioni": [
+   {
+    "paziente": "FSM_032",
+    "mm3": 123461.80183972418,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 194210
+   },
+   {
+    "paziente": "FSM_032",
+    "mm3": 4.400000065565109,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 13
+   },
+   {
+    "paziente": "FSM_032",
+    "mm3": 5.200000077486038,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 18
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_033": {
+  "lesioni": [
+   {
+    "paziente": "FSM_033",
+    "mm3": 709.7719042196325,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1891
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_035": {
+  "lesioni": [
+   {
+    "paziente": "FSM_035",
+    "mm3": 1117.192611265619,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2362
+   },
+   {
+    "paziente": "FSM_035",
+    "mm3": 67.0115532272126,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 138
+   },
+   {
+    "paziente": "FSM_035",
+    "mm3": 1.0001724362270537,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_035",
+    "mm3": 39215.761052026544,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 63596
+   },
+   {
+    "paziente": "FSM_035",
+    "mm3": 50.00862181135268,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 75
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_036": {
+  "lesioni": [
+   {
+    "paziente": "FSM_036",
+    "mm3": 108920.49360859394,
+    "fenotipo": "ROI_4",
+    "voxel_a_1mm": 180384
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 58.999725699424744,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 135
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 3.99998140335083,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 8
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 3.99998140335083,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 7
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 17.999916315078735,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 44
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 3.99998140335083,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 8
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 4.999976754188538,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 12
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 1.999990701675415,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 5
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 9.999953508377075,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 27
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 5.999972105026245,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 16
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 7.99996280670166,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 23
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 165.99922823905945,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 279
+   },
+   {
+    "paziente": "FSM_036",
+    "mm3": 3.99998140335083,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 7
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_039": {
+  "lesioni": [
+   {
+    "paziente": "FSM_039",
+    "mm3": 1428.308647390545,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2585
+   },
+   {
+    "paziente": "FSM_039",
+    "mm3": 1.5384152226086807,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 5
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_040": {
+  "lesioni": [
+   {
+    "paziente": "FSM_040",
+    "mm3": 55609.40082864463,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 77663
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 1.2000000178813934,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 1.600000023841858,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 2.2000000327825546,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 1.2000000178813934,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 7.400000110268593,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 6
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 1.8000000268220901,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 3.200000047683716,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 4
+   },
+   {
+    "paziente": "FSM_040",
+    "mm3": 34.60000051558018,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 70
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_041": {
+  "lesioni": [
+   {
+    "paziente": "FSM_041",
+    "mm3": 1749.6000260710716,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1928
+   },
+   {
+    "paziente": "FSM_041",
+    "mm3": 22.20000033080578,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 39
+   },
+   {
+    "paziente": "FSM_041",
+    "mm3": 179.2000026702881,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 211
+   },
+   {
+    "paziente": "FSM_041",
+    "mm3": 2.2000000327825546,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_041",
+    "mm3": 4.000000059604645,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_045": {
+  "lesioni": [
+   {
+    "paziente": "FSM_045",
+    "mm3": 9512.800141751766,
+    "fenotipo": "ROI_4",
+    "voxel_a_1mm": 13628
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_046": {
+  "lesioni": [
+   {
+    "paziente": "FSM_046",
+    "mm3": 294.6000043898821,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 254
+   },
+   {
+    "paziente": "FSM_046",
+    "mm3": 176.60000263154507,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 174
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_049": {
+  "lesioni": [
+   {
+    "paziente": "FSM_049",
+    "mm3": 196921.64252551578,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 340847
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 1.9440112395284275,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 4
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 2.3760137372014114,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 3
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 1.7280099906919355,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 1.5120087418554435,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 0
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 2.160012488364919,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 3
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 1.9440112395284275,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 1
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 1.0800062441824596,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 0
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 3.2400187325473793,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 10.368059944151613,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 20
+   },
+   {
+    "paziente": "FSM_049",
+    "mm3": 2.3760137372014114,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 5
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_052": {
+  "lesioni": [
+   {
+    "paziente": "FSM_052",
+    "mm3": 451.00151881575584,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 996
+   },
+   {
+    "paziente": "FSM_052",
+    "mm3": 28.600096315145493,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 32
+   },
+   {
+    "paziente": "FSM_052",
+    "mm3": 3.8000127971172333,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 5
+   },
+   {
+    "paziente": "FSM_052",
+    "mm3": 4442.414960503578,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 6766
+   },
+   {
+    "paziente": "FSM_052",
+    "mm3": 7.8000262677669525,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 13
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_053": {
+  "lesioni": [
+   {
+    "paziente": "FSM_053",
+    "mm3": 58.800027161836624,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 77
+   },
+   {
+    "paziente": "FSM_053",
+    "mm3": 448.40020713210106,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 419
+   },
+   {
+    "paziente": "FSM_053",
+    "mm3": 65.200030118227,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 83
+   },
+   {
+    "paziente": "FSM_053",
+    "mm3": 21.800010070204735,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 28
+   },
+   {
+    "paziente": "FSM_053",
+    "mm3": 8.200003787875175,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 8
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_054": {
+  "lesioni": [
+   {
+    "paziente": "FSM_054",
+    "mm3": 156.2589871872002,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 276
+   },
+   {
+    "paziente": "FSM_054",
+    "mm3": 33598.319527732216,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 52716
+   },
+   {
+    "paziente": "FSM_054",
+    "mm3": 5.49433850869199,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 9
+   },
+   {
+    "paziente": "FSM_054",
+    "mm3": 2.1977354034767957,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 4
+   },
+   {
+    "paziente": "FSM_054",
+    "mm3": 1.0988677017383979,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 2
+   },
+   {
+    "paziente": "FSM_054",
+    "mm3": 2.1977354034767957,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 0
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ },
+ "FSM_056": {
+  "lesioni": [
+   {
+    "paziente": "FSM_056",
+    "mm3": 351.85557155925534,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 639
+   },
+   {
+    "paziente": "FSM_056",
+    "mm3": 26.372684938857365,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 43
+   },
+   {
+    "paziente": "FSM_056",
+    "mm3": 4.395447489809561,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 8
+   },
+   {
+    "paziente": "FSM_056",
+    "mm3": 12027.922283489374,
+    "fenotipo": "ROI_2",
+    "voxel_a_1mm": 16367
+   },
+   {
+    "paziente": "FSM_056",
+    "mm3": 63.294443853257675,
+    "fenotipo": "ROI_1",
+    "voxel_a_1mm": 127
+   }
+  ],
+  "voxel_diversi_dal_bersaglio_%": 0.0
+ }
+}

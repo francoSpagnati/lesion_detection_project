@@ -115,6 +115,9 @@ Le figure stanno in `reports/figures/` e si rigenerano tutte da script.
 | `aincp/ablazione_canali_506.png` | ablazione dei canali su Z: copertura per fenotipo e lesioni trovate | `figura_ablazione_canali_506.py` |
 | `aincp/3d_506_<paziente>.png` | viste 3D di Z sul test: lesioni trovate, mancate, falsi positivi (FSM_049, 030, 046) | `figura_3d_506.py` |
 | `aincp/t1_flair_fenotipi.png` | la stessa fetta in T1 e FLAIR con i tre fenotipi, figura introduttiva della tesi (in inglese) | `figura_t1_flair_intro.py` |
+| `aincp/annotazioni_17.png`, `aincp/contrasto_fenotipi_17.png` | annotazioni dei 17 pazienti e contrasto lesione / cervello per fenotipo (in inglese) | `figura_annotazioni_aincp.py` |
+| `aincp/sopravvivenza_1mm_17.png` | quali delle 90 lesioni esistono nel bersaglio a 1 mm del template | `sopravvivenza_1mm_506.py` |
+| `esempi_dataset_pubblici.png`, `atlas_mancato_trovato.png` | una fetta per WMH, ATLAS, DBB; un caso ATLAS mancato da 502 accanto a uno trovato | `figura_dati_pubblici.py` |
 | `esportazioni/506_test/` (non figure) | **file per 3D Slicer**: T1, FLAIR, segmentazioni di confronto, script di apertura | `esporta_slicer_506.py` |
 | `synthstrip/` | 244 figure di validazione su DBB, il nome inizia con il Dice | `run_synthstrip.py` |
 

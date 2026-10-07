@@ -37,12 +37,12 @@ FIGURE = PROGETTO / 'reports/figures/aincp'
 # Colori dei fenotipi come in figura_lesioni_piccole.py; palette validata (tutte le coppie,
 # anche per daltonismo) con lo script della skill dataviz.
 COL = {'ROI_1': '#2a78d6', 'ROI_2': '#eb6834', 'ROI_4': '#1baf7a'}
-NOME = {'ROI_1': 'gliosi', 'ROI_2': 'cistica', 'ROI_4': 'encefalomalacia'}
-VISTA = {'ROI_1': 'iperintensa in FLAIR', 'ROI_2': 'cavità, scura in T1', 'ROI_4': 'cavità, scura in T1'}
+NOME = {'ROI_1': 'gliosis', 'ROI_2': 'cystic lesion', 'ROI_4': 'encephalomalacia'}
+VISTA = {'ROI_1': 'hyperintense on FLAIR', 'ROI_2': 'cavity, dark on T1', 'ROI_4': 'cavity, dark on T1'}
 INK, INK2, MUTED, GRIGLIA, CONTESTO = '#0b0b0b', '#52514e', '#8a8984', '#e6e5e1', '#c3c7cc'
-TRE = [('da zero', 'nnUNetTrainerWandb_250ep_arresto50'),
-       ('ATLAS,\nFLAIR spenta', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
-       ('ATLAS,\nFLAIR attiva', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50')]
+TRE = [('from scratch', 'nnUNetTrainerWandb_250ep_arresto50'),
+       ('ATLAS,\nFLAIR inactive', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
+       ('ATLAS,\nFLAIR active', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_arresto50')]
 # un paziente per pannello da nominare: quello in cui l'effetto e' piu' grande
 DA_NOMINARE = {'ROI_1': 'FSM_039', 'ROI_2': None, 'ROI_4': 'FSM_045'}
 
@@ -83,12 +83,12 @@ def figura_copertura(r):
         ax.set_ylim(0, 1.08)
         ax.set_yticks([0, .25, .5, .75, 1], ['0', '25%', '50%', '75%', '100%'])
         ax.set_title(f'{NOME[f]}', loc='left', fontsize=12, color=INK, fontweight='bold', pad=20)
-        ax.text(0, 1.035, f'{VISTA[f]} · {len(casi)} pazienti', transform=ax.transAxes,
+        ax.text(0, 1.035, f'{VISTA[f]} · {len(casi)} patients', transform=ax.transAxes,
                 fontsize=9, color=INK2)
-    axes[0].set_ylabel('voxel del fenotipo coperti dalla predizione', fontsize=9.5, color=INK2)
-    fig.legend(handles=[Line2D([], [], color=CONTESTO, lw=1.1, marker='o', ms=4, mec='none', label='un paziente'),
+    axes[0].set_ylabel('phenotype voxels covered by the prediction', fontsize=9.5, color=INK2)
+    fig.legend(handles=[Line2D([], [], color=CONTESTO, lw=1.1, marker='o', ms=4, mec='none', label='one patient'),
                         Line2D([], [], color=INK2, lw=2.2, marker='o', ms=7, mec='white', mew=2,
-                               label='tutti i pazienti insieme')],
+                               label='all patients pooled')],
                frameon=False, ncol=2, loc='lower center', fontsize=9.5, bbox_to_anchor=(.5, .0),
                labelcolor=INK2)
     fig.savefig(FIGURE / 'copertura_fenotipi_504.png', dpi=130, facecolor='white')

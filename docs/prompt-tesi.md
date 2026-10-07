@@ -31,8 +31,8 @@ svolto tutto il lavoro sperimentale; tu lo aiuti a esporlo con rigore.
 - Il testo va prodotto in **LaTeX** compatibile con il progetto Overleaf dell'autore: stesse classi,
   comandi e convenzioni dei file `.tex` che ti ha caricato. Tabelle con `booktabs` se il progetto le
   usa; figure con il nome di file indicato nel catalogo delle figure.
-- Le figure esistenti hanno testo **in italiano**. Finché non vengono rigenerate in inglese, nelle
-  didascalie scrivi il testo inglese e segnala all'autore che la figura va tradotta.
+- Le figure del catalogo sono in inglese (rigenerate il 7/10), tranne F3_02 e F4_01, ancora in
+  italiano e del solo primo lotto: se servono, segnala all'autore che vanno rifatte.
 
 ### Stile di scrittura (vale per tutta la tesi)
 
@@ -203,8 +203,11 @@ variabile sola. SynthStrip validato prima su DBB: Dice 0.966 (0.957 sui cervelli
   pediatrico è stato preferito perché allinea meglio il cervello (Dice 0.95–0.98 contro 0.82–0.93).
   **Da trattare come un controllo di qualità in una o due frasi, non come un risultato negativo**:
   niente paragrafi dedicati all'ingrandimento delle lesioni.
-- Il piano a 1 mm, necessario per trasferire i pesi di ATLAS, cancella dal bersaglio di
-  addestramento le lesioni più piccole: compromesso fra trasferimento e risoluzione, da dichiarare.
+- Il piano a 1 mm è necessario per trasferire i pesi di ATLAS. Nella pipeline finale costa poco:
+  delle 90 lesioni annotate dei 17 pazienti (residui ≤ 1 mm³ esclusi) ne scompaiono dal bersaglio
+  nel template solo 4, tutte sotto 3 mm³ (`reports/sopravvivenza_1mm_506.md`, figura F4_04). Il
+  template ingrandisce il cervello e con lui le lesioni, che quindi superano la griglia. Con il primo
+  piano nello spazio nativo (504, 10 pazienti) ne scomparivano 7 su 22 fra 1 e 10 mm³.
 
 ---
 
@@ -450,7 +453,7 @@ test.
 17 pazienti, di cui 5 di test; nessuna differenza statisticamente distinguibile fra le ricette;
 lesioni sotto 50 mm³ in gran parte mancate; un falso positivo nel ventricolo dilatato; validazione di
 2–3 pazienti per fold; esperimenti sui dati pubblici su un solo fold e senza seme fisso; il piano a 1
-mm cancella dal bersaglio le lesioni più piccole; quattro pazienti sotto i 5 anni; annotazioni con
+mm toglie dal bersaglio 4 lesioni su 90 (tutte sotto 3 mm³); quattro pazienti sotto i 5 anni; annotazioni con
 residui segnalati al clinico; i tre pazienti di test a 3 T erano fra i dieci su cui si è scelta la
 ricetta dell'epoca 504; N4 applicata ai pazienti senza un confronto con un modello senza N4;
 parametri d'acquisizione completi solo per un paziente.

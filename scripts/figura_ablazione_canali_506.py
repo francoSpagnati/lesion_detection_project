@@ -24,9 +24,9 @@ import numpy as np
 PROGETTO = Path(__file__).resolve().parent.parent
 R = json.loads((PROGETTO / 'reports/ablazione_canali_506.json').read_text())['totali']
 OUT = PROGETTO / 'reports/figures/aincp/ablazione_canali_506.png'
-COND = [('entrambe', 'FLAIR + T1', '#2a78d6'), ('solo_FLAIR', 'solo FLAIR', '#1baf7a'),
-        ('solo_T1', 'solo T1', '#eb6834')]
-FEN = [('ROI_1', 'gliosi'), ('ROI_2', 'lesione cistica'), ('ROI_4', 'encefalomalacia')]
+COND = [('entrambe', 'FLAIR + T1', '#2a78d6'), ('solo_FLAIR', 'FLAIR only', '#1baf7a'),
+        ('solo_T1', 'T1 only', '#eb6834')]
+FEN = [('ROI_1', 'gliosis'), ('ROI_2', 'cystic lesion'), ('ROI_4', 'encephalomalacia')]
 INCHIOSTRO, GRIGIO, GRIGLIA = '#1f2328', '#59636e', '#d8dee4'
 
 
@@ -53,24 +53,24 @@ def barre(ax, gruppi, valori, formato, massimo):
 def main():
     fig, (a, b) = plt.subplots(1, 2, figsize=(12, 4.6), dpi=150, gridspec_kw={'width_ratios': [3, 2]})
     cop = [[100 * R[c]['copertura'][f][0] / R[c]['copertura'][f][1] for c, _, _ in COND] for f, _ in FEN]
-    barre(a, [f'{n}\n({R["entrambe"]["copertura"][f][1]:,} voxel)'.replace(',', ' ') for f, n in FEN],
+    barre(a, [f'{n}\n({R["entrambe"]["copertura"][f][1]:,} voxels)'.replace(',', ' ') for f, n in FEN],
           cop, lambda t: f'{t:.0f}%', 100)
-    a.set_ylabel('voxel della lesione coperti (%)', color=GRIGIO)
-    a.set_title('Copertura per fenotipo', loc='left', color=INCHIOSTRO, fontsize=12)
+    a.set_ylabel('lesion voxels covered (%)', color=GRIGIO)
+    a.set_title('Coverage per phenotype', loc='left', color=INCHIOSTRO, fontsize=12)
 
     vol = np.array(R['entrambe']['volumi'])
     piccole = vol < 50
     trov = [[int(np.sum(R[c]['trovate'])) for c, _, _ in COND],
             [int(np.sum(np.array(R[c]['trovate'])[piccole])) for c, _, _ in COND]]
-    barre(b, [f'tutte\n({len(vol)} lesioni)', f'sotto 50 mm³\n({piccole.sum()} lesioni)'], trov, str, len(vol) / 2)
-    b.set_ylabel('lesioni trovate', color=GRIGIO)
-    b.set_title('Lesioni trovate', loc='left', color=INCHIOSTRO, fontsize=12)
+    barre(b, [f'all\n({len(vol)} lesions)', f'below 50 mm³\n({piccole.sum()} lesions)'], trov, str, len(vol) / 2)
+    b.set_ylabel('lesions detected', color=GRIGIO)
+    b.set_title('Detected lesions', loc='left', color=INCHIOSTRO, fontsize=12)
 
     h, l = a.get_legend_handles_labels()
     fig.legend(h, l, loc='upper center', ncol=3, frameon=False, fontsize=10, labelcolor=INCHIOSTRO,
                bbox_to_anchor=(0.5, 1.0))
-    fig.text(0.01, 0.01, 'Modello Z, 12 pazienti fuori-fold, sequenza mancante azzerata in ingresso; postprocessing '
-             'congelato (soglia 0.3, volume minimo 50 mm³). Fonte: reports/ablazione_canali_506.md',
+    fig.text(0.01, 0.01, 'Model Z, 12 development patients (out-of-fold), missing sequence set to zero at input; frozen '
+             'post-processing (threshold 0.3, minimum volume 50 mm³).',
              fontsize=8, color=GRIGIO)
     fig.tight_layout(rect=(0, 0.04, 1, 0.92))
     fig.savefig(OUT, facecolor='white')

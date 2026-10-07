@@ -79,16 +79,16 @@ def main():
             ax.set_title(f'{canale}  —  Dice {dice:.3f}', fontsize=11,
                          fontweight='bold' if c == 0 else 'normal')
             ax.axis('off')
-        assi[r, 0].annotate(f'{caso}\nfetta {z}', xy=(0, 0.5), xycoords='axes fraction',
+        assi[r, 0].annotate(f'{caso}\nslice {z}', xy=(0, 0.5), xycoords='axes fraction',
                             xytext=(-12, 0), textcoords='offset points', rotation=90,
                             va='center', ha='center', fontsize=9, color='#444')
 
-    fig.legend(handles=[Line2D([], [], color=VERDE, ls='--', lw=1.6, label='riferimento manuale'),
-                        Line2D([], [], color=ROSSO, lw=1.6, label='predizione del modello')],
+    fig.legend(handles=[Line2D([], [], color=VERDE, ls='--', lw=1.6, label='manual reference'),
+                        Line2D([], [], color=ROSSO, lw=1.6, label='model prediction')],
                loc='lower center', ncol=2, frameon=False, fontsize=10.5,
                bbox_to_anchor=(0.5, 0.004))
-    fig.suptitle('Stesso paziente, stessa fetta, stessa rete: cambia solo la sequenza\n'
-                 'i tre casi con il divario maggiore, e in fondo uno in cui il T1 tiene',
+    fig.suptitle('Same patient, same slice, same network: only the input sequence changes\n'
+                 'the three cases with the largest gap, and at the bottom one where T1 holds up',
                  fontsize=12.5)
     fig.tight_layout(rect=(0.012, 0.028, 1, 0.955), h_pad=1.4)
     out = PROGETTO / 'reports' / 'figures' / 'flair_contro_t1.png'

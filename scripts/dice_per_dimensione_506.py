@@ -39,7 +39,7 @@ R = PROGETTO / 'nnUNet/nnUNet_results/Dataset506_AINCP_FINALE'
 RICETTE = {'Z': 'nnUNetTrainerWandb_250ep_dropmod30_arresto50',
            'A': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50',
            'D': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c'}
-NOMI = {'Z': 'Z, da zero', 'A': 'A, da ATLAS', 'D': 'D, da ATLAS + WMH'}
+NOMI = {'Z': 'Z, from scratch', 'A': 'A, from ATLAS', 'D': 'D, from ATLAS + WMH'}
 # piu' fini di pp.FASCE sopra 200 mm³: le lesioni grandi arrivano a 196 847 mm³
 FASCE = [(1, 10, '1–10 mm³'), (10, 50, '10–50 mm³'), (50, 200, '50–200 mm³'), (200, 1000, '200–1 000 mm³'),
          (1000, 10000, '1 000–10 000 mm³'), (10000, np.inf, '> 10 000 mm³')]
@@ -98,8 +98,8 @@ def riassunto(ris):
 
 def figura(tab):
     fig, ax = plt.subplots(1, 2, figsize=(14, 5.6), sharey=True, facecolor=FONDO)
-    for x, (insieme, titolo) in zip(ax, (('cv', 'Cross-validation, 12 pazienti (68 lesioni)'),
-                                          ('test', 'Test, 5 pazienti (40 lesioni)'))):
+    for x, (insieme, titolo) in zip(ax, (('cv', 'Cross-validation, 12 patients (68 lesions)'),
+                                          ('test', 'Test, 5 patients (40 lesions)'))):
         x.set_facecolor(FONDO)
         etichette = [r['fascia'] for r in tab[insieme]['Z']]
         pos = np.arange(len(etichette))
@@ -117,9 +117,9 @@ def figura(tab):
             ultimo = yy
         x.set_xticks(pos)
         # l'unita' una volta sola nel titolo dell'asse: ripetuta su ogni fascia le etichette si toccano
-        x.set_xticklabels([f"{e.replace(' mm³', '')}\n{r['n']} lesioni" for e, r in zip(etichette, tab[insieme]['Z'])],
+        x.set_xticklabels([f"{e.replace(' mm³', '').replace(' 000', ',000')}\n{r['n']} lesions" for e, r in zip(etichette, tab[insieme]['Z'])],
                           fontsize=9, color=INK2)
-        x.set_xlabel('volume della lesione (mm³)', fontsize=10, color=INK2)
+        x.set_xlabel('lesion volume (mm³)', fontsize=10, color=INK2)
         x.set_ylim(-0.02, 1.0)
         x.set_xlim(-0.5, len(pos) - 0.1)
         x.grid(axis='y', color=GRIGIO, lw=0.6, alpha=0.6)
@@ -129,14 +129,14 @@ def figura(tab):
             x.spines[s].set_color(GRIGIO)
         x.tick_params(colors=INK2)
         x.set_title(titolo, loc='left', fontsize=12, color=INK)
-    ax[0].set_ylabel('Dice medio per lesione (mancate = 0)', color=INK, fontsize=10.5)
+    ax[0].set_ylabel('mean lesion-wise Dice (missed = 0)', color=INK, fontsize=10.5)
     from matplotlib.lines import Line2D
     fig.legend(handles=[Line2D([], [], color=COLORI[k], lw=2, marker='o', label=NOMI[k]) for k in ('Z', 'A', 'D')],
                loc='upper left', bbox_to_anchor=(0.005, 0.9), ncol=3, frameon=False, fontsize=10.5, labelcolor=INK)
-    fig.suptitle('Quanto bene viene segmentata ogni lesione, per dimensione', x=0.008, ha='left', fontsize=15,
+    fig.suptitle('How well each lesion is segmented, by size', x=0.008, ha='left', fontsize=15,
                  color=INK, fontweight='bold', y=0.99)
-    fig.text(0.008, 0.935, 'Dice di ciascuna lesione annotata dentro la sua regione di Voronoi (CC-Dice); fasce di volume '
-             'in scala logaritmica. Sotto 50 mm³ le fasce sono dominate dalle lesioni mancate.', ha='left', va='top',
+    fig.text(0.008, 0.935, 'Dice of each annotated lesion within its Voronoi region (CC-Dice); volume ranges on a '
+             'logarithmic scale. Below 50 mm³ the ranges are dominated by missed lesions.', ha='left', va='top',
              fontsize=10.5, color=INK2)
     fig.tight_layout(rect=(0, 0, 1, 0.84), w_pad=2)
     FIG.parent.mkdir(parents=True, exist_ok=True)

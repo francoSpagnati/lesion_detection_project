@@ -93,6 +93,8 @@ def main():
     nome = next(d.name for d in RAW.iterdir() if d.name.startswith(f'Dataset{args.dataset}'))
     valdir = RESULTS / nome / args.trainer / args.fold / 'validation'
     gtdir = PREP / nome / 'gt_segmentations'
+    if not any(gtdir.glob('*.nii.gz')):          # cancellate per spazio: sono copie di labelsTr
+        gtdir = PROGETTO / 'nnUNet/nnUNet_raw' / nome / 'labelsTr'
     imgdir = RAW / nome / 'imagesTr'
     dj = json.loads((RAW / nome / 'dataset.json').read_text())
     canale = list(dj['channel_names'].values())[0]
@@ -136,14 +138,14 @@ def main():
             if c == 0:
                 ax.set_ylabel(f'{caso}\nDice {dice:.3f}', fontsize=8.5,
                               color=('#b00020' if dice < 0.3 else '#333'))
-            ax.set_title(f'fetta {k}', fontsize=7.5, color='#666')
+            ax.set_title(f'slice {k}', fontsize=7.5, color='#666')
 
-    legenda = ([Line2D([], [], color=VERDE, ls='--', label='ground truth'),
-                Line2D([], [], color=ROSSO, label='predizione')] if not multiclasse
-               else [Line2D([], [], color='#888', label='predizione (colore = classe)')])
+    legenda = ([Line2D([], [], color=VERDE, ls='--', label='reference'),
+                Line2D([], [], color=ROSSO, label='prediction')] if not multiclasse
+               else [Line2D([], [], color='#888', label='prediction (colour = class)')])
     fig.legend(handles=legenda, loc='lower center', ncol=2, frameon=False, fontsize=9)
-    fig.suptitle(f'{nome} — {args.fold}, canale {canale} — casi campionati per Dice '
-                 f'(migliori, mediani, peggiori)', fontsize=11)
+    fig.suptitle(f'{nome} — {args.fold}, channel {canale} — cases sampled by Dice '
+                 f'(best, median, worst)', fontsize=11)
     fig.tight_layout(rect=[0, 0.022, 1, 0.975])
 
     out = PROGETTO / 'reports' / 'figures'
