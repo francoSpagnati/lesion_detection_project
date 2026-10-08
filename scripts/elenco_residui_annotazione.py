@@ -103,10 +103,12 @@ def raccogli():
     return righe
 
 
-def figura(righe, n_col=6, lato_mm=24):
+def figura(righe, n_col=10, lato_mm=24):
+    # formato della tesi: 16 cm a 300 dpi, 10 colonne; etichette corte (paziente, fenotipo, volume):
+    # fetta e coordinate restano nel CSV per il clinico, a chi legge la tesi non servono
     n = len(righe); n_riga = int(np.ceil(n / n_col))
-    fig, axes = plt.subplots(n_riga, n_col, figsize=(2.55 * n_col, 2.95 * n_riga), squeeze=False)
-    fig.subplots_adjust(left=.01, right=.99, top=.965, bottom=.01, hspace=.36, wspace=.06)
+    fig, axes = plt.subplots(n_riga, n_col, figsize=(6.3, 0.7 * n_riga), squeeze=False)
+    fig.subplots_adjust(left=.003, right=.997, top=.955, bottom=.005, hspace=.42, wspace=.05)
     cache = {}
     for ax, r in zip(axes.ravel(), righe):
         if r['_flair'] not in cache:
@@ -122,15 +124,15 @@ def figura(righe, n_col=6, lato_mm=24):
         # centro della componente nel ritaglio ruotato: rot90 manda (a, b) in (W-1-b, a)
         a, b = j0 - max(j0 - hj, 0), k0 - max(k0 - hk, 0)
         col = '#d6452b' if r['fuori_dal_cervello'] else '#eda100'
-        ax.add_patch(Circle((a, sl.shape[1] - 1 - b), radius=4 / zj, fill=False, lw=1.6, ec=col))
-        ax.set_title(f"{r['paziente']} · {r['fenotipo']}\nsagittal slice {r['i1']} · ({r['j1']}, {r['k1']})"
-                     + ('\nOUTSIDE THE BRAIN' if r['fuori_dal_cervello'] else f"\n{r['voxel']} voxel{'s' if r['voxel'] > 1 else ''} · {r['mm3']} mm³"),
-                     fontsize=7.8, color=INK, loc='left', linespacing=1.35, pad=3)
+        ax.add_patch(Circle((a, sl.shape[1] - 1 - b), radius=4 / zj, fill=False, lw=0.8, ec=col))
+        ax.set_title(f"{r['paziente'].replace('FSM_', '')} · {r['fenotipo'].replace('encephalomalacia', 'enceph.').replace('cystic lesion', 'cystic')}\n"
+                     + f"{r['mm3']:g} mm³",               # fuori dal cervello: lo dice il cerchio rosso
+                     fontsize=4.6, color=INK, loc='left', linespacing=1.2, pad=1.5)
         ax.set_axis_off()
     for ax in axes.ravel()[n:]:
         ax.set_axis_off()
     FIG.mkdir(parents=True, exist_ok=True)
-    fig.savefig(FIG / 'residui_annotazione.png', dpi=115, facecolor='white')
+    fig.savefig(FIG / 'residui_annotazione.png', dpi=300, facecolor='white')
 
 
 def main():

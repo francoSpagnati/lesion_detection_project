@@ -122,7 +122,7 @@ def main():
                 for r, mk in roi.items():
                     f = fetta(mk.astype(float))
                     if f.any():
-                        ax[i, j].contour(np.flipud(f), levels=[0.5], colors=[COL[r]], linewidths=1.3,
+                        ax[i, j].contour(f, levels=[0.5], colors=[COL[r]], linewidths=1.3,
                                          extent=estensione, origin='upper')
             ax[i, j].text(0.02, 0.98, 'R', transform=ax[i, j].transAxes, color='white', fontsize=10,
                           va='top', ha='left', fontweight='bold')

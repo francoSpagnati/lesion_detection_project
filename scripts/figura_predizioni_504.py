@@ -27,7 +27,7 @@ from matplotlib.lines import Line2D
 
 PROGETTO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROGETTO / 'scripts'))
-from plot_predictions import VERDE, ROSSO, finestra, scegli_fette  # noqa: E402
+from plot_predictions import RIF, PRED, finestra, scegli_fette  # noqa: E402
 
 RES = Path(os.environ.get('nnUNet_results', PROGETTO / 'nnUNet' / 'nnUNet_results')) / 'Dataset504_AINCP'
 PREP = Path(os.environ.get('nnUNet_preprocessed', PROGETTO / 'nnUNet' / 'nnUNet_preprocessed')) / 'Dataset504_AINCP'
@@ -36,9 +36,9 @@ FIG = PROGETTO / 'reports/figures/aincp'
 INK, INK2 = '#0b0b0b', '#52514e'
 
 VARIANTI = [
-    ('from scratch\n(reference)', 'nnUNetTrainerWandb_250ep_arresto50'),
-    ('from ATLAS\nFLAIR channel initialised to zero', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
-    ('from ATLAS\nT1 filter duplicated', 'nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50'),
+    ('from scratch', 'nnUNetTrainerWandb_250ep_arresto50'),
+    ('ATLAS, FLAIR\nzero-initialised', 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_arresto50'),
+    ('ATLAS, T1 filter\nduplicated', 'nnUNetTrainerEspansioneCanali_duplica_250ep_lr1e4_arresto50'),
 ]
 
 
@@ -60,38 +60,45 @@ def ritaglio(sl):
 
 
 def main():
+    # formato della tesi: 16 cm a 300 dpi, due pazienti per riga (le tre ricette di ciascuno),
+    # niente titolo ne' fold ne' numero di fetta: stanno nella didascalia o non servono
+    plt.rcParams.update({'font.size': 7})
     pred = {tr: fuori_fold(tr) for _, tr in VARIANTI}
     casi = sorted(pred[VARIANTI[0][1]])
-    nr, nc = len(casi), len(VARIANTI)
-    fig, axes = plt.subplots(nr, nc, figsize=(3.4 * nc, 3.55 * nr), squeeze=False)
-    fig.subplots_adjust(left=.005, right=.995, top=.965, bottom=.012, hspace=.16, wspace=.02)
-    for r, caso in enumerate(casi):
+    nv = len(VARIANTI)
+    nr, nc = (len(casi) + 1) // 2, 2 * nv
+    fig, axes = plt.subplots(nr, nc, figsize=(6.3, 4.95), squeeze=False)
+    fig.subplots_adjust(left=.005, right=.995, top=.925, bottom=.06, hspace=.13, wspace=.03)
+    for ax in axes.ravel():
+        ax.set_axis_off()
+    for i, caso in enumerate(casi):
+        r, c0 = i // 2, (i % 2) * nv
         gt = np.asarray(nib.load(str(PREP / 'gt_segmentations' / f'{caso}.nii.gz')).dataobj) > 0
         img = np.asarray(nib.load(str(RAW / 'imagesTr' / f'{caso}_0000.nii.gz')).dataobj, dtype=np.float32)
         k = scegli_fette(gt, 1, asse=0)[0]          # asse 0: la FLAIR in spazio T1 e' sagittale
         fondo = np.rot90(img[k]); box = ritaglio(fondo); fondo = fondo[box]
         lo, hi = finestra(fondo)
         g = np.rot90(gt[k])[box]
-        for c, (etichetta, tr) in enumerate(VARIANTI):
-            ax = axes[r][c]
+        for j, (_, tr) in enumerate(VARIANTI):
+            ax = axes[r][c0 + j]
             valdir, dice = pred[tr][caso]
-            p = np.rot90(np.asarray(nib.load(str(valdir / f'{caso}.nii.gz')).dataobj)[k] > 0)[box]
-            ax.imshow(fondo, cmap='gray', vmin=lo, vmax=hi, interpolation='nearest')
+            pm = np.rot90(np.asarray(nib.load(str(valdir / f'{caso}.nii.gz')).dataobj)[k] > 0)[box]
+            ax.imshow(fondo, cmap='gray', vmin=lo, vmax=hi, interpolation='lanczos')
             if g.any():
-                ax.contour(g.astype(float), levels=[.5], colors=VERDE, linewidths=1.3)
-            if p.any():
-                ax.contour(p.astype(float), levels=[.5], colors=ROSSO, linewidths=1.3)
-            ax.set_title(f'{caso}  ·  fold {valdir.parent.name[-1]}  ·  Dice {dice:.3f}',
-                         fontsize=9, loc='left', color=INK, pad=4)
-            ax.set_axis_off()
-    for c, (etichetta, _) in enumerate(VARIANTI):
-        fig.text((c + .5) / nc, .985, etichetta, ha='center', va='top', fontsize=10.5,
-                 color=INK, fontweight='bold', linespacing=1.4)
-    fig.legend(handles=[Line2D([], [], color=VERDE, lw=2, label='reference (clinician)'),
-                        Line2D([], [], color=ROSSO, lw=2, label='prediction')],
-               frameon=False, ncol=2, loc='lower center', fontsize=9.5, bbox_to_anchor=(.5, .0))
+                ax.contour(g.astype(float), levels=[.5], colors=RIF, linewidths=.7, linestyles='--')
+            if pm.any():
+                ax.contour(pm.astype(float), levels=[.5], colors=PRED, linewidths=.7)
+            ax.set_title((f'{caso} · ' if j == 0 else '') + f'Dice {dice:.2f}', fontsize=6.5, loc='left',
+                         color=INK, pad=2)
+    for c in range(nc):
+        x = (c + .5) / nc
+        fig.text(x, .995, VARIANTI[c % nv][0], ha='center', va='top', fontsize=7, color=INK,
+                 fontweight='bold', linespacing=1.2)
+    fig.legend(handles=[Line2D([], [], color=RIF, lw=1.5, ls='--', label='reference (clinician)'),
+                        Line2D([], [], color=PRED, lw=1.5, label='prediction')],
+               frameon=False, ncol=2, loc='lower center', fontsize=7.5, bbox_to_anchor=(.5, .0))
     FIG.mkdir(parents=True, exist_ok=True)
-    fig.savefig(FIG / 'predizioni_504.png', dpi=110, facecolor='white')
+    fig.savefig(FIG / 'predizioni_504.png', dpi=300, facecolor='white')
     print('scritto', FIG / 'predizioni_504.png')
 
 

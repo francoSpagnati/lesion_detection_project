@@ -32,7 +32,7 @@ PREP = Path(os.environ.get('nnUNet_preprocessed', PROGETTO / 'nnUNet' / 'nnUNet_
 RAW = PROGETTO / 'data/processed/nnUNet_raw'
 TR = 'nnUNetTrainerWandb__nnUNetPlans__3d_fullres'
 
-VERDE, ROSSO = '#00d67d', '#ff4d4d'
+RIF, PRED = '#2a78d6', '#eb6834'     # stessa coppia validata delle altre figure della tesi
 N_CASI = 4
 
 
@@ -44,7 +44,12 @@ def dadi(dataset):
 
 
 def carica(p):
-    return np.asanyarray(nib.load(str(p)).dataobj).astype(np.float32)
+    # orientamento canonico RAS, per mostrare le fette in convenzione radiologica
+    return np.asanyarray(nib.as_closest_canonical(nib.load(str(p))).dataobj).astype(np.float32)
+
+
+def spaziatura(p):
+    return nib.as_closest_canonical(nib.load(str(p))).header.get_zooms()[:3]
 
 
 def finestra(a):
@@ -58,41 +63,49 @@ def main():
     # I tre con il divario maggiore, piu' quello in cui i due modelli sono piu' vicini.
     scelti = comuni[:N_CASI - 1] + [comuni[-1]]
 
-    fig, assi = plt.subplots(len(scelti), 2, figsize=(8.6, 4.1 * len(scelti)), facecolor='white')
-    for r, caso in enumerate(scelti):
+    # formato della tesi: FLAIR sopra e T1 sotto, un caso per colonna; titolo e numero di fetta
+    # vanno nella didascalia o non servono
+    H = 3.75
+    fig, assi = plt.subplots(2, len(scelti), figsize=(6.3, H), facecolor='white')
+    for c, caso in enumerate(scelti):
         gt = carica(PREP / 'Dataset501_WMH' / 'gt_segmentations' / f'{caso}.nii.gz') > 0
-        # La fetta con piu' lesione: al centro del volume spesso non c'e' nulla da vedere.
+        # la fetta con piu' lesione: al centro del volume spesso non c'e' nulla da vedere
         z = int(np.argmax(gt.sum(axis=(0, 1))))
-        for c, (dataset, dice, canale) in enumerate((
+        for r, (dataset, dice, canale) in enumerate((
                 ('Dataset501_WMH', d501[caso], 'FLAIR'),
                 ('Dataset511_WMH_T1', d511[caso], 'T1'))):
-            img = carica(RAW / dataset / 'imagesTr' / f'{caso}_0000.nii.gz')[:, :, z]
+            f_img = RAW / dataset / 'imagesTr' / f'{caso}_0000.nii.gz'
+            vol = carica(f_img)
+            sp = spaziatura(f_img)
+            img = vol[:, :, z]
             pred = carica(RES / dataset / TR / 'fold_0' / 'validation' / f'{caso}.nii.gz')[:, :, z] > 0
-            ax = assi[r, c]
             lo, hi = finestra(img)
-            ax.imshow(np.rot90(img), cmap='gray', vmin=lo, vmax=hi)
-            g = np.rot90(gt[:, :, z])
-            if g.any():
-                ax.contour(g, levels=[0.5], colors=[VERDE], linewidths=1.3, linestyles='dashed')
-            if pred.any():
-                ax.contour(np.rot90(pred), levels=[0.5], colors=[ROSSO], linewidths=1.3)
-            ax.set_title(f'{canale}  —  Dice {dice:.3f}', fontsize=11,
-                         fontweight='bold' if c == 0 else 'normal')
+            testa = img > lo + 0.08 * (hi - lo)
+            xs, ys = np.where(testa)
+            box = (slice(max(xs.min() - 3, 0), xs.max() + 4), slice(max(ys.min() - 3, 0), ys.max() + 4))
+            # RAS -> anteriore in alto, destra del paziente a sinistra
+            orienta = lambda a: np.fliplr(np.flipud(a[box].T))
+            est = (0, (box[0].stop - box[0].start) * sp[0], 0, (box[1].stop - box[1].start) * sp[1])
+            ax = assi[r, c]
+            ax.imshow(orienta(img), cmap='gray', vmin=lo, vmax=hi, extent=est, interpolation='lanczos')
+            for m, col, ls in ((gt[:, :, z], RIF, 'dashed'), (pred, PRED, 'solid')):
+                o = orienta(m.astype(float))
+                if o.any():
+                    ax.contour(o, levels=[0.5], colors=[col], linewidths=0.8, linestyles=ls,
+                               extent=est, origin='upper')
+            ax.set_title((f'{caso}\n' if r == 0 else '') + f'{canale} · Dice {dice:.2f}', fontsize=7,
+                         loc='left', pad=2, linespacing=1.2)
             ax.axis('off')
-        assi[r, 0].annotate(f'{caso}\nslice {z}', xy=(0, 0.5), xycoords='axes fraction',
-                            xytext=(-12, 0), textcoords='offset points', rotation=90,
-                            va='center', ha='center', fontsize=9, color='#444')
+            if c == 0:
+                ax.text(0.03, 0.97, 'R', transform=ax.transAxes, color='white', fontsize=6, va='top')
+                ax.text(0.97, 0.97, 'L', transform=ax.transAxes, color='white', fontsize=6, va='top', ha='right')
 
-    fig.legend(handles=[Line2D([], [], color=VERDE, ls='--', lw=1.6, label='manual reference'),
-                        Line2D([], [], color=ROSSO, lw=1.6, label='model prediction')],
-               loc='lower center', ncol=2, frameon=False, fontsize=10.5,
-               bbox_to_anchor=(0.5, 0.004))
-    fig.suptitle('Same patient, same slice, same network: only the input sequence changes\n'
-                 'the three cases with the largest gap, and at the bottom one where T1 holds up',
-                 fontsize=12.5)
-    fig.tight_layout(rect=(0.012, 0.028, 1, 0.955), h_pad=1.4)
+    fig.legend(handles=[Line2D([], [], color=RIF, ls='--', lw=1.2, label='manual reference'),
+                        Line2D([], [], color=PRED, lw=1.2, label='model prediction')],
+               loc='lower center', ncol=2, frameon=False, fontsize=7.5)
+    fig.subplots_adjust(left=0.005, right=0.995, top=1 - 0.35 / H, bottom=0.22 / H, wspace=0.04, hspace=0.14)
     out = PROGETTO / 'reports' / 'figures' / 'flair_contro_t1.png'
-    fig.savefig(out, dpi=140, facecolor='white')
+    fig.savefig(out, dpi=300, facecolor='white')
     print(f'scritta {out}  —  casi: {", ".join(scelti)}')
 
 

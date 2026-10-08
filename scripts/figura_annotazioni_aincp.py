@@ -88,7 +88,7 @@ def figura_annotazioni(dati, info):
         a.imshow(d['img'], cmap='gray', extent=d['estensione'], interpolation='lanczos')
         for r, f in d['roi'].items():
             if f.any():
-                a.contour(np.flipud(f), levels=[0.5], colors=[COL[r]], linewidths=0.9 if r == 'ROI_3' else 1.1,
+                a.contour(f, levels=[0.5], colors=[COL[r]], linewidths=0.9 if r == 'ROI_3' else 1.1,
                           extent=d['estensione'], origin='upper')
         a.set_title(f"{p} · {pp.mm3(info[p]['lesione_mm3_nativo'])}\n"
                     f"{info[p]['percentuale_cervello_lesionato']:.2f}% of the brain",

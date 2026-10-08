@@ -67,7 +67,7 @@ def pannello(ax, img, sp, k, titolo):
 def contorno(ax, m, k, est, colore, ls='-'):
     s = fetta(m.astype(float), k)
     if s.any():
-        ax.contour(np.flipud(s), levels=[0.5], colors=[colore], linewidths=1.4, linestyles=ls,
+        ax.contour(s, levels=[0.5], colors=[colore], linewidths=1.4, linestyles=ls,
                    extent=est, origin='upper')
 
 

@@ -37,8 +37,10 @@ RESULTS = Path(os.environ.get('nnUNet_results', PROGETTO / 'nnUNet' / 'nnUNet_re
 PREP = Path(os.environ.get('nnUNet_preprocessed', PROGETTO / 'nnUNet' / 'nnUNet_preprocessed'))
 RAW = Path(os.environ.get('nnUNet_raw', PROGETTO / 'nnUNet' / 'nnUNet_raw'))
 
-VERDE = '#00d67d'   # ground truth
-ROSSO = '#ff4d4d'   # predizione
+# riferimento blu tratteggiato, predizione arancio: la coppia validata delle figure della tesi
+# (il verde e rosso di prima non si distingue con la deuteranopia)
+RIF = '#2a78d6'
+PRED = '#eb6834'
 
 
 def finestra(img):
@@ -83,7 +85,7 @@ def campiona(casi, n):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('dataset')
-    ap.add_argument('--n-casi', type=int, default=9)
+    ap.add_argument('--n-casi', type=int, default=3)
     ap.add_argument('--fette', type=int, default=3)
     ap.add_argument('--asse', type=int, default=2, help='asse delle fette (default 2, assiale)')
     ap.add_argument('--trainer', default='nnUNetTrainerWandb__nnUNetPlans__3d_fullres')
@@ -106,52 +108,62 @@ def main():
                    for c in s['metric_per_case']), key=lambda t: -t[1])
     scelti = campiona(casi, args.n_casi)
 
+    # formato della tesi: 16 cm di larghezza a 300 dpi, niente titolo (sta nella didascalia), nessun
+    # numero di fetta (inutile a chi guarda), orientamento radiologico e proporzioni in mm
     nr, nc = len(scelti), args.fette
-    fig, axes = plt.subplots(nr, nc, figsize=(3.1 * nc, 3.2 * nr), squeeze=False)
+    plt.rcParams.update({'font.size': 8})
+    fig, axes = plt.subplots(nr, nc, figsize=(6.3, 1.72 * nr + 0.25), squeeze=False)
     fig.patch.set_facecolor('white')
 
     for r, (caso, dice) in enumerate(scelti):
-        gt = np.asarray(nib.load(str(gtdir / f'{caso}.nii.gz')).dataobj)
-        pr = np.asarray(nib.load(str(valdir / f'{caso}.nii.gz')).dataobj)
-        img = np.asarray(nib.load(str(imgdir / f'{caso}_0000.nii.gz')).dataobj, dtype=np.float32)
+        carica = lambda f: nib.as_closest_canonical(nib.load(str(f)))
+        ig = carica(imgdir / f'{caso}_0000.nii.gz')
+        sp = ig.header.get_zooms()[:3]
+        img = np.asarray(ig.dataobj, dtype=np.float32)
+        gt = np.asarray(carica(gtdir / f'{caso}.nii.gz').dataobj)
+        pr = np.asarray(carica(valdir / f'{caso}.nii.gz').dataobj)
         gtb, prb = gt > 0, pr > 0
         lo, hi = finestra(img)
-        for c, k in enumerate(scegli_fette(gtb, nc, args.asse)):
+        # riquadro comune alle fette del caso: la testa, cosi' il cervello riempie il pannello
+        testa = img > lo + 0.08 * (hi - lo)
+        xs, ys = np.where(testa.any(axis=2))
+        x0, x1, y0, y1 = max(xs.min() - 3, 0), xs.max() + 4, max(ys.min() - 3, 0), ys.max() + 4
+        # RAS -> anteriore in alto, destra del paziente a sinistra (convenzione radiologica)
+        orienta = lambda a: np.fliplr(np.flipud(a[x0:x1, y0:y1].T))
+        est = (0, (x1 - x0) * sp[0], 0, (y1 - y0) * sp[1])
+        for c, k in enumerate(scegli_fette(gtb, nc, 2)):
             ax = axes[r][c]
-            sl = [slice(None)] * 3
-            sl[args.asse] = k
-            fondo = np.rot90(img[tuple(sl)])
-            ax.imshow(fondo, cmap='gray', vmin=lo, vmax=hi, interpolation='nearest')
-            g, p = np.rot90(gtb[tuple(sl)]), np.rot90(prb[tuple(sl)])
+            ax.imshow(orienta(img[:, :, k]), cmap='gray', vmin=lo, vmax=hi, extent=est, interpolation='lanczos')
+            g, p = orienta(gtb[:, :, k]).astype(float), orienta(prb[:, :, k]).astype(float)
             if multiclasse:
-                mc = np.rot90(pr[tuple(sl)]).astype(float)
+                mc = orienta(pr[:, :, k]).astype(float)
                 ax.imshow(np.ma.masked_where(mc == 0, mc), cmap='tab10', alpha=.45,
-                          vmin=0, vmax=10, interpolation='nearest')
+                          vmin=0, vmax=10, interpolation='nearest', extent=est)
             else:
                 if p.any():
-                    ax.contour(p, levels=[.5], colors=ROSSO, linewidths=1.4)
+                    ax.contour(p, levels=[.5], colors=PRED, linewidths=0.9, extent=est, origin='upper')
                 if g.any():
-                    ax.contour(g, levels=[.5], colors=VERDE, linewidths=1.0, linestyles='--')
+                    ax.contour(g, levels=[.5], colors=RIF, linewidths=0.8, linestyles='--',
+                               extent=est, origin='upper')
             ax.set_xticks([]); ax.set_yticks([])
-            for sp in ax.spines.values():
-                sp.set_visible(False)
+            for spn in ax.spines.values():
+                spn.set_visible(False)
             if c == 0:
-                ax.set_ylabel(f'{caso}\nDice {dice:.3f}', fontsize=8.5,
-                              color=('#b00020' if dice < 0.3 else '#333'))
-            ax.set_title(f'slice {k}', fontsize=7.5, color='#666')
+                ax.set_ylabel(f'{caso}\nDice {dice:.2f}', fontsize=8, color='#333')
+                ax.text(0.03, 0.97, 'R', transform=ax.transAxes, color='white', fontsize=6.5, va='top')
+                ax.text(0.97, 0.97, 'L', transform=ax.transAxes, color='white', fontsize=6.5, va='top', ha='right')
 
-    legenda = ([Line2D([], [], color=VERDE, ls='--', label='reference'),
-                Line2D([], [], color=ROSSO, label='prediction')] if not multiclasse
+    legenda = ([Line2D([], [], color=RIF, ls='--', label='reference'),
+                Line2D([], [], color=PRED, label='prediction')] if not multiclasse
                else [Line2D([], [], color='#888', label='prediction (colour = class)')])
-    fig.legend(handles=legenda, loc='lower center', ncol=2, frameon=False, fontsize=9)
-    fig.suptitle(f'{nome} — {args.fold}, channel {canale} — cases sampled by Dice '
-                 f'(best, median, worst)', fontsize=11)
-    fig.tight_layout(rect=[0, 0.022, 1, 0.975])
+    fig.legend(handles=legenda, loc='lower center', ncol=2, frameon=False, fontsize=8)
+    fig.subplots_adjust(left=0.07, right=0.995, top=0.995, bottom=0.25 / (1.72 * nr + 0.25) + 0.01,
+                        wspace=0.02, hspace=0.04)
 
     out = PROGETTO / 'reports' / 'figures'
     out.mkdir(parents=True, exist_ok=True)
     f = out / f'predizioni_{args.dataset}_{args.fold}.png'
-    fig.savefig(f, dpi=110, facecolor='white')
+    fig.savefig(f, dpi=300, facecolor='white')
     print(f'{len(scelti)} casi -> {f.relative_to(PROGETTO)}')
 
 
