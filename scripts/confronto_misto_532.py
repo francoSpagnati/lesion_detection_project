@@ -3,6 +3,7 @@
 
     python scripts/postprocessing_aincp.py scegli --run <cartella di M>   # prima: il postprocessing di M
     python scripts/confronto_misto_532.py                                  # -> reports/confronto_misto_532.{md,json}
+    python scripts/confronto_misto_532.py B                                # -> reports/confronto_blob_506.{md,json}
 
 IL CRITERIO E' FISSATO PRIMA DEI RISULTATI (scritto il 5/10/2026, prima di lanciare M), cosi' che
 non lo si possa scegliere guardando i numeri:
@@ -25,6 +26,11 @@ l'ha visto e il confronto e' appaiato.
 
 Il test non entra: se M vince qui, si misura sul test come analisi aggiuntiva accanto a Z, che
 resta il modello dichiarato prima di aprire il test.
+
+RICETTA B (blob loss, 12/10/2026). Stesso confronto, stesso criterio, scritto qui prima di lanciare
+B: misura principale le lesioni sotto 50 mm³ trovate (McNemar appaiato sulle stesse 46 lesioni),
+vincolo l'F1 per lesione e i falsi positivi, secondarie come sopra. B vince se trova piu' lesioni
+piccole con p < 0.05 senza peggiorare l'F1. B e' su Dataset506 con gli stessi split di Z.
 """
 import json
 import os
@@ -42,8 +48,12 @@ from ablazione_canali_506 import FASCE, FENOTIPI, fenotipi_in_t1, fp_, mcnemar  
 PROGETTO = Path(__file__).resolve().parent.parent
 RES = Path(os.environ['nnUNet_results'])
 RUN = {'Z': RES / 'Dataset506_AINCP_FINALE' / 'nnUNetTrainerWandb_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
-       'M': RES / 'Dataset532_MISTO_AINCP' / 'nnUNetTrainerMisto_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres'}
-OUT = PROGETTO / 'reports/confronto_misto_532'
+       'M': RES / 'Dataset532_MISTO_AINCP' / 'nnUNetTrainerMisto_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
+       'B': RES / 'Dataset506_AINCP_FINALE' / 'nnUNetTrainerBlob_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres'}
+CAND = sys.argv[1] if len(sys.argv) > 1 else 'M'
+TITOLO = {'M': 'Training misto (M, 532)', 'B': 'Blob loss (B, 506)'}[CAND]
+RUN = {'Z': RUN['Z'], CAND: RUN[CAND]}
+OUT = PROGETTO / ('reports/confronto_misto_532' if CAND == 'M' else 'reports/confronto_blob_506')
 
 
 def parametri(run: Path) -> dict:
@@ -71,7 +81,7 @@ def valuta_caso(c: str):
 
 def main():
     casi = sorted(pp.predizioni_fuori_fold(RUN['Z']))
-    assert sorted(pp.predizioni_fuori_fold(RUN['M'])) == casi, 'M non ha tutti i fold'
+    assert sorted(pp.predizioni_fuori_fold(RUN[CAND])) == casi, f'{CAND} non ha tutti i fold'
     with Pool(6) as p:
         R = dict(p.map(valuta_caso, casi))
     tot = {}
@@ -87,18 +97,19 @@ def main():
                   'per_paziente': {c: R[c][n]['dice'] for c in casi},
                   'copertura': {f: [sum(R[c][n]['copertura'].get(f, [0, 0])[i] for c in casi) for i in (0, 1)]
                                 for f in FENOTIPI}}
-    z, m = tot['Z'], tot['M']
+    z, m = tot['Z'], tot[CAND]
+    M = CAND
     v = np.array(z['volumi'])
     piccole = v < 50
     tz, tm = np.array(z['trovate']), np.array(m['trovate'])
     sm, sz, p_picc = mcnemar(tm[piccole], tz[piccole])
     sm_all, sz_all, p_all = mcnemar(tm, tz)
     dz, dm = np.array(list(z['per_paziente'].values())), np.array(list(m['per_paziente'].values()))
-    r = ['# Training misto (M, 532) contro il modello della tesi (Z, 506), fuori-fold', '',
-         'Prodotto da `scripts/confronto_misto_532.py`, **non modificare a mano**. Criterio fissato prima dei risultati: '
+    r = [f'# {TITOLO} contro il modello della tesi (Z, 506), fuori-fold', '',
+         f'Prodotto da `scripts/confronto_misto_532.py{" " + CAND if CAND != "M" else ""}`, **non modificare a mano**. Criterio fissato prima dei risultati: '
          'misura principale le lesioni sotto 50 mm³ trovate (McNemar appaiato), vincolo i falsi positivi e l\'F1.', '',
          '## Misura principale', '',
-         f'| | Z | M | trovate solo da M / solo da Z | p (McNemar) |', '| --- | --- | --- | --- | --- |',
+         f'| | Z | {M} | trovate solo da {M} / solo da Z | p (McNemar) |', '| --- | --- | --- | --- | --- |',
          f'| lesioni < 50 mm³ trovate | {tz[piccole].sum()}/{piccole.sum()} | {tm[piccole].sum()}/{piccole.sum()} | '
          f'{sm} / {sz} | {fp_(p_picc)} |',
          f'| tutte le lesioni trovate | {tz.sum()}/{len(tz)} | {tm.sum()}/{len(tm)} | {sm_all} / {sz_all} | {fp_(p_all)} |', '',
@@ -109,17 +120,17 @@ def main():
         pp_ = t['postprocessing']
         r.append(f"| {n} | soglia {pp_['t']}, volume minimo {pp_['vmin']} mm³{', cervello' if pp_['cervello'] else ''} | "
                  f"{t['f1']:.3f} | {t['fp']} | {t['dice']:.3f} | {t['mediana']:.3f} | {t['globale']:.3f} |")
-    r += ['', f'Dice per paziente, M meno Z: {(dm - dz).mean():+.3f} in media, M meglio in {(dm > dz).sum()} pazienti e '
+    r += ['', f'Dice per paziente, {M} meno Z: {(dm - dz).mean():+.3f} in media, {M} meglio in {(dm > dz).sum()} pazienti e '
           f'peggio in {(dm < dz).sum()}, p = {fp_(wilcoxon(dm, dz).pvalue)} (Wilcoxon).', '',
-          '## Lesioni trovate per fascia di volume', '', '| fascia | lesioni | Z | M |', '| --- | --- | --- | --- |']
+          '## Lesioni trovate per fascia di volume', '', f'| fascia | lesioni | Z | {M} |', '| --- | --- | --- | --- |']
     for lo, hi, et in FASCE:
         sel = (v >= lo) & (v < hi)
         r.append(f'| {et} | {sel.sum()} | {tz[sel].sum()} | {tm[sel].sum()} |')
-    r += ['', '## Copertura per fenotipo', '', '| fenotipo | voxel | Z | M |', '| --- | --- | --- | --- |']
+    r += ['', '## Copertura per fenotipo', '', f'| fenotipo | voxel | Z | {M} |', '| --- | --- | --- | --- |']
     for f, nome in FENOTIPI.items():
         nv = z['copertura'][f][1]
         r.append(f"| {nome} | {nv} | " + ' | '.join(f"{tot[k]['copertura'][f][0] / nv:.0%}" if nv else '—' for k in RUN) + ' |')
-    r += ['', '## Dice per paziente', '', '| paziente | Z | M |', '| --- | --- | --- |']
+    r += ['', '## Dice per paziente', '', f'| paziente | Z | {M} |', '| --- | --- | --- |']
     r += [f"| {c} | {z['per_paziente'][c]:.3f} | {m['per_paziente'][c]:.3f} |" for c in casi]
     OUT.with_suffix('.md').write_text('\n'.join(r) + '\n')
     OUT.with_suffix('.json').write_text(json.dumps({'totali': tot, 'per_caso': R}, indent=1, default=float))

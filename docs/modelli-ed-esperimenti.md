@@ -1249,3 +1249,22 @@ perché molti falsi positivi hanno picco 1.00 (a 0.9: 27/68, 6 falsi positivi). 
 descrittivo: 50 mm³ toglie 38 falsi positivi su 42 e fa perdere 4 lesioni (4.6, 21, 124 e 912 mm³);
 10 mm³ ne avrebbe perse 1 con 14 falsi positivi. Il postprocessing resta quello congelato prima del test;
 cambiarlo adesso vorrebbe dire sceglierlo sul test.
+
+**Ricetta B, Z con la blob loss (preparata il 12 ottobre)** (`scripts/nnunet_trainers/nnUNetTrainerBlob.py`,
+`nnUNetTrainerBlob_250ep_dropmod30_arresto50`, su Dataset506 con gli split di Z). Richiesta del responsabile:
+una misura che dia peso alle lesioni piccole, usata nell'addestramento. Perché Z non lo fa già: Dice e
+cross-entropy di nnU-Net contano voxel per voxel, e nel bersaglio a 1 mm dei 12 pazienti le lesioni sotto
+50 mm³ sono 71 su 97 componenti ma lo **0.07% dei voxel di lesione**. Il campionamento invece non è il
+problema: una patch di 128 mm contiene la lesione piccola in mediana nel 100% delle patch forzate sulla
+lesione e nell'82% di quelle casuali (misura sui `labelsTr`, ritaglio sul non nullo come nnU-Net).
+Blob loss (Kofler et al., IPMI 2023): per ogni componente dell'etichetta nella patch un Dice morbido con
+la predizione azzerata sulle altre lesioni, media per patch e poi sul batch; si somma alla loss di
+nnU-Net con peso 0.5 (rapporto 2 : 1 dell'articolo senza cambiare la scala della loss di Z), solo
+all'uscita a risoluzione piena. Componenti a 26 vicini contate nei processi del data loader dopo le
+trasformazioni spaziali, come secondo canale della segmentazione che il trainer stacca prima di nnU-Net.
+La perdita di validazione, e quindi l'arresto, è la loss totale. Collaudo: blob loss 0.50 con una lesione
+grande presa e una piccola mancata, 0.04 con entrambe prese. Criterio fissato prima di lanciare, lo
+stesso di M (`scripts/confronto_misto_532.py B` → `reports/confronto_blob_506.md`): lesioni sotto 50 mm³
+trovate, McNemar; vincolo F1 e falsi positivi; postprocessing scelto sui fuori-fold. Lancio con le schede
+condivise: `scripts/attendi_memoria_e_lancia.sh` (un fold alla volta sulla scheda con almeno 10 GB liberi,
+due code in parallelo).

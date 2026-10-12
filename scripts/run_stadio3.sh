@@ -13,6 +13,8 @@
 #   M  Z sul dataset misto 532 (pazienti + ATLAS + WMH, patch 1/2 pazienti, 1/4 WMH, 1/4 ATLAS):
 #      i dati pubblici durante l'addestramento invece che prima (scripts/make_misto_dataset.py).
 #        CUDA_VISIBLE_DEVICES=1 setsid nohup bash scripts/run_stadio3.sh 532 M > reports/logs/s3_532_M_g1.log 2>&1 < /dev/null &
+#   B  Z con la blob loss (scripts/nnunet_trainers/nnUNetTrainerBlob.py): ogni lesione pesa uguale.
+#      Con le schede occupate: scripts/attendi_memoria_e_lancia.sh 506 B "0 2 4" (e "1 3" in parallelo).
 # Il secondo argomento facoltativo divide i fold fra piu' GPU.
 set -u
 cd /home/ccantini/lesion_detection_project || exit 1
@@ -28,6 +30,7 @@ case "$GRUPPO" in
     Z) TR=nnUNetTrainerWandb_250ep_dropmod30_arresto50; W="" ;;
     M) TR=nnUNetTrainerMisto_250ep_dropmod30_arresto50; W=""
        [ "$ID" = 532 ] || { echo "la ricetta M va sul dataset misto 532"; exit 1; } ;;
+    B) TR=nnUNetTrainerBlob_250ep_dropmod30_arresto50; W="" ;;
     *) echo "gruppo sconosciuto: $GRUPPO"; exit 1 ;;
 esac
 [ -z "$W" ] || [ -f "$W" ] || { echo "pesi non trovati: $W"; exit 1; }
