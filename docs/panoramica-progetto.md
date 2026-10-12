@@ -121,6 +121,6 @@ del paziente, per centro, per fenotipo e per dimensione.
 4. Il secondo stadio della tesi — l'inpainting per il «gemello sano» — dopo la segmentazione.
 
 **Limiti da dichiarare**: 17 pazienti, 5 di test; i 3 pazienti di test a 3 T erano fra i dieci su cui
-si è scelta la ricetta; le lesioni sotto 50 mm³ sono trovate solo in un caso su tre; la registrazione
+si è scelta la ricetta; le lesioni sotto 50 mm³ sono trovate solo in un caso su tre (per limite del modello, non del filtro del postprocessing); la registrazione
 sul template deforma localmente le lesioni vicine ai ventricoli (le misure si fanno comunque nello
 spazio del paziente).

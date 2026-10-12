@@ -175,6 +175,14 @@ combinazioni: soglia 0.3, 0.4, 0.5, 0.6, 0.7 × volume minimo 0, 5, 10, 20, 50, 
 maschera del cervello; obiettivo F1 per lesione) e congelati prima del test: falsi positivi da 20 a 1, F1 da
 0.491 a 0.560, Dice invariato (0.580 → 0.584).
 
+**Come funziona il volume minimo, da spiegare bene nella tesi.** Il filtro non tocca le lesioni
+annotate: agisce sulle **componenti predette**. Dopo la soglia, la maschera predetta si divide in
+componenti connesse (macchie separate); si tolgono quelle sotto 50 mm³ (una sfera di circa 4.6 mm di
+diametro, circa 270 voxel della griglia T1 nativa). Una lesione piccola resta trovata se la macchia
+predetta che la tocca è più grande di 50 mm³. Quindi «volume minimo 50 mm³» **non** vuol dire che il
+modello ignora le lesioni sotto 50 mm³: vuol dire che non si fida delle proprie macchie isolate sotto
+quella dimensione. Quanto costa in lesioni vere è misurato in §8.4: una sola lesione in cross-validation.
+
 ### 3.2 Che cosa è stato valutato e scartato (con numeri)
 
 | prova | dove | risultato | decisione |
@@ -402,7 +410,8 @@ sottostimano la lesione (115 268 e 115 399 mm³).
 | > 10 000 mm³ | 6 | 6 | **0.83** | 2 | 2 |
 
 Le lesioni grandi sono segmentate bene; **sotto 50 mm³ quasi tutte mancate** (10 su 46 in CV). È il
-limite principale del modello.
+limite principale del modello, e **non dipende dal volume minimo del postprocessing**: senza filtro le
+lesioni piccole trovate sono sempre 10 su 46 (§8.4).
 
 ### 7.6 Ablazione dei canali (12 pazienti, fuori-fold, sequenza azzerata in ingresso)
 
@@ -455,12 +464,66 @@ CV). Contro la ROI_3 copre il 43–99% del ventricolo annotato, sotto il 60% nei
 deformati: limite noto della versione 1.0. Utile come regola di sicurezza; non ancora valutata sul
 test.
 
+### 8.4 Il volume minimo di 50 mm³: che cosa toglie davvero
+
+Il responsabile della tesi ha giudicato 50 mm³ una soglia troppo grande. Analisi fatta dopo il test
+(`scripts/analisi_volume_minimo_506.py` → `reports/analisi_volume_minimo_506.md`), sulle stesse
+probabilità di Z, soglia 0.3 in tutte le righe; cambia solo il filtro sulle componenti predette.
+
+Cross-validation, 12 pazienti, fuori-fold:
+
+| filtro | lesioni trovate | di cui < 50 mm³ | falsi positivi | F1 per lesione | Dice medio |
+| --- | --- | --- | --- | --- | --- |
+| nessuno | 28/68 | 10/46 | 21 | 0.494 | 0.584 |
+| ≥ 5 mm³ | 28/68 | 10/46 | 10 | 0.532 | 0.585 |
+| ≥ 10 mm³ | 28/68 | 10/46 | 7 | 0.542 | 0.584 |
+| ≥ 20 mm³ | 27/68 | 10/46 | 7 | 0.523 | 0.583 |
+| **≥ 50 mm³ (Z)** | **27/68** | **10/46** | **1** | **0.560** | **0.584** |
+| isteresi, picco ≥ 0.9 | 27/68 | 10/46 | 6 | 0.526 | 0.583 |
+
+Che cosa dice:
+
+- **Il filtro costa una sola lesione vera** in cross-validation: FSM_056, 346 mm³, toccata dalla
+  predizione solo con un frammento di circa 20 mm³. Toglie 20 dei 21 falsi positivi.
+- Le componenti tolte sono 36: 20 falsi positivi e 16 che toccano una lesione vera; ma quelle lesioni
+  sono quasi tutte trovate anche da un'altra componente più grande.
+- **Le lesioni piccole trovate non dipendono dal filtro.** Delle 46 lesioni sotto 50 mm³ la rete ne
+  tocca 10, con o senza filtro, e tutte stanno dentro una componente predetta più grande di 50 mm³,
+  quasi sempre quella di una lesione grande vicina. Nessuna è trovata da una macchia piccola isolata.
+- **Le altre 36 la rete non le vede**: in 34 delle 46 la probabilità massima dentro la lesione resta
+  sotto 0.05 (mediana 0.0). Abbassare la soglia o togliere il filtro non le recupera: il limite sulle
+  lesioni piccole è il modello, non il postprocessing.
+- **Isteresi** (si tiene una componente se il suo voxel più sicuro supera un valore, cioè si decide
+  per sicurezza della rete invece che per dimensione): non separa meglio del volume, perché molti
+  falsi positivi hanno probabilità massima 1.00. La rete sbaglia con piena sicurezza.
+
+Test, 5 pazienti, **solo descrittivo** (nessuna scelta fatta qui):
+
+| filtro | lesioni trovate | di cui < 50 mm³ | falsi positivi | F1 per lesione |
+| --- | --- | --- | --- | --- |
+| nessuno | 25/40 | 15/26 | 42 | 0.370 |
+| ≥ 10 mm³ | 24/40 | 14/26 | 14 | 0.545 |
+| **≥ 50 mm³ (Z)** | 21/40 | 13/26 | 4 | 0.605 |
+
+Sul test il filtro toglie 38 falsi positivi su 42 e fa perdere 4 lesioni (4.6, 21, 124 e 912 mm³);
+due lesioni piccole del test erano trovate da una macchia piccola isolata (FSM_052 e FSM_054).
+
+**Come presentarlo nella tesi.** Il volume minimo resta 50 mm³ nel risultato principale: è stato
+scelto sulla cross-validation e congelato prima del test, e cambiarlo adesso vorrebbe dire sceglierlo
+guardando il test. Va presentato come un **punto di lavoro regolabile**, un compromesso fra lesioni
+trovate e falsi positivi: la tabella della cross-validation mostra il compromesso, e un uso clinico
+che preferisce non perdere lesioni può scegliere 10 mm³ (una lesione in più nei 12, 6 falsi positivi
+in più). La soglia di 10 mm³ e la tabella del test sono analisi fatte dopo, e così vanno dichiarate.
+Nei limiti: il filtro può far perdere una lesione vera quando la rete la tocca solo con un frammento.
+
 ---
 
 ## 9. Limiti da dichiarare
 
 17 pazienti, di cui 5 di test; nessuna differenza statisticamente distinguibile fra le ricette;
-lesioni sotto 50 mm³ in gran parte mancate; un falso positivo nel ventricolo dilatato; validazione di
+lesioni sotto 50 mm³ in gran parte mancate (dal modello, non dal filtro del postprocessing, §8.4); il
+volume minimo di 50 mm³ fa perdere una lesione toccata solo da un frammento (1 in CV, 4 sul test);
+un falso positivo nel ventricolo dilatato; validazione di
 2–3 pazienti per fold; esperimenti sui dati pubblici su un solo fold e senza seme fisso; il piano a 1
 mm toglie dal bersaglio 4 lesioni su 90 (tutte sotto 3 mm³); quattro pazienti sotto i 5 anni; annotazioni con
 residui segnalati al clinico; i tre pazienti di test a 3 T erano fra i dieci su cui si è scelta la
@@ -543,7 +606,8 @@ seguendo le regole dell'ateneo che l'autore indicherà.
 6. **Experiments on public data** (sez. 5).
 7. **From public data to patients** — 504, 505, 542/543 (sez. 6).
 8. **Final model and results** — 506: CV, scelta, curve, test, dimensione, esempi, ablazione (sez. 7).
-9. **Additional analyses** — addestramento misto, difetto del dropout, SynthSeg (sez. 8).
+9. **Additional analyses** — addestramento misto, difetto del dropout, SynthSeg, volume minimo del
+   postprocessing (sez. 8).
 10. **Discussion and limitations** (sez. 9).
 11. **Conclusions and future work** (sez. 10).
 
@@ -556,4 +620,6 @@ stripping → skull stripping · modality dropout → modality dropout · arrest
 stopping · fuori-fold → out-of-fold · falso positivo → false positive · rilevamento per lesione →
 lesion-wise detection · percentuale di cervello lesionato → lesion load (% of brain volume) ·
 addestramento misto → mixed-source training · pretraining congiunto → joint pretraining ·
-espansione dei canali → input-channel expansion · passo di apprendimento → learning rate.
+espansione dei canali → input-channel expansion · passo di apprendimento → learning rate · componente
+connessa → connected component · volume minimo → minimum component volume · isteresi → hysteresis
+thresholding · punto di lavoro → operating point.
