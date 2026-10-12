@@ -1238,8 +1238,8 @@ limite atteso della versione 1.0 sulle anatomie patologiche.
 **Il volume minimo di 50 mm³, che cosa toglie (12 ottobre)** (`scripts/analisi_volume_minimo_506.py` →
 `reports/analisi_volume_minimo_506.md`). Il responsabile trova 50 mm³ troppo grandi (una sfera di 4.6 mm).
 Il filtro agisce sulle **macchie predette**, non sulle lesioni annotate. Fuori-fold dei 12, soglia 0.3: le
-macchie tolte sono 36, 20 falsi positivi e 16 che toccano una lesione vera; ma 15 di quelle 16 lesioni
-restano trovate da un'altra macchia più grande, e **la lesione vera persa è una sola** (FSM_056, 346 mm³,
+macchie tolte sono 36, 20 falsi positivi e 16 che toccano una lesione vera; ma le lesioni che toccano sono quasi
+tutte trovate anche da un'altra macchia più grande, e **la lesione vera persa è una sola** (FSM_056, 346 mm³,
 toccata solo da un frammento). Delle 46 lesioni sotto 50 mm³ la rete ne tocca 10, con o senza filtro, e
 tutte stanno dentro una macchia più grande di 50 mm³, quasi sempre quella di una lesione grande vicina;
 le altre 36 la rete non le vede (probabilità massima sotto 0.05 in 34 su 46). Il limite sulle lesioni
