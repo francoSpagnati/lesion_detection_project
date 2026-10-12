@@ -1234,3 +1234,18 @@ i falsi positivi nel ventricolo non compaiono nei 12, e l'unico visto è quello 
 ROI_3 (8 pazienti): SynthSeg copre fra il 43% e il 99% del ventricolo annotato; sotto il 60% in FSM_028,
 FSM_035, FSM_040 e FSM_041, cioè **sottostima i ventricoli più deformati**, il caso che interessa. È il
 limite atteso della versione 1.0 sulle anatomie patologiche.
+
+**Il volume minimo di 50 mm³, che cosa toglie (12 ottobre)** (`scripts/analisi_volume_minimo_506.py` →
+`reports/analisi_volume_minimo_506.md`). Il responsabile trova 50 mm³ troppo grandi (una sfera di 4.6 mm).
+Il filtro agisce sulle **macchie predette**, non sulle lesioni annotate. Fuori-fold dei 12, soglia 0.3: le
+macchie tolte sono 36, 20 falsi positivi e 16 che toccano una lesione vera; ma 15 di quelle 16 lesioni
+restano trovate da un'altra macchia più grande, e **la lesione vera persa è una sola** (FSM_056, 346 mm³,
+toccata solo da un frammento). Delle 46 lesioni sotto 50 mm³ la rete ne tocca 10, con o senza filtro, e
+tutte stanno dentro una macchia più grande di 50 mm³, quasi sempre quella di una lesione grande vicina;
+le altre 36 la rete non le vede (probabilità massima sotto 0.05 in 34 su 46). Il limite sulle lesioni
+piccole è il modello, non il postprocessing. Alternative, stesse 12: 10 mm³ tiene 28/68 con 7 falsi
+positivi (F1 0.542); l'isteresi sulla probabilità massima della macchia non separa meglio del volume,
+perché molti falsi positivi hanno picco 1.00 (a 0.9: 27/68, 6 falsi positivi). Sul test, solo
+descrittivo: 50 mm³ toglie 38 falsi positivi su 42 e fa perdere 4 lesioni (4.6, 21, 124 e 912 mm³);
+10 mm³ ne avrebbe perse 1 con 14 falsi positivi. Il postprocessing resta quello congelato prima del test;
+cambiarlo adesso vorrebbe dire sceglierlo sul test.

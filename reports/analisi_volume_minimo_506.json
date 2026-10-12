@@ -1,0 +1,575 @@
+{
+ "cv": {
+  "volume_0": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 21,
+   "comp": 55,
+   "dice": 0.5842903666217444,
+   "f1": 0.4942886812045691,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_1": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 21,
+   "comp": 55,
+   "dice": 0.5843084918590604,
+   "f1": 0.4942886812045691,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_5": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 10,
+   "comp": 40,
+   "dice": 0.5847240122412779,
+   "f1": 0.5316455696202532,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_10": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 7,
+   "comp": 34,
+   "dice": 0.5842130749418372,
+   "f1": 0.5423242467718794,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_20": {
+   "lesioni": 68,
+   "trovate": 27,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 7,
+   "comp": 30,
+   "dice": 0.583297097100649,
+   "f1": 0.5231676495366471,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_056",
+     346.0200332403183
+    ]
+   ]
+  },
+  "volume_50": {
+   "lesioni": 68,
+   "trovate": 27,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 1,
+   "comp": 19,
+   "dice": 0.5843334930330567,
+   "f1": 0.5595854922279793,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_056",
+     346.0200332403183
+    ]
+   ]
+  },
+  "isteresi_0.5": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 15,
+   "comp": 47,
+   "dice": 0.5844167702816703,
+   "f1": 0.5131729667812142,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.6": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 13,
+   "comp": 45,
+   "dice": 0.5844196097376516,
+   "f1": 0.5215366705471479,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.7": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 11,
+   "comp": 41,
+   "dice": 0.5843110298302993,
+   "f1": 0.5269761606022584,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.8": {
+   "lesioni": 68,
+   "trovate": 28,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 9,
+   "comp": 35,
+   "dice": 0.5841058359498956,
+   "f1": 0.529839883551674,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.9": {
+   "lesioni": 68,
+   "trovate": 27,
+   "piccole": 46,
+   "piccole_trovate": 10,
+   "fp": 6,
+   "comp": 27,
+   "dice": 0.5834730207160452,
+   "f1": 0.525730180806676,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_056",
+     346.0200332403183
+    ]
+   ]
+  }
+ },
+ "test": {
+  "volume_0": {
+   "lesioni": 40,
+   "trovate": 25,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 42,
+   "comp": 57,
+   "dice": 0.6234700158347696,
+   "f1": 0.37037037037037035,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_1": {
+   "lesioni": 40,
+   "trovate": 25,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 42,
+   "comp": 57,
+   "dice": 0.6234844555701147,
+   "f1": 0.37037037037037035,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_5": {
+   "lesioni": 40,
+   "trovate": 25,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 18,
+   "comp": 33,
+   "dice": 0.6236189736823773,
+   "f1": 0.5263157894736842,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "volume_10": {
+   "lesioni": 40,
+   "trovate": 24,
+   "piccole": 26,
+   "piccole_trovate": 14,
+   "fp": 14,
+   "comp": 28,
+   "dice": 0.623471601181771,
+   "f1": 0.5454545454545454,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_052",
+     21.233787387609482
+    ]
+   ]
+  },
+  "volume_20": {
+   "lesioni": 40,
+   "trovate": 22,
+   "piccole": 26,
+   "piccole_trovate": 13,
+   "fp": 8,
+   "comp": 20,
+   "dice": 0.623351792068296,
+   "f1": 0.5739130434782609,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_030",
+     912.25
+    ],
+    [
+     "FSM_052",
+     21.233787387609482
+    ],
+    [
+     "FSM_054",
+     4.616036638617516
+    ]
+   ]
+  },
+  "volume_50": {
+   "lesioni": 40,
+   "trovate": 21,
+   "piccole": 26,
+   "piccole_trovate": 13,
+   "fp": 4,
+   "comp": 14,
+   "dice": 0.6223169727103792,
+   "f1": 0.6051873198847262,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_030",
+     123.5
+    ],
+    [
+     "FSM_030",
+     912.25
+    ],
+    [
+     "FSM_052",
+     21.233787387609482
+    ],
+    [
+     "FSM_054",
+     4.616036638617516
+    ]
+   ]
+  },
+  "isteresi_0.5": {
+   "lesioni": 40,
+   "trovate": 25,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 34,
+   "comp": 49,
+   "dice": 0.6235118090287557,
+   "f1": 0.4109589041095891,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.6": {
+   "lesioni": 40,
+   "trovate": 25,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 27,
+   "comp": 42,
+   "dice": 0.6235318650204015,
+   "f1": 0.45454545454545453,
+   "perse_rispetto_a_nessun_filtro": []
+  },
+  "isteresi_0.7": {
+   "lesioni": 40,
+   "trovate": 24,
+   "piccole": 26,
+   "piccole_trovate": 15,
+   "fp": 17,
+   "comp": 31,
+   "dice": 0.6232714513317135,
+   "f1": 0.5153374233128835,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_030",
+     912.25
+    ]
+   ]
+  },
+  "isteresi_0.8": {
+   "lesioni": 40,
+   "trovate": 23,
+   "piccole": 26,
+   "piccole_trovate": 14,
+   "fp": 14,
+   "comp": 27,
+   "dice": 0.6231749664249109,
+   "f1": 0.5241016652059597,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_030",
+     912.25
+    ],
+    [
+     "FSM_052",
+     21.233787387609482
+    ]
+   ]
+  },
+  "isteresi_0.9": {
+   "lesioni": 40,
+   "trovate": 22,
+   "piccole": 26,
+   "piccole_trovate": 13,
+   "fp": 9,
+   "comp": 21,
+   "dice": 0.623228885365774,
+   "f1": 0.5605095541401274,
+   "perse_rispetto_a_nessun_filtro": [
+    [
+     "FSM_030",
+     912.25
+    ],
+    [
+     "FSM_052",
+     21.233787387609482
+    ],
+    [
+     "FSM_054",
+     4.616036638617516
+    ]
+   ]
+  }
+ },
+ "componenti_tolte_cv": [
+  {
+   "caso": "FSM_001",
+   "mm3": 34.60702121257782,
+   "pmax": 0.99658203125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_001",
+   "mm3": 1.3165714591741562,
+   "pmax": 0.495361328125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_001",
+   "mm3": 20.31281679868698,
+   "pmax": 0.9306640625,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_001",
+   "mm3": 4.137796014547348,
+   "pmax": 0.76904296875,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 8.000618934631348,
+   "pmax": 0.8173828125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 5.000386834144592,
+   "pmax": 0.45361328125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 40.00309467315674,
+   "pmax": 0.62890625,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 2.000154733657837,
+   "pmax": 0.310302734375,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 23.001779437065125,
+   "pmax": 0.85888671875,
+   "lesioni": [
+    6
+   ]
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 20.00154733657837,
+   "pmax": 0.84228515625,
+   "lesioni": [
+    6
+   ]
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 11.000851035118103,
+   "pmax": 0.7470703125,
+   "lesioni": [
+    6
+   ]
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 4.000309467315674,
+   "pmax": 0.42529296875,
+   "lesioni": [
+    6
+   ]
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 2.000154733657837,
+   "pmax": 0.56689453125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_028",
+   "mm3": 4.000309467315674,
+   "pmax": 0.802734375,
+   "lesioni": [
+    6
+   ]
+  },
+  {
+   "caso": "FSM_035",
+   "mm3": 2.999845504760742,
+   "pmax": 0.564453125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_036",
+   "mm3": 4.999906122684479,
+   "pmax": 0.75341796875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_036",
+   "mm3": 2.9999436736106873,
+   "pmax": 0.8310546875,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_039",
+   "mm3": 3.5082022845745087,
+   "pmax": 0.73828125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 29.91201639175415,
+   "pmax": 0.99462890625,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 20.125986337661743,
+   "pmax": 0.953125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 31.758437156677246,
+   "pmax": 1.0,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 11.263166666030884,
+   "pmax": 0.939453125,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 3.3235573768615723,
+   "pmax": 0.65966796875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 8.49353551864624,
+   "pmax": 0.77587890625,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 27.511669397354126,
+   "pmax": 0.99609375,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_041",
+   "mm3": 27.880953550338745,
+   "pmax": 0.99560546875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 1.292494535446167,
+   "pmax": 0.343017578125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 6.277830600738525,
+   "pmax": 0.424560546875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 3.6928415298461914,
+   "pmax": 0.38916015625,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 10.339956283569336,
+   "pmax": 0.7373046875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 6.6471147537231445,
+   "pmax": 0.60595703125,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_045",
+   "mm3": 3.6928415298461914,
+   "pmax": 0.94970703125,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_053",
+   "mm3": 1.2924973517656326,
+   "pmax": 0.418212890625,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_053",
+   "mm3": 7.385699152946472,
+   "pmax": 0.6591796875,
+   "lesioni": []
+  },
+  {
+   "caso": "FSM_056",
+   "mm3": 19.387461841106415,
+   "pmax": 0.85498046875,
+   "lesioni": [
+    1
+   ]
+  },
+  {
+   "caso": "FSM_056",
+   "mm3": 24.00352418422699,
+   "pmax": 0.99658203125,
+   "lesioni": []
+  }
+ ]
+}
