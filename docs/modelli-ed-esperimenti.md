@@ -1267,4 +1267,8 @@ grande presa e una piccola mancata, 0.04 con entrambe prese. Criterio fissato pr
 stesso di M (`scripts/confronto_misto_532.py B` → `reports/confronto_blob_506.md`): lesioni sotto 50 mm³
 trovate, McNemar; vincolo F1 e falsi positivi; postprocessing scelto sui fuori-fold. Lancio con le schede
 condivise: `scripts/attendi_memoria_e_lancia.sh` (un fold alla volta sulla scheda con almeno 10 GB liberi,
-due code in parallelo).
+due code in parallelo). Code avviate il 12/10 alle 17:42 con soglia 9 GB; il 13/10 mattina ancora in attesa:
+le quattro schede sono occupate da un training di un altro utente (75.6 GB su 80 per scheda, al 100%,
+senza limite di passi). Misura con un tetto di 5 GB per non toccare l'altro job: B non ci sta, e la memoria
+finisce nella rete (4.3 GB allocati al primo passo), non nella blob loss, che è stata riscritta con una sola
+scatter_add (stessa loss e stessi gradienti della forma lesione per lesione, differenza < 1e-12).

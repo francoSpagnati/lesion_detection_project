@@ -64,21 +64,28 @@ def aggiungi_istanze(t):
 
 
 def blob_dice(logit: torch.Tensor, ist: torch.Tensor) -> torch.Tensor:
-    """1 - Dice morbido medio per lesione. logit (B, 2, ...) a risoluzione piena, ist (B, ...)."""
+    """1 - Dice morbido medio per lesione. logit (B, 2, ...) a risoluzione piena, ist (B, ...).
+
+    Per la lesione k, con la predizione azzerata sulle altre lesioni:
+        intersezione = somma di p dentro k                       = S_k
+        somma della predizione = somma di p fuori da ogni lesione + S_k = F + S_k
+        Dice_k = 2 S_k / (F + S_k + N_k),  N_k = voxel di k
+    Tutte le S_k con una sola scatter_add: la memoria non cresce con il numero di lesioni. Scritta
+    lesione per lesione (una maschera intera per lesione) la blob loss non stava nei 5 GB rimasti
+    liberi sulle schede condivise il 13/10; il risultato e' lo stesso (verificato contro quella forma)."""
     p = torch.softmax(logit.float(), 1)[:, 1]
     per_patch = []
     for b in range(p.shape[0]):
-        ids = torch.unique(ist[b])
-        ids = ids[ids > 0]
-        if len(ids) == 0:
+        idx = ist[b].reshape(-1).long()
+        n = int(idx.max())
+        if n == 0:
             continue
-        lesione = ist[b] > 0
-        perdite = []
-        for k in ids:
-            g = (ist[b] == k).float()
-            pm = p[b] * (~lesione | (ist[b] == k)).float()       # predizione azzerata sulle altre lesioni
-            perdite.append(1 - (2 * (pm * g).sum() + 1e-5) / (pm.sum() + g.sum() + 1e-5))
-        per_patch.append(torch.stack(perdite).mean())
+        pb = p[b].reshape(-1)
+        S = torch.zeros(n + 1, device=p.device).scatter_add_(0, idx, pb)
+        N = torch.bincount(idx, minlength=n + 1).float()
+        k = N[1:] > 0                                                # indici senza voxel (mai, ma per sicurezza)
+        F, S, N = S[0], S[1:][k], N[1:][k]
+        per_patch.append((1 - (2 * S + 1e-5) / (F + S + N + 1e-5)).mean())
     if not per_patch:
         return logit.sum() * 0
     return torch.stack(per_patch).mean()
