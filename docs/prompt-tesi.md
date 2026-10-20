@@ -542,6 +542,21 @@ Una componente vera tolta non è una lesione persa: quasi sempre la stessa lesio
 componente più grande, che resta. Delle componenti tolte sul test, 28 su 43 sono falsi positivi sotto
 10 mm³.
 
+Le stesse tabelle per **D** (`reports/tabelle_postprocessing_506_D.md`), con il suo postprocessing (soglia
+0.4, volume minimo **20 mm³**, scelto sulla CV con la stessa regola):
+
+| passo | CV: Dice | CV: trovate | CV: FP | CV: F1 | test: Dice | test: trovate | test: FP | test: F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| uscita di nnU-Net (0.5, nessun filtro) | 0.577 | 26/68 | 16 | 0.482 | 0.671 | 22/40 | 21 | 0.547 |
+| soglia 0.4 | 0.579 | 27/68 | 13 | 0.510 | 0.669 | 24/40 | 25 | 0.539 |
+| **soglia 0.4 + 20 mm³ (D)** | **0.577** | **25/68** | **2** | **0.522** | **0.672** | **24/40** | **5** | **0.683** |
+
+Il filtro di D toglie 25 componenti in CV (14 vere, 11 falsi positivi su 13) e 25 sul test (5 vere, 20
+falsi positivi su 25); lesioni perse davvero 2 in CV (346 e 667 mm³, toccate solo da frammenti) e 0 sul
+test. Un volume minimo più piccolo quindi non garantisce meno lesioni perse: in CV D ne perde 2 con 20 mm³,
+Z una con 50. Errore medio sul % di cervello lesionato, test: D 1.48 punti, Z 0.65 (D sottostima la
+lesione estesa di FSM_049).
+
 ---
 
 ## 9. Limiti da dichiarare

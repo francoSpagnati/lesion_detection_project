@@ -41,9 +41,9 @@ CONFIG = ([('volume', v) for v in (0, 1, 5, 10, 20, 50)] +
           [('isteresi', h) for h in (0.5, 0.6, 0.7, 0.8, 0.9)])
 
 
-def componenti(prob, ref, vox):
-    """Le componenti a soglia T con volume, probabilita' massima e lesioni annotate che toccano."""
-    m = prob >= T
+def componenti(prob, ref, vox, t=T):
+    """Le componenti a soglia t con volume, probabilita' massima e lesioni annotate che toccano."""
+    m = prob >= t
     lp, n = ndimage.label(m, structure=pp.STRUTTURA)
     lr, nr = ndimage.label(ref, structure=pp.STRUTTURA)
     vr = np.bincount(lr.ravel(), minlength=nr + 1)[1:] * vox

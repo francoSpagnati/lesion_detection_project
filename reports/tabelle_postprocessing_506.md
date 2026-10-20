@@ -1,6 +1,6 @@
-# Z prima e dopo il postprocessing; che cosa toglie il filtro dei 50 mm³
+# Z prima e dopo il postprocessing; che cosa toglie il volume minimo di 50 mm³
 
-Prodotto da `scripts/tabelle_postprocessing_506.py`, **non modificare a mano**. Griglia T1 nativa; lesione trovata se toccata da almeno un voxel; componente vera se tocca una lesione annotata, falso positivo se non ne tocca nessuna (componenti sotto 1 mm³ non contate). Cross-validation: fuori-fold dei 12 pazienti, dove il postprocessing è stato scelto. Test: 5 pazienti, solo descrittivo.
+Prodotto da `scripts/tabelle_postprocessing_506.py`, **non modificare a mano**. Modello `nnUNetTrainerWandb_250ep_dropmod30_arresto50`. Griglia T1 nativa; lesione trovata se toccata da almeno un voxel; componente vera se tocca una lesione annotata, falso positivo se non ne tocca nessuna (componenti sotto 1 mm³ non contate). Cross-validation: fuori-fold dei 12 pazienti, dove il postprocessing è stato scelto. Test: 5 pazienti, solo descrittivo.
 
 ## Prima e dopo il postprocessing: Cross-validation (12 pazienti)
 
@@ -18,7 +18,7 @@ Prodotto da `scripts/tabelle_postprocessing_506.py`, **non modificare a mano**. 
 | soglia 0.3, nessun filtro | 0.623 | 25/40 | 15/26 | 57 | 42 (8.4) | 0.26 | 0.370 | 0.66 punti |
 | **soglia 0.3 + volume minimo 50 mm³ (Z)** | 0.622 | 21/40 | 13/26 | 14 | 4 (0.8) | 0.71 | 0.605 | 0.65 punti |
 
-## Che cosa toglie il filtro dei 50 mm³ (a soglia 0.3)
+## Che cosa toglie il volume minimo di 50 mm³ (a soglia 0.3)
 
 | | cross-validation (12) | test (5) |
 | --- | --- | --- |

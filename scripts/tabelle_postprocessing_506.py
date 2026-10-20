@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-"""Due tabelle per la tesi: Z prima e dopo il postprocessing, e che cosa toglie il filtro dei 50 mm³.
+"""Due tabelle per la tesi: un modello prima e dopo il postprocessing, e che cosa toglie il volume minimo.
 
-    python scripts/tabelle_postprocessing_506.py     # -> reports/tabelle_postprocessing_506.{md,json}
+    python scripts/tabelle_postprocessing_506.py       # Z -> reports/tabelle_postprocessing_506.{md,json}
+    python scripts/tabelle_postprocessing_506.py D     # D -> reports/tabelle_postprocessing_506_D.{md,json}
+    python scripts/tabelle_postprocessing_506.py A     # A -> reports/tabelle_postprocessing_506_A.{md,json}
 
 PERCHE'. Il responsabile vuole vedere quanto cambia il postprocessing e quante componenti vere e
 false toglie il volume minimo. I numeri esistono gia' sparsi (valutazione_cv/test_*, analisi_volume_
@@ -9,8 +11,9 @@ minimo_506.md); qui stanno in due tabelle leggibili, cross-validation e test aff
 
 COME. Stesse funzioni di postprocessing_aincp.py (postprocessa, misure), quindi stessi numeri dei
 report ufficiali. Tre passi: l'uscita di nnU-Net (soglia 0.5, nessun filtro), la sola soglia 0.3, la
-soglia 0.3 con il volume minimo di 50 mm³ (il postprocessing di Z, scelto sulla cross-validation e
-congelato prima del test). Per il filtro: componenti predette fra 1 e 50 mm³ a soglia 0.3, divise in
+soglia scelta con il volume minimo scelto (per Z 0.3 e 50 mm³, per D 0.4 e 20 mm³, per A 0.6 e 5 mm³:
+ognuna il proprio, scelto sulla cross-validation con la stessa regola e congelato prima del test).
+Per il filtro: componenti predette fra 1 mm³ e il volume minimo alla soglia scelta, divise in
 quelle che toccano una lesione annotata (vere) e quelle che non ne toccano (falsi positivi), e le
 lesioni annotate che restano senza nessuna componente (perse davvero). Sul test e' descrizione.
 """
@@ -22,14 +25,21 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import postprocessing_aincp as pp  # noqa: E402
-from analisi_volume_minimo_506 import RUN, componenti  # noqa: E402
+from analisi_volume_minimo_506 import componenti  # noqa: E402
 
 PROGETTO = Path(__file__).resolve().parent.parent
-OUT = PROGETTO / 'reports/tabelle_postprocessing_506'
+RICETTA = sys.argv[1] if len(sys.argv) > 1 else 'Z'
+TRAINER = {'Z': 'nnUNetTrainerWandb_250ep_dropmod30_arresto50',
+           'D': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_dropmod30_arresto50_dapre2c',
+           'A': 'nnUNetTrainerEspansioneCanali_zero_250ep_lr1e4_primo1e2_wdfix_dropmod30_arresto50'}[RICETTA]
+RUN = PROGETTO / 'nnUNet/nnUNet_results/Dataset506_AINCP_FINALE' / f'{TRAINER}__nnUNetPlansDa502__3d_fullres'
+PAR = json.loads((PROGETTO / 'reports' / f'postprocessing_{RUN.parent.name}__{RUN.name}.json').read_text())['scelto']
+T, VMIN = PAR['t'], PAR['vmin']
+OUT = PROGETTO / ('reports/tabelle_postprocessing_506' + ('' if RICETTA == 'Z' else f'_{RICETTA}'))
 PASSI = [('uscita di nnU-Net (soglia 0.5, nessun filtro)', 0.5, 0),
-         ('soglia 0.3, nessun filtro', 0.3, 0),
-         ('**soglia 0.3 + volume minimo 50 mm³ (Z)**', 0.3, 50)]
-FASCE_TOLTE = [(1, 10, '1–10 mm³'), (10, 20, '10–20 mm³'), (20, 50, '20–50 mm³')]
+         (f'soglia {T}, nessun filtro', T, 0),
+         (f'**soglia {T} + volume minimo {VMIN} mm³ ({RICETTA})**', T, VMIN)]
+FASCE_TOLTE = [(lo, min(hi, VMIN), f'{lo}–{min(hi, VMIN)} mm³') for lo, hi in ((1, 10), (10, 20), (20, 50)) if lo < VMIN]
 
 
 def insieme(nome):
@@ -47,10 +57,10 @@ def analizza(nome):
         ref, cer, vox = pp.carica_caso(c)
         for i, (_, t, v) in enumerate(PASSI):
             passi[i].append(pp.misure(pp.postprocessa(prob, t, v, False, cer, vox), ref, cer, vox))
-        lesioni, comp, _ = componenti(prob, ref, vox)               # soglia 0.3
-        tenute = set().union(*[q['lesioni'] for q in comp if q['mm3'] >= 50]) if comp else set()
+        lesioni, comp, _ = componenti(prob, ref, vox, T)
+        tenute = set().union(*[q['lesioni'] for q in comp if q['mm3'] >= VMIN]) if comp else set()
         prima = set().union(*[q['lesioni'] for q in comp if q['mm3'] >= pp.SOGLIA_LESIONE_MM3]) if comp else set()
-        tolte += [{'caso': c, **q} for q in comp if pp.SOGLIA_LESIONE_MM3 <= q['mm3'] < 50]
+        tolte += [{'caso': c, **q} for q in comp if pp.SOGLIA_LESIONE_MM3 <= q['mm3'] < VMIN]
         perse += [{'caso': c, 'mm3': l['mm3']} for l in lesioni if l['id'] in prima and l['id'] not in tenute]
     righe = []
     for i, (et, t, v) in enumerate(PASSI):
@@ -69,8 +79,9 @@ def analizza(nome):
 
 def main():
     R = {k: analizza(k) for k in ('cv', 'test')}
-    md = ['# Z prima e dopo il postprocessing; che cosa toglie il filtro dei 50 mm³', '',
-          'Prodotto da `scripts/tabelle_postprocessing_506.py`, **non modificare a mano**. Griglia T1 nativa; lesione '
+    md = [f'# {RICETTA} prima e dopo il postprocessing; che cosa toglie il volume minimo di {VMIN} mm³', '',
+          f'Prodotto da `scripts/tabelle_postprocessing_506.py{"" if RICETTA == "Z" else " " + RICETTA}`, **non modificare a mano**. '
+          f'Modello `{TRAINER}`. Griglia T1 nativa; lesione '
           'trovata se toccata da almeno un voxel; componente vera se tocca una lesione annotata, falso positivo se non '
           'ne tocca nessuna (componenti sotto 1 mm³ non contate). Cross-validation: fuori-fold dei 12 pazienti, dove il '
           'postprocessing è stato scelto. Test: 5 pazienti, solo descrittivo.', '']
@@ -84,12 +95,12 @@ def main():
                       f"{r['componenti']} | {r['fp']} ({r['fp_paz']:.1f}) | {r['prec']:.2f} | {r['f1']:.3f} | "
                       f"{r['errore_carico']:.2f} punti |")
         md.append('')
-    md += ['## Che cosa toglie il filtro dei 50 mm³ (a soglia 0.3)', '',
+    md += [f'## Che cosa toglie il volume minimo di {VMIN} mm³ (a soglia {T})', '',
            '| | cross-validation (12) | test (5) |', '| --- | --- | --- |']
 
     def riga(et, f):
         md.append(f"| {et} | {f(R['cv'])} | {f(R['test'])} |")
-    riga('componenti predette tolte (1–50 mm³)', lambda x: len(x['tolte']))
+    riga(f'componenti predette tolte (1–{VMIN} mm³)', lambda x: len(x['tolte']))
     riga('di cui vere (toccano una lesione annotata)', lambda x: sum(bool(q['lesioni']) for q in x['tolte']))
     riga('di cui falsi positivi', lambda x: sum(not q['lesioni'] for q in x['tolte']))
     riga('falsi positivi tolti, sul totale prima del filtro',
