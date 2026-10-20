@@ -516,6 +516,32 @@ che preferisce non perdere lesioni può scegliere 10 mm³ (una lesione in più n
 in più). La soglia di 10 mm³ e la tabella del test sono analisi fatte dopo, e così vanno dichiarate.
 Nei limiti: il filtro può far perdere una lesione vera quando la rete la tocca solo con un frammento.
 
+**Tabelle riassuntive** (`scripts/tabelle_postprocessing_506.py` → `reports/tabelle_postprocessing_506.md`).
+Prima e dopo il postprocessing, passo per passo:
+
+| passo | CV: Dice | CV: trovate | CV: FP | CV: F1 | test: Dice | test: trovate | test: FP | test: F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| uscita di nnU-Net (0.5, nessun filtro) | 0.580 | 27/68 | 20 | 0.491 | 0.615 | 24/40 | 41 | 0.394 |
+| soglia 0.3 | 0.584 | 28/68 | 21 | 0.494 | 0.623 | 25/40 | 42 | 0.370 |
+| **soglia 0.3 + 50 mm³ (Z)** | **0.584** | **27/68** | **1** | **0.560** | **0.622** | **21/40** | **4** | **0.605** |
+
+La soglia 0.3 serve al Dice e a una lesione in più; il filtro toglie i falsi positivi. Componenti predette
+da 55 a 19 in CV, da 57 a 14 sul test; precisione da 0.62 a 0.95 in CV, da 0.26 a 0.71 sul test.
+
+Che cosa toglie il filtro:
+
+| | CV (12) | test (5) |
+| --- | --- | --- |
+| componenti tolte (1–50 mm³) | 36 | 43 |
+| di cui vere (toccano una lesione) | 16 | 5 |
+| di cui falsi positivi | 20 | 38 |
+| falsi positivi tolti sul totale | 20 su 21 | 38 su 42 |
+| **lesioni perse davvero** | **1** (346 mm³) | **4** (4.6, 21, 124, 912 mm³) |
+
+Una componente vera tolta non è una lesione persa: quasi sempre la stessa lesione è toccata anche da una
+componente più grande, che resta. Delle componenti tolte sul test, 28 su 43 sono falsi positivi sotto
+10 mm³.
+
 ---
 
 ## 9. Limiti da dichiarare
