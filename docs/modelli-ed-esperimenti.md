@@ -1272,3 +1272,30 @@ le quattro schede sono occupate da un training di un altro utente (75.6 GB su 80
 senza limite di passi). Misura con un tetto di 5 GB per non toccare l'altro job: B non ci sta, e la memoria
 finisce nella rete (4.3 GB allocati al primo passo), non nella blob loss, che è stata riscritta con una sola
 scatter_add (stessa loss e stessi gradienti della forma lesione per lesione, differenza < 1e-12).
+
+**B lanciato (21 ottobre).** Le schede si sono liberate la mattina del 21/10 e le code sono partite alle
+10:51: circa 28 s per epoca su scheda libera. Arresti dei fold 0–3 alle epoche migliori 230, 95, 21 e 64
+(Z: 93, 140, 46, 42). Difetto delle code trovato qui: `run_stadio3.sh` usciva con 1 anche a fold riuscito,
+la coda lo riprovava e trovava «già fatto» (10 minuti persi a fold, nessun danno); corretto.
+
+**Ricette C e F, classi in più (21 ottobre)** (`scripts/dataset_classi_aincp.py`). Ognuna cambia una cosa
+sola rispetto a Z: stesse immagini (collegamenti fisici ai file di 506), stessa lesione voxel per voxel
+(verificato sui 17 e nel preprocessing), stessi fold, stesso piano Da502, stesso trainer
+`nnUNetTrainerWandb_250ep_dropmod30_arresto50`.
+- **C, `Dataset507_AINCP_VENTRICOLO`**: 1 = lesione, 2 = ventricolo dilatato (ROI_3 nel template, lineare,
+  soglia 0.5, fuori dalla lesione). Domanda: se la rete impara che il ventricolo non è lesione, calano i
+  falsi positivi (FSM_046 nel test)? La ROI_3 manca in 4 pazienti di training (FSM_033, 039, 045, 056):
+  lì il ventricolo resta sfondo, leggendo l'assenza come ventricolo non dilatato (decisione dell'utente,
+  21/10, da confermare col clinico).
+- **F, `Dataset508_AINCP_FENOTIPI`**: 1 = gliosi, 2 = cistica, 3 = encefalomalacia. Le ROI si sovrappongono
+  (gliosi ed encefalomalacia circa 5 000 mm³, cistica ed encefalomalacia circa 6 400 mm³ sui 17): vince il
+  valore interpolato più alto, a parità cistica, poi encefalomalacia, poi gliosi. Cistica ed
+  encefalomalacia ci sono ciascuna in 6 dei 12 pazienti di training.
+- **Campionamento delle patch come in Z**: con più classi nnU-Net sceglierebbe a caso la classe su cui
+  centrare la patch forzata (metà delle patch di C sul ventricolo); i `.pkl` del preprocessing ricevono le
+  posizioni di campionamento di 506, quindi le patch forzate sono le stesse di Z.
+- Valutazione: probabilità di lesione = somma delle classi di lesione (`postprocessing_aincp.canali_lesione`),
+  poi tutto come per Z; postprocessing scelto sui fuori-fold; `confronto_misto_532.py C|F`. Criterio
+  fissato prima: C misura principale i falsi positivi e l'F1, vincolo le lesioni trovate; F il rilevamento
+  non deve peggiorare, il riconoscimento del fenotipo si misura a parte.
+Lanciate il 21/10 alle 15:07, due code ciascuna, accanto al fold 4 di B.

@@ -67,8 +67,16 @@ def sessione(caso: str) -> Path:
     return next(d for d in PROC.iterdir() if d.is_dir() and '_'.join(d.name.split('_')[:2]) == caso)
 
 
-def prob_nativa(npz: Path, cache: Path) -> np.ndarray:
-    """Probabilita' di lesione nella griglia T1 nativa del paziente (float16, in cache)."""
+def canali_lesione(run: Path) -> tuple:
+    """I canali di uscita che sono lesione: tutte le classi tranne lo sfondo e il ventricolo dilatato.
+    506: (1,); 507 (lesione + ventricolo): (1,); 508 (gliosi, cistica, encefalomalacia): (1, 2, 3)."""
+    lab = json.loads((run / 'dataset.json').read_text())['labels']
+    return tuple(sorted(v for k, v in lab.items() if k not in ('background', 'ventricolo_dilatato')))
+
+
+def prob_nativa(npz: Path, cache: Path, canali: tuple = (1,)) -> np.ndarray:
+    """Probabilita' di lesione nella griglia T1 nativa del paziente (float16, in cache). Con piu' classi
+    di lesione e' la somma delle loro probabilita' (softmax: la probabilita' che il voxel sia lesione)."""
     f = cache / (npz.name[:-4] + '.npy')
     if f.exists():
         return np.load(f).astype(np.float32)
@@ -77,7 +85,7 @@ def prob_nativa(npz: Path, cache: Path) -> np.ndarray:
     caso = npz.name[:-4]
     s = sessione(caso)
     rif = nib.load(str(npz.with_suffix('.nii.gz')))              # la maschera esportata: geometria del template
-    p = np.load(npz)['probabilities'][1].transpose(2, 1, 0)       # SimpleITK (z,y,x) -> nibabel (x,y,z)
+    p = np.load(npz)['probabilities'][list(canali)].sum(0).transpose(2, 1, 0)   # SimpleITK (z,y,x) -> nibabel (x,y,z)
     assert p.shape == rif.shape, (caso, p.shape, rif.shape)
     tmp = cache / f'{caso}_tpl.nii.gz'
     nib.save(nib.Nifti1Image(p.astype(np.float32), rif.affine), str(tmp))
@@ -153,7 +161,7 @@ def scegli(run: Path):
     cache = run / 'prob_nativa'
     cache.mkdir(exist_ok=True)
     npz = predizioni_fuori_fold(run)
-    casi = {c: (prob_nativa(p, cache), *carica_caso(c)) for c, p in sorted(npz.items())}
+    casi = {c: (prob_nativa(p, cache, canali_lesione(run)), *carica_caso(c)) for c, p in sorted(npz.items())}
     griglia = []
     for t in SOGLIE:
         for v in VOLUMI_MIN:
@@ -212,7 +220,7 @@ def valuta(run: Path, test: Path | None):
     ris = {}
     for c, p in sorted(npz.items()):
         ref, cer, vox = carica_caso(c)
-        pr = prob_nativa(p, cache)
+        pr = prob_nativa(p, cache, canali_lesione(run))
         ris[c] = {'post': misure(postprocessa(pr, par['t'], par['vmin'], par['cervello'], cer, vox), ref, cer, vox),
                   'default': misure(pr >= 0.5, ref, cer, vox), 'strato': strati.get(c, '—')}
     righe = [f'# Valutazione di `{nome}`', '', f'Prodotto da `scripts/postprocessing_aincp.py valuta`, **non modificare a mano**. '

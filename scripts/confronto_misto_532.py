@@ -31,6 +31,13 @@ RICETTA B (blob loss, 12/10/2026). Stesso confronto, stesso criterio, scritto qu
 B: misura principale le lesioni sotto 50 mm³ trovate (McNemar appaiato sulle stesse 46 lesioni),
 vincolo l'F1 per lesione e i falsi positivi, secondarie come sopra. B vince se trova piu' lesioni
 piccole con p < 0.05 senza peggiorare l'F1. B e' su Dataset506 con gli stessi split di Z.
+
+RICETTE C E F (21/10/2026, scritto prima di lanciarle; scripts/dataset_classi_aincp.py). Stessi split,
+stesso trainer di Z, la lesione e' l'unione delle classi di lesione. C (ventricolo dilatato come classe)
+vuole togliere falsi positivi: misura principale i **falsi positivi** e l'F1 per lesione, vincolo le
+lesioni trovate (McNemar, non devono scendere). F (fenotipi come classi) vuole dire il tipo di lesione:
+qui conta che il rilevamento **non peggiori** (F1, lesioni trovate, Dice); quanto indovina il tipo si
+misura a parte. Le stesse tabelle servono per tutte e due.
 """
 import json
 import os
@@ -49,11 +56,15 @@ PROGETTO = Path(__file__).resolve().parent.parent
 RES = Path(os.environ['nnUNet_results'])
 RUN = {'Z': RES / 'Dataset506_AINCP_FINALE' / 'nnUNetTrainerWandb_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
        'M': RES / 'Dataset532_MISTO_AINCP' / 'nnUNetTrainerMisto_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
-       'B': RES / 'Dataset506_AINCP_FINALE' / 'nnUNetTrainerBlob_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres'}
+       'B': RES / 'Dataset506_AINCP_FINALE' / 'nnUNetTrainerBlob_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
+       'C': RES / 'Dataset507_AINCP_VENTRICOLO' / 'nnUNetTrainerWandb_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres',
+       'F': RES / 'Dataset508_AINCP_FENOTIPI' / 'nnUNetTrainerWandb_250ep_dropmod30_arresto50__nnUNetPlansDa502__3d_fullres'}
 CAND = sys.argv[1] if len(sys.argv) > 1 else 'M'
-TITOLO = {'M': 'Training misto (M, 532)', 'B': 'Blob loss (B, 506)'}[CAND]
+TITOLO = {'M': 'Training misto (M, 532)', 'B': 'Blob loss (B, 506)', 'C': 'Lesione + ventricolo dilatato (C, 507)',
+          'F': 'Fenotipi come classi (F, 508)'}[CAND]
 RUN = {'Z': RUN['Z'], CAND: RUN[CAND]}
-OUT = PROGETTO / ('reports/confronto_misto_532' if CAND == 'M' else 'reports/confronto_blob_506')
+OUT = PROGETTO / 'reports' / {'M': 'confronto_misto_532', 'B': 'confronto_blob_506', 'C': 'confronto_ventricolo_507',
+                              'F': 'confronto_fenotipi_508'}[CAND]
 
 
 def parametri(run: Path) -> dict:
@@ -71,7 +82,7 @@ def valuta_caso(c: str):
         par = parametri(run)
         cache = run / 'prob_nativa'
         cache.mkdir(exist_ok=True)
-        pred = pp.postprocessa(pp.prob_nativa(pp.predizioni_fuori_fold(run)[c], cache),
+        pred = pp.postprocessa(pp.prob_nativa(pp.predizioni_fuori_fold(run)[c], cache, pp.canali_lesione(run)),
                                par['t'], par['vmin'], par['cervello'], cer, vox)
         m = pp.misure(pred, ref, cer, vox)
         m['copertura'] = {r: [int((mk & pred).sum()), int(mk.sum())] for r, mk in fen.items()}
