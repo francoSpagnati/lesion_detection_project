@@ -44,3 +44,6 @@ for FOLD in ${3:-0 1 2 3 4}; do
         >> "reports/logs/train_${ID}_${TR}_fold${FOLD}.log" 2>&1
     rc=$?; echo "[$(date +%H:%M)] fold $FOLD: codice $rc"; [ "$rc" -ne 0 ] && exit 1
 done
+# senza questa riga lo script esce con lo stato dell'ultimo test qui sopra (1 quando il fold e' andato
+# bene): il 21/10 la coda di attendi_memoria_e_lancia.sh ha preso ogni fold riuscito per un fallimento
+exit 0
