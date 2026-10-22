@@ -1299,3 +1299,29 @@ sola rispetto a Z: stesse immagini (collegamenti fisici ai file di 506), stessa 
   fissato prima: C misura principale i falsi positivi e l'F1, vincolo le lesioni trovate; F il rilevamento
   non deve peggiorare, il riconoscimento del fenotipo si misura a parte.
 Lanciate il 21/10 alle 15:07, due code ciascuna, accanto al fold 4 di B.
+
+**Risultati di B, C e F (22 ottobre)** (`scripts/analisi_ricette_BCF.sh`; `reports/confronto_blob_506.md`,
+`confronto_ventricolo_507.md`, `confronto_fenotipi_508.md`, `fenotipi_508.md`). Fuori-fold dei 12, ognuna col
+suo postprocessing scelto con la stessa regola di Z; confronti appaiati con Z.
+
+| | postprocessing | lesioni < 50 mm³ | tutte | FP grezzi | FP | F1 | Dice medio | globale |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Z | 0.3, 50 mm³ | 10/46 | 27/68 | 20 | 1 | 0.560 | 0.584 | 0.859 |
+| B, blob loss | 0.3, 5 mm³ | 9/46 | 27/68 | 12 | 8 | 0.532 | 0.600 | 0.862 |
+| C, + ventricolo | 0.3, 20 mm³, cervello | 9/46 | 26/68 | 30 | 5 | 0.517 | 0.584 | 0.857 |
+| F, fenotipi | 0.5, 20 mm³, cervello | 12/46 | 29/68 | 81 | 12 | 0.511 | 0.582 | 0.808 |
+
+(FP grezzi: uscita di nnU-Net, soglia 0.5 senza filtro.) **Nessuna delle tre batte Z con il criterio
+fissato prima.** B: le lesioni piccole sono 9 contro 10 (McNemar p = 1.0); la blob loss non insegna a
+trovarle, conferma che il limite è il segnale e non il peso nella loss; Dice +0.016 (p = 0.47), meno
+falsi positivi grezzi (12 contro 20) ma il postprocessing scelto ne lascia 8. C: l'ipotesi era meno falsi
+positivi, è successo il contrario (grezzi 30 contro 20, dopo il postprocessing 5 contro 1); lesioni 26
+contro 27 (p = 1.0). F: rilevamento non peggiore nel numero (29 contro 27, piccole 12 contro 10, p = 0.63)
+ma con molti più falsi positivi (81 grezzi, 12 dopo) e Dice globale più basso (0.808): la cistica coperta
+scende dal 91% al 77%. **Il riconoscimento del tipo funziona**: sui voxel trovati il tipo è giusto
+nell'86% (cistica 95%, gliosi 79%, encefalomalacia 71%; gli errori sono gliosi ↔ encefalomalacia ed
+encefalomalacia → cistica, i fenotipi che si sovrappongono anche nelle ROI); Dice per classe gliosi 0.596,
+cistica 0.794, encefalomalacia 0.556; lesione per lesione il tipo prevalente è giusto in 28 su 29, ma la
+regola banale «sempre gliosi» ne indovina già 22. Conclusione: Z resta il modello della tesi; F è un
+risultato a sé (una rete può dire anche il fenotipo, al costo di più falsi positivi), da presentare come
+analisi aggiuntiva. Il test non è stato usato per nessuna delle tre.

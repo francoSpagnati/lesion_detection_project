@@ -63,6 +63,11 @@ CAND = sys.argv[1] if len(sys.argv) > 1 else 'M'
 TITOLO = {'M': 'Training misto (M, 532)', 'B': 'Blob loss (B, 506)', 'C': 'Lesione + ventricolo dilatato (C, 507)',
           'F': 'Fenotipi come classi (F, 508)'}[CAND]
 RUN = {'Z': RUN['Z'], CAND: RUN[CAND]}
+CRITERIO = {k: 'misura principale le lesioni sotto 50 mm³ trovate (McNemar appaiato), vincolo i falsi positivi e l\'F1.'
+            for k in ('M', 'B')}
+CRITERIO['C'] = 'misura principale i falsi positivi e l\'F1 per lesione, vincolo le lesioni trovate (McNemar, non devono scendere).'
+CRITERIO['F'] = ('il rilevamento non deve peggiorare (F1, lesioni trovate, Dice); il riconoscimento del tipo di lesione '
+                 'è in reports/fenotipi_508.md.')
 OUT = PROGETTO / 'reports' / {'M': 'confronto_misto_532', 'B': 'confronto_blob_506', 'C': 'confronto_ventricolo_507',
                               'F': 'confronto_fenotipi_508'}[CAND]
 
@@ -118,7 +123,7 @@ def main():
     dz, dm = np.array(list(z['per_paziente'].values())), np.array(list(m['per_paziente'].values()))
     r = [f'# {TITOLO} contro il modello della tesi (Z, 506), fuori-fold', '',
          f'Prodotto da `scripts/confronto_misto_532.py{" " + CAND if CAND != "M" else ""}`, **non modificare a mano**. Criterio fissato prima dei risultati: '
-         'misura principale le lesioni sotto 50 mm³ trovate (McNemar appaiato), vincolo i falsi positivi e l\'F1.', '',
+         + CRITERIO[CAND], '',
          '## Misura principale', '',
          f'| | Z | {M} | trovate solo da {M} / solo da Z | p (McNemar) |', '| --- | --- | --- | --- | --- |',
          f'| lesioni < 50 mm³ trovate | {tz[piccole].sum()}/{piccole.sum()} | {tm[piccole].sum()}/{piccole.sum()} | '

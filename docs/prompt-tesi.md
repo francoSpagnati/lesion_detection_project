@@ -557,19 +557,77 @@ test. Un volume minimo più piccolo quindi non garantisce meno lesioni perse: in
 Z una con 50. Errore medio sul % di cervello lesionato, test: D 1.48 punti, Z 0.65 (D sottostima la
 lesione estesa di FSM_049).
 
+### 8.5 Tre varianti di Z dopo il test: blob loss, ventricolo, fenotipi (21–22 ottobre)
+
+Tre richieste del responsabile e dell'autore, una variante per richiesta, ognuna con **una sola
+differenza da Z** (stessi pazienti, immagini, fold, piano e trainer; le patch di addestramento campionate
+come in Z) e il proprio postprocessing scelto sulla cross-validation con la stessa regola. Solo fuori-fold
+dei 12: **il test non è stato usato**. Criteri fissati prima di lanciare.
+
+- **B, blob loss** (Kofler et al., IPMI 2023; da aggiungere al `.bib`). La loss di nnU-Net conta voxel per
+  voxel: nel bersaglio a 1 mm le lesioni sotto 50 mm³ sono 71 componenti su 97 ma lo 0.07% dei voxel di
+  lesione, quindi quasi non pesano. La blob loss aggiunge un Dice calcolato lesione per lesione, così ogni
+  lesione pesa uguale (peso 0.5, solo all'uscita a risoluzione piena). Criterio: lesioni sotto 50 mm³
+  trovate (McNemar).
+- **C, ventricolo dilatato come seconda classe** (ROI_3). Domanda: se la rete impara che il ventricolo non
+  è lesione, calano i falsi positivi? Criterio: falsi positivi e F1, senza perdere lesioni. La ROI_3 manca
+  in 4 dei 12 pazienti di training: lì il ventricolo resta sfondo (letto come non dilatato).
+- **F, fenotipi come classi** (gliosi, cistica, encefalomalacia; la lesione è la loro unione, identica a
+  Z). Domanda: la rete può dire anche il tipo di lesione? Criterio: il rilevamento non deve peggiorare; il
+  tipo si misura a parte. Le ROI si sovrappongono: a parità vince cistica, poi encefalomalacia, poi gliosi.
+
+| | postprocessing | lesioni < 50 mm³ | tutte | FP prima del postpr. | FP | F1 | Dice medio | Dice globale |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **Z** | 0.3, 50 mm³ | 10/46 | 27/68 | 20 | 1 | **0.560** | 0.584 | 0.859 |
+| B | 0.3, 5 mm³ | 9/46 | 27/68 | 12 | 8 | 0.532 | 0.600 | 0.862 |
+| C | 0.3, 20 mm³, cervello | 9/46 | 26/68 | 30 | 5 | 0.517 | 0.584 | 0.857 |
+| F | 0.5, 20 mm³, cervello | 12/46 | 29/68 | 81 | 12 | 0.511 | 0.582 | 0.808 |
+
+Nessuna differenza significativa da Z (lesioni appaiate: p da 0.63 a 1.0; Dice per paziente: p da 0.47 a
+0.58). Lettura:
+- **B** non trova più lesioni piccole (9 contro 10). Dare loro più peso nella loss non basta: la rete non
+  le vede (§8.4, probabilità sotto 0.05 in 34 su 46), quindi il limite è il segnale nelle immagini, non
+  l'addestramento. È il quarto modo di attaccare le lesioni piccole (A, D, M, B) e il quarto pareggio.
+- **C** fa il contrario dell'ipotesi: più falsi positivi (30 contro 20 prima del postprocessing, 5 contro
+  1 dopo), una lesione in meno. Insegnare il ventricolo come classe non toglie la confusione fra liquido e
+  cavità.
+- **F** trova due lesioni piccole in più (non significativo) ma con molti più falsi positivi e un Dice
+  globale più basso: le cavità grandi sono coperte meno (cistica dal 91% al 77%). **Il tipo di lesione
+  però lo riconosce** (`reports/fenotipi_508.md`):
+
+| vero \ predetto (voxel trovati) | gliosi | cistica | encefalomalacia |
+| --- | --- | --- | --- |
+| gliosi | **79%** | 0% | 21% |
+| cistica | 0% | **95%** | 5% |
+| encefalomalacia | 9% | 20% | **71%** |
+
+  Voxel con il tipo giusto 86%; Dice per classe gliosi 0.596 (12 pazienti), cistica 0.794 (6),
+  encefalomalacia 0.556 (6). Gli errori sono fra i fenotipi che si sovrappongono anche nelle ROI del
+  clinico. Lesione per lesione il tipo prevalente è giusto in 28 su 29, ma con cautela: «sempre gliosi»
+  ne indovina già 22.
+
+**Come presentarlo.** Z resta il modello della tesi. B e C sono risultati negativi utili: confermano che
+gli errori di Z non si correggono cambiando la loss o aggiungendo il ventricolo. F è un risultato positivo
+a sé: con le stesse immagini una rete può distinguere i tre fenotipi, al prezzo di più falsi positivi;
+va nelle analisi aggiuntive e nel lavoro futuro (valutarlo su più pazienti con cisti ed encefalomalacia,
+che qui sono 6 ciascuno).
+
 ---
 
 ## 9. Limiti da dichiarare
 
 17 pazienti, di cui 5 di test; nessuna differenza statisticamente distinguibile fra le ricette;
-lesioni sotto 50 mm³ in gran parte mancate (dal modello, non dal filtro del postprocessing, §8.4); il
+lesioni sotto 50 mm³ in gran parte mancate (dal modello, non dal filtro del postprocessing, §8.4; né la
+blob loss né le altre varianti le recuperano, §8.5); il
 volume minimo di 50 mm³ fa perdere una lesione toccata solo da un frammento (1 in CV, 4 sul test);
 un falso positivo nel ventricolo dilatato; validazione di
 2–3 pazienti per fold; esperimenti sui dati pubblici su un solo fold e senza seme fisso; il piano a 1
 mm toglie dal bersaglio 4 lesioni su 90 (tutte sotto 3 mm³); quattro pazienti sotto i 5 anni; annotazioni con
 residui segnalati al clinico; i tre pazienti di test a 3 T erano fra i dieci su cui si è scelta la
 ricetta dell'epoca 504; N4 applicata ai pazienti senza un confronto con un modello senza N4;
-parametri d'acquisizione completi solo per un paziente.
+parametri d'acquisizione completi solo per un paziente; la ROI_3 (ventricolo dilatato) manca in 4
+pazienti di training, letta come ventricolo non dilatato senza conferma del clinico; il riconoscimento
+dei fenotipi (F) poggia su 6 pazienti con cisti e 6 con encefalomalacia.
 
 ---
 
@@ -648,7 +706,7 @@ seguendo le regole dell'ateneo che l'autore indicherà.
 7. **From public data to patients** — 504, 505, 542/543 (sez. 6).
 8. **Final model and results** — 506: CV, scelta, curve, test, dimensione, esempi, ablazione (sez. 7).
 9. **Additional analyses** — addestramento misto, difetto del dropout, SynthSeg, volume minimo del
-   postprocessing (sez. 8).
+   postprocessing, blob loss, ventricolo come classe, fenotipi come classi (sez. 8).
 10. **Discussion and limitations** (sez. 9).
 11. **Conclusions and future work** (sez. 10).
 
