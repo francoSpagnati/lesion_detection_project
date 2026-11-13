@@ -102,8 +102,8 @@ manuale e per fenotipo, e l'endpoint è il rilevamento, scomposto per dimensione
 | **AInCP** | T1 + FLAIR 3D, non coregistrate all'origine | **17 pazienti** | lesione tracciata a mano sulla FLAIR, in ROI per fenotipo | il bersaglio |
 
 **AInCP nel dettaglio.** Due lotti (10 + 7). Strati di acquisizione: 10 Stella Maris 3 T, 5 Stella
-Maris 1.5 T, 2 altri centri a 1.5 T (Niguarda, Burlo Garofolo). Età all'esame 7.7 ± 3.7 anni (media ± deviazione standard, n = 17; mediana 7, da 3 a 15; `reports/eta_aincp.md`)
-(mediana 7); 8 maschi, 5 femmine, 4 non riportati. Geometria e sequenze per strato nella tabella
+Maris 1.5 T, 2 altri centri a 1.5 T (Niguarda, Burlo Garofolo). Età all'esame 7.7 ± 3.7 anni (media ± deviazione standard, n = 17; mediana 7, da 3 a 15; `reports/eta_aincp.md`);
+8 maschi, 5 femmine, 4 non riportati. Geometria e sequenze per strato nella tabella
 sotto. Lesione da
 **166 mm³** (FSM_001, 0.01% del cervello) a **196 847 mm³** (FSM_049, 16%); nel test la più piccola è
 FSM_046 (454 mm³, 0.03%). Etichetta = ROI_1 ∪ ROI_2 ∪
