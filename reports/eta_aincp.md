@@ -2,7 +2,7 @@
 
 Prodotto da `scripts/eta_aincp.py`, **non modificare a mano**. Fonte: campo DICOM «Patient's Age» (anni compiuti) nei fogli di metadati dei due file in `docs/`.
 
-Età: da 3 a 15 anni; mediana 7. Sotto i 5 anni (strettamente): **4** (FSM_028, FSM_032, FSM_035, FSM_036). A esattamente 5 anni: **2** (FSM_030, FSM_033). Oltre i 5 anni: **11**.
+Età: da 3 a 15 anni; mediana 7; media ± deviazione standard **7.7 ± 3.7** anni (deviazione standard campionaria, n − 1; con n al denominatore 3.5). Sotto i 5 anni (strettamente): **4** (FSM_028, FSM_032, FSM_035, FSM_036). A esattamente 5 anni: **2** (FSM_030, FSM_033). Oltre i 5 anni: **11**.
 
 | paziente | età (anni) | fonte (file, foglio, valore) | sotto 5 anni |
 | --- | --- | --- | --- |

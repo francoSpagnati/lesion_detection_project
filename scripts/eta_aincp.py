@@ -13,6 +13,7 @@ Il foglio `SITE & MRFIELD` ha la stessa informazione in «AGE AT SCAN» (solo al
 paziente senza nessuna voce viene segnalato, non stimato.
 """
 import re
+import statistics
 import sys
 from pathlib import Path
 
@@ -75,7 +76,9 @@ def main():
     md = ['# Età dei pazienti AInCP (17)', '',
           'Prodotto da `scripts/eta_aincp.py`, **non modificare a mano**. Fonte: campo DICOM «Patient\'s Age» '
           '(anni compiuti) nei fogli di metadati dei due file in `docs/`.', '',
-          f'Età: da {min(eta_v)} a {max(eta_v)} anni; mediana {sorted(eta_v)[len(eta_v) // 2]}. '
+          f'Età: da {min(eta_v)} a {max(eta_v)} anni; mediana {statistics.median(eta_v):g}; '
+          f'media ± deviazione standard **{statistics.mean(eta_v):.1f} ± {statistics.stdev(eta_v):.1f}** anni '
+          f'(deviazione standard campionaria, n − 1; con n al denominatore {statistics.pstdev(eta_v):.1f}). '
           f'Sotto i 5 anni (strettamente): **{len(sotto5)}** ({", ".join(sotto5)}). '
           f'A esattamente 5 anni: **{len(cinque)}** ({", ".join(cinque)}). '
           f'Oltre i 5 anni: **{len(eta_v) - len(sotto5) - len(cinque)}**.', '',
