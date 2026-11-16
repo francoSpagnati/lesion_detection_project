@@ -692,7 +692,7 @@ python scripts/pipeline_aincp.py piano --id 506 && nnUNetv2_preprocess -d 506 -p
 ```
 
 Arrivati 7 pazienti (totale 17, non 27), tutti a 1.5 T, nello stesso formato del primo lotto. Foglio
-aggiornato `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`, ora letto dalla pipeline. Controllo a vista
+aggiornato `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx` (non incluso nel repository: metadati dei pazienti), ora letto dalla pipeline. Controllo a vista
 dei 7 nel template: allineamento corretto. In FSM_030 e FSM_033 la lesione cresce nel template più
 del cervello (2.7 contro 1.9 e 1.5 volte): la registrazione non lineare deforma di più la zona
 periventricolare; le misure si fanno nel nativo. Split 12/5 per strato con quote a resti maggiori

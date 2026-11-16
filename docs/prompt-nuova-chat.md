@@ -61,7 +61,7 @@ che abbiamo" si puo' fare solo su WMH, ed e' gia' fatto (Dataset512).
 I DATI PRIVATI (AInCP), tutti arrivati: 17 pazienti, e non ne arriveranno altri.
   - lotto 1 (11/9): 10 pazienti Stella Maris a 3 T, data/raw/AINCP/dataset_FSM_v1;
   - lotto 2 (1/10): 7 pazienti a 1.5 T (5 Stella Maris, FSM_001 Niguarda, FSM_049 Burlo Garofolo),
-    data/raw/AINCP/dataset_FSM_v2. Foglio con centro, campo ed eta': docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx;
+    data/raw/AINCP/dataset_FSM_v2. Foglio con centro, campo ed eta': docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx (non incluso nel repository: metadati dei pazienti);
   - T1 e FLAIR originali, ROI per fenotipo disegnate sulla FLAIR: ROI_1 gliosi, ROI_2 cistica,
     ROI_3 ventricolo (ESCLUSO dall'etichetta), ROI_4 encefalomalacia;
   - si usano SOLO i lotti consegnati da AInCP (la copia di FSM_028 in /data01/fsm_mri_data no).

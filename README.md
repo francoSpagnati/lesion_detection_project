@@ -5,6 +5,12 @@ cerebrali su risonanza magnetica di bambini con paralisi cerebrale. Il bersaglio
 **17 pazienti** dell'AInCP (Stella Maris e altri centri), 3–15 anni; tre dataset pubblici (WMH, ATLAS 2.0, DBB)
 servono a costruire il metodo e i pesi di partenza.
 
+In tre punti:
+
+1. **Dati e metodo.** Preprocessing nel template pediatrico, nnU-Net 3D a due canali, postprocessing nello spazio nativo del paziente.
+2. **Risultato.** Dice medio 0.622 sul test (5 pazienti); le lesioni grandi sono segmentate bene, quelle sotto 50 mm³ in gran parte mancate.
+3. **Limite.** Con 12 pazienti di addestramento nessuna ricetta (pretraining, training misto, blob loss, classi aggiuntive) è distinguibile dalle altre.
+
 > **Questo repository non contiene dati di pazienti.** Ci sono il codice, i report con le misure e la
 > documentazione. Immagini, maschere, modelli addestrati e dati preprocessati (circa 150 GB) restano fuori
 > da git; i dati AInCP sono privati. Senza di essi gli script di addestramento non si possono
@@ -55,9 +61,41 @@ voxel trovati, a prezzo di più falsi positivi. Dettaglio e limiti in
 
 ## Struttura
 
-`configs` · `data` (template, manifesti dei pazienti, alcune predizioni su ATLAS) · `docs` · `notebooks` (esplorazione dei dataset pubblici) ·
-`reports` · `scripts`. Gli script hanno nell'intestazione il perché e il come; i report sono generati dagli
-script e non vanno modificati a mano.
+- `configs`: configurazioni.
+- `data`: template pediatrico e manifesti dei pazienti (senza immagini).
+- `docs`: documentazione; si parte da [`docs/README.md`](docs/README.md).
+- `notebooks`: esplorazione dei dataset pubblici, descritti in [`notebooks/README.md`](notebooks/README.md).
+- `reports`: tabelle e analisi, generate dagli script e non da modificare a mano.
+- `scripts`: pipeline, trainer, valutazione; l'indice è in [`scripts/README.md`](scripts/README.md). Ogni script ha nell'intestazione il perché e il come.
+
+**Non sono nel repository**: dati e immagini dei pazienti AInCP, immagini dei dataset pubblici (ATLAS, WMH,
+DBB), i fogli Excel con i metadati dei pazienti e i modelli addestrati.
+
+## Riprodurre
+
+Servono i dati, che qui mancano; i comandi documentano la procedura. Ogni script ha l'uso nell'intestazione.
+
+```bash
+source scripts/env.sh                                     # variabili nnU-Net e percorso dei trainer
+
+# preprocessing dei pazienti AInCP e dataset nnU-Net
+python scripts/pipeline_aincp.py elenco
+python scripts/pipeline_aincp.py prepara [--casi ...]
+python scripts/pipeline_aincp.py dataset --id 506
+nnUNetv2_extract_fingerprint -d 506                       # poi: pipeline_aincp.py piano --id 506; nnUNetv2_preprocess
+
+# addestramento: dataset, ricetta (A, D, Z, M, B, ...) e fold; si lancia con setsid nohup, vedi docs/training.md
+bash scripts/run_stadio3.sh 506 Z "0 1"
+
+# postprocessing e valutazione nello spazio nativo
+python scripts/postprocessing_aincp.py scegli --run <cartella trainer__piano__config>
+python scripts/postprocessing_aincp.py valuta --run <cartella> [--test <cartella predizioni>]
+
+# rilevamento per singola lesione sui dataset pubblici (esempio dalla docstring)
+python scripts/metriche_per_lesione.py 504 --trainer EspansioneCanali_zero --fold all --soglia-mm3 10
+```
+
+La procedura di addestramento è in [`docs/training.md`](docs/training.md).
 
 ## Ambiente
 

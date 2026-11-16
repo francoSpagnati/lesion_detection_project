@@ -29,18 +29,29 @@ Per aprire una **nuova sessione di lavoro con un assistente**, usa il prompt in
 [prompt-nuova-chat.md](prompt-nuova-chat.md): fa partire la sessione da questi documenti invece di far
 riesplorare i dati da zero.
 
-## Stato al 2 ottobre 2026
+## Stato attuale
 
-**In una riga:** il **modello finale** (`Dataset506`) è addestrato e **testato**: una rete nnU-Net a
-due canali (FLAIR + T1) nel template pediatrico, in tre ricette — da ATLAS con il primo strato espanso
-(A), dal pretraining congiunto ATLAS + WMH (D), da zero (Z) — su 12 pazienti. Le tre sono
-indistinguibili in cross-validation e sul test; per la regola fissata prima, il modello della tesi è
-**Z**: sul test (5 pazienti) Dice medio 0.622, mediana 0.770, globale 0.832, F1 per lesione 0.605.
-Dettaglio e limiti in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md), sezione 506.
+Il bersaglio è il dataset AInCP di **17 pazienti**: 12 per addestramento e cross-validation a 5 fold, 5 di
+test usati una sola volta. Il **modello finale è Z** (`Dataset506`), addestrato da zero, a due canali
+(FLAIR + T1) nel template pediatrico, con modality dropout 0.3 e arresto anticipato. Postprocessing: soglia
+0.3, componenti sotto 50 mm³ tolte, scelti sulla cross-validation prima del test.
 
-Il percorso, spiegato per chi non conosce il progetto, è in [panoramica-progetto.md](panoramica-progetto.md).
+- **Cross-validation** (12 pazienti, fuori-fold): Dice medio 0.584, lesioni trovate 27/68, 1 falso positivo, F1 per lesione 0.560.
+- **Test** (5 pazienti): Dice medio 0.622, lesioni trovate 21/40, 4 falsi positivi, F1 per lesione 0.605.
 
-### Risultati misurati
+Varianti provate, tutte senza un vantaggio distinguibile da Z:
+
+- **A**, pretraining da ATLAS con il primo strato espanso: indistinguibile da Z.
+- **D**, pretraining congiunto ATLAS + WMH: indistinguibile da Z.
+- **M**, training misto (pazienti + ATLAS + WMH): pari a Z sulle lesioni piccole (11/46 contro 10/46), più falsi positivi; non adottato.
+- **B**, blob loss: lesioni piccole 9/46 contro 10/46; il limite è il segnale nelle immagini, non la loss.
+- **C**, ventricolo dilatato come seconda classe: più falsi positivi e una lesione in meno.
+- **F**, fenotipi (gliosi, cistica, encefalomalacia) come classi: riconosce il tipo di lesione sull'86% dei voxel trovati, ma con più falsi positivi e Dice globale più basso; resta un'analisi aggiuntiva.
+
+Dettaglio in [modelli-ed-esperimenti.md](modelli-ed-esperimenti.md); il percorso per chi non conosce il
+progetto è in [panoramica-progetto.md](panoramica-progetto.md).
+
+## Risultati dei dataset pubblici
 
 | Esperimento | Dice fold 0 | Cosa dice |
 | --- | --- | --- |

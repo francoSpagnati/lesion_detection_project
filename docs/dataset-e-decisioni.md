@@ -160,7 +160,7 @@ Due scelte conseguenti, scritte nel `dataset.json`:
 
 Il bersaglio. **17 pazienti** in due lotti consegnati da AInCP ed estratti in `data/raw/AINCP/`
 (primo lotto `dataset_FSM_v1`, 11/9, dall'archivio `.7z`; secondo `dataset_FSM_v2`, 1/10, da FileSender
-GARR). Centro, campo ed età nel foglio `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`, foglio
+GARR). Centro, campo ed età nel foglio `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx` (non incluso nel repository: metadati dei pazienti), foglio
 `SITE & MRFIELD` (e `Sheet1` per il secondo lotto). **Si usano solo i lotti consegnati da AInCP**: la
 copia di FSM_028 trovata in `/data01/fsm_mri_data/`, di provenienza ignota, è esclusa (FSM_028 è poi
 arrivato regolarmente nel secondo lotto).

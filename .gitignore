@@ -69,3 +69,12 @@ data/processed/AINCP/*/*
 # --- Esportazioni per 3D Slicer ----------------------------------------------
 # Immagini e segmentazioni di pazienti, rigenerabili con scripts/esporta_slicer_506.py.
 esportazioni/
+
+# Fuori da GitHub: immagini di pazienti, immagini ATLAS (licenza), metadati dei pazienti
+data/processed/inferenza_15T/
+notebooks/aincp_primo_lotto.ipynb
+docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx
+docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx
+docs/pipeline_preprocessing.docx
+*.xlsx
+*.docx

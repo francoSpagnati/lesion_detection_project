@@ -586,7 +586,7 @@ Due misure che cambiano la decisione sullo spazio di addestramento:
 Conseguenze: i volumi e le metriche vanno calcolati **in spazio nativo**; nnU-Net normalizza la
 spaziatura, non lo spazio anatomico, quindi i pesi di ATLAS non richiedono MNI. **Proposta: addestrare
 nello spazio T1 nativo con la FLAIR coregistrata**, MNI solo per analisi di gruppo. Da discutere con il
-responsabile, perché il docx prevedeva MNI.
+responsabile, perché il docx (non incluso nel repository) prevedeva MNI.
 
 **Piano di addestramento proposto** (non lanciato; GPU occupate; prima si decide lo spazio):
 input 2 canali `{0: FLAIR, 1: T1}` come Dataset512; 5 fold per paziente con 039/054/056 su fold
@@ -775,7 +775,7 @@ rifare negli stadi 1 e 2; lo spazio cambia solo allo stadio 3. I dieci pazienti 
 template pediatrico (`Dataset505_AINCP_MNI`, la stessa pipeline che servirà per i 27), e 505 serve a
 provare la strategia prima che arrivino i 17: stesso split di 504, metriche riportate nel nativo.
 
-**Centro, campo ed età, dal foglio `SITE & MRFIELD` di `docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx`**:
+**Centro, campo ed età, dal foglio `SITE & MRFIELD` di `docs/AINCP_SERIES_TYPE_dataset_FSM_v1.xlsx`** (non incluso nel repository: metadati dei pazienti):
 tutti e dieci i pazienti attuali sono **IRCCS Stella Maris, 3 T**; età 3–15 anni (FSM_032 ha 3 anni,
 sotto il criterio di inclusione dei 5 annotato nel foglio, e sotto la coorte 4.5–18.5 del template).
 Il foglio elenca 68 sessioni di 57 pazienti in 16 centri (18 grafie). Delle sessioni a 1.5 T, 20
@@ -826,7 +826,7 @@ preparazione mezza giornata, due ricette × cinque fold ~5 ore su tre GPU, test 
 
 **I pazienti sono 17 in tutto, non 27**: il secondo lotto AInCP (`data/raw/AINCP/dataset_FSM_v2`, zip
 da FileSender GARR) ne contiene 7, e il «17» dell'incontro era il totale. Correzione di quanto scritto
-il 23/9. Il foglio aggiornato è `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx`.
+il 23/9. Il foglio aggiornato è `docs/AINCP_SERIES_TYPE_dataset_FSM_v2.xlsx` (non incluso nel repository: metadati dei pazienti).
 
 | strato | pazienti | test |
 | --- | --- | --- |
