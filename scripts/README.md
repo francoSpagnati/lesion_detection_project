@@ -38,6 +38,7 @@ Gli altri trainer (blob loss, training misto, espansione dei canali) sono nella 
 | [analisi_union_d.py](analisi_union_d.py) | Legge il risultato della vecchia variante D (Dataset531) separandolo per sorgente e per classe *(storico)* |
 | [oblio_atlas_stadio2.py](oblio_atlas_stadio2.py) | Lo stadio 2 ha fatto dimenticare le cavita' di ATLAS? Rete di 542 sulla validazione di 502 *(storico)* |
 | [inferenza_incrociata_15T.py](inferenza_incrociata_15T.py) | Applica il modello addestrato **solo su 3 T** ai casi a 1.5 T che non ha mai visto *(storico)* |
+| [volumi_atlas_15T.py](volumi_atlas_15T.py) | Volume delle lesioni ATLAS nei casi a 1.5 T e nella validazione a 3 T del modello solo-3 T (521) |
 | [run_baselines.sh](run_baselines.sh) | Esegue in sequenza le baseline fold 0 di 3d_fullres su 501, 502 e 503 *(storico)* |
 | [run_stadio2_542.sh](run_stadio2_542.sh) | Stadio 2 della Proposta B: la rete espansa da ATLAS (502) impara la FLAIR su WMH in MNI (542) *(storico)* |
 
@@ -92,6 +93,7 @@ Gli altri trainer (blob loss, training misto, espansione dei canali) sono nella 
 | [confronto_fold.py](confronto_fold.py) | Confronta due trainer sullo stesso dataset unendo i fold: ogni paziente conta una volta |
 | [confronto_misto_532.py](confronto_misto_532.py) | Confronto fuori-fold fra il training misto (M, Dataset532) e il modello della tesi (Z, Dataset506) |
 | [confronto_505_504.py](confronto_505_504.py) | Stadio 3 nel template (505) contro lo spazio nativo (504), misurati nello stesso posto *(storico)* |
+| [scarto_misura_505.py](scarto_misura_505.py) | Perché lo stesso modello di 505 ha due serie di numeri «senza postprocessing»: maschera o probabilità, gt di 504 o etichetta pulita |
 | [porta_505_nativo.py](porta_505_nativo.py) | Riporta le predizioni fuori-fold di Dataset505 (template pediatrico) nello spazio T1 del paziente *(storico)* |
 | [metriche_per_lesione.py](metriche_per_lesione.py) | Metriche di rilevamento per singola lesione, non per voxel |
 | [metriche_per_lesione_541.py](metriche_per_lesione_541.py) | Rilevamento per lesione dei bracci del test di pretraining (541), sugli stessi 35 casi *(storico)* |

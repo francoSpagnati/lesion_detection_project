@@ -1,0 +1,992 @@
+{
+ "Template, passo differenziato (505 A)": {
+  "totali": {
+   "maschera+gt504": {
+    "dice": 0.5631577413528183,
+    "trovate": 23,
+    "lesioni": 47,
+    "fp": 15
+   },
+   "maschera+pulita": {
+    "dice": 0.5679531976679344,
+    "trovate": 25,
+    "lesioni": 47,
+    "fp": 15
+   },
+   "probabilita+gt504": {
+    "dice": 0.5645422769158206,
+    "trovate": 23,
+    "lesioni": 47,
+    "fp": 12
+   },
+   "probabilita+pulita": {
+    "dice": 0.5694144472351754,
+    "trovate": 25,
+    "lesioni": 47,
+    "fp": 12
+   }
+  },
+  "per_caso": {
+   "maschera+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8926052043293741,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.48031251937744157,
+     "fp": 0,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.892400438751803,
+     "fp": 0,
+     "lesioni": 9,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.12249955744379536,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3507627629484227,
+     "fp": 2,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.4372146118721461,
+     "fp": 8,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6445379616026295,
+     "fp": 1,
+     "lesioni": 7,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.3905372104484968,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8335194502244303,
+     "fp": 1,
+     "lesioni": 6,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.5871876965296439,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "maschera+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.894142213413148,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.4909670563230606,
+     "fp": 0,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8947713976688817,
+     "fp": 0,
+     "lesioni": 6,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.12813320061532893,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3539511472068678,
+     "fp": 2,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.43661836675942806,
+     "fp": 8,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6574819945293483,
+     "fp": 1,
+     "lesioni": 8,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.3985327649449787,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8338876476453164,
+     "fp": 1,
+     "lesioni": 8,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.5910461875729852,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8928915167800336,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.4780901327681855,
+     "fp": 0,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8939027888666535,
+     "fp": 0,
+     "lesioni": 9,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.1217006200177148,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.35063769192669636,
+     "fp": 2,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.4487416188902925,
+     "fp": 6,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6452354764523548,
+     "fp": 1,
+     "lesioni": 7,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.3917751067845436,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8341973804963448,
+     "fp": 1,
+     "lesioni": 6,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.5882504361753854,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8944303853991917,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.4889084396405455,
+     "fp": 0,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8963270131939896,
+     "fp": 0,
+     "lesioni": 6,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.1280449153309789,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3540162350212602,
+     "fp": 2,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.44823529411764707,
+     "fp": 6,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6579835743437296,
+     "fp": 1,
+     "lesioni": 8,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.3994405035468079,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8346731267747717,
+     "fp": 1,
+     "lesioni": 8,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.5920849849828324,
+     "fp": 0,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ]
+  },
+  "mm3_diversi_fra_riferimenti": {
+   "FSM_032": 2227.5220108032227,
+   "FSM_039": 100.07608622312546,
+   "FSM_040": 1127.23987698555,
+   "FSM_041": 306.3212049007416,
+   "FSM_045": 378.3316147327423,
+   "FSM_046": 60.00867486000061,
+   "FSM_052": 456.0648247599602,
+   "FSM_053": 75.70341631770134,
+   "FSM_054": 850.0893073678017,
+   "FSM_056": 562.6056783795357
+  }
+ },
+ "Template da Pretrain-Seq (505 B, da 542)": {
+  "totali": {
+   "maschera+gt504": {
+    "dice": 0.6001956015032823,
+    "trovate": 25,
+    "lesioni": 47,
+    "fp": 32
+   },
+   "maschera+pulita": {
+    "dice": 0.6061631156614615,
+    "trovate": 27,
+    "lesioni": 47,
+    "fp": 32
+   },
+   "probabilita+gt504": {
+    "dice": 0.6008847391531602,
+    "trovate": 24,
+    "lesioni": 47,
+    "fp": 34
+   },
+   "probabilita+pulita": {
+    "dice": 0.6071979238662846,
+    "trovate": 26,
+    "lesioni": 47,
+    "fp": 35
+   }
+  },
+  "per_caso": {
+   "maschera+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8507758973863633,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.57161013583287,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8707045990959156,
+     "fp": 2,
+     "lesioni": 9,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.1421087098886706,
+     "fp": 3,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.43191276043454974,
+     "fp": 6,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.4788113424714869,
+     "fp": 12,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.693104916946666,
+     "fp": 0,
+     "lesioni": 7,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.5138087639621947,
+     "fp": 4,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8339228886319769,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6151960003821291,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "maschera+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.852022600148405,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5868849827433984,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8724573071004507,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.1490517169354165,
+     "fp": 3,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.43678476357748564,
+     "fp": 6,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.47623072047327275,
+     "fp": 12,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.7065694126620901,
+     "fp": 0,
+     "lesioni": 8,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.5268883669180369,
+     "fp": 4,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8347376138997855,
+     "fp": 2,
+     "lesioni": 8,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6200036721562742,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.850612770228253,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5752855659397715,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.87286173676345,
+     "fp": 1,
+     "lesioni": 9,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.13865131578947368,
+     "fp": 3,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.4301422848459732,
+     "fp": 8,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.4877581434958484,
+     "fp": 13,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6929507885236557,
+     "fp": 1,
+     "lesioni": 7,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.5116105799081088,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8349380000197295,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6140362060173381,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8518793022756155,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5914924529824844,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8746194206017534,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.14521950810039452,
+     "fp": 3,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.43465779703824337,
+     "fp": 8,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.4869396968719768,
+     "fp": 13,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.7071828492128057,
+     "fp": 1,
+     "lesioni": 8,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.525328330206379,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8357990723223062,
+     "fp": 2,
+     "lesioni": 8,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6188608090508873,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ]
+  },
+  "mm3_diversi_fra_riferimenti": {
+   "FSM_032": 2227.5220108032227,
+   "FSM_039": 100.07608622312546,
+   "FSM_040": 1127.23987698555,
+   "FSM_041": 306.3212049007416,
+   "FSM_045": 378.3316147327423,
+   "FSM_046": 60.00867486000061,
+   "FSM_052": 456.0648247599602,
+   "FSM_053": 75.70341631770134,
+   "FSM_054": 850.0893073678017,
+   "FSM_056": 562.6056783795357
+  }
+ },
+ "Template da Pretrain-Joint (505 D, da 543)": {
+  "totali": {
+   "maschera+gt504": {
+    "dice": 0.5867053641813403,
+    "trovate": 25,
+    "lesioni": 47,
+    "fp": 25
+   },
+   "maschera+pulita": {
+    "dice": 0.5913884526465417,
+    "trovate": 28,
+    "lesioni": 47,
+    "fp": 25
+   },
+   "probabilita+gt504": {
+    "dice": 0.5899192871658652,
+    "trovate": 24,
+    "lesioni": 47,
+    "fp": 22
+   },
+   "probabilita+pulita": {
+    "dice": 0.5948445090639245,
+    "trovate": 27,
+    "lesioni": 47,
+    "fp": 22
+   }
+  },
+  "per_caso": {
+   "maschera+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.875665381533585,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5636856368563685,
+     "fp": 3,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.883045492002232,
+     "fp": 4,
+     "lesioni": 9,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.08990318118948824,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3289992925084506,
+     "fp": 1,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.5069341258048539,
+     "fp": 8,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6978526532233568,
+     "fp": 2,
+     "lesioni": 7,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.486652977412731,
+     "fp": 1,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8325182958513216,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6017966054310161,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "maschera+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8766545547882025,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5720731417715507,
+     "fp": 3,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8850861914043601,
+     "fp": 4,
+     "lesioni": 6,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.09345464181609399,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3322339489885664,
+     "fp": 1,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.5077019411396368,
+     "fp": 8,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.7109939510909219,
+     "fp": 2,
+     "lesioni": 8,
+     "trovate": 5
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.4964339339339339,
+     "fp": 1,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8324871121486237,
+     "fp": 3,
+     "lesioni": 8,
+     "trovate": 5
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6067651093835283,
+     "fp": 1,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+gt504": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8754515697702934,
+     "fp": 0,
+     "lesioni": 4,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5688565637295815,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8847297491312222,
+     "fp": 3,
+     "lesioni": 9,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.086941431670282,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.3274886966932905,
+     "fp": 0,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.5245901639344263,
+     "fp": 6,
+     "lesioni": 2,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.6995334880558877,
+     "fp": 2,
+     "lesioni": 7,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.49573782913430575,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8333989664007312,
+     "fp": 2,
+     "lesioni": 6,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6024644131386324,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ],
+   "probabilita+pulita": [
+    {
+     "caso": "FSM_032",
+     "dice": 0.8763957937217498,
+     "fp": 0,
+     "lesioni": 3,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_039",
+     "dice": 0.5779860610430185,
+     "fp": 2,
+     "lesioni": 2,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_040",
+     "dice": 0.8867388498444567,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_041",
+     "dice": 0.09044156765383933,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 2
+    },
+    {
+     "caso": "FSM_045",
+     "dice": 0.33054261613999747,
+     "fp": 0,
+     "lesioni": 1,
+     "trovate": 1
+    },
+    {
+     "caso": "FSM_046",
+     "dice": 0.5263563898174338,
+     "fp": 6,
+     "lesioni": 3,
+     "trovate": 3
+    },
+    {
+     "caso": "FSM_052",
+     "dice": 0.7136751127588731,
+     "fp": 2,
+     "lesioni": 8,
+     "trovate": 4
+    },
+    {
+     "caso": "FSM_053",
+     "dice": 0.5055238095238095,
+     "fp": 3,
+     "lesioni": 6,
+     "trovate": 6
+    },
+    {
+     "caso": "FSM_054",
+     "dice": 0.8332327107718075,
+     "fp": 2,
+     "lesioni": 8,
+     "trovate": 5
+    },
+    {
+     "caso": "FSM_056",
+     "dice": 0.6075521793642599,
+     "fp": 2,
+     "lesioni": 5,
+     "trovate": 3
+    }
+   ]
+  },
+  "mm3_diversi_fra_riferimenti": {
+   "FSM_032": 2227.5220108032227,
+   "FSM_039": 100.07608622312546,
+   "FSM_040": 1127.23987698555,
+   "FSM_041": 306.3212049007416,
+   "FSM_045": 378.3316147327423,
+   "FSM_046": 60.00867486000061,
+   "FSM_052": 456.0648247599602,
+   "FSM_053": 75.70341631770134,
+   "FSM_054": 850.0893073678017,
+   "FSM_056": 562.6056783795357
+  }
+ }
+}

@@ -996,6 +996,15 @@ Percentuale di cervello lesionato, predetta contro vera: Pearson 0.989, Spearman
 sul dataset finale si scelgono sui fuori-fold dei pazienti di addestramento e si provano sul test.
 Lesioni per fascia (D): 100% sopra 200 mm³, 86% fra 50 e 200, 29–38% sotto 50.
 
+**Perché i «default» qui non coincidono con `confronto_505_504.md`** (verificato il 17/11/2026,
+`scripts/scarto_misura_505.py` → `reports/scarto_misura_505.md`). Sono due catene di misura diverse
+sulle stesse predizioni. Il confronto riporta nel nativo la *maschera* binaria di nnU-Net e misura
+contro `gt_segmentations` di 504. Il postprocessing riporta la *probabilità* e misura contro
+`lesione_pulita_inT1`. Per A e D il passaggio alla probabilità toglie 3 falsi positivi (15 → 12,
+25 → 22), mentre il riferimento non li cambia. L'etichetta pulita fa trovare 2–3 lesioni in più.
+Per B (da 542) il trasporto agisce nel verso opposto (32 → 34–35). Tutte le valutazioni di 506 usano
+la seconda catena.
+
 ### Varianti del congiunto (24 settembre): si sceglie quella da 1000 epoche
 
 Fold 0 di 543, validazione separata per sorgente, appaiata contro il 543 del 23/9:
